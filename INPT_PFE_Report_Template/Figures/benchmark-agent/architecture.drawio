@@ -1,0 +1,40 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="arch" name="Agent Architecture">
+    <mxGraphModel dx="1100" dy="780" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="780" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Title -->
+        <mxCell id="title" value="MCU Benchmark Copilot Agent System" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="320" y="20" width="340" height="30" as="geometry" /></mxCell>
+        <!-- User Request -->
+        <mxCell id="user" value="User Request&#10;(VS Code Chat)" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="380" y="70" width="200" height="50" as="geometry" /></mxCell>
+        <!-- Router Agent -->
+        <mxCell id="router" value="MCU-Benchmark-Agent&#10;(Router &amp; Coordinator)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="350" y="160" width="260" height="60" as="geometry" /></mxCell>
+        <!-- Edge: user to router -->
+        <mxCell id="e_user_router" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="user" target="router"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <!-- Specialist Agents Group -->
+        <mxCell id="agents_group" value="Specialist Agents" style="swimlane;startSize=24;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;fontStyle=1;rounded=1;" vertex="1" parent="1"><mxGeometry x="40" y="290" width="440" height="180" as="geometry" /></mxCell>
+        <mxCell id="creation" value="Creation-Porting&#10;&#10;Create benchmarks &amp;&#10;port to target MCU" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="agents_group"><mxGeometry x="20" y="40" width="130" height="120" as="geometry" /></mxCell>
+        <mxCell id="build" value="Build-Project&#10;&#10;IAR EWARM config,&#10;startup, linker,&#10;device selection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="agents_group"><mxGeometry x="160" y="40" width="130" height="120" as="geometry" /></mxCell>
+        <mxCell id="debugger" value="Debugger&#10;&#10;Evidence-driven&#10;failure diagnosis&#10;(compile/link/runtime)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="agents_group"><mxGeometry x="300" y="40" width="130" height="120" as="geometry" /></mxCell>
+        <!-- Skills Group -->
+        <mxCell id="skills_group" value="Reusable Skills (stateless checklists)" style="swimlane;startSize=24;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;fontStyle=1;rounded=1;" vertex="1" parent="1"><mxGeometry x="520" y="290" width="540" height="180" as="geometry" /></mxCell>
+        <mxCell id="sk_analysis" value="benchmark-&#10;analysis&#10;&#10;Semantics &amp;&#10;portability" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="skills_group"><mxGeometry x="10" y="40" width="100" height="120" as="geometry" /></mxCell>
+        <mxCell id="sk_equiv" value="semantic-&#10;equivalence&#10;&#10;Drift &amp; fairness&#10;detection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="skills_group"><mxGeometry x="115" y="40" width="100" height="120" as="geometry" /></mxCell>
+        <mxCell id="sk_enhance" value="stm32-&#10;enhancement&#10;&#10;Reference&#10;improvement" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="skills_group"><mxGeometry x="220" y="40" width="100" height="120" as="geometry" /></mxCell>
+        <mxCell id="sk_result" value="result-&#10;interpretation&#10;&#10;Log &amp; metric&#10;comparison" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="skills_group"><mxGeometry x="325" y="40" width="100" height="120" as="geometry" /></mxCell>
+        <mxCell id="sk_diagram" value="diagram-&#10;generation&#10;&#10;Mermaid &amp;&#10;draw.io" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="skills_group"><mxGeometry x="430" y="40" width="100" height="120" as="geometry" /></mxCell>
+        <!-- Edges: router to groups -->
+        <mxCell id="e_router_agents" value="delegates" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=11;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="router" target="agents_group"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_router_skills" value="invokes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=11;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="router" target="skills_group"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <!-- Always-On Rules at the bottom -->
+        <mxCell id="rules" value="Always-On Benchmark Rules&#10;(semantic preservation · fairness enforcement · evidence-driven validation · no invention · reference read-only)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="40" y="520" width="1020" height="50" as="geometry" /></mxCell>
+        <!-- Dashed edges from rules to groups -->
+        <mxCell id="e_rules_agents" value="governs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;dashed=1;fontSize=10;startArrow=none;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="rules" target="agents_group"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_rules_skills" value="governs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;dashed=1;fontSize=10;startArrow=none;exitX=0.75;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="rules" target="skills_group"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <!-- VS Code / Copilot context -->
+        <mxCell id="vscode" value="VS Code + GitHub Copilot Extension&#10;(workspace files, terminal, search)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;dashed=1;" vertex="1" parent="1"><mxGeometry x="40" y="610" width="1020" height="40" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

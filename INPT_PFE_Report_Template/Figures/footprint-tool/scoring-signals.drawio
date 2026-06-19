@@ -1,0 +1,92 @@
+<mxfile host="app.diagrams.net" modified="2026-06-04" agent="MCU Workflow Studio" type="device">
+  <diagram name="Scoring Signals Detail" id="scoring-05">
+    <mxGraphModel dx="1422" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="Scoring Signals — Computation &amp; Penalty Detail" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;fontColor=#1A237E;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="700" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ═══ SIGNAL COMPUTATION DETAIL ═══ -->
+        <mxCell id="sig_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#1565C0;strokeWidth=2;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="1520" height="420" as="geometry"/>
+        </mxCell>
+        <mxCell id="sig_label" value="⚡ SIGNAL COMPUTATION — How each signal is calculated" style="text;html=1;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontStyle=1;fontSize=14;fontColor=#1565C0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="85" width="550" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Signal 1: External -->
+        <mxCell id="s1" value="📝 external_similarity (w=0.28)&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;CompositeExternalSignalProvider:&#xa;  github_score = GitHubCopilotProvider.score(src, tgt)&#xa;  secondary = LLM(0.60) × llm_score + KB(0.40) × kb_prior_score&#xa;  composite = GitHub(0.65) × github_score + Secondary(0.35) × secondary&#xa;&#xa;Falls back to 0.0 if no provider available" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=10;fontColor=#0D47A1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="60" y="120" width="480" height="140" as="geometry"/>
+        </mxCell>
+
+        <!-- Signal 2: Alias -->
+        <mxCell id="s2" value="🏷️ alias_similarity (w=0.18)&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;normalize(name):&#xa;  strip vendor prefixes (HAL_, LL_, BSP_)&#xa;  lowercase, split on _/camelCase&#xa;  remove common suffixes (_IRQHandler, _Init)&#xa;&#xa;score = SequenceMatcher(norm_src, norm_tgt).ratio()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=10;fontColor=#0D47A1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="560" y="120" width="460" height="140" as="geometry"/>
+        </mxCell>
+
+        <!-- Signal 3: Context -->
+        <mxCell id="s3" value="🔄 context_similarity (w=0.14)&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Build call-site neighbor sets:&#xa;  src_neighbors = functions in same source_object&#xa;  tgt_neighbors = functions in same source_object&#xa;&#xa;score = |intersection| / |union| (Jaccard)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=10;fontColor=#0D47A1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="120" width="500" height="140" as="geometry"/>
+        </mxCell>
+
+        <!-- Signal 4: Object -->
+        <mxCell id="s4" value="📦 object_similarity (w=0.14)&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Compare source_object paths:&#xa;  Split on / and \\ → path tokens&#xa;  Longest common subsequence of tokens&#xa;  score = LCS_length / max(len_src, len_tgt)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=10;fontColor=#0D47A1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="60" y="280" width="480" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- Signal 5: Name -->
+        <mxCell id="s5" value="✏️ name_similarity (w=0.12)&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Raw token comparison (no normalization):&#xa;  src_tokens = split_camel_and_underscore(src_name)&#xa;  tgt_tokens = split_camel_and_underscore(tgt_name)&#xa;  score = 2 * |common_tokens| / (|src| + |tgt|) (Dice coefficient)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=10;fontColor=#0D47A1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="560" y="280" width="500" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- Signal 6+7: Role + Signature -->
+        <mxCell id="s6" value="🏗️ role_similarity (w=0.08)&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;1.0 if src.layer == tgt.layer&#xa;0.5 if adjacent layers&#xa;0.0 otherwise" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=10;fontColor=#0D47A1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="280" width="290" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="s7" value="🔑 signature_similarity (w=0.06)&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Size ratio: 1.0 - |src.size - tgt.size| / max(src.size, tgt.size)&#xa;Capped at 0.0 minimum" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=10;fontColor=#0D47A1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="60" y="410" width="560" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- ═══ PENALTY DETAIL ═══ -->
+        <mxCell id="pen_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=2;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="530" width="1520" height="220" as="geometry"/>
+        </mxCell>
+        <mxCell id="pen_label" value="⚠️ PENALTY MULTIPLIERS — Applied after weighted sum (stackable)" style="text;html=1;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontStyle=1;fontSize=14;fontColor=#C62828;" vertex="1" parent="1">
+          <mxGeometry x="60" y="535" width="600" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="pen1" value="×0.55 — Runtime/Toolchain Pair&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Trigger: Both items classified as&#xa;system/runtime layer&#xa;Rationale: Runtime pairs are vendor-&#xa;specific, unlikely functional match" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E57373;strokeWidth=2;fontSize=10;fontColor=#B71C1C;align=left;spacingLeft=8;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="60" y="575" width="300" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="pen2" value="×0.70 — Unknown-Unknown Pair&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Trigger: Neither item found in any&#xa;vendor registry or KB prior&#xa;Rationale: No contextual evidence,&#xa;score unreliable" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E57373;strokeWidth=2;fontSize=10;fontColor=#B71C1C;align=left;spacingLeft=8;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="390" y="575" width="300" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="pen3" value="×0.75 — Name Match + Role Mismatch&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Trigger: name_similarity > 0.8 but&#xa;role_similarity == 0.0&#xa;Rationale: Same-name different-layer&#xa;functions are false positives" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E57373;strokeWidth=2;fontSize=10;fontColor=#B71C1C;align=left;spacingLeft=8;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="720" y="575" width="310" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="pen4" value="×0.85 — Low Signal Uncertainty&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Trigger: coverage &lt; 0.4 (fewer than&#xa;3 signals contributed non-zero)&#xa;Rationale: Insufficient evidence for&#xa;reliable scoring" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E57373;strokeWidth=2;fontSize=10;fontColor=#B71C1C;align=left;spacingLeft=8;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="575" width="300" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- STACKING NOTE -->
+        <mxCell id="stack_note" value="⚠️ Penalties STACK multiplicatively: if runtime (×0.55) AND unknown (×0.70) apply → effective = conf × 0.55 × 0.70 = conf × 0.385" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57F17;strokeWidth=2;fontSize=11;fontColor=#E65100;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="720" width="800" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- FORMULA BOX -->
+        <mxCell id="formula" value="🧮 FINAL FORMULA&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;confidence = (Σ signal_i × weight_i) × Π penalty_j&#xa;coverage   = count(signal_i > 0) / 7&#xa;&#xa;Final bucket:  confidence ≥ 0.72 → accepted  |  0.55–0.71 → review  |  0.45–0.54 → alternative  |  &lt; 0.45 → rejected" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1A237E;strokeColor=#0D47A1;strokeWidth=3;fontSize=11;fontColor=#FFFFFF;align=left;spacingLeft=15;verticalAlign=top;spacingTop=8;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="790" width="900" height="110" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

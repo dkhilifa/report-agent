@@ -1,0 +1,17 @@
+\babel@toc {nil}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Principal inputs and outputs of the tool.}}{13}{table.caption.13}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Implementation stack and the role of each external dependency.}}{15}{table.caption.15}%
+\contentsline {table}{\numberline {2.3}{\ignorespaces Optional language-model back-ends. All are disabled by default; the tool runs fully without them.}}{20}{table.caption.21}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Specialist agents and their responsibilities.}}{26}{table.caption.23}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Reusable skills and their purposes.}}{27}{table.caption.24}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces File structure of the agent system.}}{30}{table.caption.26}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {C.1}{\ignorespaces Table Example}}{45}{table.caption.28}%
+\contentsline {table}{\numberline {C.2}{\ignorespaces Long table Example}}{45}{table.C.2}%

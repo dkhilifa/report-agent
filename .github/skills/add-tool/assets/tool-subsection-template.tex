@@ -1,0 +1,82 @@
+% =====================================================================
+% Supportive-tool subsection template — STM32Cube Ecosystem Benchmark
+% For a tool the AUTHOR BUILT THEMSELVES to enhance the benchmarking effort
+% (the author's own engineering contribution — not a benchmark, and not a
+% third-party tool merely used). Write it in the "we designed and built" voice.
+% Copy into the methodology/tooling chapter, replace <...> placeholders,
+% delete unused blocks. Keep labels meaningful and unique. pdfLaTeX-safe.
+% Arc: problem -> design/architecture -> implementation -> integration ->
+%      usage -> value/outcome.
+% =====================================================================
+
+\subsection{<Tool name, e.g. Automated flash-and-measure harness>}
+\label{sec:<tool-key>}
+
+% --- Problem: the benchmarking pain point this tool removes -----------
+Running the benchmarks by hand <state the manual / error-prone / missing
+capability> made <state the consequence: slow iteration, inconsistent
+conditions, no traceability>. We therefore developed <tool> to <one-line
+purpose>, so that <the benefit to the benchmarking effort>.
+
+% --- Design & architecture: how it is structured ---------------------
+\subsubsection{Design and architecture}
+<Describe the components and how data flows from input to output.> The
+overall structure is shown in Figure~\ref{fig:<tool-key>-arch}.
+
+\begin{figure}[H]
+  \centering
+  % Replace with the diagram-designer's TikZ architecture/workflow figure,
+  % or an image under Figures/<tool-key>/.
+  \includegraphics[width=0.85\textwidth]{Figures/<tool-key>/<arch-file>}
+  \caption{Architecture of <tool>: <input> $\rightarrow$ <processing> $\rightarrow$ <output>.}
+  \label{fig:<tool-key>-arch}
+\end{figure}
+
+% --- Implementation: stack and key engineering choices ---------------
+\subsubsection{Implementation}
+We implemented <tool> in <language/framework>, relying on <key
+libraries/external tools>~\cite{<lib-key>}. <Explain one or two notable
+engineering decisions and why — e.g. how runs are timestamped, how the SWO/UART
+stream is parsed, how configurations are swept.> The key parameters are
+summarized in Table~\ref{tab:<tool-key>-io}; the full listing is given in
+Appendix~\ref{chap:<appendix-label>} (Listing~\ref{lst:<tool-key>}).
+
+% Inputs/outputs (or configuration) table
+\begin{table}[H]
+  \centering
+  \begin{tabular}{l l}
+    \toprule
+    Aspect & Value \\
+    \midrule
+    Inputs        & <files / interfaces consumed> \\
+    Outputs       & <artifacts produced: CSV/JSON/plots/report> \\
+    Interfaces    & <UART / SWO / ITM / OpenOCD / CubeProgrammer> \\
+    Stack         & <language, frameworks, key libraries> \\
+    Invocation    & <CLI / GUI / CI step> \\
+    \bottomrule
+  \end{tabular}
+  \caption{Inputs, outputs, and stack of <tool>.}
+  \label{tab:<tool-key>-io}
+\end{table}
+
+% --- Integration: where it plugs into the benchmark workflow ---------
+\subsubsection{Integration with the benchmarking workflow}
+<Explain how the tool fits the pipeline (configure $\rightarrow$ build $\rightarrow$ flash
+$\rightarrow$ measure $\rightarrow$ aggregate) and which benchmarks depend on it.>
+The benchmarks of Chapter~\ref{chap:<results-chapter>} were produced with this tool,
+ensuring identical conditions across configurations.
+
+% --- Usage: how it is operated ---------------------------------------
+\subsubsection{Usage}
+<Show a representative invocation and what it produces. Keep it short; push the
+full command reference / config to the appendix.>
+
+% --- Value / outcome: the concrete improvement, honestly ------------
+\subsubsection{Outcome}
+<State what the tool improved for the benchmarking effort: reproducibility,
+reduced per-run effort, consistent conditions, traceable logs. Give evidence
+where available (e.g. a full sweep now runs unattended instead of manually).
+Note limitations and what remains manual.>
+
+\paragraph{Takeaway} <One or two sentences: the engineering value the tool adds
+to the report's benchmarking methodology.>

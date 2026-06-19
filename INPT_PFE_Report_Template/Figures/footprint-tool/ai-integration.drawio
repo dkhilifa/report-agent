@@ -1,0 +1,115 @@
+<mxfile host="65bd71144e">
+    <diagram name="AI Integration" id="ai-12">
+        <mxGraphModel dx="836" dy="653" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1200" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="AI Integration — LLM Provider Protocol, Backends &amp; Detection Chain" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;fontColor=#1A237E;" parent="1" vertex="1">
+                    <mxGeometry x="350" y="20" width="900" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="proto_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F57F17;strokeWidth=2;arcSize=3;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="80" width="700" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="proto_label" value="① LLM PROVIDER PROTOCOL (Abstract Interface)" style="text;html=1;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontStyle=1;fontSize=14;fontColor=#F57F17;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="85" width="500" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="proto_iface" value="class LLMProvider(Protocol):&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;  @abstractmethod&#xa;  def score_mapping(src: str, tgt: str, context: dict) → float&#xa;&#xa;  @abstractmethod&#xa;  def classify_layer(name: str, path: str, layers: list[str]) → str | None&#xa;&#xa;  @abstractmethod&#xa;  def explain_mapping(src: str, tgt: str, signals: dict) → str&#xa;&#xa;  @abstractmethod&#xa;  def suggest_root_cause(item: str, context: dict) → str | None&#xa;&#xa;  @property&#xa;  def is_available(self) → bool&#xa;&#xa;  @property&#xa;  def provider_name(self) → str" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F57F17;fontSize=10;fontColor=#E65100;align=left;spacingLeft=12;verticalAlign=top;spacingTop=5;fontFamily=Courier New;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="120" width="660" height="225" as="geometry"/>
+                </mxCell>
+                <mxCell id="back_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;arcSize=3;" parent="1" vertex="1">
+                    <mxGeometry x="790" y="80" width="870" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="back_label" value="② BACKENDS — Concrete Implementations" style="text;html=1;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontStyle=1;fontSize=14;fontColor=#1565C0;" parent="1" vertex="1">
+                    <mxGeometry x="810" y="85" width="450" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="b_copilot" value="GitHubCopilotProvider&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;• REST API (copilot.github.com)&#xa;• Model: GPT-4o&#xa;• Auth: GitHub token (env var)&#xa;• Rate limit: 10 req/min&#xa;• Timeout: 30s per call&#xa;• Primary provider (weight: 0.65)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=10;fontColor=#0D47A1;align=left;spacingLeft=8;verticalAlign=top;spacingTop=5;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="810" y="125" width="270" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="b_openai" value="OpenAIProvider&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;• REST API (api.openai.com)&#xa;• Model: configurable (gpt-4-turbo)&#xa;• Auth: API key (env var)&#xa;• Rate limit: per-key tier&#xa;• Timeout: 60s per call&#xa;• Fallback provider" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=10;fontColor=#0D47A1;align=left;spacingLeft=8;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+                    <mxGeometry x="1100" y="125" width="250" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="b_local" value="LocalLLMProvider (Ollama)&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;• REST API (localhost:11434)&#xa;• Model: codellama/mistral&#xa;• Auth: none (local)&#xa;• No rate limit&#xa;• Timeout: 120s (slower)&#xa;• Offline fallback" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=10;fontColor=#0D47A1;align=left;spacingLeft=8;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+                    <mxGeometry x="1370" y="125" width="260" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="b_null" value="NullProvider (no AI)&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;• Returns 0.0 for all scores&#xa;• Returns None for classifications&#xa;• Always available&#xa;• Used when all providers fail" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=1;fontSize=10;fontColor=#B71C1C;align=left;spacingLeft=8;verticalAlign=top;spacingTop=5;" parent="1" vertex="1">
+                    <mxGeometry x="810" y="275" width="270" height="85" as="geometry"/>
+                </mxCell>
+                <mxCell id="detect_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;arcSize=5;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="400" width="1620" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="detect_label" value="③ DETECTION CHAIN — Provider Discovery &amp; Fallback" style="text;html=1;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontStyle=1;fontSize=14;fontColor=#2E7D32;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="405" width="500" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="d1" value="Check GITHUB_TOKEN&#xa;env var" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=10;fontColor=#1B5E20;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="450" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="d2" value="Ping Copilot API&#xa;(health check)" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=10;fontColor=#1B5E20;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="450" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="d3" value="✅ Use GitHubCopilotProvider" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;fontSize=10;fontColor=#1B5E20;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="465" width="220" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="d4" value="Check OPENAI_API_KEY" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57F17;fontSize=10;fontColor=#E65100;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="495" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="d5" value="✅ Use OpenAIProvider" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57F17;fontSize=10;fontColor=#E65100;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="510" width="220" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="d6" value="Check localhost:11434" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=10;fontColor=#0D47A1;" parent="1" vertex="1">
+                    <mxGeometry x="800" y="450" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="d7" value="✅ Use LocalLLMProvider" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=10;fontColor=#0D47A1;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="1020" y="465" width="200" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="d8" value="⚠️ Use NullProvider&#xa;(AI features disabled)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontSize=10;fontColor=#B71C1C;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="1280" y="460" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="da1" value="yes" style="strokeColor=#2E7D32;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=9;fontColor=#2E7D32;" parent="1" source="d1" target="d2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="da2" value="yes" style="strokeColor=#2E7D32;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=9;fontColor=#2E7D32;" parent="1" source="d2" target="d3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="da3" value="no" style="strokeColor=#C62828;strokeWidth=1;endArrow=blockThin;endFill=1;dashed=1;fontSize=9;fontColor=#C62828;" parent="1" source="d1" target="d4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="da4" value="yes" style="strokeColor=#F57F17;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=9;fontColor=#F57F17;" parent="1" source="d4" target="d5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="da5" value="no" style="strokeColor=#C62828;strokeWidth=1;endArrow=blockThin;endFill=1;dashed=1;fontSize=9;fontColor=#C62828;" parent="1" source="d2" target="d6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="da6" value="yes" style="strokeColor=#1565C0;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=9;fontColor=#1565C0;" parent="1" source="d6" target="d7" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="da7" value="no" style="strokeColor=#C62828;strokeWidth=1;endArrow=blockThin;endFill=1;dashed=1;fontSize=9;fontColor=#C62828;" parent="1" source="d6" target="d8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="int_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#6A1B9A;strokeWidth=2;arcSize=3;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="610" width="1620" height="310" as="geometry"/>
+                </mxCell>
+                <mxCell id="int_label" value="④ FIVE INTEGRATION POINTS — Where AI connects to the analysis pipeline" style="text;html=1;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontStyle=1;fontSize=14;fontColor=#6A1B9A;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="615" width="600" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="ip1" value="① Scoring Signal&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Where: CompositeExternalSignalProvider&#xa;Method: score_mapping(src, tgt, context)&#xa;Purpose: Provide external_similarity score (weight=0.28)&#xa;Fallback: Returns 0.0, coverage decreases" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#6A1B9A;fontSize=10;fontColor=#4A148C;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="655" width="500" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="ip2" value="② Layer Classification&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Where: LayerClassifier (ambiguous items)&#xa;Method: classify_layer(name, path, layers)&#xa;Purpose: Resolve ambiguous layer when lexicon fails&#xa;Fallback: Item remains unclassified (layer=None)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#6A1B9A;fontSize=10;fontColor=#4A148C;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="655" width="500" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="ip3" value="③ Root Cause Tagging&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Where: RootCauseAnalyzer&#xa;Method: suggest_root_cause(item, context)&#xa;Purpose: Generate explanatory tags for anomalies&#xa;Fallback: Rule-based tags only (no AI explanation)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#6A1B9A;fontSize=10;fontColor=#4A148C;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="1100" y="655" width="520" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="ip4" value="④ AI Chat Assistant&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Where: AIChatPanel (GUI)&#xa;Method: Free-form Q&amp;A with analysis context&#xa;Purpose: User asks questions about results&#xa;Fallback: Panel hidden, feature unavailable" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#6A1B9A;fontSize=10;fontColor=#4A148C;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="780" width="500" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="ip5" value="⑤ Mapping Explanation&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Where: ReviewPanel (on-demand)&#xa;Method: explain_mapping(src, tgt, signals)&#xa;Purpose: Human-readable justification for review&#xa;Fallback: Shows raw signal values instead" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#6A1B9A;fontSize=10;fontColor=#4A148C;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="780" width="500" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="principle" value="Design Principle: ALL AI features are gracefully degraded — the tool is 100% functional without any LLM provider configured" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1A237E;strokeColor=#0D47A1;strokeWidth=3;fontSize=12;fontColor=#FFFFFF;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="940" width="900" height="35" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

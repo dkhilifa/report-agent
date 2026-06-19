@@ -1,0 +1,292 @@
+\chapter{An AI-Assisted Agent for Benchmark Creation, Porting, and Debugging}
+\label{chap:benchmark-agent}
+
+\section*{Introduction}
+
+The previous chapter presented a tool that analyses the \emph{output} of a benchmark ---
+two linker maps produced by completed builds. However, producing those builds in the first
+place is itself a substantial engineering task. Each new cross-vendor comparison requires
+creating a benchmark project for the competitor platform, porting the STM32 reference code
+while preserving its exact runtime semantics, configuring the IAR Embedded Workbench for
+ARM (EWARM) project correctly, and debugging the inevitable compiler, linker, and runtime
+issues that arise when targeting unfamiliar silicon. Done manually, this process is slow,
+error-prone, and difficult to keep consistent across many vendor comparisons.
+
+To address this, we designed and built a custom GitHub Copilot agent system ---
+the \emph{MCU Benchmark Copilot Agent} --- that operates inside Visual Studio Code (VS
+Code) and automates the reasoning-intensive parts of benchmark creation, porting, building,
+and debugging \cite{vscode, github-copilot}. Where MCU Workflow Studio analyses what
+\emph{exists}, the agent system helps \emph{create} what does not yet exist, and it does so
+under strict rules that enforce semantic equivalence and benchmark fairness at every step.
+The two tools are complementary: the agent produces the builds, and the studio analyses
+their footprint.
+
+This chapter documents the agent as an engineering contribution. We describe the problem it
+addresses, its architecture and the specialist roles it defines, the reusable skill
+workflows it exposes, the always-on rules that govern its behaviour, how it integrates with
+the rest of the benchmarking effort, and its value and limitations.
+
+\section{The benchmark engineering problem}
+\label{sec:agent-problem}
+
+A single STM32-versus-competitor benchmark involves several non-trivial steps. The STM32
+reference project must first be understood in full --- task structure, timing, peripheral
+usage, reporting format, and observable behaviour. A corresponding project must then be
+created for the target platform, mapping every STM32 hardware abstraction layer (HAL) call to
+the competitor's equivalent application programming interface (API) without altering the
+benchmark's semantics. The resulting project must be configured for the IAR toolchain with the
+correct device selection, startup file, linker configuration, include paths, and compiler
+defines. Once it compiles, runtime issues --- wrong interrupt vectors, misconfigured clocks,
+broken universal asynchronous receiver-transmitter (UART) output --- must be diagnosed from
+real evidence rather than guesswork. And throughout, the comparison must remain fair: same
+optimisation level, same measurement scope, same observable output format.
+
+Doing this for one vendor pair and one software stack is manageable. Repeating it for
+multiple vendors (GD32, NXP, Renesas, Texas Instruments) across multiple stacks (USB device,
+FreeRTOS, CoreMark) quickly becomes the dominant time cost of the benchmarking campaign. Each
+port also carries a risk of \emph{semantic drift} --- subtle changes in task priorities,
+timing, or synchronisation that invalidate the comparison without being immediately visible.
+
+We needed an assistant that could enforce the methodology consistently across every port,
+refuse to guess when evidence was missing, and make its reasoning transparent. A general-purpose
+large language model (LLM) cannot do this out of the box: it lacks the domain-specific
+checklists, the structured routing, and the policy of refusing to claim success without
+hardware evidence. A custom agent system, built on VS Code's Copilot extensibility framework,
+gave us the ability to encode our benchmarking methodology directly into the tool's behaviour.
+
+\section{Architecture}
+\label{sec:agent-architecture}
+
+The system is structured as a set of cooperating agents and reusable skills, orchestrated
+by a single router, and governed by a shared set of always-on rules. All configuration
+lives in a \texttt{.github/} directory within the benchmark workspace and is expressed as
+Markdown files with YAML frontmatter --- no compiled code, no external server, no
+deployment step. The agents run inside VS Code's GitHub Copilot Chat extension
+\cite{github-copilot} and have access to the workspace file system, terminal, and search
+capabilities.
+
+Figure~\ref{fig:agent-architecture} illustrates the layered arrangement. A user request
+enters the router agent, which classifies it and delegates to the appropriate specialist
+agent or invokes a skill workflow directly. Specialist agents operate in isolated context
+and return a structured result. Skills are stateless checklists and workflows that any
+agent can invoke.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/benchmark-agent/architecture.pdf}
+\caption{Architecture of the MCU Benchmark Copilot Agent system. The router classifies
+requests and delegates to specialist agents or invokes skill workflows; all operate under
+the shared always-on benchmark rules within the VS Code environment.}
+\label{fig:agent-architecture}
+\end{figure}
+
+\subsection{The four specialist agents}
+\label{sec:agent-specialists}
+
+Each agent has a defined responsibility, a restricted tool set, and a structured output
+contract. Table~\ref{tab:agent-roles} summarises them.
+
+\begin{table}[H]
+\centering
+\caption{Specialist agents and their responsibilities.}
+\label{tab:agent-roles}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Agent} & \textbf{Role} & \textbf{Responsibility} \\
+\midrule
+MCU-Benchmark-Agent & Router \& coordinator & Classifies user requests via a decision tree and delegates to the correct specialist or skill. Has full tool access. \\
+Creation-Porting & Project generation & Creates new benchmark projects and ports STM32 references to target MCU platforms while preserving exact semantics. \\
+Build-Project & Toolchain configuration & Configures IAR EWARM projects: source groups, include paths, compiler defines, startup files, linker files, and device/debugger selection. \\
+Debugger & Failure diagnosis & Diagnoses compiler, linker, and runtime failures from real evidence (build output, UART logs, debugger captures). Refuses to guess. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The router agent's decision tree is deterministic: a request involving project understanding
+goes to the \emph{benchmark-analysis} skill; a request for cross-vendor porting goes to
+\emph{Creation-Porting}; build configuration issues go to \emph{Build-Project}; and
+failures accompanied by real evidence go to \emph{Debugger}. This routing prevents a
+general-purpose model from attempting tasks outside its configured expertise and ensures
+that each specialist receives only the context it needs.
+
+\subsection{The five reusable skills}
+\label{sec:agent-skills}
+
+Skills encode repeatable workflows as structured Markdown checklists. Unlike agents, they
+do not receive isolated context or delegated reasoning --- they provide structure, not
+autonomy. Table~\ref{tab:agent-skills} lists them.
+
+\begin{table}[H]
+\centering
+\caption{Reusable skills and their purposes.}
+\label{tab:agent-skills}
+\begin{tabularx}{\textwidth}{l X l}
+\toprule
+\textbf{Skill} & \textbf{Purpose} & \textbf{Primary users} \\
+\midrule
+benchmark-analysis & File classification, semantics extraction, and portability split of an existing project. & Router, Creation-Porting \\
+semantic-equivalence & Reference-versus-target behaviour comparison and drift detection. & Router, Creation-Porting \\
+stm32-enhancement & Gap-driven recommendations for improving STM32 reference portability. & Router \\
+result-interpretation & Comparative interpretation of benchmark logs, measurements, and result files. & Router, Debugger \\
+diagram-generation & Mermaid and draw.io workflow, architecture, and presentation diagrams. & Router \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Always-on benchmark rules}
+\label{sec:agent-rules}
+
+All agents and skills inherit a shared policy layer --- the \emph{always-on benchmark
+rules} --- that constrains the system's behaviour regardless of which specialist is active.
+These rules encode the core principles of our benchmarking methodology:
+
+\begin{itemize}
+\item \textbf{Reference is read-only.} The STM32 reference project is never modified
+unless the user explicitly requests it; new target projects are generated instead.
+\item \textbf{Semantic preservation.} A seventeen-point checklist governs what must be
+identical between reference and target: task count and creation order, priorities,
+delays, periodicity, synchronisation primitives, suspend/resume and yield behaviour,
+counters, state transitions, measurement scopes, reporting format, and error behaviour.
+\item \textbf{No invention.} The system does not invent vendor APIs, pin mappings,
+peripheral choices, or board details. Uncertain hardware details are marked as
+\texttt{TODO} rather than guessed.
+\item \textbf{Evidence-driven validation.} No claim of runtime success is made without
+actual compiler output, runtime logs, UART captures, or debugger observations.
+\item \textbf{Fairness enforcement.} A fairness checklist --- covering optimisation level,
+clock frequency, memory configuration, RTOS wrapper differences, measurement
+instrumentation overhead, and environmental differences --- is applied to every
+comparison and any risk is flagged explicitly.
+\end{itemize}
+
+These rules solve a specific problem with using general-purpose LLMs for embedded work:
+without them, a model may silently simplify a benchmark, invent an API that does not exist,
+or claim that code works when it has never been compiled. The always-on policy prevents all
+three failure modes.
+
+\section{Semantic preservation in detail}
+\label{sec:agent-semantics}
+
+The semantic-equivalence skill deserves elaboration because it is the mechanism that keeps
+cross-vendor comparisons valid. When the Creation-Porting agent produces a target project,
+the semantic-equivalence skill is invoked to compare the target against the reference on
+every point of the checklist. The result is classified into one of five categories:
+
+\begin{enumerate}
+\item \textbf{Equivalent} --- behaviour matches within the benchmark definition.
+\item \textbf{Equivalent with caveats} --- behaviour matches, but environment or
+implementation details affect fairness (e.g.\ a different tick source).
+\item \textbf{Drift} --- behaviour differs and may affect results.
+\item \textbf{Approval required} --- an intentional deviation that the user must accept.
+\item \textbf{Unknown} --- evidence is insufficient to determine equivalence.
+\end{enumerate}
+
+Any result other than category~1 halts the workflow and produces a clear report of what
+differs and why. This prevents semantic drift from silently propagating into published
+benchmark numbers.
+
+\section{Integration with the benchmarking workflow}
+\label{sec:agent-integration}
+
+The agent system occupies a precise position in the benchmarking pipeline. It sits
+\emph{before} MCU Workflow Studio in the workflow: the agent creates and validates the
+target project, ensures it compiles under IAR EWARM, and confirms that its runtime
+behaviour matches the reference. Only then does the build's linker map become an input to
+MCU Workflow Studio for footprint analysis. The relationship is strictly sequential and
+complementary --- the agent is responsible for \emph{producing} correct builds, and the
+studio is responsible for \emph{measuring} them. Figure~\ref{fig:agent-workflow} shows the
+end-to-end lifecycle.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/benchmark-agent/workflow.pdf}
+\caption{End-to-end benchmark lifecycle. The MCU Benchmark Copilot Agent handles steps~1
+through~5 (understand, create, build, debug, validate); once semantic equivalence is
+confirmed, the validated linker map is handed to MCU Workflow Studio for footprint analysis.}
+\label{fig:agent-workflow}
+\end{figure}
+
+This separation keeps each tool focused. The agent does not attempt footprint analysis, and
+the studio does not attempt code generation or debugging. Together, they cover the full
+lifecycle of a cross-vendor benchmark: create, port, build, debug, validate, then analyse.
+
+\section{Implementation}
+\label{sec:agent-implementation}
+
+The entire agent system is implemented as a set of Markdown configuration files within a
+\texttt{.github/} directory, leveraging the VS Code GitHub Copilot extensibility framework
+\cite{github-copilot, vscode-agent-mode}. No compiled code is required beyond what VS Code
+and the Copilot extension already provide. The configuration files use YAML frontmatter to
+declare agent metadata (name, description, tool permissions) and Markdown bodies for the
+behavioural instructions. Table~\ref{tab:agent-impl} summarises the file structure.
+
+\begin{table}[H]
+\centering
+\caption{File structure of the agent system.}
+\label{tab:agent-impl}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Path} & \textbf{Role} \\
+\midrule
+\texttt{.github/copilot-instructions.md} & Always-on rules inherited by every agent and skill. \\
+\texttt{.github/agents/*.agent.md} & One file per specialist agent (4 files). \\
+\texttt{.github/skills/*/SKILL.md} & One directory per skill, each containing a structured checklist (5 directories). \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The implementation requires no external server, no API keys beyond the user's existing
+GitHub Copilot subscription, and no deployment pipeline. Adding a new agent or skill is a
+matter of creating a Markdown file and restarting the Copilot Chat session. This minimal
+footprint was deliberate: the system should be as easy to maintain and version-control as
+the benchmark source code itself.
+
+\section{Engineering value and limitations}
+\label{sec:agent-value}
+
+The agent system's primary value is \emph{methodology enforcement}. By encoding the
+semantic-equivalence checklist, the fairness checklist, and the evidence-driven validation
+policy directly into the tool's behaviour, we ensure that every benchmark port follows the
+same discipline regardless of which vendor is targeted or how many comparisons are run in
+parallel. The structured routing prevents the model from operating outside its configured
+expertise, and the refusal to guess without evidence prevents false claims of success.
+
+In practical terms, the agent reduces the time to produce a correct, validated target
+project from several hours of manual porting and debugging to a guided session of tens of
+minutes, with the methodology applied automatically rather than relying on the engineer's
+memory. The structured output contracts --- each agent returns a defined set of sections
+(assumptions, semantic checklist, fairness risks, validation points) --- also make the work
+auditable and reproducible.
+
+We acknowledge several limitations. The system depends on the quality of the underlying
+language model; while the always-on rules constrain its behaviour, they cannot prevent all
+model errors, particularly for vendor APIs that are poorly represented in the model's
+training data. The tool supports IAR EWARM as the target toolchain; extending it to other
+compilers (GCC, Keil) would require additional Build-Project agent configurations. Finally,
+the evidence-driven validation policy means the system cannot fully automate the workflow
+--- human intervention is still required to provide compiler output, flash the board, and
+capture runtime logs. This is by design: in embedded benchmarking, the hardware is the
+ground truth, and no amount of static reasoning can substitute for it.
+
+\section*{Conclusion}
+
+We designed and built the MCU Benchmark Copilot Agent to fill the engineering gap between
+defining a benchmark and having a validated, compilable target project ready for footprint
+analysis. Its four specialist agents cover the full creation-to-debugging lifecycle, its
+five reusable skills encode our methodology as structured checklists, and its always-on
+rules enforce semantic equivalence, benchmark fairness, and evidence-driven validation at
+every step. Together with MCU Workflow Studio, it forms a complete toolchain for
+reproducible, explainable cross-vendor firmware benchmarking: the agent produces correct
+builds, and the studio measures them.
+
+\paragraph{Paragraph a}
+
+\paragraph{Paragraph b}
+
+
+\newpage
+
+\section*{Conclusion}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec dapibus justo. Donec sagittis vulputate ante sed porttitor. Suspendisse sit amet nisl massa. Curabitur nec nisl condimentum, egestas ex vitae, dapibus enim. Etiam iaculis, erat faucibus pellentesque sagittis, nisi justo sollicitudin nibh, et condimentum augue massa non turpis. Proin commodo enim fermentum suscipit condimentum. Maecenas molestie, dui nec vestibulum rhoncus, arcu nisl faucibus neque, a ornare nisi massa ac eros. Aenean id velit sit amet lacus mattis varius. Donec fringilla massa sed nisi eleifend, a aliquet mi tempus. Nunc posuere euismod est, nec tristique augue lobortis non. Sed sodales sem ut metus tempus ullamcorper.
+
+\pagebreak

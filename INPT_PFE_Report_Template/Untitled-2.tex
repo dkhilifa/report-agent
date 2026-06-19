@@ -1,0 +1,201 @@
+\chapter{General Description of the project  }
+\section*{Introduction}
+This chapter present the host company and the context of the project. The existing problems are also detailed to define the specifications and clarify the requested work. Finally, the adopted work methodology is explained.
+\section{Host Company}
+
+This section provides an overview of the host firm, STMicroelectronics, specifically its history, a synopsis of the ST Tunis location, and the technically oriented marketing,and Application support
+tunis team will be presented below.
+\subsection{Presentation }
+STMicroelectronics is a global company in the semiconductor industry, dedicated to enhance people’s lives through innovative electronic solutions \cite{stmicroelectronics2025}. With one of the most extensive product portfolios in the industry, ST has gained the trust of over 200,000 customers worldwide, achieving
+net sales ofo 13.27 billion dolar in 2024 \cite{st2023investors} .
+The company was established in June 1987 as SGS-THOMSON Microelectronics, following the
+merger of SGS Microelectronica (Italy) and Thomson Semiconductors (France). The name
+"STMicroelectronics" was officially adopted in May 1998.Figure 1.1 represents ST’s official
+logo.
+\vskip0.4cm
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=0.6\columnwidth]{img/logost.png}
+\caption{STMicroelectronics logo}
+\label{fig:STMicroelectronics_logo}
+\end{figure}
+With more than 80 sales and marketing offices and 14 primary manufacturing
+locations across the globe, as seen in figure 1.2, the corporation has over 50,000 employees.
+\vskip0.4cm
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=0.7\columnwidth]{img/Global presence of STMicroelectronics.png}
+\caption{Global presence of STMicroelectronics}
+\label{fig:Global presence of STMicroelectronics}
+\end{figure}
+
+\subsection{STMicroelectronics Vision}
+STMicroelectronics has prioritized technological innovation in its strategy for over 25 years.
+It makes market-driven investments in technological development with the goal of commercializing
+cutting-edge innovations, which immediately creates value for its clientele\cite{ststrategy}.
+Today, with a robust pipeline of innovations, STMicroelectronics can create products
+that are significantly smaller, faster, more energy-efficient, more reliable, and equipped with new
+features. These advancements address the everyday challenges people face and meet their aspirations,
+as illustrated in figure 1.3. Driven by a global lean manufacturing culture, ST offers customers a
+variety of engagement models, including application-specific embedded systems and application-specific
+standard product services.
+
+main specific domains addressed by st  presented in following 
+\vskip0.4cm
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=0.8\columnwidth]{img/STMicroelectronics target markets.png}
+\caption{STMicroelectronics target markets}
+\label{fig:STMicroelectronics target markets}
+\end{figure}
+
+\subsection{STMicroelectronics Tunis}
+The ST Tunis site, located in Technopark El Ghazela as illustrated in figure 1.4 , began its operations in 2001 with just
+9 engineers. Today, it has expanded to more than 200 employees who work across various domains
+including design, tools, applications, quality, and other support functions.
+The ST Tunisia facility plays a crucial role in the microelectronics industry, participating in every
+stage from the initial design of new circuits to the final verification of their functionality before they are transitioned to mass production.
+
+\vskip0.4cm
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=0.4\columnwidth]{img/STMicroelectronics Tunis site.png}
+\caption{STMicroelectronics Tunis site}
+\label{fig:STMicroelectronics Tunis site}
+\end{figure}
+The Microcontroller Division "MCD"  is dedicated to the design of microcontrollers, demonstration platforms and solutions for consumer use with competitive and innovative products. It is responsible for the development of drivers and embedded software.
+The validation and development of libraries and firmware that drive the operation of ST microcontrollers.
+
+Hierarchically, ST Tunis has 3 sub-divisions following in figure 1.5
+\vskip0.4cm
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=0.7\columnwidth]{img/ST site architecture.png}
+\caption{ST site architecture}
+\label{fig:ST site architecture}
+\end{figure}
+
+This project is realized in Maintenance team under microcontroller division "MCD". This team includes two following sub-teams described :
+\begin{itemize}
+\item \textbf{The GitHub team}: It  support the customer under GitHub, in order to encourage customers and facilitate the realization of applications based on STM32 microcontrollers this team focuses on  putting online the new updates of HAL drivers.
+\item \textbf{The Maintenance and Validation team}: Its objective is to achieve customer satisfaction through the maintenance of bugs reported by their customers. This team plays a very important role in the manufacturing cycle of ST’s. It ensures specifically the functional validation of all its manufactured microcontrollers and the associated HAL versions.
+The maintenance team represents the junction that links all the software and hardware design processes to the implementation and industrialization processes.
+\end{itemize}
+
+\section{Project presentation}
+ \subsection{Project framework}
+ 
+ As part of our training in Electronics engineering at the Higher Institute of Computer Science and Mathematics of Monastir (en francais Institut Supérieur d'Informatique et de Mathématiques de Monastir(ISIMM)), we conclude our education with a final project. In this context, our project, entitled Support new revisions of Nucleo-64 boards within STM32Cube packages, took place inside STMicroelectronics Tunis during a period of six month.
+ \subsubsection{Project context}
+The semiconductor market is highly competitive, with companies racing to meet evolving customer needs through rapid innovation. To remain competitive, we propose an updated MB1932 (or new) board featuring USB Type-C support. This will enhance the Nucleo-64 board with broader STM32 compatibility and added functionality. The maintenance team will also provide example applications to showcase key microcontroller features. The flowchart in Figure~\ref{fig:project_context} summarizes the project context, with further details provided in the annex.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{img/flow chat project.png}
+    \caption{Project context for enhancing the Nucleo-64 board}
+    \label{fig:project_context}
+\end{figure}
+\vspace{-0.5cm}
+\subsubsection{Problematic}
+The introduction of the new Nucleo-64 board, which supports USB Type-C, presents several challenges. Developing a dedicated example to showcase the USB functionality requires significant effort and expertise from the maintenance team. This example must effectively demonstrate the new features and be robust enough to serve as a reference for users.our development tool, is crucial for ensuring a seamless user experience. The figure below  illustrates the challenges of the project associated with the introduction of the new Nucleo-64 board, which supports USB Type-C.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{img/challenges .png}
+    \caption{Challenges Associated }
+    \label{fig:Challenges Associated }
+\end{figure}
+\subsubsection{Study of the existing }
+The STM32Cube MCU package provides a robust framework for STM32 microcontroller development, including drivers, middleware, and project templates. Key components like the STM32 USB Device and Host Libraries enable USB functionalities. However, for the Nucleo-64 board, there is a notable absence of USB application examples with USB Type-C support. This gap restricts developers from leveraging the advanced connectivity features of USB Type-C on the board, creating challenges in implementing and optimizing USB functionalities. Dedicated resources and examples are needed to address this limitation.The following diagram illustrates the structure and key components of the STM32Cube MCU package, highlighting its drivers, middleware, projects, and documentation resources.
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=0.9\columnwidth]{img/stm32CUBE.drawio.png}
+\caption{Integration of USB Type-C Applications}
+\label{fig:Integration of USB Type-C Applications}
+\end{figure}
+\subsubsection{proposed Solution}
+The analysis of the STM32Cube MCU package highlights a lack of USB application examples for the Nucleo-64 board with USB Type-C support. To address this, we propose creating dedicated USB applications for both device and host modes, showcasing USB Type-C's advanced features. Integrating these examples into the STM32Cube package will provide developers with practical resources, enhance the board's USB capabilities.These newly developed applications will be included as part of the "Projects" section of the STM32Cube package, and the place where they will be added is already highlighted in Figure 1.8.
+\subsection{Mission and Objectives}
+The primary goal of this internship is to enhance my expertise in STM32 microcontrollers, the USB protocol, and STM32Cube packages, facilitating a smooth transition into professional life through hands-on experience with various tools and areas in high demand in the industry.
+
+Specifically,our final project aims to address the following points:
+
+\begin{itemize}
+    \item  Analyze the existing introduction package offer for the available Nucleo-64 boards.
+    \item Develop new projects to introduce the newly supported features of the Nucleo-64 boards, such as the USB Type-C connector.
+    \item Ensure the porting and validation and testing on all supported toolchains.
+\end{itemize}
+\section{Work methodology}
+\begin{itemize}
+\item \textbf{Task 1}
+\item \textbf{Task 2}
+\item \textbf{Task 3}
+\item \textbf{Task 4}
+
+\end{itemize}
+\subsection{Internship planning}
+A Gantt diagram, also known as a Gantt chart, is a type of bar chart that represents a project schedule\cite{ganttchart}. It visually outlines the start and finish dates of the various elements of a project.
+The Gantt diagram,as illustrated in Figure \ref{fig:Gantt Diagram}shows the distribution of activities across the five months of our  internship in st tunisia.
+\vskip1cm
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=1\columnwidth]{img/diragmm.png}
+\caption{Gantt Diagram of our project}
+\label{fig:Gantt Diagram}
+\end{figure}
+
+
+In order to understand the various aspects of our project, it is essential to review fondamental theoretical concepts and analyse existing information.
+\section{Theoretical Foundations of the Project}
+This section presents the theoretical background that are  essential for understanding the technical aspects of our project.Specifically, we present below the STM32 microcontroller as well.
+\subsection{STM32 microcontroller}
+In the following, an overview of microcontrollers and STM32 family used in this project will be
+explained
+In the following, an overview of microcontrollers and STM32 family used in this project will be explained
+\subsubsection{Overview on Microcontrollers}
+The microcontroller is an integrated circuit considered as a minicomputer designed to create specific  that are genarlly used in embedded systems. It specially integrates in the same package the main componets that are sumarizedin the table below.
+\begin{table}[h!]
+\centering
+\caption{Main components of a microcontroller and their descriptions.}
+\begin{tabular}{|l|p{7cm}|}
+\hline
+\textbf{Component} & \textbf{Description} \\ \hline
+Processor or Central Processing Unit (CPU) & The core of the microcontroller responsible for executing instructions. \\ \hline
+Read-Only Memory (ROM) & Contains the program to be executed. \\ \hline
+Random-Access Memory (RAM) & A volatile memory used to temporarily store data during program execution. \\ \hline
+Oscillator & Used for clock generation, often implemented with a quartz crystal for precise timing. \\ \hline
+Peripherals & Components for specific tasks, such as ADC (Analog-to-Digital Converter), timers, UART (Universal Asynchronous Receiver-Transmitter), USB, etc. \\ \hline
+Direct Memory Access (DMA) &  direct data transfer between peripherals and memory without CPU intervention. \\ \hline
+\end{tabular}
+\label{tab:microcontroller_components}
+\end{table}
+
+\subsubsection{STM32 Family}
+The STM32 family from STMicroelectronics is a series of microcontrollers developed since 2006\cite{stm32microcontrollers}.This family is based on 32-bit ARM architecture processors.
+Currently, STMicroelectronics has a large range of microcontrollers subdivided into more than ten distinct product subfamilies, each of them has specific characteristics. The following diagram of figure 1.11 groups the subfamilies into four macro groups: high-performance, mainstream, ultra-low-power and wireless microcontrollers, and shows the dedicated solutions for each subfamily.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/STM32 MCU families.jpg}
+    \caption{Main STM32 MCU families}
+    \label{STM32 MCU families}
+\end{figure}
+The Advanced RISC Machines (ARM) architecture for processors has existed since 1990 and is characterized by a simple, low-power architecture. The Cortex cores have the designation "Cortex-XN", where "X" designates the profile to which the core belongs and "N" its degree of performance, which varies between 0 (the least efficient) and 9 (the most efficient)\cite{architectureARM}.
+There are three profiles specific to the ARM or Cortex architecture,as illustrated in Figure 1.12:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/ARM ARCHITECTURE.png}
+    \caption{ARM architecture}
+    \label{ARM architecture}
+\end{figure}
+specific information of cortex A,R and M series are as follows \cite{architectureARM}:
+\begin{itemize}
+\item \textbf{Cortex-A series}: designed to run complex applications such as embedded operating systems (Linux, Windows CE) requiring high processing power and a virtual memory management system.
+\item \textbf{Cortex-R series}: designed principally for real time applications with very severe constraints and requiring reliability and low response time. The processors of this profile also contain an additional unit for floating point calculation and are used for example in hard disks, digital cameras, the automotive sector.
+\item \textbf{Cortex-M series}: optimized for applications requiring low power consumption and low cost. This is the profile that is intended to be integrated in microcontrollers \cite{architectureARM}.
+\end{itemize}
+ In our case, we consider Cortex-M,In fact the STM32 family based on the Arm® Cortex®-M processor is designed to offer new degrees of freedom to MCU users. This theoretical understanding of the STM32 architecture sets the stage for the next essential component of our project which is the USB. It constitutes one of the most widely adopted communication protocols due to its versatility, ease of use, and widespread support. The following section provides an overview on the USB protocol.
+
+\section{Conclusion}
+
+In this chapter, we have established the context for the internship by introducing the host company and its environment. We have presented our management approach, including a Gantt chart that outlines the work methodology . Theoretical foundations of the project, which were earlier discussed, provide the essential knowledge required for the practical implementation that will be explored in the next chapter of this report .
+
+\newpage

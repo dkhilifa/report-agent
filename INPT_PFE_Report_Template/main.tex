@@ -1,0 +1,228 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Welcome to Overleaf --- just edit your LaTeX on the left,
+% and we'll compile it for you on the right. If you open the
+% 'Share' menu, you can invite other users to edit at the same
+% time. See www.overleaf.com/learn for more info. Enjoy!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,a4paper,oneside]{book}
+
+
+\input{Packages}
+
+
+%\makenoidxglossaries 
+
+%\newglossaryentry{latex}
+%{
+       % name=latex,
+        %description={Is a mark up language specially suited for scientific documents}
+%}
+
+
+
+%\selectlanguage{English}
+
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdfauthor={Name},  %put your name here
+    pdftitle={PDF_TTILE},  %PDF title
+    pdfpagemode=FullScreen,
+    }
+
+
+
+\begin{document}
+
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+    \definecolor{codegray}{rgb}{0.5,0.5,0.5}
+    \definecolor{codepurple}{rgb}{0.58,0,0.82}
+    \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    
+    \lstdefinestyle{mystyle}{
+        backgroundcolor=\color{backcolour},   
+        keywordstyle=\color{magenta},
+        numberstyle=\tiny\color{codegreen},
+        stringstyle=\color{codepurple},
+        basicstyle=\ttfamily\footnotesize,
+        breakatwhitespace=false,         
+        breaklines=true,                 
+        captionpos=b,                    
+        keepspaces=true,                 
+        numbers=left,                    
+        numbersep=5pt,                  
+        showspaces=false,                
+        showstringspaces=false,
+        showtabs=false,                  
+        tabsize=2
+    }
+
+
+
+
+%\include{Frontmatter/Page_de_garde} %FRENCH ONE
+
+\include{Frontmatter/Page_de_Garde_EN} % ENGLISH
+
+\afterpage{\blankpage}  %page vide obligatoire
+
+\frontmatter
+
+
+\input{Frontmatter/Dedication}
+
+
+\input{Frontmatter/Acknowledgements}
+
+
+\input{Frontmatter/Résumé}
+
+% \cleardoublepage
+%
+
+\input{Frontmatter/Abstract}
+
+% \cleardoublepage
+%
+
+\input{Frontmatter/Molakhas}
+
+% \cleardoublepage
+%
+
+
+
+
+
+
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures} 
+%figures are added automatically here
+
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables} 
+%tables are added automatically here
+
+\lstlistoflistings
+\addcontentsline{toc}{chapter}{List of Listings} 
+%Code snippets are added automatically here
+
+\tableofcontents
+\addcontentsline{toc}{chapter}{Table of Contents}
+%contents are added automatically here
+
+\mainmatter
+
+%debut of chapters
+
+\input{Chapters/Chapter1}
+
+\input{Chapters/Chapter2}
+
+\input{Chapters/Chapter3}
+
+\input{Chapters/Chapter4}
+
+\input{Chapters/Chapter5}
+
+
+\input{Chapters/Conclusion}
+
+\appendix
+
+
+\input{Endmatter/Glossary}
+
+\input{Endmatter/Acronyms}
+
+\input{Endmatter/ComplementaryCodes}
+
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Bibliography}
+
+% --- References cited in Chapter~\ref{chap:general-description} ---
+
+\bibitem{st-about}
+STMicroelectronics, \emph{About ST}. [Online]. Available: \url{https://www.st.com/content/st_com/en/about/st_company_information.html}. Accessed: 2026.
+
+\bibitem{st-investors}
+STMicroelectronics, \emph{2024 Annual Report and Financial Highlights}. [Online]. Available: \url{https://investors.st.com/}. Accessed: 2026.
+
+\bibitem{st-strategy}
+STMicroelectronics, \emph{Strategy and Innovation}. [Online]. Available: \url{https://www.st.com/content/st_com/en/about/innovation---technology/innovation---technology.html}. Accessed: 2026.
+
+\bibitem{stm32-family}
+STMicroelectronics, \emph{STM32 32-bit Arm Cortex MCUs}. [Online]. Available: \url{https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html}. Accessed: 2026.
+
+\bibitem{arm-cortexm}
+Arm Ltd., \emph{Cortex-M Series Processors}. [Online]. Available: \url{https://developer.arm.com/Processors/Cortex-M}. Accessed: 2026.
+
+\bibitem{stm32cube-ecosystem}
+STMicroelectronics, \emph{STM32Cube Ecosystem}. [Online]. Available: \url{https://www.st.com/en/ecosystems/stm32cube.html}. Accessed: 2026.
+
+\bibitem{divide-conquer}
+T.~H. Cormen, C.~E. Leiserson, R.~L. Rivest, and C.~Stein, \emph{Introduction to Algorithms}, 3rd~ed. Cambridge, MA: MIT Press, 2009.
+
+% --- External tools, libraries, and references cited in Chapter~\ref{chap:footprint-tool} ---
+
+\bibitem{python}
+Python Software Foundation, \emph{The Python Language Reference, version~3.11}. [Online]. Available: \url{https://docs.python.org/3.11/}. Accessed: 2026.
+
+\bibitem{pyside6}
+The Qt Company, \emph{Qt for Python (PySide6) Documentation}. [Online]. Available: \url{https://doc.qt.io/qtforpython/}. Accessed: 2026.
+
+\bibitem{pandas}
+The pandas development team, \emph{pandas: Powerful Python Data Analysis Toolkit}. [Online]. Available: \url{https://pandas.pydata.org/}. Accessed: 2026.
+
+\bibitem{openpyxl}
+E.~Gazoni and C.~Clark, \emph{openpyxl: A Python Library to Read and Write Excel 2010 xlsx/xlsm Files}. [Online]. Available: \url{https://openpyxl.readthedocs.io/}. Accessed: 2026.
+
+\bibitem{matplotlib}
+J.~D. Hunter, ``Matplotlib: A 2D Graphics Environment,'' \emph{Computing in Science \& Engineering}, vol.~9, no.~3, pp.~90--95, 2007. [Online]. Available: \url{https://matplotlib.org/}.
+
+\bibitem{sqlite}
+SQLite Development Team, \emph{SQLite Documentation}. [Online]. Available: \url{https://www.sqlite.org/docs.html}. Accessed: 2026.
+
+\bibitem{pyinstaller}
+PyInstaller Development Team, \emph{PyInstaller Manual}. [Online]. Available: \url{https://pyinstaller.org/}. Accessed: 2026.
+
+\bibitem{iar-ewarm}
+IAR Systems, \emph{IAR Embedded Workbench for Arm --- C/C++ Development Guide (ILINK Linker and Linker Map File)}. [Online]. Available: \url{https://www.iar.com/embedded-development-tools/iar-embedded-workbench}. Accessed: 2026.
+
+\bibitem{github-copilot}
+GitHub, \emph{GitHub Copilot Documentation}. [Online]. Available: \url{https://docs.github.com/en/copilot}. Accessed: 2026.
+
+\bibitem{anthropic}
+Anthropic, \emph{Claude API Documentation}. [Online]. Available: \url{https://docs.anthropic.com/}. Accessed: 2026.
+
+\bibitem{openai-api}
+OpenAI, \emph{OpenAI API Reference}. [Online]. Available: \url{https://platform.openai.com/docs/}. Accessed: 2026.
+
+\bibitem{ollama}
+Ollama, \emph{Ollama: Run Large Language Models Locally}. [Online]. Available: \url{https://ollama.com/}. Accessed: 2026.
+
+\bibitem{github-models}
+GitHub, \emph{GitHub Models Documentation}. [Online]. Available: \url{https://docs.github.com/en/github-models}. Accessed: 2026.
+
+\bibitem{nxp-mcuxpresso}
+NXP Semiconductors, \emph{MCUXpresso SDK Documentation}. [Online]. Available: \url{https://mcuxpresso.nxp.com/}. Accessed: 2026.
+
+% --- External tools and references cited in Chapter~\ref{chap:benchmark-agent} ---
+
+\bibitem{vscode}
+Microsoft, \emph{Visual Studio Code Documentation}. [Online]. Available: \url{https://code.visualstudio.com/docs}. Accessed: 2026.
+
+\bibitem{vscode-agent-mode}
+Microsoft, \emph{GitHub Copilot Agent Mode in VS Code}. [Online]. Available: \url{https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode}. Accessed: 2026.
+
+\end{thebibliography}
+
+\end{document}

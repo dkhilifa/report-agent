@@ -1,0 +1,136 @@
+% =====================================================================
+% Vendor benchmark chapter template — STM32Cube Ecosystem Benchmark report
+%
+% The report compares ST (the reference) against ONE competing vendor per
+% chapter (e.g. GD32, TI, NXP). Copy the relevant blocks into the target
+% file, replace <...> placeholders, and delete unused blocks. Keep labels
+% meaningful and unique. pdfLaTeX-safe.
+%
+% Chapter layout (fixed so every vendor reads the same way):
+%   Introduction
+%   -> Hardware platforms        (board-characteristics comparison table)
+%   -> one \section per stack    (USB device stack, FreeRTOS, ...), each:
+%        Scenario design -> Results (per scenario) -> Interpretation
+%   -> Conclusion                (ST vs this vendor synthesis)
+%
+% Routing reminder:
+%   new vendor          -> new chapter (this whole file, wired into main.tex)
+%   existing vendor,
+%     new stack         -> just a new \section block (the STACK block below)
+%   existing stack,
+%     new scenario      -> just a new \subsubsection in that stack's Results
+% =====================================================================
+
+% =========================== CHAPTER =================================
+\chapter{Benchmarking ST against <Vendor, e.g. GD32>}
+\label{chap:vs-<vendor-key>}
+
+% --- Introduction: why this vendor, what the comparison settles ------
+We compare the STMicroelectronics / STM32Cube ecosystem against
+<vendor>'s equivalent offering on <which stacks, e.g. the USB device stack
+and the FreeRTOS integration>. <Say why this vendor is a relevant competitor
+(market position, ST-compatibility, price) and what question this comparison
+should settle.>
+
+% --- Hardware platforms: the two boards under test ------------------
+\section{Hardware platforms}
+\label{sec:<vendor-key>-boards}
+Every scenario in this chapter runs on two comparable boards: the ST
+reference board <ST board / part> and <vendor>'s <vendor board / part>.
+Table~\ref{tab:<vendor-key>-boards} contrasts their characteristics.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{l l l}
+    \toprule
+    Characteristic   & ST (<ST part>)            & <Vendor> (<part>) \\
+    \midrule
+    Core / clock     & <Cortex-M? / freq\,MHz>   & <core / freq\,MHz> \\
+    Flash / RAM      & <KB / KB>                 & <KB / KB> \\
+    Key peripherals  & <USB FS/HS, ...>          & <...> \\
+    Toolchain / IDE  & STM32CubeIDE / GCC        & <vendor IDE / GCC> \\
+    Reference price  & <approx>                  & <approx> \\
+    \bottomrule
+  \end{tabular}
+  \caption{Board characteristics: ST reference vs <vendor>.}
+  \label{tab:<vendor-key>-boards}
+\end{table}
+
+% ====================== STACK BLOCK (repeat per stack) ===============
+% Copy this whole \section for each benchmarked stack (USB, FreeRTOS, ...).
+\section{<Stack, e.g. USB device stack>}
+\label{sec:<vendor-key>-<stack-key>}
+
+% --- Scenario design: which scenarios and why -----------------------
+\subsection{Scenario design}
+\label{sec:<vendor-key>-<stack-key>-scenarios}
+To exercise the <stack> meaningfully we defined <N> scenarios:
+<e.g. HID, CDC, and MSC>. <Justify the choice --- they cover the dominant
+device classes / use cases.> Each scenario was implemented identically on
+both platforms; Table~\ref{tab:<vendor-key>-<stack-key>-scenarios} states
+what each one exercises and the metric it yields.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{l l l}
+    \toprule
+    Scenario & What it exercises          & Measured metric \\
+    \midrule
+    <HID>    & <low-rate interrupt xfers> & <latency / cycles> \\
+    <CDC>    & <virtual COM throughput>   & <MB/s> \\
+    <MSC>    & <mass-storage throughput>  & <MB/s> \\
+    \bottomrule
+  \end{tabular}
+  \caption{<Stack> benchmark scenarios.}
+  \label{tab:<vendor-key>-<stack-key>-scenarios}
+\end{table}
+
+% --- Results: one block per scenario --------------------------------
+\subsection{Results}
+\label{sec:<vendor-key>-<stack-key>-results}
+
+\subsubsection{<Scenario 1, e.g. HID>}
+<One line on any scenario-specific setup.> Table~\ref{tab:<vendor-key>-<stack-key>-s1}
+reports <metric + units> for both platforms.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{l r r}
+    \toprule
+    Platform           & <Metric (unit)> & <Metric 2 (unit)> \\
+    \midrule
+    ST (<part>)        & <value>         & <value> \\
+    <Vendor> (<part>)  & <value>         & <value> \\
+    \bottomrule
+  \end{tabular}
+  \caption{<Scenario 1> results: ST vs <vendor>.}
+  \label{tab:<vendor-key>-<stack-key>-s1}
+\end{table}
+
+% \subsubsection{<Scenario 2>}  ... repeat the results table ...
+% \subsubsection{<Scenario 3>}  ... repeat the results table ...
+
+% Optional: a grouped bar chart comparing all scenarios at once.
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width=0.8\textwidth]{Figures/<vendor-key>/<stack-key>-chart}
+%   \caption{<Stack> throughput across scenarios: ST vs <vendor>.}
+%   \label{fig:<vendor-key>-<stack-key>-chart}
+% \end{figure}
+
+% --- Interpretation: what the comparison reveals --------------------
+\subsection{Interpretation}
+<Across the scenarios, where does ST lead or trail <vendor>, and by how much?
+Tie each difference back to the board characteristics
+(Table~\ref{tab:<vendor-key>-boards}) or to the stack implementation. Name the
+trade-off and the practical guidance for an engineer choosing between the two.
+Cite any external spec used for context~\cite{<key>}.>
+
+% ====================== END STACK BLOCK =============================
+% (repeat the \section above for the next stack: FreeRTOS, ...)
+
+% --- Chapter conclusion: ST vs this vendor --------------------------
+\section*{Conclusion}
+<Synthesize how the STM32Cube ecosystem stands against <vendor> across the
+stacks tested, and the practical guidance for an engineer choosing between
+them. Feed this takeaway into the optional cross-vendor synthesis chapter.>

@@ -1,0 +1,20 @@
+\babel@toc {nil}{}\relax 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces STMicroelectronics logo.}}{2}{figure.caption.10}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Organisational structure of the Microcontroller Division (MCD) at ST Tunis. The Maintenance team (highlighted) is the host team of this project.}}{3}{figure.caption.11}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Layered architecture of the footprint-analysis tool. A deterministic comparison core (ingestion, classification, mapping, comparison, export) is wrapped by the user interfaces and backed by an SQLite knowledge base; an optional, off-by-default AI-assistance column refines the mapping without ever sitting on the critical path.}}{12}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces End-to-end benchmark pipeline, from linker-map ingestion to report generation. Dashed stages are optional AI-assisted steps that are disabled by default; the solid deterministic path runs end to end on its own.}}{14}{figure.caption.14}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Layer-classification decision flow. Each symbol's tokens are matched against priority-ordered lexicons (system, middleware, low-level, application); the first match determines the layer with an associated confidence.}}{16}{figure.caption.16}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Relative weights of the signals combined by the deterministic mapping scorer. Name and role similarity dominate; the optional LLM-similarity signal (highlighted) is capped so that AI assistance can shift a candidate's confidence by at most twelve percent.}}{17}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Detailed signal computation and penalty system. Seven evidence signals are computed for each candidate pair; penalties for size mismatch and layer conflict reduce the composite score before the acceptance threshold is applied.}}{18}{figure.caption.18}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Candidate generation, ranking, and threshold flow. The Cartesian product of source and target items is pruned by fast rejection filters, scored on all signals, and bucketed into accepted, review, alternative, and unmatched categories by confidence thresholds.}}{19}{figure.caption.19}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces AI integration flow. A common protocol abstracts all back-ends; an auto-detection chain probes them in priority order (Copilot, OpenAI, Ollama) and falls back gracefully to purely deterministic operation if none is available.}}{20}{figure.caption.20}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Architecture of the MCU Benchmark Copilot Agent system. The router classifies requests and delegates to specialist agents or invokes skill workflows; all operate under the shared always-on benchmark rules within the VS Code environment.}}{25}{figure.caption.22}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces End-to-end benchmark lifecycle. The MCU Benchmark Copilot Agent handles steps~1 through~5 (understand, create, build, debug, validate); once semantic equivalence is confirmed, the validated linker map is handed to MCU Workflow Studio for footprint analysis.}}{29}{figure.caption.25}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

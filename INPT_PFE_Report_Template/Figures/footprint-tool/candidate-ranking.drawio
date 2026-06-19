@@ -1,0 +1,79 @@
+<mxfile host="app.diagrams.net" modified="2026-06-04" agent="MCU Workflow Studio" type="device">
+  <diagram name="Candidate Ranking" id="ranking-06">
+    <mxGraphModel dx="1422" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="Candidate Ranking Pipeline — Generation to Threshold" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;fontColor=#1A237E;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="700" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ═══ STAGE 1: GENERATION ═══ -->
+        <mxCell id="st1" value="① GENERATE&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Cartesian product:&#xa;source_items × target_items&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Typical: 200 × 300 = 60,000 pairs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00695C;strokeWidth=2;fontSize=11;fontColor=#004D40;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="250" height="150" as="geometry"/>
+        </mxCell>
+
+        <!-- ═══ STAGE 2: PRUNING ═══ -->
+        <mxCell id="st2" value="② PRUNE&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Remove obvious non-matches:&#xa;• Different layers (if both classified)&#xa;• Size ratio &gt; 10× mismatch&#xa;• Zero name token overlap&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Typical: 60,000 → 5,000 (92% reduction)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=2;fontSize=11;fontColor=#BF360C;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="340" y="100" width="260" height="190" as="geometry"/>
+        </mxCell>
+
+        <!-- ═══ STAGE 3: SCORING ═══ -->
+        <mxCell id="st3" value="③ SCORE&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Apply 7-signal weighted sum:&#xa;conf = Σ(signal_i × weight_i)&#xa;Apply penalty multipliers&#xa;Compute coverage metric&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;All 5,000 pairs scored" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;fontSize=11;fontColor=#0D47A1;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="650" y="100" width="250" height="190" as="geometry"/>
+        </mxCell>
+
+        <!-- ═══ STAGE 4: RANKING (Top-K) ═══ -->
+        <mxCell id="st4" value="④ RANK (Top-K)&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Per source item:&#xa;• Sort targets by confidence DESC&#xa;• Keep top K=3 targets&#xa;• Mark best as 'primary'&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Typical: 5,000 → 600 (200 × 3)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;fontSize=11;fontColor=#1B5E20;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="950" y="100" width="260" height="190" as="geometry"/>
+        </mxCell>
+
+        <!-- ═══ STAGE 5: THRESHOLD ═══ -->
+        <mxCell id="st5" value="⑤ THRESHOLD&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Assign acceptance bucket:&#xa;&#xa;≥ 0.72 → ✅ accepted&#xa;0.55–0.71 → 🔍 review&#xa;0.45–0.54 → 🔀 alternative&#xa;&lt; 0.45 → ❌ rejected&#xa;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━&#xa;Output: categorized ScoredMapping[]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#6A1B9A;strokeWidth=2;fontSize=11;fontColor=#4A148C;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="80" width="270" height="230" as="geometry"/>
+        </mxCell>
+
+        <!-- FLOW ARROWS -->
+        <mxCell id="f12" style="strokeColor=#00695C;strokeWidth=3;endArrow=blockThin;endFill=1;" edge="1" source="st1" target="st2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f23" style="strokeColor=#E65100;strokeWidth=3;endArrow=blockThin;endFill=1;" edge="1" source="st2" target="st3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f34" style="strokeColor=#1565C0;strokeWidth=3;endArrow=blockThin;endFill=1;" edge="1" source="st3" target="st4" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f45" style="strokeColor=#2E7D32;strokeWidth=3;endArrow=blockThin;endFill=1;" edge="1" source="st4" target="st5" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- VOLUME REDUCTION BAR -->
+        <mxCell id="vol_label" value="📉 VOLUME REDUCTION" style="text;html=1;align=center;verticalAlign=middle;fillColor=none;strokeColor=none;fontStyle=1;fontSize=13;fontColor=#37474F;" vertex="1" parent="1">
+          <mxGeometry x="550" y="380" width="250" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="vol1" value="60,000" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00695C;fontSize=12;fontColor=#004D40;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="420" width="180" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="vol2" value="5,000" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=12;fontColor=#BF360C;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="420" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="vol3" value="5,000 (scored)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=12;fontColor=#0D47A1;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="420" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="vol4" value="600" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=12;fontColor=#1B5E20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="990" y="420" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="vol5" value="~450 accepted&#xa;~100 review&#xa;~50 rejected" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#6A1B9A;fontSize=10;fontColor=#4A148C;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="410" width="130" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- Reduction arrows -->
+        <mxCell id="vf1" value="-92%" style="strokeColor=#C62828;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#C62828;fontStyle=1;" edge="1" source="vol1" target="vol2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="vf2" value="" style="strokeColor=#78909C;strokeWidth=1;endArrow=blockThin;endFill=1;" edge="1" source="vol2" target="vol3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="vf3" value="-88%" style="strokeColor=#C62828;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#C62828;fontStyle=1;" edge="1" source="vol3" target="vol4" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="vf4" value="" style="strokeColor=#78909C;strokeWidth=1;endArrow=blockThin;endFill=1;" edge="1" source="vol4" target="vol5" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- TOTAL REDUCTION -->
+        <mxCell id="total_red" value="Total reduction: 60,000 → 600 final mappings = 99% eliminated" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1A237E;strokeColor=#0D47A1;strokeWidth=2;fontSize=12;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="510" width="500" height="35" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

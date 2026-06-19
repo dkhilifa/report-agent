@@ -1,0 +1,26 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="tool-arch" name="Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1240" pageHeight="620" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ui" value="&lt;b&gt;User interfaces&lt;/b&gt;&lt;br&gt;Desktop GUI (PySide6/Qt) • Chat assistant • Mind-map &amp; charts • CLI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="180" y="40" width="620" height="70" as="geometry" /></mxCell>
+        <mxCell id="orch" value="&lt;b&gt;Orchestration&lt;/b&gt;&lt;br&gt;Workflow service • Data models" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="180" y="130" width="620" height="60" as="geometry" /></mxCell>
+        <mxCell id="ing" value="&lt;b&gt;Ingestion&lt;/b&gt;&lt;br&gt;IAR .map parser • Excel loader • Input detection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="180" y="210" width="620" height="60" as="geometry" /></mxCell>
+        <mxCell id="cls" value="&lt;b&gt;Classification&lt;/b&gt;&lt;br&gt;Layer classifier: application / middleware / low-level / system-runtime" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="180" y="290" width="620" height="60" as="geometry" /></mxCell>
+        <mxCell id="cmp" value="&lt;b&gt;Comparison core&lt;/b&gt; (deterministic)&lt;br&gt;Benchmark engine • Multi-signal mapping engine • Acceptance policy&lt;br&gt;Global &amp; per-layer compare • Recommendations &amp; root-cause" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="180" y="370" width="620" height="104" as="geometry" /></mxCell>
+        <mxCell id="exp" value="&lt;b&gt;Export&lt;/b&gt;&lt;br&gt;Excel writer • Scoped CSV/JSON • PDF report • GUI payload" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="180" y="494" width="620" height="78" as="geometry" /></mxCell>
+        <mxCell id="aibox" value="&lt;b&gt;Optional AI assistance&lt;/b&gt; (default off)&lt;br&gt;LLM map provider • confident pass • layer classifier • web ingestion • firmware advisor • AI narrative" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="860" y="296" width="320" height="120" as="geometry" /></mxCell>
+        <mxCell id="kb" value="&lt;b&gt;Knowledge &amp; persistence&lt;/b&gt; (SQLite)&lt;br&gt;Vendor registry • knowledge store • feedback / learning • run history" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="900" y="478" width="240" height="94" as="geometry" /></mxCell>
+        <mxCell id="ea1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#333333;" edge="1" parent="1" source="ui" target="orch"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#333333;" edge="1" parent="1" source="orch" target="ing"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#333333;" edge="1" parent="1" source="ing" target="cls"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#333333;" edge="1" parent="1" source="cls" target="cmp"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#333333;" edge="1" parent="1" source="cmp" target="exp"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="eai" value="optional" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;startArrow=open;dashed=1;strokeColor=#d79b00;fontSize=11;fontColor=#d79b00;" edge="1" parent="1" source="cmp" target="aibox"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ekb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;startArrow=open;strokeColor=#666666;" edge="1" parent="1" source="exp" target="kb"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ekb2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;dashed=1;strokeColor=#999999;" edge="1" parent="1" source="cmp" target="kb"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
