@@ -4,7 +4,7 @@
 \section*{Introduction}
 
 GigaDevice Semiconductor is a Chinese fabless semiconductor company that produces the GD32
-series of 32-bit microcontrollers \cite{gigadevice-gd32}. The GD32 family is often
+series of 32-bit microcontrollers~\cite{gigadevice-gd32}. The GD32 family is often
 positioned as a pin-compatible, drop-in alternative to STM32 parts, sharing the same Arm
 Cortex-M cores, similar peripheral sets, and comparable pricing. This close correspondence
 makes GD32 a particularly relevant competitor: engineers evaluating an MCU platform
@@ -57,7 +57,7 @@ Table~\ref{tab:gd32-boards} contrasts their key characteristics.
 The STM32U575 belongs to the ultra-low-power STM32U5 series and offers substantially more
 flash and RAM, hardware security accelerators, and a richer peripheral set
 \cite{stm32u575-ds}. The GD32E507 targets a similar performance point at a competitive
-price but with fewer on-chip resources \cite{gigadevice-gd32}. For our benchmarks, the
+price but with fewer on-chip resources~\cite{gd32e507-ds}. For our benchmarks, the
 relevant constant is that \emph{both devices run the same core at the same frequency},
 so footprint and execution-time differences are attributable to the vendor's software stack
 and HAL implementation.
@@ -322,10 +322,10 @@ functionality:
 \label{sec:gd32-freertos}
 
 FreeRTOS is the most widely adopted real-time operating system for Cortex-M
-microcontrollers \cite{freertos}. Both STMicroelectronics and GigaDevice ship FreeRTOS
+microcontrollers~\cite{freertos}. Both STMicroelectronics and GigaDevice ship FreeRTOS
 integration packages as part of their firmware offerings. We benchmark the two
-implementations using FreeRTOS v11.2, running on the same two boards at 160\,MHz with a
-1\,ms tick (time slice) per task.
+implementations using FreeRTOS v11.2~\cite{freertos-v11}, running on the same two boards
+at 160\,MHz with a 1\,ms tick (time slice) per task.
 
 % --- Scenario design ------------------------------------------------
 \subsection{Scenario design}

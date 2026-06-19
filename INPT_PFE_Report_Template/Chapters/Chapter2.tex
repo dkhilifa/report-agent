@@ -71,10 +71,10 @@ AI-assistance column refines the mapping without ever sitting on the critical pa
 \end{figure}
 
 Two interfaces sit on top of the same engine: a desktop graphical user interface (GUI) built with PySide6
-(the Qt binding for Python) \cite{pyside6}, which adds interactive charts and a project-scoped
+(the Qt binding for Python)~\cite{pyside6}, which adds interactive charts and a project-scoped
 chat assistant, and a command-line interface for scripted and reproducible runs. Both call
 into a single \emph{workflow service} that owns the data models and drives every stage.
-Persistence is handled by SQLite \cite{sqlite}: a vendor registry of aliases and naming
+Persistence is handled by SQLite~\cite{sqlite}: a vendor registry of aliases and naming
 prefixes, a knowledge store of confirmed correspondences, an optional feedback store, and a
 history of past runs. The block of language-model features on the right is genuinely
 optional --- the deterministic path produces a complete result without it --- and we return
@@ -141,13 +141,13 @@ sanity-check a map before a full comparison.
 \section{Implementation}
 \label{sec:tool-implementation}
 
-The tool is written entirely in Python ($\geq$~3.11) \cite{python}, with a small,
+The tool is written entirely in Python ($\geq$~3.11)~\cite{python}, with a small,
 deliberately conventional dependency set summarised in Table~\ref{tab:tool-stack}. We
 favoured the standard library wherever it was sufficient: all persistence uses the built-in
-SQLite engine \cite{sqlite}, and every network call to a language model goes through the
+SQLite engine~\cite{sqlite}, and every network call to a language model goes through the
 standard \texttt{urllib} module rather than a vendor SDK, which keeps the executable small
 and the dependency surface auditable. The whole application can be packaged into a
-stand-alone Windows executable with PyInstaller \cite{pyinstaller}.
+stand-alone Windows executable with PyInstaller~\cite{pyinstaller}.
 
 \begin{table}[H]
 \centering
@@ -172,7 +172,7 @@ Packaging & PyInstaller \cite{pyinstaller} & Stand-alone Windows executable. \\
 \label{sec:tool-parsing}
 
 The single required input is the linker map emitted by the IAR Embedded Workbench for ARM
-(EWARM) toolchain \cite{iar-ewarm}. The parser reads this map and reconstructs, for
+(EWARM) toolchain~\cite{iar-ewarm}. The parser reads this map and reconstructs, for
 each module and function, the read-only code and data it contributes and the read-write data
 it reserves. From these we derive the two footprint figures the benchmark cares about: flash
 occupancy as the sum of read-only code and read-only data, and RAM occupancy as the
@@ -265,8 +265,8 @@ language.
 
 These features can be served by several interchangeable back-ends, listed in
 Table~\ref{tab:tool-ai}, selected automatically in a fixed order or pinned explicitly. They
-range from a hosted GitHub Copilot endpoint \cite{github-copilot} to a fully offline Ollama
-server \cite{ollama}, so the assistance can run without any data leaving the machine. If a
+range from a hosted GitHub Copilot endpoint~\cite{github-copilot} to a fully offline Ollama
+server~\cite{ollama}, so the assistance can run without any data leaving the machine. If a
 back-end is unavailable or returns something unusable, the tool degrades gracefully to its
 deterministic output rather than failing. Figure~\ref{fig:tool-ai-integration} shows the
 provider abstraction and the auto-detection fallback chain.
@@ -340,7 +340,7 @@ eight-page PDF report with an executive summary, source-versus-target charts, an
 architecture-and-module breakdown, a gap analysis, and recommendations. The samples we used to
 develop and validate the tool are themselves a representative comparison: a USB human interface device (HID)
 class project built for an STM32U575 board against the equivalent project built for an NXP
-MCXN947 board \cite{nxp-mcuxpresso}, both compiled with the same IAR toolchain so that only the
+MCXN947 board~\cite{nxp-mcuxpresso}, both compiled with the same IAR toolchain so that only the
 vendor software stacks differ.
 
 \section{Engineering value and limitations}

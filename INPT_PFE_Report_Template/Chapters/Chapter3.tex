@@ -15,7 +15,7 @@ error-prone, and difficult to keep consistent across many vendor comparisons.
 To address this, we designed and built a custom GitHub Copilot agent system ---
 the \emph{MCU Benchmark Copilot Agent} --- that operates inside Visual Studio Code (VS
 Code) and automates the reasoning-intensive parts of benchmark creation, porting, building,
-and debugging \cite{vscode, github-copilot}. Where MCU Workflow Studio analyses what
+and debugging~\cite{vscode, github-copilot}. Where MCU Workflow Studio analyses what
 \emph{exists}, the agent system helps \emph{create} what does not yet exist, and it does so
 under strict rules that enforce semantic equivalence and benchmark fairness at every step.
 The two tools are complementary: the agent produces the builds, and the studio analyses
@@ -62,7 +62,7 @@ by a single router, and governed by a shared set of always-on rules. All configu
 lives in a \texttt{.github/} directory within the benchmark workspace and is expressed as
 Markdown files with YAML frontmatter --- no compiled code, no external server, no
 deployment step. The agents run inside VS Code's GitHub Copilot Chat extension
-\cite{github-copilot} and have access to the workspace file system, terminal, and search
+~\cite{github-copilot} and have access to the workspace file system, terminal, and search
 capabilities.
 
 Figure~\ref{fig:agent-architecture} illustrates the layered arrangement. A user request
