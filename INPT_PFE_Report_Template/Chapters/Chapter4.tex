@@ -1,52 +1,592 @@
-\chapter{Chapter 4 title}
-\label{chap:Chapter 4 title}
+\chapter{Benchmarking ST against GD32}
+\label{chap:vs-gd32}
+
 \section*{Introduction}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec dapibus justo. Donec sagittis vulputate ante sed porttitor. Suspendisse sit amet nisl massa. Curabitur nec nisl condimentum, egestas ex vitae, dapibus enim. Etiam iaculis, erat faucibus pellentesque sagittis, nisi justo sollicitudin nibh, et condimentum augue massa non turpis. Proin commodo enim fermentum suscipit condimentum. Maecenas molestie, dui nec vestibulum rhoncus, arcu nisl faucibus neque, a ornare nisi massa ac eros. Aenean id velit sit amet lacus mattis varius. Donec fringilla massa sed nisi eleifend, a aliquet mi tempus. Nunc posuere euismod est, nec tristique augue lobortis non. Sed sodales sem ut metus tempus ullamcorper.
-      
+GigaDevice Semiconductor is a Chinese fabless semiconductor company that produces the GD32
+series of 32-bit microcontrollers \cite{gigadevice-gd32}. The GD32 family is often
+positioned as a pin-compatible, drop-in alternative to STM32 parts, sharing the same Arm
+Cortex-M cores, similar peripheral sets, and comparable pricing. This close correspondence
+makes GD32 a particularly relevant competitor: engineers evaluating an MCU platform
+frequently shortlist both vendors, and the choice often comes down to measurable differences
+in software-stack quality rather than silicon specifications.
 
+In this chapter we compare the STM32Cube ecosystem against GigaDevice's GD32 firmware
+libraries on two middleware stacks: the \textbf{USB device stack} (exercised through HID and
+CDC scenarios) and the \textbf{FreeRTOS} real-time operating system integration (exercised
+through basic, cooperative, and preemptive scheduling scenarios). For each stack we present
+the scenario design, per-scenario footprint and execution-time results, a per-layer ROM
+breakdown, and an interpretation of the trade-offs the data reveals.
 
+All measurements follow the methodology described in
+Chapter~\ref{chap:general-description}: identical scenarios on both platforms, same compiler
+optimisation level, same clock frequency, and results extracted from IAR EWARM linker maps
+using the footprint analysis tool presented in Chapter~\ref{chap:footprint-tool}.
 
+% ====================================================================
+\section{Hardware platforms}
+\label{sec:gd32-boards}
 
-\pagebreak
+Every scenario in this chapter runs on two boards hosting comparable Cortex-M33 parts: the
+STMicroelectronics \textbf{NUCLEO-U575ZI-Q} (STM32U575ZIT6Q) and GigaDevice's
+\textbf{GD32E507} evaluation board (GD32E507ZET6). Both devices integrate an Arm Cortex-M33
+core clocked at 160\,MHz for these tests, ensuring that performance differences reflect
+software-stack efficiency rather than raw silicon speed.
+Table~\ref{tab:gd32-boards} contrasts their key characteristics.
 
-\section{Section1}
+\begin{table}[H]
+  \centering
+  \caption{Board characteristics: ST reference vs GigaDevice GD32.}
+  \label{tab:gd32-boards}
+  \begin{tabularx}{\textwidth}{l X X}
+    \toprule
+    \textbf{Characteristic} & \textbf{ST (STM32U575ZIT6Q)} & \textbf{GD32 (GD32E507ZET6)} \\
+    \midrule
+    Core              & Arm Cortex-M33              & Arm Cortex-M33 \\
+    Clock (test)      & 160\,MHz                    & 160\,MHz \\
+    Flash             & 2\,MB                       & 512\,KB \\
+    SRAM              & 786\,KB                     & 128\,KB \\
+    USB               & Full-Speed device            & Full-Speed device \\
+    Security          & TrustZone, AES, PKA, HASH    & --- \\
+    Toolchain / IDE   & STM32CubeIDE / IAR EWARM     & IAR EWARM \\
+    % TODO(source): verify GD32E507 reference price
+    \bottomrule
+  \end{tabularx}
+\end{table}
 
-\subsection{Subsection1}
+The STM32U575 belongs to the ultra-low-power STM32U5 series and offers substantially more
+flash and RAM, hardware security accelerators, and a richer peripheral set
+\cite{stm32u575-ds}. The GD32E507 targets a similar performance point at a competitive
+price but with fewer on-chip resources \cite{gigadevice-gd32}. For our benchmarks, the
+relevant constant is that \emph{both devices run the same core at the same frequency},
+so footprint and execution-time differences are attributable to the vendor's software stack
+and HAL implementation.
 
-\subsection{Subsection2}
+% ====================================================================
+% STACK 1: USB DEVICE STACK
+% ====================================================================
+\section{USB device stack}
+\label{sec:gd32-usb}
 
-\subsubsection{Subsubsection1}
+The Universal Serial Bus (USB) device stack is a critical middleware component for any MCU
+that needs to communicate with a host PC. We benchmark ST's USB Device Library (part of the
+STM32Cube middleware) against GigaDevice's USB library, both operating in
+\textbf{Full-Speed} mode and running bare-metal (no RTOS).
 
-\subsubsection{Subsubsection2}
+% --- Scenario design ------------------------------------------------
+\subsection{Scenario design}
+\label{sec:gd32-usb-scenarios}
 
-\paragraph{Paragraph a}
+We defined two scenarios that cover the most commonly used USB device classes:
 
-\paragraph{Paragraph b}
+\begin{enumerate}
+  \item \textbf{HID (Human Interface Device)} --- a low-rate interrupt-transfer scenario in
+    which the MCU acts as a USB mouse, sending periodic HID reports to the host. This
+    exercises the enumeration path, descriptor handling, and interrupt-endpoint transfer
+    logic.
+  \item \textbf{CDC (Communication Device Class)} --- a higher-throughput bulk-transfer
+    scenario in which the MCU exposes a virtual COM port. The host sends data to the
+    device, which echoes it back. This exercises bulk IN/OUT transfers, line-coding
+    negotiation, and buffering.
+\end{enumerate}
 
-\section{Section2}
+Each scenario was implemented identically on both platforms: same USB descriptors, same
+endpoint configuration (Full-Speed), same clock source (internal oscillator ---
+HSI48 on STM32, IRC48M on GD32), and same core frequency of 160\,MHz.
+Table~\ref{tab:gd32-usb-scenarios} summarises the scenarios and the metrics collected.
 
-\subsection{Subsection1}
+\begin{table}[H]
+  \centering
+  \caption{USB device stack benchmark scenarios.}
+  \label{tab:gd32-usb-scenarios}
+  \begin{tabularx}{\textwidth}{l X l}
+    \toprule
+    \textbf{Scenario} & \textbf{What it exercises} & \textbf{Metrics} \\
+    \midrule
+    HID  & Interrupt transfers, enumeration, descriptor handling
+         & ROM/RAM (bytes), init/enum/TX time (ms) \\
+    CDC  & Bulk transfers, virtual COM port, echo loopback
+         & ROM/RAM (bytes), init/enum/TX/RX time (ms) \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
 
-\subsection{Subsection2}
+% --- Results --------------------------------------------------------
+\subsection{Results}
+\label{sec:gd32-usb-results}
 
-\subsubsection{Subsubsection1}
+% ---- HID ----------------------------------------------------------
+\subsubsection{HID scenario}
+\label{sec:gd32-usb-hid}
 
-\subsubsection{Subsubsection2}
+Table~\ref{tab:gd32-usb-hid-footprint} presents the total ROM and RAM footprint for the
+HID scenario.
 
-\paragraph{Paragraph a}
+\begin{table}[H]
+  \centering
+  \caption{USB HID device footprint (bytes).}
+  \label{tab:gd32-usb-hid-footprint}
+  \begin{tabular}{l r r r}
+    \toprule
+    \textbf{Metric} & \textbf{STM32U575} & \textbf{GD32E507} & \textbf{Difference} \\
+    \midrule
+    ROM (total) & 16\,269 & 9\,175  & $+77\,\%$ \\
+    RAM (total) & 3\,446  & 9\,608  & $-65\,\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
-\paragraph{Paragraph b}
+The STM32 firmware consumes 77\,\% more ROM than GD32, but uses 65\,\% \emph{less} RAM.
+The RAM advantage is substantial: the GD32 implementation requires 0x2000 bytes (8\,KB) of
+stack and 0x2000 bytes of heap, whereas the STM32 configuration needs only 0x400 bytes
+(1\,KB) of stack and 0x200 bytes (512~bytes) of heap.
 
+Table~\ref{tab:gd32-usb-hid-rom} breaks down the ROM consumption by architectural layer.
 
+\begin{table}[H]
+  \centering
+  \caption{USB HID ROM breakdown by layer (bytes).}
+  \label{tab:gd32-usb-hid-rom}
+  \begin{tabular}{l r r r}
+    \toprule
+    \textbf{Layer} & \textbf{STM32U575} & \textbf{GD32E507} & \textbf{Difference} \\
+    \midrule
+    Application    & 2\,580  & 1\,942 & $+33\,\%$ \\
+    HAL drivers    & 10\,426 & 820    & $+1\,171\,\%$ \\
+    MW stack       & 2\,859  & 5\,743 & $-50\,\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
+The HAL layer dominates the difference. On STM32, the HAL RCC module alone accounts for
+4\,560 bytes (44\,\% of total HAL ROM) and the combined HAL/LL USB driver adds another
+4\,988 bytes (48\,\%). By contrast, GD32's HAL layer is minimal at 820 bytes because
+GigaDevice folds much of the peripheral-initialisation logic into the middleware itself.
+This architectural choice gives GD32 a smaller HAL at the cost of a larger middleware
+layer: the GD32 USB library ROM (5\,743 bytes) is twice the size of ST's (2\,859 bytes).
 
+The STM32 application layer is 33\,\% larger because the STM32Cube USB library externalises
+device configuration into user files (\texttt{usbd\_desc.c}, \texttt{usbd\_conf.c}),
+accounting for 985 bytes (38\,\% of application ROM). On GD32, these configuration concerns
+are handled inside the middleware. This design gives STM32 users more configuration
+flexibility at the cost of a larger application footprint.
 
+Table~\ref{tab:gd32-usb-hid-exec} shows the execution-time measurements.
 
-\newpage
+\begin{table}[H]
+  \centering
+  \caption{USB HID execution time (ms).}
+  \label{tab:gd32-usb-hid-exec}
+  \begin{tabular}{l r r r}
+    \toprule
+    \textbf{Operation} & \textbf{STM32U575} & \textbf{GD32E507} & \textbf{Difference} \\
+    \midrule
+    Initialisation      & 9.990  & 26.084 & $-61.7\,\%$ \\
+    Enumeration         & 213    & 216    & $-1.4\,\%$ \\
+    Data transmission   & 0.0093 & 0.0094 & $-0.7\,\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
+The STM32 USB initialisation is 61.7\,\% faster than GD32's --- a significant difference
+that reflects more efficient clock-tree configuration and peripheral bring-up in the
+STM32Cube HAL. Enumeration and data-transmission times are nearly identical, as expected:
+these phases are dominated by USB protocol timing rather than software overhead.
+
+% ---- CDC ----------------------------------------------------------
+\subsubsection{CDC scenario}
+\label{sec:gd32-usb-cdc}
+
+Table~\ref{tab:gd32-usb-cdc-footprint} presents the total footprint for the CDC scenario.
+
+\begin{table}[H]
+  \centering
+  \caption{USB CDC device footprint (bytes).}
+  \label{tab:gd32-usb-cdc-footprint}
+  \begin{tabular}{l r r r}
+    \toprule
+    \textbf{Metric} & \textbf{STM32U575} & \textbf{GD32E507} & \textbf{Difference} \\
+    \midrule
+    ROM (total) & 17\,049 & 9\,085  & $+88\,\%$ \\
+    RAM (total) & 4\,089  & 9\,683  & $-57.7\,\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The pattern mirrors HID: STM32 uses substantially more ROM ($+88\,\%$) but far less RAM
+($-57.7\,\%$). The CDC scenario adds transmit and receive buffer management, which
+increases both vendors' footprints relative to HID, but the ratio remains consistent.
+
+Table~\ref{tab:gd32-usb-cdc-rom} provides the per-layer ROM breakdown.
+
+\begin{table}[H]
+  \centering
+  \caption{USB CDC ROM breakdown by layer (bytes).}
+  \label{tab:gd32-usb-cdc-rom}
+  \begin{tabular}{l r r r}
+    \toprule
+    \textbf{Layer} & \textbf{STM32U575} & \textbf{GD32E507} & \textbf{Difference} \\
+    \midrule
+    Application    & 2\,683  & 1\,882 & $+42.5\,\%$ \\
+    HAL drivers    & 10\,446 & 820    & $+1\,174\,\%$ \\
+    MW stack       & 2\,423  & 5\,709 & $-57.5\,\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The root cause is the same as in HID. The STM32 HAL RCC module (4\,560 bytes) and the
+HAL/LL USB driver (5\,006 bytes) together account for 92\,\% of the HAL ROM.
+The STM32 application layer is 42.5\,\% larger due to the externalised USB device
+configuration files (\texttt{usb\_device.c}, \texttt{usbd\_cdc\_if.c},
+\texttt{usbd\_desc.c}, \texttt{usbd\_conf.c}), contributing 1\,164 bytes (43\,\% of
+application ROM). In return, the STM32 USB middleware library itself is 57.5\,\% smaller
+than GD32's, because GigaDevice bundles configuration and driver logic into its middleware
+layer.
+
+Table~\ref{tab:gd32-usb-cdc-exec} shows the execution-time measurements.
+
+\begin{table}[H]
+  \centering
+  \caption{USB CDC execution time (ms).}
+  \label{tab:gd32-usb-cdc-exec}
+  \begin{tabular}{l r r r}
+    \toprule
+    \textbf{Operation} & \textbf{STM32U575} & \textbf{GD32E507} & \textbf{Difference} \\
+    \midrule
+    Initialisation      & 9.994   & 26.076 & $-61.7\,\%$ \\
+    Enumeration         & 218.2   & 218.5  & $-0.1\,\%$ \\
+    Data transmission   & 0.00988 & 0.01003 & $-1.5\,\%$ \\
+    Data reception      & 0.00986 & 0.00993 & $-0.7\,\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Once again, initialisation is where STM32 dominates: 61.7\,\% faster than GD32. The
+remaining operations (enumeration, transmission, reception) are within 1.5\,\% of each
+other, confirming that steady-state USB throughput is protocol-bound rather than
+software-bound.
+
+% --- Interpretation -------------------------------------------------
+\subsection{Interpretation}
+\label{sec:gd32-usb-interp}
+
+The USB benchmark reveals a clear architectural trade-off between the two vendors.
+
+\paragraph{ROM footprint.}
+STM32 consumes 77--88\,\% more total ROM than GD32 across both scenarios. The dominant
+contributor is the HAL layer, which is roughly twelve times larger on STM32. Two modules
+drive this cost: the \textbf{HAL RCC} clock-configuration driver ($\approx$4\,560 bytes)
+and the \textbf{HAL/LL USB} peripheral driver ($\approx$5\,000 bytes). GigaDevice achieves
+a much smaller HAL by embedding peripheral-initialisation logic inside the middleware
+library rather than exposing it as a separate, reusable driver layer.
+
+\paragraph{RAM footprint.}
+The situation is reversed: STM32 uses 57--65\,\% less RAM. The GD32 implementation
+defaults to much larger stack and heap allocations (8\,KB each vs $\leq$1.5\,KB for STM32).
+This suggests that the GD32 USB library relies more heavily on dynamic allocation or deep
+call chains, whereas the STM32Cube library uses statically allocated buffers and a
+shallower call stack.
+
+\paragraph{Execution time.}
+STM32's USB initialisation is consistently 61.7\,\% faster across both HID and CDC. After
+initialisation, the two platforms perform within 1--2\,\% of each other, as the USB
+protocol itself (enumeration handshake, bulk/interrupt transfers) dictates the timing.
+
+\paragraph{Design philosophy.}
+STM32Cube separates concerns: HAL handles clocks and peripheral access, the middleware
+handles protocol logic, and the application owns configuration through user-editable files
+(\texttt{usbd\_conf.c}, \texttt{usbd\_desc.c}). This modular design gives developers
+explicit control and reusability at the cost of a larger total ROM. GigaDevice takes a more
+monolithic approach --- smaller HAL, but a thicker middleware that bundles configuration
+internally, reducing ROM but also reducing the user's configuration flexibility.
+
+\paragraph{Enhancement proposals.}
+The data suggests two concrete areas where STM32Cube could reduce ROM without sacrificing
+functionality:
+
+\begin{enumerate}
+  \item \textbf{HAL RCC optimisation.} The HAL RCC module accounts for $\approx$4.5\,KB in
+    every USB project regardless of the clocks actually configured. A conditionally compiled
+    or link-time-optimised RCC driver that includes only the clock paths used would
+    significantly narrow the HAL gap.
+  \item \textbf{HAL/LL USB driver consolidation.} The combined HAL and LL USB driver
+    ($\approx$5\,KB) provides a comprehensive abstraction but may include code paths
+    (e.g.\ High-Speed, OTG, DMA) that Full-Speed-only projects never execute. Finer
+    compile-time selection of USB features could reduce this cost.
+\end{enumerate}
+
+% ====================================================================
+% STACK 2: FreeRTOS
+% ====================================================================
+\section{FreeRTOS integration}
+\label{sec:gd32-freertos}
+
+FreeRTOS is the most widely adopted real-time operating system for Cortex-M
+microcontrollers \cite{freertos}. Both STMicroelectronics and GigaDevice ship FreeRTOS
+integration packages as part of their firmware offerings. We benchmark the two
+implementations using FreeRTOS v11.2, running on the same two boards at 160\,MHz with a
+1\,ms tick (time slice) per task.
+
+% --- Scenario design ------------------------------------------------
+\subsection{Scenario design}
+\label{sec:gd32-freertos-scenarios}
+
+We defined three scheduling scenarios that stress progressively more complex RTOS
+mechanisms:
+
+\begin{enumerate}
+  \item \textbf{Basic processing} --- a single counting thread runs at low priority
+    alongside a high-priority reporting thread. The counting thread increments a global
+    counter in a tight loop; the reporting thread wakes every 30\,s and prints the counter
+    delta. This isolates single-task throughput with minimal scheduler overhead.
+  \item \textbf{Cooperative processing} --- five threads at the same low priority, each
+    incrementing its own counter and then calling \texttt{taskYIELD()} to voluntarily yield
+    the processor. A high-priority reporter prints all five counters every 30\,s. This
+    exercises voluntary context switching under equal-priority round-robin scheduling.
+  \item \textbf{Preemptive processing} --- five threads at ascending priorities. Each
+    thread resumes the next-higher-priority thread (which preempts it), increments its
+    counter, then suspends itself. A high-priority reporter prints all five counters every
+    30\,s. This exercises the full preemptive scheduler: suspend, resume, and
+    priority-based preemption.
+\end{enumerate}
+
+Table~\ref{tab:gd32-freertos-scenarios} summarises the three scenarios.
+
+\begin{table}[H]
+  \centering
+  \caption{FreeRTOS benchmark scenarios.}
+  \label{tab:gd32-freertos-scenarios}
+  \begin{tabularx}{\textwidth}{l X l}
+    \toprule
+    \textbf{Scenario} & \textbf{What it exercises} & \textbf{Metric} \\
+    \midrule
+    Basic        & Single-thread throughput, minimal scheduler overhead
+                 & Thread iterations/s \\
+    Cooperative  & Voluntary context switching (\texttt{taskYIELD})
+                 & Total thread iterations/30\,s \\
+    Preemptive   & Priority-based preemption, suspend/resume
+                 & Total thread iterations/30\,s \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+% --- Results --------------------------------------------------------
+\subsection{Results}
+\label{sec:gd32-freertos-results}
+
+% ---- Basic processing ---------------------------------------------
+\subsubsection{Basic processing}
+\label{sec:gd32-freertos-basic}
+
+Table~\ref{tab:gd32-freertos-basic-perf} shows the performance result and
+Table~\ref{tab:gd32-freertos-basic-fp} the footprint.
+
+\begin{table}[H]
+  \centering
+  \caption{FreeRTOS basic processing --- performance.}
+  \label{tab:gd32-freertos-basic-perf}
+  \begin{tabular}{l r r r}
+    \toprule
+    \textbf{Metric} & \textbf{STM32U575} & \textbf{GD32E507} & \textbf{Difference} \\
+    \midrule
+    Thread iterations/s & 47\,943 & 47\,955 & $-0.025\,\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{FreeRTOS basic processing --- footprint (bytes).}
+  \label{tab:gd32-freertos-basic-fp}
+  \begin{tabular}{l r r r}
+    \toprule
+    \textbf{Metric} & \textbf{STM32U575} & \textbf{GD32E507} & \textbf{Difference} \\
+    \midrule
+    ROM & 14\,266 & 10\,128 & $+40.9\,\%$ \\
+    RAM & 11\,960 & 11\,716 & $+2.1\,\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Performance is virtually identical ($-0.025\,\%$), confirming that the counting loop is
+CPU-bound and both FreeRTOS ports schedule it with the same efficiency. The ROM difference
+($+40.9\,\%$) is significant; the RAM difference is negligible.
+
+% ---- Cooperative processing ----------------------------------------
+\subsubsection{Cooperative processing}
+\label{sec:gd32-freertos-coop}
+
+\begin{table}[H]
+  \centering
+  \caption{FreeRTOS cooperative processing --- performance.}
+  \label{tab:gd32-freertos-coop-perf}
+  \begin{tabular}{l r r r}
+    \toprule
+    \textbf{Metric} & \textbf{STM32U575} & \textbf{GD32E507} & \textbf{Difference} \\
+    \midrule
+    Thread iterations/30\,s & 1\,220\,066 & 1\,200\,666 & $+1.6\,\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{FreeRTOS cooperative processing --- footprint (bytes).}
+  \label{tab:gd32-freertos-coop-fp}
+  \begin{tabular}{l r r r}
+    \toprule
+    \textbf{Metric} & \textbf{STM32U575} & \textbf{GD32E507} & \textbf{Difference} \\
+    \midrule
+    ROM & 15\,422 & 11\,224 & $+37\,\%$ \\
+    RAM & 10\,972 & 10\,728 & $+2.3\,\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+STM32 completes 1.6\,\% more thread iterations over 30 seconds, indicating a marginally
+faster \texttt{taskYIELD()} context switch. The footprint gap narrows slightly to
+$+37\,\%$ ROM.
+
+% ---- Preemptive processing -----------------------------------------
+\subsubsection{Preemptive processing}
+\label{sec:gd32-freertos-preemptive}
+
+\begin{table}[H]
+  \centering
+  \caption{FreeRTOS preemptive processing --- performance.}
+  \label{tab:gd32-freertos-preemptive-perf}
+  \begin{tabular}{l r r r}
+    \toprule
+    \textbf{Metric} & \textbf{STM32U575} & \textbf{GD32E507} & \textbf{Difference} \\
+    \midrule
+    Thread iterations/30\,s & 294\,615 & 285\,144 & $+3.3\,\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{FreeRTOS preemptive processing --- footprint (bytes).}
+  \label{tab:gd32-freertos-preemptive-fp}
+  \begin{tabular}{l r r r}
+    \toprule
+    \textbf{Metric} & \textbf{STM32U575} & \textbf{GD32E507} & \textbf{Difference} \\
+    \midrule
+    ROM & 16\,226 & 12\,028 & $+35\,\%$ \\
+    RAM & 10\,996 & 10\,748 & $+2.3\,\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Preemptive scheduling is the most demanding scenario, involving suspend, resume, and
+priority-based task switching. STM32 achieves 3.3\,\% more iterations, the largest
+performance advantage across the three FreeRTOS scenarios. The ROM gap ($+35\,\%$) is
+consistent with the other scenarios.
+
+% ---- Per-layer ROM breakdown (all three scenarios) -----------------
+\subsubsection{Per-layer ROM breakdown}
+\label{sec:gd32-freertos-rom-breakdown}
+
+To understand \emph{where} the ROM overhead originates, Table~\ref{tab:gd32-freertos-rom}
+breaks down the ROM footprint into three architectural layers --- application, HAL drivers,
+and FreeRTOS middleware stack --- for all three scenarios.
+
+\begin{table}[H]
+  \centering
+  \caption{FreeRTOS ROM breakdown by layer (bytes).}
+  \label{tab:gd32-freertos-rom}
+  \begin{tabular}{l l r r r}
+    \toprule
+    \textbf{Scenario} & \textbf{Layer} & \textbf{STM32U575} & \textbf{GD32E507}
+        & \textbf{Diff.} \\
+    \midrule
+    \multirow{3}{*}{Basic}
+      & Application & 4\,531  & 4\,278 & $+6\,\%$ \\
+      & HAL drivers & 4\,927  & 1\,078 & $+357\,\%$ \\
+      & MW stack    & 4\,808  & 4\,772 & $+0.7\,\%$ \\
+    \midrule
+    \multirow{3}{*}{Cooperative}
+      & Application & 5\,823  & 5\,484 & $+6\,\%$ \\
+      & HAL drivers & 4\,911  & 1\,078 & $+355\,\%$ \\
+      & MW stack    & 4\,688  & 4\,662 & $+0.6\,\%$ \\
+    \midrule
+    \multirow{3}{*}{Preemptive}
+      & Application & 6\,191  & 5\,810 & $+6\,\%$ \\
+      & HAL drivers & 4\,911  & 1\,078 & $+355\,\%$ \\
+      & MW stack    & 5\,124  & 5\,140 & $-0.3\,\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The pattern is strikingly consistent across all three scenarios:
+
+\begin{itemize}
+  \item The \textbf{FreeRTOS middleware stack} itself is virtually identical in size
+    ($\leq$1\,\% difference). Both vendors ship the same upstream FreeRTOS kernel, so
+    this is expected.
+  \item The \textbf{application layer} is $\approx$6\,\% larger on STM32, reflecting
+    slightly more initialisation code in the STM32Cube project template.
+  \item The \textbf{HAL layer} is 355--357\,\% larger on STM32, entirely accounting for
+    the total ROM gap. The dominant contributor is the \textbf{HAL RCC} module, which
+    configures the clock tree.
+\end{itemize}
+
+% --- Interpretation -------------------------------------------------
+\subsection{Interpretation}
+\label{sec:gd32-freertos-interp}
+
+\paragraph{Performance.}
+FreeRTOS scheduling performance is nearly identical between the two platforms in the basic
+scenario ($-0.025\,\%$) and slightly favours STM32 in the cooperative ($+1.6\,\%$) and
+preemptive ($+3.3\,\%$) scenarios. The advantage grows with scheduler complexity, suggesting
+that the STM32Cube FreeRTOS port has a marginally more efficient context-switch
+implementation. However, these differences are small enough that application-level
+performance is unlikely to be affected.
+
+\paragraph{ROM footprint.}
+The ROM overhead follows the same pattern as the USB stack: a 35--41\,\% total increase
+driven almost entirely by the HAL layer, specifically the HAL RCC clock-configuration
+module. Crucially, the FreeRTOS middleware itself contributes no measurable overhead ---
+the gap is in the vendor's hardware-abstraction code, not in the RTOS kernel.
+
+\paragraph{RAM footprint.}
+RAM differences are negligible (2.1--2.3\,\%), indicating that both FreeRTOS ports allocate
+task stacks and kernel structures similarly.
+
+\paragraph{Enhancement proposals.}
+The FreeRTOS results reinforce the conclusion from the USB benchmark: the HAL RCC module
+is the single largest contributor to STM32's ROM overhead across \emph{all} middleware
+stacks. A targeted effort to slim the RCC driver --- through dead-code elimination,
+conditional compilation based on the clocks actually used, or link-time optimisation ---
+would benefit every STM32 project, not just FreeRTOS.
+
+% ====================================================================
 \section*{Conclusion}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec dapibus justo. Donec sagittis vulputate ante sed porttitor. Suspendisse sit amet nisl massa. Curabitur nec nisl condimentum, egestas ex vitae, dapibus enim. Etiam iaculis, erat faucibus pellentesque sagittis, nisi justo sollicitudin nibh, et condimentum augue massa non turpis. Proin commodo enim fermentum suscipit condimentum. Maecenas molestie, dui nec vestibulum rhoncus, arcu nisl faucibus neque, a ornare nisi massa ac eros. Aenean id velit sit amet lacus mattis varius. Donec fringilla massa sed nisi eleifend, a aliquet mi tempus. Nunc posuere euismod est, nec tristique augue lobortis non. Sed sodales sem ut metus tempus ullamcorper.
+The ST-versus-GD32 comparison across two middleware stacks (USB device and FreeRTOS) and
+five scenarios reveals a consistent pattern:
+
+\begin{itemize}
+  \item \textbf{Performance:} STM32 matches or slightly exceeds GD32 in every scenario.
+    USB initialisation is 61.7\,\% faster; FreeRTOS preemptive scheduling is 3.3\,\% faster;
+    steady-state throughput is equivalent.
+  \item \textbf{ROM footprint:} STM32 consumes 35--88\,\% more flash, with the HAL layer
+    (principally HAL RCC and, for USB, HAL/LL USB) responsible for the bulk of the
+    difference. The middleware stacks themselves are comparable in size.
+  \item \textbf{RAM footprint:} STM32 uses significantly less RAM than GD32 in USB
+    scenarios (57--65\,\% less) thanks to smaller default stack/heap allocations and more
+    static memory management. FreeRTOS RAM is nearly identical.
+  \item \textbf{Architectural trade-off:} STM32Cube's modular, layered design (separate
+    HAL, middleware, and user-configuration files) provides greater flexibility and
+    reusability but at a measurable ROM cost. GigaDevice's more monolithic approach yields
+    smaller ROM by bundling driver and configuration logic into the middleware, at the
+    expense of less user-visible modularity.
+\end{itemize}
+
+The single most impactful enhancement for STM32 would be \textbf{optimising the HAL RCC
+module}: it appears in every project and consistently accounts for the largest share of the
+HAL ROM gap. A secondary improvement for USB projects would be \textbf{finer-grained
+compile-time selection} of USB driver features (Full-Speed vs High-Speed, device vs OTG)
+to exclude unused code paths.
 
 \pagebreak

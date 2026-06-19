@@ -9,9 +9,25 @@
 \contentsline {table}{\numberline {3.2}{\ignorespaces Reusable skills and their purposes.}}{27}{table.caption.24}%
 \contentsline {table}{\numberline {3.3}{\ignorespaces File structure of the agent system.}}{30}{table.caption.26}%
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Board characteristics: ST reference vs GigaDevice GD32.}}{34}{table.caption.27}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces USB device stack benchmark scenarios.}}{35}{table.caption.28}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces USB HID device footprint (bytes).}}{35}{table.caption.29}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces USB HID ROM breakdown by layer (bytes).}}{36}{table.caption.30}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces USB HID execution time (ms).}}{36}{table.caption.31}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces USB CDC device footprint (bytes).}}{37}{table.caption.32}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces USB CDC ROM breakdown by layer (bytes).}}{37}{table.caption.33}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces USB CDC execution time (ms).}}{37}{table.caption.34}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces FreeRTOS benchmark scenarios.}}{40}{table.caption.35}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces FreeRTOS basic processing --- performance.}}{40}{table.caption.36}%
+\contentsline {table}{\numberline {4.11}{\ignorespaces FreeRTOS basic processing --- footprint (bytes).}}{40}{table.caption.37}%
+\contentsline {table}{\numberline {4.12}{\ignorespaces FreeRTOS cooperative processing --- performance.}}{40}{table.caption.38}%
+\contentsline {table}{\numberline {4.13}{\ignorespaces FreeRTOS cooperative processing --- footprint (bytes).}}{41}{table.caption.39}%
+\contentsline {table}{\numberline {4.14}{\ignorespaces FreeRTOS preemptive processing --- performance.}}{41}{table.caption.40}%
+\contentsline {table}{\numberline {4.15}{\ignorespaces FreeRTOS preemptive processing --- footprint (bytes).}}{41}{table.caption.41}%
+\contentsline {table}{\numberline {4.16}{\ignorespaces FreeRTOS ROM breakdown by layer (bytes).}}{42}{table.caption.42}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {C.1}{\ignorespaces Table Example}}{45}{table.caption.28}%
-\contentsline {table}{\numberline {C.2}{\ignorespaces Long table Example}}{45}{table.C.2}%
+\contentsline {table}{\numberline {C.1}{\ignorespaces Table Example}}{54}{table.caption.44}%
+\contentsline {table}{\numberline {C.2}{\ignorespaces Long table Example}}{54}{table.C.2}%
