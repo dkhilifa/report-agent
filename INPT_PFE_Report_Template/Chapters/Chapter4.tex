@@ -33,6 +33,15 @@ STMicroelectronics \textbf{NUCLEO-U575ZI-Q} (STM32U575ZIT6Q) and GigaDevice's
 core clocked at 160\,MHz for these tests, ensuring that performance differences reflect
 software-stack efficiency rather than raw silicon speed.
 Table~\ref{tab:gd32-boards} contrasts their key characteristics.
+Figure~\ref{fig:gd32-boards-photo} shows the two boards used in our test setup.
+
+% TODO(screenshot): Replace placeholder with actual photo of the two boards side by side
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\textwidth}{\centering\vspace{3cm}\textbf{[PLACEHOLDER --- Board photo]}\\Take a side-by-side photo of the NUCLEO-U575ZI-Q and the GD32E507 evaluation board.\vspace{3cm}}}
+\caption{The two evaluation boards used for ST-vs-GD32 benchmarking: NUCLEO-U575ZI-Q (left) and GD32E507 (right).}
+\label{fig:gd32-boards-photo}
+\end{figure}
 
 \begin{table}[H]
   \centering
@@ -93,6 +102,15 @@ We defined two scenarios that cover the most commonly used USB device classes:
 Each scenario was implemented identically on both platforms: same USB descriptors, same
 endpoint configuration (Full-Speed), same clock source (internal oscillator ---
 HSI48 on STM32, IRC48M on GD32), and same core frequency of 160\,MHz.
+
+% TODO(screenshot): Replace placeholder with actual IAR EWARM project screenshot
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\textwidth}{\centering\vspace{3cm}\textbf{[PLACEHOLDER --- IAR EWARM project screenshot]}\\Capture the IAR Embedded Workbench showing both the STM32 and GD32 USB HID\\projects side by side (project navigator and build configuration).\vspace{3cm}}}
+\caption{IAR EWARM project structure for the USB HID benchmark: STM32 reference (left) and GD32 target (right).}
+\label{fig:gd32-usb-iar}
+\end{figure}
+
 Table~\ref{tab:gd32-usb-scenarios} summarises the scenarios and the metrics collected.
 
 \begin{table}[H]
@@ -373,6 +391,14 @@ Table~\ref{tab:gd32-freertos-scenarios} summarises the three scenarios.
 % --- Results --------------------------------------------------------
 \subsection{Results}
 \label{sec:gd32-freertos-results}
+
+% TODO(screenshot): Replace placeholder with actual UART terminal screenshot
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\textwidth}{\centering\vspace{3cm}\textbf{[PLACEHOLDER --- UART terminal output screenshot]}\\Capture the terminal/serial monitor showing the FreeRTOS reporter thread\\output from both STM32 and GD32 (counter values printed every 30\,s).\vspace{3cm}}}
+\caption{UART terminal output of the FreeRTOS cooperative benchmark: thread iteration counters reported every 30 seconds on STM32 (left) and GD32 (right).}
+\label{fig:gd32-freertos-uart}
+\end{figure}
 
 % ---- Basic processing ---------------------------------------------
 \subsubsection{Basic processing}

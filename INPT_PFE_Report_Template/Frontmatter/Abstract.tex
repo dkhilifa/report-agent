@@ -2,11 +2,15 @@
 \addcontentsline{toc}{chapter}{Summary}
 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec dapibus justo. Donec sagittis vulputate ante sed porttitor. Suspendisse sit amet nisl massa. Curabitur nec nisl condimentum, egestas ex vitae, dapibus enim. Etiam iaculis, erat faucibus pellentesque sagittis, nisi justo sollicitudin nibh, et condimentum augue massa non turpis. Proin commodo enim fermentum suscipit condimentum. Maecenas molestie, dui nec vestibulum rhoncus, arcu nisl faucibus neque, a ornare nisi massa ac eros. Aenean id velit sit amet lacus mattis varius. Donec fringilla massa sed nisi eleifend, a aliquet mi tempus. Nunc posuere euismod est, nec tristique augue lobortis non. Sed sodales sem ut metus tempus ullamcorper.
+This report presents work carried out during an end-of-studies internship at STMicroelectronics Tunis, focused on benchmarking the STM32Cube ecosystem against competing vendor ecosystems (GigaDevice GD32, NXP, Texas Instruments, Renesas). The goal is to provide the technical marketing team with objective, reproducible, and interpretable comparative data on firmware memory footprint (flash and RAM), execution performance, and middleware maturity.
+
+We designed a structured benchmarking methodology based on identical scenarios executed on both compared platforms under the same optimisation level, clock frequency, and observable behaviour. Two complementary tools were developed in parallel to make this methodology scalable and reproducible: \emph{MCU Workflow Studio}, a cross-vendor firmware footprint analysis application that automates linker-map comparison, architectural-layer classification, and result export; and the \emph{MCU Benchmark Copilot Agent}, a custom AI agent system integrated into VS~Code that accelerates benchmark creation, porting, and debugging while enforcing semantic equivalence and comparison fairness.
+
+Results from the ST-versus-GD32 comparison --- covering the USB device stack (HID and CDC scenarios) and FreeRTOS integration (basic, cooperative, and preemptive scheduling scenarios) --- reveal a clear architectural trade-off: STM32 consumes more ROM (35--88\,\%) due to its modular HAL layer, but uses significantly less RAM (57--65\,\% for USB) and delivers superior initialisation performance (61.7\,\% faster). Targeted enhancement proposals are formulated, notably optimising the HAL~RCC module and enabling finer compile-time USB feature selection.
 
 \noindent\rule[2pt]{\textwidth}{0.5pt}
 
-{\textbf{Key Words :}}
-xxxx, xxxx, xxx, xxx.
+{\textbf{Key Words:}}
+STM32Cube, benchmarking, memory footprint, microcontroller, linker-map analysis, FreeRTOS, USB, GD32, cross-vendor porting, AI agent.
 \\
 \noindent\rule[2pt]{\textwidth}{0.5pt}

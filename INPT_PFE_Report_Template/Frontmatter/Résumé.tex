@@ -2,11 +2,15 @@
 \addcontentsline{toc}{chapter}{Résumé}
 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec dapibus justo. Donec sagittis vulputate ante sed porttitor. Suspendisse sit amet nisl massa. Curabitur nec nisl condimentum, egestas ex vitae, dapibus enim. Etiam iaculis, erat faucibus pellentesque sagittis, nisi justo sollicitudin nibh, et condimentum augue massa non turpis. Proin commodo enim fermentum suscipit condimentum. Maecenas molestie, dui nec vestibulum rhoncus, arcu nisl faucibus neque, a ornare nisi massa ac eros. Aenean id velit sit amet lacus mattis varius. Donec fringilla massa sed nisi eleifend, a aliquet mi tempus. Nunc posuere euismod est, nec tristique augue lobortis non. Sed sodales sem ut metus tempus ullamcorper.
+Ce rapport présente les travaux réalisés dans le cadre d'un projet de fin d'études au sein de STMicroelectronics Tunis, portant sur le benchmarking de l'écosystème STM32Cube face aux écosystèmes concurrents (GigaDevice GD32, NXP, Texas Instruments, Renesas). L'objectif est de fournir à l'équipe de marketing technique des données comparatives objectives, reproductibles et interprétables sur l'empreinte mémoire (flash et RAM), les performances d'exécution et la maturité des piles logicielles embarquées.
+
+Nous avons conçu une méthodologie de benchmarking structurée reposant sur des scénarios identiques exécutés sur les deux plateformes comparées, avec le même niveau d'optimisation, la même fréquence d'horloge et le même comportement observable. Deux outils complémentaires ont été développés en parallèle pour rendre cette méthodologie scalable et reproductible~: \emph{MCU Workflow Studio}, une application d'analyse d'empreinte firmware inter-vendeurs qui automatise la comparaison de fichiers linker map, la classification par couche architecturale et l'export des résultats~; et le \emph{MCU Benchmark Copilot Agent}, un système d'agents IA personnalisé intégré à VS~Code qui accélère la création, le portage et le débogage des benchmarks tout en imposant l'équivalence sémantique et l'équité des comparaisons.
+
+Les résultats obtenus sur la comparaison ST~vs~GD32 --- couvrant la pile USB device (scénarios HID et CDC) et l'intégration FreeRTOS (scénarios basique, coopératif et préemptif) --- révèlent un compromis architectural clair~: STM32 consomme davantage de ROM (35--88\,\%) en raison de sa couche HAL modulaire, mais utilise significativement moins de RAM (57--65\,\% pour l'USB) et offre des performances d'initialisation supérieures (61,7\,\% plus rapide). Des propositions d'amélioration ciblées sont formulées, notamment l'optimisation du module HAL~RCC et la sélection fine des fonctionnalités USB à la compilation.
 
 \noindent\rule[2pt]{\textwidth}{0.5pt}
 
 {\textbf{Mots clés :}}
-xxx, xxx, xxx, xxx.
+STM32Cube, benchmarking, empreinte mémoire, microcontrôleur, analyse de fichier linker map, FreeRTOS, USB, GD32, portage inter-vendeurs, agent IA.
 \\
 \noindent\rule[2pt]{\textwidth}{0.5pt}
