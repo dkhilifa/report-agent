@@ -1,105 +1,202 @@
-\chapter{Some subject you want to expand on}
-\label{chap:Some subject you want to expand on} 
+\chapter{Complementary Code Listings}
+\label{chap:complementary-codes}
 
+This appendix provides representative code excerpts that complement the tool and benchmark
+descriptions in the main chapters. They illustrate the formats consumed and produced by our
+tools and the firmware structure of the benchmark scenarios.
 
-You can add more appendices depending on the subjects.
-%You can decide which code snippets to use in the main report and which to add here in the annex
-    
-    \lstset{style=mystyle} %this style is already defined in Packages.tex
-    
-    \begin{lstlisting}[language=bash, caption= Bash example]
-    
-    [root@host ~]# You can change the language and caption.
+\lstset{style=mystyle}
 
-    \end{lstlisting}
+% ====================================================================
+\section{IAR EWARM linker map excerpt}
+\label{sec:appendix-linker-map}
 
+Listing~\ref{lst:linker-map} shows an abbreviated IAR EWARM linker map for a USB HID
+project. This is the format parsed by MCU Workflow Studio
+(Chapter~\ref{chap:footprint-tool}). Each entry lists a module, its read-only code size,
+read-only data, and read-write data --- the three quantities from which flash and RAM
+footprint are derived.
 
+\begin{lstlisting}[language={}, caption={Abbreviated IAR EWARM linker map (USB HID, STM32U575).}, label={lst:linker-map}]
+*******************************************************************************
+*** MODULE SUMMARY
+***
 
-    \begin{lstlisting}[language=python, caption= Python example]
-    
-    # Solve the quadratic equation ax**2 + bx + c = 0
+    Module               ro code  ro data  rw data
+    ------               -------  -------  -------
+    main.o                   164       --       --
+    stm32u5xx_hal.o          212       --        4
+    stm32u5xx_hal_gpio.o     456       --       --
+    stm32u5xx_hal_rcc.o    4 560       16       --
+    stm32u5xx_hal_pcd.o    2 496       --       --
+    stm32u5xx_ll_usb.o     2 492       --       --
+    usbd_core.o            1 048       --       --
+    usbd_ctlreq.o            876       --       --
+    usbd_hid.o               620       --       --
+    usbd_conf.o              524       --       32
+    usbd_desc.o              461      268       --
+    system_stm32u5xx.o       128       16        4
+    startup_stm32u575xx.o    394      512       --
+    ------               -------  -------  -------
+    Total:               14 431      812       40
 
-    # import complex math module
-    import cmath
-    
-    a = 1
-    b = 5
-    c = 6
-    
-    # calculate the discriminant
-    d = (b**2) - (4*a*c)
-    
-    # find two solutions
-    sol1 = (-b-cmath.sqrt(d))/(2*a)
-    sol2 = (-b+cmath.sqrt(d))/(2*a)
-    
-    print('The solution are {0} and {1}'.format(sol1,sol2))
+*******************************************************************************
+*** ENTRY LIST
+***
 
-    \end{lstlisting}
+    Entry                 Address    Size  Type  Object
+    -----                 -------    ----  ----  ------
+    HAL_Init             0x0800'1234   52  Code  stm32u5xx_hal.o
+    HAL_RCC_OscConfig    0x0800'2000  1024  Code  stm32u5xx_hal_rcc.o
+    HAL_RCC_ClockConfig  0x0800'2400   896  Code  stm32u5xx_hal_rcc.o
+    USBD_Init            0x0800'3000   128  Code  usbd_core.o
+    USBD_HID_Init        0x0800'3200    96  Code  usbd_hid.o
+    ...
+\end{lstlisting}
 
+\pagebreak
 
+% ====================================================================
+\section{Agent configuration file}
+\label{sec:appendix-agent-config}
 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|m{5cm}|m{10cm}|}
-        \hline
-          Column1 & Column2 \\
-        \hline
-          Element11 & Element21 \\
-        \hline
-          Element12 & Element22 \\
-        \hline
-          Element13 & Element23 \\
-        \hline
-    \end{tabular}
-    \caption{Table Example}
-\end{table}
+Listing~\ref{lst:agent-config} shows the configuration of the Creation-Porting specialist
+agent from the MCU Benchmark Copilot Agent system
+(Chapter~\ref{chap:benchmark-agent}). The YAML frontmatter declares metadata and tool
+permissions; the Markdown body contains the behavioural instructions the agent follows.
 
+\begin{lstlisting}[language={}, caption={Creation-Porting agent configuration (abbreviated).}, label={lst:agent-config}]
+---
+name: creation-porting
+description: >
+  Creates new benchmark projects and ports STM32 references to
+  target MCU platforms while preserving exact runtime semantics.
+tools:
+  - read
+  - edit
+  - search
+  - execute
+---
 
+# Creation-Porting Agent
 
+You create benchmark projects for target MCU platforms by porting
+the STM32 reference. You MUST preserve semantic equivalence.
 
-\begin{longtable}[c]{| m{4.4cm} | m{11cm} |}
-\caption{Long table Example}\\
- \hline
+## Porting workflow
 
- Cell & Description  \\ 
- \hline
- \endfirsthead
+1. Read and understand the STM32 reference project completely.
+2. Identify all HAL calls, peripherals, and timing dependencies.
+3. Map each STM32 HAL call to the target vendor's equivalent API.
+4. Generate the target project preserving:
+   - Task count and creation order
+   - Priorities and scheduling policy
+   - Delay values and periodicity
+   - Synchronisation primitives
+   - Measurement scope and reporting format
+5. Mark any uncertain hardware detail as TODO.
+6. Invoke the semantic-equivalence skill to verify the port.
 
- \hline
- 
- Cell & Description  \\ 
- \hline
- \endhead
+## Non-negotiable rules
 
-        \hline
-          Element11 & Element21 \\
-        \hline
-          Element12 & Element22 \\
-        \hline
-          Element13 & Element23 \\
-        \hline
-          Element14 & Element24 \\
-        \hline
-          Element15 & Element25 \\
-        \hline
-          Element16 & Element26 \\
-        \hline
-          Element17 & Element27 \\
-        \hline
-          Element18 & Element28 \\
-        \hline
-          Element19 & Element29 \\
-        \hline
-          Element110 & Element210 \\
-        \hline
-          Element111 & Element211 \\
-        \hline
-          Element112 & Element212 \\
-        \hline
-          Element113 & Element213 \\
-        \hline
-          Element114 & Element214 \\
-        \hline
+- NEVER modify the STM32 reference project.
+- NEVER invent vendor APIs --- use only documented functions.
+- NEVER claim success without compiler evidence.
+\end{lstlisting}
 
- \end{longtable}
+\pagebreak
+
+% ====================================================================
+\section{FreeRTOS cooperative benchmark scenario}
+\label{sec:appendix-freertos-coop}
+
+Listing~\ref{lst:freertos-coop} shows the core task logic of the cooperative processing
+benchmark scenario from Chapter~\ref{chap:vs-gd32}. Five equal-priority threads each
+increment a counter and yield; a reporter thread prints the results every 30~seconds.
+
+\begin{lstlisting}[language=C, caption={FreeRTOS cooperative scenario --- task functions (STM32, simplified).}, label={lst:freertos-coop}]
+/* Shared counters for the five worker threads */
+volatile uint32_t counters[5] = {0};
+
+/* Worker task: increment own counter, then yield */
+void WorkerTask(void *param)
+{
+    uint32_t id = (uint32_t)param;
+    for (;;)
+    {
+        counters[id]++;
+        taskYIELD();
+    }
+}
+
+/* Reporter task: print all counters every 30 s */
+void ReporterTask(void *param)
+{
+    (void)param;
+    for (;;)
+    {
+        vTaskDelay(pdMS_TO_TICKS(30000));
+        printf("Counters: %lu %lu %lu %lu %lu\r\n",
+               counters[0], counters[1], counters[2],
+               counters[3], counters[4]);
+        /* Reset for next interval */
+        for (int i = 0; i < 5; i++)
+            counters[i] = 0;
+    }
+}
+
+/* Task creation (in main, after HAL and kernel init) */
+void CreateBenchmarkTasks(void)
+{
+    for (uint32_t i = 0; i < 5; i++)
+    {
+        xTaskCreate(WorkerTask, "Worker", 128,
+                    (void *)i, tskIDLE_PRIORITY + 1, NULL);
+    }
+    xTaskCreate(ReporterTask, "Reporter", 256,
+                NULL, tskIDLE_PRIORITY + 2, NULL);
+    vTaskStartScheduler();
+}
+\end{lstlisting}
+
+\pagebreak
+
+% ====================================================================
+\section{Footprint tool CLI output}
+\label{sec:appendix-tool-output}
+
+Listing~\ref{lst:tool-output} shows a representative terminal output from a footprint
+benchmark run using the MCU Workflow Studio command-line interface
+(Chapter~\ref{chap:footprint-tool}).
+
+\begin{lstlisting}[language={}, caption={MCU Workflow Studio CLI --- benchmark summary output.}, label={lst:tool-output}]
+$ mcu-workflow-cli benchmark \
+    --source stm32_usb_hid.map --source-vendor stm32 \
+    --target gd32_usb_hid.map  --target-vendor gd32 \
+    --out results/
+
+[INFO] Parsing source map: stm32_usb_hid.map (IAR EWARM)
+[INFO] Parsing target map: gd32_usb_hid.map (IAR EWARM)
+[INFO] Classifying 47 source symbols into layers...
+[INFO] Classifying 31 target symbols into layers...
+[INFO] Mapping engine: 42 pairs scored, 38 accepted (confidence >= 0.72)
+[INFO] 4 pairs queued for review (confidence 0.55-0.72)
+
+=== FOOTPRINT COMPARISON (USB HID) ===
+
+Layer           | STM32 ROM | GD32 ROM  | Diff
+----------------|-----------|-----------|--------
+Application     |   2 580 B |   1 942 B | +33%
+HAL drivers     |  10 426 B |     820 B | +1171%
+MW stack        |   2 859 B |   5 743 B | -50%
+----------------|-----------|-----------|--------
+TOTAL ROM       |  16 269 B |   9 175 B | +77%
+TOTAL RAM       |   3 446 B |   9 608 B | -65%
+
+Verdict: STM32 uses +77% more ROM but -65% less RAM.
+Root cause: HAL RCC (4560 B) + HAL/LL USB (4988 B) = 93% of gap.
+
+[INFO] Results written to results/benchmark_results.xlsx
+[INFO] Mapping diagnostics: results/mapping_diagnostics.json
+[INFO] Review queue (4 items): results/review_queue.csv
+\end{lstlisting}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.5.14)  19 JUN 2026 17:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.5.14)  22 JUN 2026 09:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1182,12 +1182,12 @@ Package caption Info: End \AtBeginDocument code.
 \openout2 = `Frontmatter/Page_de_Garde_EN.aux'.
 
  (Frontmatter/Page_de_Garde_EN.tex
-<Logos/UTM.png, id=394, 199.74625pt x 199.74625pt>
+<Logos/UTM.png, id=410, 199.74625pt x 199.74625pt>
 File: Logos/UTM.png Graphic file (type png)
 <use Logos/UTM.png>
 Package pdftex.def Info: Logos/UTM.png  used on input line 3.
 (pdftex.def)             Requested size: 56.90388pt x 56.9055pt.
-<Logos/fst.png, id=395, 233.87375pt x 176.66pt>
+<Logos/fst.png, id=411, 233.87375pt x 176.66pt>
 File: Logos/fst.png Graphic file (type png)
 <use Logos/fst.png>
 Package pdftex.def Info: Logos/fst.png  used on input line 5.
@@ -1201,7 +1201,7 @@ LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
 LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
 (Font)              using `T1/lmr/m/scsl' instead on input line 11.
 
-<Logos/STMicroelectronics.png, id=396, 963.6pt x 675.52374pt>
+<Logos/STMicroelectronics.png, id=412, 963.6pt x 675.52374pt>
 File: Logos/STMicroelectronics.png Graphic file (type png)
 <use Logos/STMicroelectronics.png>
 Package pdftex.def Info: Logos/STMicroelectronics.png  used on input line 19.
@@ -1309,19 +1309,19 @@ Overfull \hbox (24.62096pt too wide) in paragraph at lines 4--4
 
  [8
 
-] [9] (main.lol)
+] (main.lol)
 \tf@lol=\write9
 \openout9 = `main.lol'.
 
- [10
+ [9
 
-] (main.toc [11
+] (main.toc [10
 
-] [12] [13])
+] [11] [12])
 \tf@toc=\write10
 \openout10 = `main.toc'.
 
- [14] (Chapters/Chapter1.tex
+ [13] (Chapters/Chapter1.tex
 Chapter 1.
 
 Overfull \hbox (1.11241pt too wide) in paragraph at lines 14--17
@@ -1353,7 +1353,7 @@ Overfull \hbox (28.79535pt too wide) in paragraph at lines 59--65
 
 
 pdfTeX warning: pdflatex (file ./Figures/chapter1/st-site-organization.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/chapter1/st-site-organization.pdf, id=680, 457.71pt x 280.1667pt>
+<Figures/chapter1/st-site-organization.pdf, id=696, 457.71pt x 280.1667pt>
 File: Figures/chapter1/st-site-organization.pdf Graphic file (type pdf)
 <use Figures/chapter1/st-site-organization.pdf>
 Package pdftex.def Info: Figures/chapter1/st-site-organization.pdf  used on input line 68.
@@ -1398,7 +1398,7 @@ Chapter 2.
 ]
 
 pdfTeX warning: pdflatex (file ./Figures/footprint-tool/architecture.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/footprint-tool/architecture.pdf, id=761, 724.62718pt x 385.44pt>
+<Figures/footprint-tool/architecture.pdf, id=777, 724.62718pt x 385.44pt>
 File: Figures/footprint-tool/architecture.pdf Graphic file (type pdf)
 <use Figures/footprint-tool/architecture.pdf>
 Package pdftex.def Info: Figures/footprint-tool/architecture.pdf  used on input line 65.
@@ -1406,7 +1406,7 @@ Package pdftex.def Info: Figures/footprint-tool/architecture.pdf  used on input 
 [11] [12 <./Figures/footprint-tool/architecture.pdf>]
 
 pdfTeX warning: pdflatex (file ./Figures/footprint-tool/pipeline.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/footprint-tool/pipeline.pdf, id=792, 536.0025pt x 534.07532pt>
+<Figures/footprint-tool/pipeline.pdf, id=808, 536.0025pt x 534.07532pt>
 File: Figures/footprint-tool/pipeline.pdf Graphic file (type pdf)
 <use Figures/footprint-tool/pipeline.pdf>
 Package pdftex.def Info: Figures/footprint-tool/pipeline.pdf  used on input line 130.
@@ -1414,7 +1414,7 @@ Package pdftex.def Info: Figures/footprint-tool/pipeline.pdf  used on input line
 [13{C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}] [14 <./Figures/footprint-tool/pipeline.pdf>]
 
 pdfTeX warning: pdflatex (file ./Figures/footprint-tool/layer-classification.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/footprint-tool/layer-classification.pdf, id=845, 1101.15382pt x 645.37106pt>
+<Figures/footprint-tool/layer-classification.pdf, id=861, 1101.15382pt x 645.37106pt>
 File: Figures/footprint-tool/layer-classification.pdf Graphic file (type pdf)
 <use Figures/footprint-tool/layer-classification.pdf>
 Package pdftex.def Info: Figures/footprint-tool/layer-classification.pdf  used on input line 192.
@@ -1422,7 +1422,7 @@ Package pdftex.def Info: Figures/footprint-tool/layer-classification.pdf  used o
 [15]
 
 pdfTeX warning: pdflatex (file ./Figures/footprint-tool/weights.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/footprint-tool/weights.pdf, id=857, 463.7325pt x 355.3275pt>
+<Figures/footprint-tool/weights.pdf, id=872, 463.7325pt x 355.3275pt>
 File: Figures/footprint-tool/weights.pdf Graphic file (type pdf)
 <use Figures/footprint-tool/weights.pdf>
 Package pdftex.def Info: Figures/footprint-tool/weights.pdf  used on input line 215.
@@ -1430,7 +1430,7 @@ Package pdftex.def Info: Figures/footprint-tool/weights.pdf  used on input line 
 [16 <./Figures/footprint-tool/layer-classification.pdf>]
 
 pdfTeX warning: pdflatex (file ./Figures/footprint-tool/scoring-signals.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/footprint-tool/scoring-signals.pdf, id=2519, 1137.28882pt x 638.385pt>
+<Figures/footprint-tool/scoring-signals.pdf, id=2535, 1137.28882pt x 638.385pt>
 File: Figures/footprint-tool/scoring-signals.pdf Graphic file (type pdf)
 <use Figures/footprint-tool/scoring-signals.pdf>
 Package pdftex.def Info: Figures/footprint-tool/scoring-signals.pdf  used on input line 224.
@@ -1438,7 +1438,7 @@ Package pdftex.def Info: Figures/footprint-tool/scoring-signals.pdf  used on inp
 [17 <./Figures/footprint-tool/weights.pdf>]
 
 pdfTeX warning: pdflatex (file ./Figures/footprint-tool/candidate-ranking.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/footprint-tool/candidate-ranking.pdf, id=2544, 1183.5417pt x 381.34468pt>
+<Figures/footprint-tool/candidate-ranking.pdf, id=2560, 1183.5417pt x 381.34468pt>
 File: Figures/footprint-tool/candidate-ranking.pdf Graphic file (type pdf)
 <use Figures/footprint-tool/candidate-ranking.pdf>
 Package pdftex.def Info: Figures/footprint-tool/candidate-ranking.pdf  used on input line 244.
@@ -1451,7 +1451,7 @@ Overfull \hbox (4.09067pt too wide) in paragraph at lines 266--273
 
 
 pdfTeX warning: pdflatex (file ./Figures/footprint-tool/ai-integration.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/footprint-tool/ai-integration.pdf, id=4490, 1332.89963pt x 692.5875pt>
+<Figures/footprint-tool/ai-integration.pdf, id=4506, 1332.89963pt x 692.5875pt>
 File: Figures/footprint-tool/ai-integration.pdf Graphic file (type pdf)
 <use Figures/footprint-tool/ai-integration.pdf>
 Package pdftex.def Info: Figures/footprint-tool/ai-integration.pdf  used on input line 276.
@@ -1479,7 +1479,7 @@ Overfull \hbox (0.40959pt too wide) in paragraph at lines 15--23
 ] [24]
 
 pdfTeX warning: pdflatex (file ./Figures/benchmark-agent/architecture.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/benchmark-agent/architecture.pdf, id=5118, 738.84026pt x 456.74638pt>
+<Figures/benchmark-agent/architecture.pdf, id=5134, 738.84026pt x 456.74638pt>
 File: Figures/benchmark-agent/architecture.pdf Graphic file (type pdf)
 <use Figures/benchmark-agent/architecture.pdf>
 Package pdftex.def Info: Figures/benchmark-agent/architecture.pdf  used on input line 76.
@@ -1512,7 +1512,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 133--133
 [26] [27]
 
 pdfTeX warning: pdflatex (file ./Figures/benchmark-agent/workflow.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/benchmark-agent/workflow.pdf, id=5149, 702.70526pt x 427.5975pt>
+<Figures/benchmark-agent/workflow.pdf, id=5164, 702.70526pt x 427.5975pt>
 File: Figures/benchmark-agent/workflow.pdf Graphic file (type pdf)
 <use Figures/benchmark-agent/workflow.pdf>
 Package pdftex.def Info: Figures/benchmark-agent/workflow.pdf  used on input line 201.
@@ -1609,7 +1609,12 @@ Chapter 5.
 ]
 Appendix A.
 
-Underfull \hbox (badness 10000) in paragraph at lines 5--6
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--7
 
  []
 
@@ -1619,38 +1624,80 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--9
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 11--12
+Overfull \hbox (15.22037pt too wide) in paragraph at lines 10--11
+\T1/lmr/m/n/12 vendor platforms under identical conditions (clock, optimisation level, scenario logic), producing comparable
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10--11
 
  []
 
-) [49
 
-] (Endmatter/Acronyms.tex
-Appendix B.
-[50
+Underfull \hbox (badness 10000) in paragraph at lines 12--13
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--15
+
+ []
+
+[49
 
 ]
-Overfull \vbox (45.97563pt too high) has occurred while \output is active []
+Underfull \hbox (badness 10000) in paragraph at lines 16--17
 
- [51]) (Endmatter/ComplementaryCodes.tex [52]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--19
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--21
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--23
+
+ []
+
+) [50] (Endmatter/Acronyms.tex
+Appendix B.
+[51
+
+]
+Overfull \vbox (89.4756pt too high) has occurred while \output is active []
+
+ [52]) (Endmatter/ComplementaryCodes.tex [53]
 Appendix C.
-(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
-) [53
 
-]) [54]
+Overfull \hbox (7.38536pt too wide) in paragraph at lines 4--7
+\T1/lmr/m/n/12 This appendix provides representative code excerpts that complement the tool and benchmark descriptions
+ []
+
+[54
+
+] [55] [56] [57] (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2025/11/14 1.11b listings language file
+) (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
+) [58] [59]) [60]
 Underfull \hbox (badness 4391) in paragraph at lines 169--170
 []\T1/lmr/m/n/12 STMicroelectronics, \T1/lmr/m/it/12 STM32Cube Ecosystem\T1/lmr/m/n/12 . [Online]. Available: [][]$https : / / www . st . com / en /
  []
 
-[55
+[61
 
 ]
 Underfull \hbox (badness 2961) in paragraph at lines 213--214
 []\T1/lmr/m/n/12 GitHub, \T1/lmr/m/it/12 GitHub Models Documentation\T1/lmr/m/n/12 . [Online]. Available: [][]$https : / / docs . github . com / en /
  []
 
-[56] [57] (main.aux (Frontmatter/Page_de_Garde_EN.aux))
+[62] [63] (main.aux (Frontmatter/Page_de_Garde_EN.aux))
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-03-20>
@@ -1877,30 +1924,31 @@ Endmatter/Glossary.tex
 Endmatter/Acronyms.tex
 Endmatter/ComplementaryCodes.tex
 lstlang1.sty    2025/11/14 1.11b listings language file
+ lstmisc.sty    2025/11/14 1.11b (Carsten Heinz)
  ***********
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 2AAC10C79864792BF2127E3F68EF2334;15407.
+(rerunfilecheck)             Checksum: 5F807BE862825472B668A27E14659880;16198.
  )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 41 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 43871 strings out of 467691
- 859135 string characters out of 5413535
- 1721716 words of memory out of 5000000
- 71802 multiletter control sequences out of 15000+600000
+ 44248 strings out of 467691
+ 864399 string characters out of 5413535
+ 1853095 words of memory out of 5000000
+ 72051 multiletter control sequences out of 15000+600000
  687799 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,12n,102p,2532b,3800s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,12n,102p,2532b,4649s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\dkhilifa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsco10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtti10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/arabtex/xnsh14.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/arabtex/xnsh14bf.pfb>
-Output written on main.pdf (73 pages, 2779851 bytes).
+Output written on main.pdf (78 pages, 2821010 bytes).
 PDF statistics:
- 5545 PDF objects out of 6186 (max. 8388607)
- 293 named destinations out of 1000 (max. 500000)
- 854 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 5734 PDF objects out of 6186 (max. 8388607)
+ 419 named destinations out of 1000 (max. 500000)
+ 886 words of extra memory for PDF output out of 10000 (max. 10000000)
 

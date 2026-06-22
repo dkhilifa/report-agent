@@ -5,9 +5,9 @@
 \contentsline {chapter}{Summary}{iv}{chapter*.4}%
 \contentsline {chapter}{Arabic Abstract}{v}{chapter*.5}%
 \contentsline {chapter}{List of Figures}{vii}{chapter*.6}%
-\contentsline {chapter}{List of Tables}{ix}{chapter*.7}%
-\contentsline {chapter}{List of Listings}{x}{chapter*.8}%
-\contentsline {chapter}{Table of Contents}{xiv}{chapter*.9}%
+\contentsline {chapter}{List of Tables}{viii}{chapter*.7}%
+\contentsline {chapter}{List of Listings}{ix}{chapter*.8}%
+\contentsline {chapter}{Table of Contents}{xiii}{chapter*.9}%
 \contentsline {chapter}{\numberline {1}General Description of the Project}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Host company}{1}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}Presentation}{1}{subsection.1.1.1}%
@@ -93,6 +93,10 @@
 \contentsline {paragraph}{\numberline {5.2.2.2.2}Paragraph b}{46}{paragraph.5.2.2.2.2}%
 \contentsline {chapter}{General Conclusion and Perspectives}{48}{chapter*.43}%
 \contentsline {chapter}{\numberline {A}Glossary}{49}{chapter.A}%
-\contentsline {chapter}{\numberline {B}Acronyms}{50}{chapter.B}%
-\contentsline {chapter}{\numberline {C}Some subject you want to expand on}{53}{chapter.C}%
-\contentsline {chapter}{Bibliography}{55}{appendix*.45}%
+\contentsline {chapter}{\numberline {B}Acronyms}{51}{chapter.B}%
+\contentsline {chapter}{\numberline {C}Complementary Code Listings}{54}{chapter.C}%
+\contentsline {section}{\numberline {C.1}IAR EWARM linker map excerpt}{54}{section.C.1}%
+\contentsline {section}{\numberline {C.2}Agent configuration file}{56}{section.C.2}%
+\contentsline {section}{\numberline {C.3}FreeRTOS cooperative benchmark scenario}{58}{section.C.3}%
+\contentsline {section}{\numberline {C.4}Footprint tool CLI output}{60}{section.C.4}%
+\contentsline {chapter}{Bibliography}{61}{appendix*.44}%

@@ -1,14 +1,24 @@
 \chapter{Glossary}
-\label{chap:Glossary} 
+\label{chap:Glossary}
 
+\textbf{Architectural layer:} A classification of firmware symbols into one of four categories --- application, middleware, low-level driver, or system runtime --- used to attribute memory costs to comparable functional blocks across vendors.\\
 
-\textbf{Telnet:} Telnet is a network protocol that allows users to establish a remote terminal connection to a computer or network device over a network.\\
+\textbf{Board Support Package (BSP):} A set of drivers and configuration files that adapt a vendor's generic HAL to a specific evaluation or development board.\\
 
+\textbf{Context switch:} The process by which an RTOS saves the CPU state of the currently running task and restores the state of the next task to be executed. Context-switch efficiency directly affects multi-threaded throughput.\\
 
-\textbf{SSH (Secure Shell):} SSH is a network protocol used for secure remote administration and secure file transfers.\\
+\textbf{Cross-vendor benchmark:} A controlled experiment in which the same workload runs on two vendor platforms under identical conditions (clock, optimisation level, scenario logic), producing comparable metrics.\\
 
+\textbf{Firmware footprint:} The amount of non-volatile (flash/ROM) and volatile (RAM) memory a firmware image occupies once compiled and linked. It is a static measurement taken from the linked binary, not a dynamic runtime observation.\\
 
-\textbf{SNMP (Simple Network Management Protocol):} SNMP is a network protocol designed for managing and monitoring network devices and systems.\\
+\textbf{Linker map:} A text file produced by the linker at the end of the build process. It lists every module and function linked into the final image together with its code size, constant-data size, and variable-data size. It is the primary input to the footprint analysis tool.\\
 
+\textbf{Middleware:} Software libraries that sit between the hardware abstraction layer and the application, providing protocol or service logic (e.g.\ USB device stack, FreeRTOS kernel, FatFS, LwIP).\\
+
+\textbf{Semantic equivalence:} The property that two benchmark implementations --- one on the reference platform and one on the competitor --- exhibit identical observable behaviour (task structure, timing, synchronisation, reporting format) so that their comparison is fair.\\
+
+\textbf{Software stack:} A vertical slice of firmware functionality (e.g.\ USB device, FreeRTOS integration) comprising application code, middleware, and hardware drivers, benchmarked as a unit.\\
+
+\textbf{Tick (RTOS):} The periodic timer interrupt that drives the RTOS scheduler. A 1\,ms tick means the scheduler evaluates task readiness every millisecond.\\
 
 \pagebreak
