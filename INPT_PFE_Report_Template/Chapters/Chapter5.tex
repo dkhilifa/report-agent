@@ -1,48 +1,574 @@
-\chapter{Chapter 5 title}
-\label{chap:Chapter 5 title} 
+\chapter{Benchmarking ST against Texas Instruments}
+\label{chap:vs-ti}
+
 \section*{Introduction}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec dapibus justo. Donec sagittis vulputate ante sed porttitor. Suspendisse sit amet nisl massa. Curabitur nec nisl condimentum, egestas ex vitae, dapibus enim. Etiam iaculis, erat faucibus pellentesque sagittis, nisi justo sollicitudin nibh, et condimentum augue massa non turpis. Proin commodo enim fermentum suscipit condimentum. Maecenas molestie, dui nec vestibulum rhoncus, arcu nisl faucibus neque, a ornare nisi massa ac eros. Aenean id velit sit amet lacus mattis varius. Donec fringilla massa sed nisi eleifend, a aliquet mi tempus. Nunc posuere euismod est, nec tristique augue lobortis non. Sed sodales sem ut metus tempus ullamcorper.
+Texas Instruments (TI) is one of the world's largest semiconductor manufacturers, with a
+broad portfolio of embedded processors and microcontrollers~\cite{ti-about}. Its MSPM0 and
+MSPM3 families, built around Arm Cortex-M0+ and Cortex-M33 cores respectively, target
+cost-sensitive and mixed-signal applications with a strong emphasis on analog
+integration~\cite{ti-mspm33-product}. Unlike GigaDevice, which competes primarily on
+pin-compatibility, TI competes on a fundamentally different SDK architecture: a
+SysConfig-centric, unified serial peripheral model and a single-layer driver library
+(driverlib) rather than the dual HAL/LL approach used by STMicroelectronics.
 
-\pagebreak
+This chapter presents the first phase of our ST-versus-TI comparison: a comprehensive
+\textbf{static analysis} of the low-level driver layers of both SDKs. We compare the
+STM32CubeC5 Low-Layer (LL) drivers~\cite{stm32cubec5-sw} against the TI MSPM33 SDK
+driverlib~\cite{ti-mspm33-sdk} across seven quality dimensions --- lines of code,
+documentation coverage, code duplication, cyclomatic complexity, API surface design,
+MISRA~C:2012 compliance, and security (CWE analysis). For the scope definition, we also
+map the SDK coverage in terms of peripheral drivers, middleware, cryptographic algorithms,
+and communication protocols, identifying what each vendor offers exclusively.
 
-\section{Section1}
+All measurements were produced by automated scripts using
+\texttt{cloc}~\cite{cloc-tool}, \texttt{cppcheck}~\cite{cppcheck-tool} (with its
+\texttt{--addon=misra} and \texttt{--addon=cert} modes),
+\texttt{lizard}~\cite{lizard-tool} for cyclomatic complexity, and
+\texttt{jscpd}~\cite{jscpd-tool} for duplication detection.
 
-\subsection{Subsection1}
+% ====================================================================
+\section{Hardware platforms}
+\label{sec:ti-boards}
 
-\subsection{Subsection2}
+Every scenario in this chapter targets two boards hosting comparable Cortex-M33 parts.
+Table~\ref{tab:ti-board-comparison} summarises their key characteristics.
 
-\subsubsection{Subsubsection1}
+\begin{table}[H]
+\centering
+\caption{Board and MCU comparison --- STM32C5A3 vs.\ MSPM33C321A.}
+\label{tab:ti-board-comparison}
+\begin{tabular}{l l l}
+\toprule
+\textbf{Feature} & \textbf{STM32C5A3 (NUCLEO-C5A3ZG)} & \textbf{MSPM33C321A (LP-MSPM33C321A)} \\
+\midrule
+Core & Arm Cortex-M33 (FPU, DSP, MPU) & Arm Cortex-M33 (FPU, DSP, TrustZone) \\
+Max frequency & 144\,MHz & 160\,MHz \\
+Flash & 1\,MB (ECC, dual-bank) & 1\,MB (ECC, dual-bank, address swap) \\
+SRAM & 256\,KB (128\,KB with ECC) & 256\,KB (ECC) \\
+ADC & 3 $\times$ 12-bit, 4.5\,MSPS & 2 $\times$ 12-bit, 9.4\,MSPS \\
+DAC & 1 $\times$ 12-bit & 2 $\times$ 8-bit \\
+CAN & 2 $\times$ FDCAN & 2 $\times$ CAN\,FD \\
+USB & USB\,2.0 FS (Host/Device/DRD) & --- \\
+Ethernet & Yes (MAC with DMA) & --- \\
+I3C & Yes & --- \\
+Debug probe & ST-LINK & XDS110 (EnergyTrace) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\subsubsection{Subsubsection2}
+Both parts share the same core architecture and identical flash/RAM capacities, which makes
+the comparison fair at the silicon level. The STM32C5A3 offers broader connectivity (USB,
+Ethernet, I3C), while the MSPM33C321A favours higher analog bandwidth (9.4\,MSPS ADC) and
+provides TrustZone support~\cite{ti-mspm33-ds, stm32c5a3-product}.
 
-\paragraph{Paragraph a}
+% ====================================================================
+\section{Static analysis of the driver layer}
+\label{sec:ti-static-analysis}
 
-\paragraph{Paragraph b}
+This section compares the LL driver layer of STM32CubeC5 against the driverlib of the
+MSPM33 SDK. The LL layer was chosen for ST because it is the closest architectural
+equivalent to TI's driverlib: both are thin, inline-heavy abstractions over peripheral
+registers, designed for performance-critical code. We analyse seven complementary
+dimensions.
 
-\section{Section2}
+% --------------------------------------------------------------------
+\subsection{Scope and methodology}
+\label{subsec:ti-scope}
 
-\subsection{Subsection1}
+The analysis targets the following source sets:
 
-\subsection{Subsection2}
+\begin{itemize}
+  \item \textbf{ST:} all 33 header files in
+        \texttt{stm32c5xx\_drivers/ll/} (the LL layer of STM32CubeC5).
+  \item \textbf{TI:} all 85 source and header files in
+        \texttt{source/ti/driverlib/} and its \texttt{m33/} subdirectory
+        (the driverlib of MSPM33 SDK v1.03.00.01).
+\end{itemize}
 
-\subsubsection{Subsubsection1}
+Both sets were analysed on the same workstation under identical tool configurations. The
+tools and their roles are:
 
-\subsubsection{Subsubsection2}
+\begin{itemize}
+  \item \textbf{cloc} v2.08~\cite{cloc-tool} --- counts blank, comment, and code lines per
+        language and file.
+  \item \textbf{lizard}~\cite{lizard-tool} --- computes cyclomatic complexity, number of
+        parameters, and token count per function.
+  \item \textbf{cppcheck} v2.x~\cite{cppcheck-tool} --- runs MISRA~C:2012 addon
+        (\texttt{--addon=misra}) and CWE/CERT checks.
+  \item \textbf{jscpd}~\cite{jscpd-tool} --- detects copy-pasted code blocks (duplication).
+  \item A custom Python script (\texttt{analyze\_firmware.py}) --- extracts API surface
+        metrics (public/static/inline functions, macros, enums, naming patterns, parameter
+        distributions) and documentation coverage (Doxygen blocks, \texttt{@brief},
+        \texttt{@param}, \texttt{@return} tags, file headers).
+\end{itemize}
 
-\paragraph{Paragraph a}
+% --------------------------------------------------------------------
+\subsection{Lines of code}
+\label{subsec:ti-loc}
 
-\paragraph{Paragraph b}
+Table~\ref{tab:ti-loc} presents the line-count breakdown for each SDK's driver layer.
 
+\begin{table}[H]
+\centering
+\caption{Lines-of-code comparison --- ST LL vs.\ TI driverlib.}
+\label{tab:ti-loc}
+\begin{tabular}{l r r}
+\toprule
+\textbf{Metric} & \textbf{ST (LL)} & \textbf{TI (driverlib)} \\
+\midrule
+Source files      &        33 &        85 \\
+Blank lines       &     5\,744 &     8\,747 \\
+Comment lines     &    57\,649 &    45\,763 \\
+Code lines        &    22\,292 &    27\,972 \\
+\midrule
+Total lines       &    85\,685 &    82\,482 \\
+Comment-to-code ratio & 2.59 & 1.64 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
+ST delivers its LL layer in 33 header-only files containing 22\,292 lines of code, while
+TI spreads its driverlib across 85 files (both \texttt{.c} and \texttt{.h}) with
+27\,972 code lines. Despite having 25\% more code, TI's total line count is slightly
+lower because ST invests significantly more in inline comments: 57\,649 comment lines
+versus 45\,763, yielding a comment-to-code ratio of 2.59 for ST compared with 1.64 for TI.
+This difference reflects ST's header-only, fully-documented inline function strategy, where
+each function carries extensive Doxygen annotations embedded alongside the implementation.
 
+% --------------------------------------------------------------------
+\subsection{Documentation coverage}
+\label{subsec:ti-doc}
 
+We measured documentation quality through Doxygen tag extraction.
+Table~\ref{tab:ti-doc} summarises the results.
 
+\begin{table}[H]
+\centering
+\caption{Documentation coverage --- ST LL vs.\ TI driverlib.}
+\label{tab:ti-doc}
+\begin{tabular}{l r r}
+\toprule
+\textbf{Metric} & \textbf{ST (LL)} & \textbf{TI (driverlib)} \\
+\midrule
+Total functions         &   3\,713 &   3\,056 \\
+Documented functions    &   3\,613 &   2\,525 \\
+\textbf{Doc.\ coverage} & \textbf{97.3\,\%} & \textbf{82.6\,\%} \\
+\midrule
+Doxygen blocks          &   5\,967 &   3\,357 \\
+\texttt{@brief} tags    &   3\,826 &   5\,568 \\
+\texttt{@param} tags    &   4\,440 &   3\,970 \\
+\texttt{@return} tags   &   1\,705 &   2\,172 \\
+File headers            &      33  &      85  \\
+Inline comments         &       0  &     283  \\
+\bottomrule
+\end{tabular}
+\end{table}
 
+ST achieves 97.3\% function-level documentation coverage, leaving only 100 undocumented
+functions. TI reaches 82.6\%, with 531 undocumented functions --- mostly in \texttt{.c}
+implementation files, where TI concentrates complex logic (e.g.\ flash controller
+operations, PLL configuration) without per-function Doxygen blocks. This architectural
+choice is deliberate: TI documents the \emph{header} API thoroughly but omits Doxygen in
+\texttt{.c} bodies, whereas ST's header-only approach means every function definition is
+also its documented declaration.
 
+Interestingly, TI uses more \texttt{@brief} tags (5\,568 vs.\ 3\,826) and more
+\texttt{@return} tags (2\,172 vs.\ 1\,705), suggesting that when TI does document a
+function, it tends to be descriptive about purpose and return values. ST, however, produces
+78\% more Doxygen blocks overall (5\,967 vs.\ 3\,357), reflecting its higher raw volume of
+documented entities.
 
+% --------------------------------------------------------------------
+\subsection{Code duplication}
+\label{subsec:ti-dup}
+
+Table~\ref{tab:ti-dup} presents the duplication metrics.
+
+\begin{table}[H]
+\centering
+\caption{Code duplication --- ST LL vs.\ TI driverlib.}
+\label{tab:ti-dup}
+\begin{tabular}{l r r}
+\toprule
+\textbf{Metric} & \textbf{ST (LL)} & \textbf{TI (driverlib)} \\
+\midrule
+Total lines analysed     &    85\,685 &    82\,403 \\
+Code lines               &    10\,461 &    18\,008 \\
+Duplicate blocks         &        71 &       414 \\
+Duplicate lines          &       229 &     1\,306 \\
+\textbf{Duplication \%}  & \textbf{2.19\,\%} & \textbf{7.25\,\%} \\
+\midrule
+Same-file clones         &        71 &       338 \\
+Cross-file clones        &         0 &        76 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+TI's driver layer exhibits 3.3$\times$ more duplication than ST's (7.25\% vs.\ 2.19\%).
+All 71 duplicate blocks in ST occur within the same file, typically in symmetric
+getter/setter pairs for multi-channel peripherals (e.g.\ ADC rank configuration).
+TI, by contrast, has 76 cross-file clones --- code that is structurally identical across
+different peripheral modules. This pattern arises from TI's UniComm architecture, where
+\texttt{dl\_unicommuart.h}, \texttt{dl\_unicommspi.h}, and \texttt{dl\_unicommi2cc.h}
+share a common General Serial Controller (GSC) base but replicate similar interrupt-handling
+and configuration boilerplate in each specialisation.
+
+The higher duplication in TI is not inherently a quality defect --- it reflects a design
+choice that trades some code reuse for peripheral-specific readability. However, from a
+maintenance perspective, ST's lower duplication means fewer locations to update when fixing
+a bug or adapting to silicon errata.
+
+% --------------------------------------------------------------------
+\subsection{API surface}
+\label{subsec:ti-api}
+
+Table~\ref{tab:ti-api} compares the API design characteristics.
+
+\begin{table}[H]
+\centering
+\caption{API surface comparison --- ST LL vs.\ TI driverlib.}
+\label{tab:ti-api}
+\begin{tabular}{l r r}
+\toprule
+\textbf{Metric} & \textbf{ST (LL)} & \textbf{TI (driverlib)} \\
+\midrule
+Public functions         &    3\,543 &    2\,500 \\
+Static functions         &         1 &        42 \\
+Inline functions         &    3\,543 &    2\,032 \\
+Functional macros        &       194 &        27 \\
+Constant macros          &     3\,993 &    3\,271 \\
+Enums                    &         1 &       361 \\
+Typedefs                 &         0 &       470 \\
+\midrule
+Avg.\ parameters/func.  &      1.17 &      1.69 \\
+Max parameters           &         8 &         8 \\
+\texttt{extern "C"} guards &    33 &        43 \\
+Include guards           &        33 &         0 \\
+\midrule
+\multicolumn{3}{l}{\textbf{Parameter distribution (functions by param count)}} \\
+0 parameters             &       492 &       120 \\
+1 parameter              &     2\,303 &     1\,160 \\
+2 parameters             &       658 &       933 \\
+3 parameters             &       135 &       274 \\
+4+ parameters            &        48 &       139 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The two APIs reflect fundamentally different design philosophies:
+
+\begin{itemize}
+  \item \textbf{ST LL} exposes 3\,543 public functions, \emph{all} of which are
+        \texttt{\_\_STATIC\_INLINE}. The API is almost entirely composed of one-parameter
+        getters and zero-parameter status queries (65\% of functions take 0 or 1 parameter).
+        Type safety relies on constant macros rather than enums. The naming convention
+        follows the \texttt{LL\_PERIPHERAL\_Action} pattern consistently across all 33
+        files.
+  \item \textbf{TI driverlib} exposes 2\,500 public functions, of which 2\,032 are inline
+        (81\%). It makes heavier use of enums (361 enum types) and typedefs (470) for
+        configuration parameters, which improves type safety and IDE autocompletion at the
+        cost of a more complex type graph. The naming convention follows
+        \texttt{DL\_Peripheral\_Action} uniformly. Functions tend to take more parameters
+        on average (1.69 vs.\ 1.17), reflecting a more configuration-object-oriented
+        style where a single call sets multiple related fields.
+\end{itemize}
+
+ST's 194 functional macros versus TI's 27 show that ST still uses preprocessor computation
+in places (e.g.\ register-offset calculations, bit-field assembly) where TI has migrated
+the same logic into inline functions. While both approaches compile to equivalent machine
+code, the inline-function approach provides better debugging and type checking.
+
+% --------------------------------------------------------------------
+\subsection{MISRA~C:2012 compliance}
+\label{subsec:ti-misra}
+
+Both SDKs were analysed using \texttt{cppcheck} with the MISRA~C:2012
+addon~\cite{misra-c2012}. Table~\ref{tab:ti-misra} presents the per-rule breakdown.
+
+\begin{table}[H]
+\centering
+\caption{MISRA~C:2012 violations --- ST LL vs.\ TI driverlib.}
+\label{tab:ti-misra}
+\begin{tabular}{l l r r}
+\toprule
+\textbf{Rule} & \textbf{Description} & \textbf{ST} & \textbf{TI} \\
+\midrule
+17.3 & Function declared implicitly       & 3\,541 &  281 \\
+11.4 & Conversion between pointer and integer & 84 &    4 \\
+10.6 & Composite expression assigned to wider type & 29 & --- \\
+20.7 & Macro parameter not enclosed in parentheses & 21 & --- \\
+7.3  & Lower-case ``l'' suffix on literal  &    18 & --- \\
+10.4 & Incompatible essential types in operation & --- & 67 \\
+12.1 & Precedence of operators unclear     & --- &   52 \\
+18.4 & Pointer arithmetic                  & --- &   76 \\
+15.5 & Multiple return statements          &     4 &   14 \\
+10.1 & Operands of inappropriate essential type & --- & 13 \\
+3.1  & Comment contains nested comment     & --- &   11 \\
+Other & Various minor rules                &    6 &   33 \\
+\midrule
+\textbf{Total} & & \textbf{3\,703} & \textbf{551} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Interpretation.}
+At first glance, ST's LL layer appears to have far more MISRA violations (3\,703 vs.\ 551).
+However, this requires careful interpretation:
+
+\begin{enumerate}
+  \item \textbf{Rule 17.3 dominates ST's count.} Of ST's 3\,703 violations, 3\,541 (96\%)
+        are Rule~17.3 (implicit function declaration). These arise because every LL
+        function is defined as \texttt{\_\_STATIC\_INLINE} in a header and \texttt{cppcheck}
+        analyses each header in isolation, reporting each inline function call within the
+        same header as an implicit declaration when the callee is defined later in the file.
+        In a real compilation unit (where the header is \texttt{\#include}d), these are all
+        resolved. This is a \emph{tooling artifact}, not a genuine code-quality issue.
+
+  \item \textbf{Rule 11.4 is unavoidable in MCU drivers.} The 84 Rule~11.4 violations in ST
+        are casts between integers and peripheral base-address pointers
+        (\texttt{(ADC\_TypeDef~*)ADC1\_BASE}). Both vendors do this; TI has the same
+        pattern but fewer instances (4) because TI defines peripheral pointers via
+        device-header macros that \texttt{cppcheck} does not fully expand.
+
+  \item \textbf{TI's violations are more diverse.} TI triggers 15 distinct MISRA rules
+        compared with ST's 9. Rules 18.4 (pointer arithmetic, 76 occurrences), 10.4
+        (essential-type mismatch, 67), and 12.1 (operator precedence, 52) point to more
+        complex expression patterns in TI's \texttt{.c} implementation files.
+\end{enumerate}
+
+\noindent
+If we exclude the tooling-artifact Rule~17.3 from both vendors, the adjusted counts are
+ST~=~162 and TI~=~270, putting ST ahead on genuine MISRA conformance per line of code.
+
+\paragraph{Security analysis (CWE).}
+Both driver layers returned \textbf{zero CWE findings} from \texttt{cppcheck}'s CERT/CWE
+checker. Neither SDK contains patterns flagged as common weakness enumerations, which is
+expected for thin, register-level driver code that performs no dynamic allocation, string
+handling, or network I/O.
+
+% ====================================================================
+\section{SDK coverage comparison}
+\label{sec:ti-sdk-coverage}
+
+Beyond driver-layer quality, the breadth of an SDK --- how many peripherals, middleware
+stacks, and communication protocols it supports out of the box --- determines the
+development effort required for a real product. We mapped the complete contents of both
+SDKs file by file and identified exclusive features on each side.
+
+% --------------------------------------------------------------------
+\subsection{Peripheral driver coverage}
+\label{subsec:ti-periph-gaps}
+
+Table~\ref{tab:ti-periph-exclusive} lists the peripheral drivers present in only one SDK.
+
+\begin{table}[H]
+\centering
+\caption{Exclusive peripheral drivers --- features in one SDK only.}
+\label{tab:ti-periph-exclusive}
+\begin{tabular}{l p{5.5cm} l}
+\toprule
+\textbf{Vendor} & \textbf{Driver} & \textbf{Capability} \\
+\midrule
+\multicolumn{3}{l}{\textit{ST-exclusive (25 drivers)}} \\
+ST & CORDIC accelerator              & HW trigonometric/hyperbolic math \\
+ST & DAC (12-bit)                    & Full DAC peripheral \\
+ST & Ethernet MAC                    & On-chip networking \\
+ST & USB Host / Device / DRD         & Full USB stack support \\
+ST & I3C controller                  & Next-gen I3C bus \\
+ST & HASH accelerator (SHA)          & HW SHA-1/SHA-256 \\
+ST & OPAMP                           & On-chip operational amplifier \\
+ST & ICACHE controller               & Configurable instruction cache \\
+ST & XSPI (Octo/Quad-SPI)           & Advanced memory-mapped SPI \\
+ST & LPUART, USART, SmartCard, SMBus & Extended serial protocols \\
+\midrule
+\multicolumn{3}{l}{\textit{TI-exclusive (16 drivers)}} \\
+TI & High-Speed ADC (HSADC)          & Dedicated 9.4\,MSPS ADC block \\
+TI & General Serial Controller (GSC) & Unified serial engine \\
+TI & UniComm (I2C/SPI/UART)          & Configurable serial block \\
+TI & Signal Processing Subsystem     & On-chip analog processing \\
+TI & Low-Frequency Subsystem (LFSS)  & Unified RTC + tamper + scratchpad \\
+TI & Key Store Controller            & HW key management \\
+TI & Error Action Module             & HW automatic fault handling \\
+TI & UART extend (IrDA, Manchester)  & Extended UART modes \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+ST leads with 25 exclusive peripheral drivers to TI's 16. The most significant gaps are
+in connectivity: ST offers USB, Ethernet, and I3C, which are entirely absent from the
+MSPM33C321A. TI compensates with stronger analog integration (high-speed ADC, signal
+processing subsystem) and a unified serial architecture that consolidates UART, SPI, and
+I2C into a single configurable peripheral.
+
+% --------------------------------------------------------------------
+\subsection{Middleware coverage}
+\label{subsec:ti-mw-gaps}
+
+Table~\ref{tab:ti-mw-exclusive} compares the middleware stacks.
+
+\begin{table}[H]
+\centering
+\caption{Exclusive middleware --- present in one SDK only.}
+\label{tab:ti-mw-exclusive}
+\begin{tabular}{l l p{6cm}}
+\toprule
+\textbf{Vendor} & \textbf{Middleware} & \textbf{Purpose} \\
+\midrule
+ST & FileX              & FAT-compatible embedded file system \\
+ST & LevelX             & Flash wear-leveling (NAND/NOR) \\
+ST & LwIP               & Lightweight TCP/IP stack \\
+ST & USBX               & USB device/host class drivers \\
+ST & mbedTLS             & TLS/SSL library (TLS~1.2/1.3) \\
+ST & Open Bootloader     & Multi-interface bootloader \\
+ST & stFCF               & Security provisioning framework \\
+ST & stCryptoLib          & Comprehensive crypto library \\
+\midrule
+TI & Edge AI             & On-device ML inference \\
+TI & LVGL                & Embedded graphics/GUI library \\
+TI & LIN Bus             & Automotive LIN protocol \\
+TI & DALI                & Smart lighting protocol \\
+TI & IQmath              & Fixed-point DSP math library \\
+TI & Post-Quantum Crypto & ML-DSA (Dilithium) signatures \\
+TI & Curve25519          & Modern elliptic curve crypto \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+ST provides 8 exclusive middleware components focused on connectivity (USB, Ethernet/IP,
+file system) and security (TLS, crypto library, secure boot). TI provides 7 exclusive
+components that target emerging domains: Edge~AI for on-device machine learning, LVGL for
+embedded GUIs, automotive protocols (LIN, DALI), and forward-looking cryptography
+(post-quantum ML-DSA, Curve25519).
+
+% --------------------------------------------------------------------
+\subsection{Cryptographic algorithm coverage}
+\label{subsec:ti-crypto}
+
+Table~\ref{tab:ti-crypto} provides a detailed comparison of the algorithms available in
+each vendor's crypto libraries.
+
+\begin{table}[H]
+\centering
+\caption{Cryptographic algorithm coverage comparison.}
+\label{tab:ti-crypto}
+\begin{tabular}{l c c}
+\toprule
+\textbf{Algorithm} & \textbf{ST (stCryptoLib)} & \textbf{TI (crypto/)} \\
+\midrule
+AES (ECB, CBC, CTR, GCM)  & \checkmark & \checkmark \\
+AES-CCM / AES-XTS         & \checkmark & ---        \\
+SHA-224/256                & \checkmark & \checkmark \\
+SHA-384/512, SHA-3         & \checkmark & ---        \\
+HMAC                       & \checkmark & \checkmark \\
+CMAC / KMAC                & \checkmark & ---        \\
+RSA (PKCS\#1)              & \checkmark & \checkmark \\
+ECDSA / ECDH               & \checkmark & \checkmark \\
+EdDSA (Ed25519)            & \checkmark & \checkmark \\
+SM2 / SM3 (Chinese std.)   & \checkmark & ---        \\
+ChaCha20-Poly1305          & \checkmark & ---        \\
+ML-DSA (Post-Quantum)      & ---        & \checkmark \\
+Curve25519 / X25519         & ---        & \checkmark \\
+TRNG (HW)                  & \checkmark & \checkmark \\
+PKA (HW)                   & \checkmark & \checkmark \\
+Key Store (HW)              & \checkmark & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+ST offers the broader algorithm portfolio (10+ exclusive algorithms), covering legacy
+standards (SHA-1), Chinese national standards (SM2/SM3), and authenticated-encryption
+modes (AES-CCM, ChaCha20-Poly1305). TI, while narrower, holds a forward-looking advantage
+with post-quantum cryptography (ML-DSA/Dilithium) and modern elliptic-curve primitives
+(Curve25519), which positions it well for long-term security requirements~\cite{nist-pqc}.
+
+% --------------------------------------------------------------------
+\subsection{Communication protocol coverage}
+\label{subsec:ti-comm}
+
+Table~\ref{tab:ti-comm-protocols} summarises the communication protocol support.
+
+\begin{table}[H]
+\centering
+\caption{Communication protocol support comparison.}
+\label{tab:ti-comm-protocols}
+\begin{tabular}{l c c}
+\toprule
+\textbf{Protocol} & \textbf{ST} & \textbf{TI} \\
+\midrule
+UART / SPI / I2C / I2S / CAN\,FD   & \checkmark & \checkmark \\
+USB (Device + Host)                  & \checkmark & ---        \\
+Ethernet                             & \checkmark & ---        \\
+I3C                                  & \checkmark & ---        \\
+SMBus / SmartCard (ISO~7816)         & \checkmark & ---        \\
+LPUART / USART (synchronous)         & \checkmark & ---        \\
+IrDA mode / Manchester encoding      & ---        & \checkmark \\
+LIN Bus                              & ---        & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+ST supports 7 exclusive communication protocols, with USB and Ethernet being the most
+impactful for connected applications. TI brings 3 exclusive capabilities: IrDA mode,
+Manchester encoding (both through its extended UART), and LIN Bus for automotive
+applications.
+
+% ====================================================================
+\section{Summary of findings}
+\label{sec:ti-static-summary}
+
+Table~\ref{tab:ti-summary-scoreboard} provides a consolidated view of the static-analysis
+results.
+
+\begin{table}[H]
+\centering
+\caption{Static-analysis scoreboard --- STM32CubeC5 LL vs.\ TI MSPM33 driverlib.}
+\label{tab:ti-summary-scoreboard}
+\begin{tabular}{l l l l}
+\toprule
+\textbf{Dimension} & \textbf{ST result} & \textbf{TI result} & \textbf{Advantage} \\
+\midrule
+Code lines            & 22\,292          & 27\,972          & ST (leaner) \\
+Documentation coverage & 97.3\,\%        & 82.6\,\%         & ST \\
+Code duplication       & 2.19\,\%        & 7.25\,\%         & ST \\
+API functions          & 3\,543          & 2\,500           & ST (wider) \\
+Type safety (enums)    & 1               & 361              & TI \\
+MISRA violations       & 162\textsuperscript{*} & 270       & ST \\
+Security (CWE)         & 0               & 0                & Tie \\
+Exclusive peripherals  & 25              & 16               & ST \\
+Exclusive middleware   & 8               & 7                & Balanced \\
+Crypto algorithms      & 10+ exclusive   & 2 exclusive      & ST (breadth), TI (PQC) \\
+Comm.\ protocols       & 7 exclusive     & 3 exclusive      & ST \\
+\bottomrule
+\multicolumn{4}{l}{\footnotesize \textsuperscript{*}After excluding tooling-artifact Rule~17.3 from both vendors.} \\
+\end{tabular}
+\end{table}
+
+The static analysis reveals that ST's LL driver layer is leaner, better documented, less
+duplicated, and more MISRA-conformant when tooling artifacts are factored out. ST also holds
+a clear lead in SDK breadth, particularly in connectivity (USB, Ethernet, I3C) and security
+middleware (TLS, comprehensive crypto library).
+
+TI, however, brings distinct strengths: stronger type safety through enums and typedefs,
+forward-looking post-quantum cryptography, superior analog integration (9.4\,MSPS ADC), a
+unified serial architecture that simplifies board design, and emerging-domain middleware
+(Edge~AI, LVGL, automotive protocols). These advantages position TI well for mixed-signal
+and AI-at-the-edge applications where connectivity is less critical than analog performance.
 
 \newpage
 \section*{Conclusion}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec dapibus justo. Donec sagittis vulputate ante sed porttitor. Suspendisse sit amet nisl massa. Curabitur nec nisl condimentum, egestas ex vitae, dapibus enim. Etiam iaculis, erat faucibus pellentesque sagittis, nisi justo sollicitudin nibh, et condimentum augue massa non turpis. Proin commodo enim fermentum suscipit condimentum. Maecenas molestie, dui nec vestibulum rhoncus, arcu nisl faucibus neque, a ornare nisi massa ac eros. Aenean id velit sit amet lacus mattis varius. Donec fringilla massa sed nisi eleifend, a aliquet mi tempus. Nunc posuere euismod est, nec tristique augue lobortis non. Sed sodales sem ut metus tempus ullamcorper.
+This chapter presented the first phase of our ST-versus-TI comparison, focusing on a
+comprehensive static analysis of the low-level driver layers of STM32CubeC5 and the TI
+MSPM33 SDK. The analysis covered seven quality dimensions and a complete SDK coverage
+mapping.
+
+The results demonstrate that ST's ecosystem is the more mature and broadly equipped
+platform, excelling in documentation discipline, code hygiene, MISRA conformance, and
+middleware breadth. TI offers a credible alternative with targeted advantages in analog
+performance, type-safe API design, forward-looking cryptography, and emerging middleware for
+AI and automotive applications.
+
+Future work will extend this comparison to runtime benchmarks --- footprint analysis,
+execution time, and power consumption on identical workloads --- to complement the
+static-analysis findings presented here with empirical measurements from both platforms.

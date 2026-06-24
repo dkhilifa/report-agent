@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.5.14)  22 JUN 2026 17:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.5.14)  24 JUN 2026 14:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1182,12 +1182,12 @@ Package caption Info: End \AtBeginDocument code.
 \openout2 = `Frontmatter/Page_de_Garde_EN.aux'.
 
  (Frontmatter/Page_de_Garde_EN.tex
-<Logos/UTM.png, id=410, 160.6pt x 180.675pt>
+<Logos/UTM.png, id=422, 160.6pt x 180.675pt>
 File: Logos/UTM.png Graphic file (type png)
 <use Logos/UTM.png>
 Package pdftex.def Info: Logos/UTM.png  used on input line 3.
 (pdftex.def)             Requested size: 50.58191pt x 56.9055pt.
-<Logos/fst.png, id=411, 233.87375pt x 176.66pt>
+<Logos/fst.png, id=423, 233.87375pt x 176.66pt>
 File: Logos/fst.png Graphic file (type png)
 <use Logos/fst.png>
 Package pdftex.def Info: Logos/fst.png  used on input line 5.
@@ -1201,7 +1201,7 @@ LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
 LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
 (Font)              using `T1/lmr/m/scsl' instead on input line 11.
 
-<Logos/STMicroelectronics.png, id=412, 963.6pt x 675.52374pt>
+<Logos/STMicroelectronics.png, id=424, 963.6pt x 675.52374pt>
 File: Logos/STMicroelectronics.png Graphic file (type png)
 <use Logos/STMicroelectronics.png>
 Package pdftex.def Info: Logos/STMicroelectronics.png  used on input line 19.
@@ -1288,61 +1288,12 @@ LaTeX Font Info:    Font shape `U/xnsh/m/n' will be
 (Font)              scaled to size 35.82726pt on input line 1.
 LaTeX Font Info:    Font shape `U/xnsh/m/n' will be
 (Font)              scaled to size 17.28003pt on input line 4.
-
-Frontmatter/Molakhas.tex:8: Unknown arabic command: \textenglish .
-\a@cmderr ...age {Unknown arabic command: \nxp #1}
-                                                  \else \errmessage {Illegal...
-l.8 ...متكاملتين: تطبيق \textenglish
-                                                  {MCU Workflow Studio} لت...
-Your command will be echoed in the output
-
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 8.
-(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Frontmatter/Molakhas.tex:8: Unknown arabic command: \textenglish .
-\a@cmderr ...age {Unknown arabic command: \nxp #1}
-                                                  \else \errmessage {Illegal...
-l.8 ...�لمعمارية، ونظام \textenglish
-                                                  {MCU Benchmark Copilot Age...
-Your command will be echoed in the output
-
-Frontmatter/Molakhas.tex:8: Unknown arabic command: \textenglish .
-\a@cmderr ...age {Unknown arabic command: \nxp #1}
-                                                  \else \errmessage {Illegal...
-l.8 ...nt} المدمج في بيئة \textenglish
-                                                  {VS Code} لتسريع إ�...
-Your command will be echoed in the output
-
 LaTeX Font Info:    Font shape `U/xnsh/bx/n' will be
 (Font)              scaled to size 17.28003pt on input line 18.
-Frontmatter/Molakhas.tex:20: Unknown arabic command: \textenglish .
-\a@cmderr ...age {Unknown arabic command: \nxp #1}
-                                                  \else \errmessage {Illegal...
-l.20 \textenglish
-                 {STM32Cube}، قياس الأداء، البصمة الذا...
-Your command will be echoed in the output
 
-Frontmatter/Molakhas.tex:20: Unknown arabic command: \textenglish .
-\a@cmderr ...age {Unknown arabic command: \nxp #1}
-                                                  \else \errmessage {Illegal...
-l.20 ...�حليل ملف الربط، \textenglish
-                                                  {FreeRTOS}، \textenglish{...
-Your command will be echoed in the output
-
-Frontmatter/Molakhas.tex:20: Unknown arabic command: \textenglish .
-\a@cmderr ...age {Unknown arabic command: \nxp #1}
-                                                  \else \errmessage {Illegal...
-l.20 ...ط، \textenglish{FreeRTOS}، \textenglish
-                                                  {USB}، \textenglish{GD32}...
-Your command will be echoed in the output
-
-Frontmatter/Molakhas.tex:20: Unknown arabic command: \textenglish .
-\a@cmderr ...age {Unknown arabic command: \nxp #1}
-                                                  \else \errmessage {Illegal...
-l.20 ...eeRTOS}، \textenglish{USB}، \textenglish
-                                                  {GD32}، النقل بين...
-Your command will be echoed in the output
+Overfull \hbox (2.59033pt too wide) in paragraph at lines 20--20
+[]\T1/lmr/m/n/12 GD32  
+ []
 
 )
 Underfull \hbox (badness 10000) in paragraph at lines 25--97
@@ -1351,12 +1302,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 25--97
 
 [5
 
-] [6] (main.lof
+] (main.lof
 Overfull \hbox (24.62096pt too wide) in paragraph at lines 4--4
  [][] [][][]\T1/lmr/m/n/12 Organisational structure of the Microcontroller Division (MCD) at ST Tunis. The Maintenance 
  []
 
-[7
+[6
 
 ]
 Overfull \hbox (4.73997pt too wide) in paragraph at lines 14--14
@@ -1372,13 +1323,17 @@ Overfull \hbox (2.82826pt too wide) in paragraph at lines 24--24
 \tf@lof=\write7
 \openout7 = `main.lof'.
 
- [8] (main.lot)
+ [7] (main.lot [8
+
+])
 \tf@lot=\write8
 \openout8 = `main.lot'.
 
- [9
-
-] (main.lol)
+ [9] (main.lol
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 6.
+ (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+))
 \tf@lol=\write9
 \openout9 = `main.lol'.
 
@@ -1422,7 +1377,7 @@ Overfull \hbox (28.79535pt too wide) in paragraph at lines 59--65
 
 
 pdfTeX warning: pdflatex (file ./Figures/chapter1/st-site-organization.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/chapter1/st-site-organization.pdf, id=722, 457.71pt x 280.1667pt>
+<Figures/chapter1/st-site-organization.pdf, id=761, 457.71pt x 280.1667pt>
 File: Figures/chapter1/st-site-organization.pdf Graphic file (type pdf)
 <use Figures/chapter1/st-site-organization.pdf>
 Package pdftex.def Info: Figures/chapter1/st-site-organization.pdf  used on input line 68.
@@ -1463,7 +1418,7 @@ Chapter 2.
 ]
 
 pdfTeX warning: pdflatex (file ./Figures/footprint-tool/architecture.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/footprint-tool/architecture.pdf, id=802, 724.62718pt x 385.44pt>
+<Figures/footprint-tool/architecture.pdf, id=841, 724.62718pt x 385.44pt>
 File: Figures/footprint-tool/architecture.pdf Graphic file (type pdf)
 <use Figures/footprint-tool/architecture.pdf>
 Package pdftex.def Info: Figures/footprint-tool/architecture.pdf  used on input line 65.
@@ -1471,7 +1426,7 @@ Package pdftex.def Info: Figures/footprint-tool/architecture.pdf  used on input 
 [11] [12 <./Figures/footprint-tool/architecture.pdf>]
 
 pdfTeX warning: pdflatex (file ./Figures/footprint-tool/pipeline.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/footprint-tool/pipeline.pdf, id=833, 536.0025pt x 534.07532pt>
+<Figures/footprint-tool/pipeline.pdf, id=872, 536.0025pt x 534.07532pt>
 File: Figures/footprint-tool/pipeline.pdf Graphic file (type pdf)
 <use Figures/footprint-tool/pipeline.pdf>
 Package pdftex.def Info: Figures/footprint-tool/pipeline.pdf  used on input line 130.
@@ -1479,7 +1434,7 @@ Package pdftex.def Info: Figures/footprint-tool/pipeline.pdf  used on input line
 [13{C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}] [14 <./Figures/footprint-tool/pipeline.pdf>]
 
 pdfTeX warning: pdflatex (file ./Figures/footprint-tool/layer-classification.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/footprint-tool/layer-classification.pdf, id=886, 1101.15382pt x 645.37106pt>
+<Figures/footprint-tool/layer-classification.pdf, id=925, 1101.15382pt x 645.37106pt>
 File: Figures/footprint-tool/layer-classification.pdf Graphic file (type pdf)
 <use Figures/footprint-tool/layer-classification.pdf>
 Package pdftex.def Info: Figures/footprint-tool/layer-classification.pdf  used on input line 192.
@@ -1487,7 +1442,7 @@ Package pdftex.def Info: Figures/footprint-tool/layer-classification.pdf  used o
 [15]
 
 pdfTeX warning: pdflatex (file ./Figures/footprint-tool/weights.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/footprint-tool/weights.pdf, id=898, 463.7325pt x 355.3275pt>
+<Figures/footprint-tool/weights.pdf, id=937, 463.7325pt x 355.3275pt>
 File: Figures/footprint-tool/weights.pdf Graphic file (type pdf)
 <use Figures/footprint-tool/weights.pdf>
 Package pdftex.def Info: Figures/footprint-tool/weights.pdf  used on input line 215.
@@ -1495,7 +1450,7 @@ Package pdftex.def Info: Figures/footprint-tool/weights.pdf  used on input line 
 [16 <./Figures/footprint-tool/layer-classification.pdf>]
 
 pdfTeX warning: pdflatex (file ./Figures/footprint-tool/scoring-signals.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/footprint-tool/scoring-signals.pdf, id=2560, 1137.28882pt x 638.385pt>
+<Figures/footprint-tool/scoring-signals.pdf, id=2599, 1137.28882pt x 638.385pt>
 File: Figures/footprint-tool/scoring-signals.pdf Graphic file (type pdf)
 <use Figures/footprint-tool/scoring-signals.pdf>
 Package pdftex.def Info: Figures/footprint-tool/scoring-signals.pdf  used on input line 224.
@@ -1503,7 +1458,7 @@ Package pdftex.def Info: Figures/footprint-tool/scoring-signals.pdf  used on inp
 [17 <./Figures/footprint-tool/weights.pdf>]
 
 pdfTeX warning: pdflatex (file ./Figures/footprint-tool/candidate-ranking.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/footprint-tool/candidate-ranking.pdf, id=2585, 1183.5417pt x 381.34468pt>
+<Figures/footprint-tool/candidate-ranking.pdf, id=2624, 1183.5417pt x 381.34468pt>
 File: Figures/footprint-tool/candidate-ranking.pdf Graphic file (type pdf)
 <use Figures/footprint-tool/candidate-ranking.pdf>
 Package pdftex.def Info: Figures/footprint-tool/candidate-ranking.pdf  used on input line 244.
@@ -1516,7 +1471,7 @@ Overfull \hbox (4.09067pt too wide) in paragraph at lines 266--273
 
 
 pdfTeX warning: pdflatex (file ./Figures/footprint-tool/ai-integration.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/footprint-tool/ai-integration.pdf, id=4531, 1332.89963pt x 692.5875pt>
+<Figures/footprint-tool/ai-integration.pdf, id=4570, 1332.89963pt x 692.5875pt>
 File: Figures/footprint-tool/ai-integration.pdf Graphic file (type pdf)
 <use Figures/footprint-tool/ai-integration.pdf>
 Package pdftex.def Info: Figures/footprint-tool/ai-integration.pdf  used on input line 276.
@@ -1544,7 +1499,7 @@ Overfull \hbox (0.40959pt too wide) in paragraph at lines 15--23
 ] [26]
 
 pdfTeX warning: pdflatex (file ./Figures/benchmark-agent/architecture.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/benchmark-agent/architecture.pdf, id=5167, 738.84026pt x 456.74638pt>
+<Figures/benchmark-agent/architecture.pdf, id=5206, 738.84026pt x 456.74638pt>
 File: Figures/benchmark-agent/architecture.pdf Graphic file (type pdf)
 <use Figures/benchmark-agent/architecture.pdf>
 Package pdftex.def Info: Figures/benchmark-agent/architecture.pdf  used on input line 76.
@@ -1577,7 +1532,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 133--133
 [28] [29]
 
 pdfTeX warning: pdflatex (file ./Figures/benchmark-agent/workflow.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/benchmark-agent/workflow.pdf, id=5198, 702.70526pt x 427.5975pt>
+<Figures/benchmark-agent/workflow.pdf, id=5237, 702.70526pt x 427.5975pt>
 File: Figures/benchmark-agent/workflow.pdf Graphic file (type pdf)
 <use Figures/benchmark-agent/workflow.pdf>
 Package pdftex.def Info: Figures/benchmark-agent/workflow.pdf  used on input line 201.
@@ -1667,9 +1622,71 @@ Overfull \hbox (17.66373pt too wide) in paragraph at lines 605--610
 
 [47]) [48] (Chapters/Chapter5.tex
 Chapter 5.
+
+Overfull \hbox (18.23167pt too wide) in paragraph at lines 41--58
+ [][] 
+ []
+
 [49
 
-] [50]) (Chapters/Conclusion.tex [51]) (Endmatter/Glossary.tex [52
+] [50]
+Overfull \hbox (15.34895pt too wide) in paragraph at lines 100--104
+[]\T1/lmr/m/n/12 A custom Python script (\T1/lmtt/m/n/12 analyze_firmware.py\T1/lmr/m/n/12 ) --- extracts API surface metrics (public/static/inline
+ []
+
+[51] [52] [53] [54]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 315.
+
+[55]
+Overfull \hbox (21.79381pt too wide) in paragraph at lines 345--349
+\T1/lmtt/m/n/12 cppcheck\T1/lmr/m/n/12 's CERT/CWE checker. Neither SDK contains patterns flagged as common weakness enumerations,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 383--383
+[]|\T1/lmr/m/n/12 LPUART, USART,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
+[]|\T1/lmr/m/n/12 General Serial Controller
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--390
+[]|\T1/lmr/m/n/12 Low-Frequency Subsystem
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 393--393
+[]|\T1/lmr/m/n/12 UART extend (IrDA,
+ []
+
+[56]
+Underfull \hbox (badness 4144) in paragraph at lines 418--419
+[]|\T1/lmr/m/n/12 FAT-compatible embedded file
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 419--420
+[]|\T1/lmr/m/n/12 Flash wear-leveling
+ []
+
+[57] [58]
+Overfull \hbox (29.62962pt too wide) in paragraph at lines 479--484
+\T1/lmr/m/n/12 ChaCha20-Poly1305). TI, while narrower, holds a forward-looking advantage with post-quantum cryptography
+ []
+
+[59]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 543.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 543.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 543.
+ [60] [61]) (Chapters/Conclusion.tex [62]) (Endmatter/Glossary.tex [63
 
 ]
 Appendix A.
@@ -1708,7 +1725,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 14--15
 
  []
 
-[53
+[64
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 16--17
@@ -1730,39 +1747,64 @@ Underfull \hbox (badness 10000) in paragraph at lines 22--23
 
  []
 
-) [54] (Endmatter/Acronyms.tex
+) [65] (Endmatter/Acronyms.tex
 Appendix B.
-[55
+[66
 
 ]
-Overfull \vbox (89.4756pt too high) has occurred while \output is active []
+Overfull \vbox (350.47542pt too high) has occurred while \output is active []
 
- [56]) (Endmatter/ComplementaryCodes.tex [57]
+ [67]) (Endmatter/ComplementaryCodes.tex
+Overfull \vbox (67.38771pt too high) has occurred while \output is active []
+
+ [68]
 Appendix C.
 
 Overfull \hbox (7.38536pt too wide) in paragraph at lines 4--7
 \T1/lmr/m/n/12 This appendix provides representative code excerpts that complement the tool and benchmark descriptions
  []
 
-[58
+[69
 
-] [59] [60] [61] (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+] [70] [71] [72] (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 ) (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
-) [62] [63]) [64]
+) [73] [74] [75]
+Overfull \hbox (18.36818pt too wide) in paragraph at lines 210--214
+\T1/lmr/m/n/12 Listing [][]C.5[][] shows an abbreviated version of the Python script used to extract API surface and documentation
+ []
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2025/11/14 1.11b listings language file
+) [76]) [77]
 Underfull \hbox (badness 4391) in paragraph at lines 169--170
 []\T1/lmr/m/n/12 STMicroelectronics, \T1/lmr/m/it/12 STM32Cube Ecosystem\T1/lmr/m/n/12 . [Online]. Available: [][]$https : / / www . st . com / en /
  []
 
-[65
+[78
 
 ]
 Underfull \hbox (badness 2961) in paragraph at lines 213--214
 []\T1/lmr/m/n/12 GitHub, \T1/lmr/m/it/12 GitHub Models Documentation\T1/lmr/m/n/12 . [Online]. Available: [][]$https : / / docs . github . com / en /
  []
 
-[66] [67] (main.aux (Frontmatter/Page_de_Garde_EN.aux))
+[79]
+Underfull \hbox (badness 2197) in paragraph at lines 246--247
+[]\T1/lmr/m/n/12 Texas Instruments, \T1/lmr/m/it/12 About TI\T1/lmr/m/n/12 . [Online]. Available: [][]$https : / / www . ti . com / about-[]ti / company /
+ []
+
+
+Underfull \hbox (badness 4096) in paragraph at lines 252--253
+[]\T1/lmr/m/n/12 Texas Instruments, \T1/lmr/m/it/12 MSPM33C321A Datasheet\T1/lmr/m/n/12 . [Online]. Available: [][]$https : / / www . ti . com /
+ []
+
+[80]
+Underfull \hbox (badness 1648) in paragraph at lines 303--304
+[]\T1/lmr/m/n/12 Texas Instruments, \T1/lmr/m/it/12 EnergyTrace Technology\T1/lmr/m/n/12 . [Online]. Available: [][]$https : / / www . ti . com / tool /
+ []
+
+[81] [82] (main.aux (Frontmatter/Page_de_Garde_EN.aux))
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-03-20>
@@ -1990,30 +2032,31 @@ Endmatter/Acronyms.tex
 Endmatter/ComplementaryCodes.tex
 lstlang1.sty    2025/11/14 1.11b listings language file
  lstmisc.sty    2025/11/14 1.11b (Carsten Heinz)
+lstlang1.sty    2025/11/14 1.11b listings language file
  ***********
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: C92CFBCB2704FF7242F0481B05D73E2A;16198.
+(rerunfilecheck)             Checksum: A87AB67C0BB765BFC607CDBF3D7675CB;17693.
  )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 41 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 44271 strings out of 467691
- 864750 string characters out of 5413535
- 1855631 words of memory out of 5000000
- 72061 multiletter control sequences out of 15000+600000
- 687799 words of font info for 80 fonts, out of 8000000 for 9000
+ 44667 strings out of 467691
+ 869752 string characters out of 5413535
+ 1921510 words of memory out of 5000000
+ 72325 multiletter control sequences out of 15000+600000
+ 705814 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,12n,102p,2532b,4649s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\dkhilifa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsco10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtti10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/arabtex/xnsh14.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/arabtex/xnsh14bf.pfb>
-Output written on main.pdf (83 pages, 2860132 bytes).
+ 99i,12n,102p,2532b,4742s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\dkhilifa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsco10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtti10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/arabtex/xnsh14.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/arabtex/xnsh14bf.pfb>
+Output written on main.pdf (98 pages, 2981818 bytes).
 PDF statistics:
- 5779 PDF objects out of 6186 (max. 8388607)
- 432 named destinations out of 1000 (max. 500000)
- 886 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6084 PDF objects out of 6186 (max. 8388607)
+ 550 named destinations out of 1000 (max. 500000)
+ 910 words of extra memory for PDF output out of 10000 (max. 10000000)
 

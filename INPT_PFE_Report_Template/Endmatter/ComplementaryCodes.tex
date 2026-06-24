@@ -200,3 +200,77 @@ Root cause: HAL RCC (4560 B) + HAL/LL USB (4988 B) = 93% of gap.
 [INFO] Mapping diagnostics: results/mapping_diagnostics.json
 [INFO] Review queue (4 items): results/review_queue.csv
 \end{lstlisting}
+
+\pagebreak
+
+% ====================================================================
+\section{Static-analysis automation script (ST vs.\ TI)}
+\label{sec:appendix-analyze-firmware}
+
+Listing~\ref{lst:analyze-firmware} shows an abbreviated version of the Python script used
+to extract API surface and documentation coverage metrics for the ST-versus-TI static
+analysis (Chapter~\ref{chap:vs-ti}). The full script analyses duplication, documentation,
+and API design in a single pass over the driver source trees.
+
+\begin{lstlisting}[language=Python, caption={Abbreviated \texttt{analyze\_firmware.py} --- API and documentation extraction.}, label={lst:analyze-firmware}]
+"""
+Firmware benchmark analysis script:
+- Code duplication detection (sliding-window hash)
+- Documentation coverage (Doxygen tag extraction)
+- API surface area analysis (functions, macros, enums)
+"""
+import os, re, json, hashlib
+from collections import defaultdict, Counter
+from pathlib import Path
+
+TI_DIR = r"mspm33_sdk/source/ti/driverlib"
+ST_DIR = r"STM32CubeC5/stm32c5xx_drivers/ll"
+
+def get_c_files(directory):
+    files = []
+    for root, _, filenames in os.walk(directory):
+        for f in filenames:
+            if f.endswith(('.c', '.h')):
+                files.append(os.path.join(root, f))
+    return files
+
+def analyze_api(files):
+    """Extract API surface metrics from C source files."""
+    result = {
+        'public_functions': 0, 'static_functions': 0,
+        'inline_functions': 0, 'macros_functional': 0,
+        'macros_constant': 0, 'enums': 0, 'typedefs': 0,
+        'param_distribution': Counter(),
+    }
+    for filepath in files:
+        with open(filepath, 'r', errors='ignore') as f:
+            content = f.read()
+        # Count public functions (not static)
+        pub = re.findall(
+            r'(?<!static\s)(?:__STATIC_INLINE\s+|inline\s+)?'
+            r'(?:void|bool|uint\w+|int\w+|DL_\w+|LL_\w+)\s+'
+            r'(\w+)\s*\(([^)]*)\)', content)
+        for name, params in pub:
+            result['public_functions'] += 1
+            n = len([p for p in params.split(',')
+                     if p.strip()]) if params.strip() else 0
+            result['param_distribution'][n] += 1
+        # Count enums, typedefs, macros
+        result['enums'] += len(re.findall(
+            r'\benum\s+\w*\s*\{', content))
+        result['typedefs'] += len(re.findall(
+            r'\btypedef\s+', content))
+        result['macros_functional'] += len(re.findall(
+            r'#define\s+\w+\([^)]*\)', content))
+        result['macros_constant'] += len(re.findall(
+            r'#define\s+\w+\s+[^(]', content))
+    return result
+
+if __name__ == '__main__':
+    for label, path in [("TI", TI_DIR), ("ST", ST_DIR)]:
+        files = get_c_files(path)
+        api = analyze_api(files)
+        print(f"\n=== {label} API Surface ===")
+        for k, v in api.items():
+            print(f"  {k}: {v}")
+\end{lstlisting}
