@@ -83,23 +83,22 @@
 \contentsline {subsection}{\numberline {5.2.2}Lines of code}{51}{subsection.5.2.2}%
 \contentsline {subsection}{\numberline {5.2.3}Documentation coverage}{52}{subsection.5.2.3}%
 \contentsline {subsection}{\numberline {5.2.4}Code duplication}{52}{subsection.5.2.4}%
-\contentsline {subsection}{\numberline {5.2.5}API surface}{53}{subsection.5.2.5}%
-\contentsline {subsection}{\numberline {5.2.6}MISRA~C:2012 compliance}{55}{subsection.5.2.6}%
-\contentsline {paragraph}{\numberline {5.2.6.0.1}Interpretation.}{55}{paragraph.5.2.6.0.1}%
-\contentsline {paragraph}{\numberline {5.2.6.0.2}Security analysis (CWE).}{56}{paragraph.5.2.6.0.2}%
-\contentsline {section}{\numberline {5.3}SDK coverage comparison}{56}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Peripheral driver coverage}{56}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Middleware coverage}{58}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Cryptographic algorithm coverage}{58}{subsection.5.3.3}%
-\contentsline {subsection}{\numberline {5.3.4}Communication protocol coverage}{59}{subsection.5.3.4}%
-\contentsline {section}{\numberline {5.4}Summary of findings}{60}{section.5.4}%
-\contentsline {chapter}{General Conclusion and Perspectives}{63}{chapter*.62}%
-\contentsline {chapter}{\numberline {A}Glossary}{64}{chapter.A}%
-\contentsline {chapter}{\numberline {B}Acronyms}{66}{chapter.B}%
-\contentsline {chapter}{\numberline {C}Complementary Code Listings}{69}{chapter.C}%
-\contentsline {section}{\numberline {C.1}IAR EWARM linker map excerpt}{69}{section.C.1}%
-\contentsline {section}{\numberline {C.2}Agent configuration file}{71}{section.C.2}%
-\contentsline {section}{\numberline {C.3}FreeRTOS cooperative benchmark scenario}{73}{section.C.3}%
-\contentsline {section}{\numberline {C.4}Footprint tool CLI output}{75}{section.C.4}%
-\contentsline {section}{\numberline {C.5}Static-analysis automation script (ST vs.\ TI)}{76}{section.C.5}%
-\contentsline {chapter}{Bibliography}{78}{appendix*.63}%
+\contentsline {subsection}{\numberline {5.2.5}Cyclomatic complexity}{53}{subsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.2.6}API surface}{54}{subsection.5.2.6}%
+\contentsline {subsection}{\numberline {5.2.7}MISRA~C:2012 compliance}{56}{subsection.5.2.7}%
+\contentsline {section}{\numberline {5.3}SDK coverage comparison}{57}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Peripheral driver coverage}{57}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Middleware coverage}{59}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Cryptographic algorithm coverage}{59}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Communication protocol coverage}{60}{subsection.5.3.4}%
+\contentsline {section}{\numberline {5.4}Summary of findings}{61}{section.5.4}%
+\contentsline {chapter}{General Conclusion and Perspectives}{64}{chapter*.63}%
+\contentsline {chapter}{\numberline {A}Glossary}{65}{chapter.A}%
+\contentsline {chapter}{\numberline {B}Acronyms}{67}{chapter.B}%
+\contentsline {chapter}{\numberline {C}Complementary Code Listings}{70}{chapter.C}%
+\contentsline {section}{\numberline {C.1}IAR EWARM linker map excerpt}{70}{section.C.1}%
+\contentsline {section}{\numberline {C.2}Agent configuration file}{72}{section.C.2}%
+\contentsline {section}{\numberline {C.3}FreeRTOS cooperative benchmark scenario}{74}{section.C.3}%
+\contentsline {section}{\numberline {C.4}Footprint tool CLI output}{76}{section.C.4}%
+\contentsline {section}{\numberline {C.5}Static-analysis automation script (ST vs.\ TI)}{77}{section.C.5}%
+\contentsline {chapter}{Bibliography}{79}{appendix*.64}%

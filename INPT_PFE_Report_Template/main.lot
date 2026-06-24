@@ -30,13 +30,14 @@
 \contentsline {table}{\numberline {5.2}{\ignorespaces Lines-of-code comparison --- ST LL vs.\ TI driverlib.}}{51}{table.caption.52}%
 \contentsline {table}{\numberline {5.3}{\ignorespaces Documentation coverage --- ST LL vs.\ TI driverlib.}}{52}{table.caption.53}%
 \contentsline {table}{\numberline {5.4}{\ignorespaces Code duplication --- ST LL vs.\ TI driverlib.}}{53}{table.caption.54}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces API surface comparison --- ST LL vs.\ TI driverlib.}}{54}{table.caption.55}%
-\contentsline {table}{\numberline {5.6}{\ignorespaces MISRA~C:2012 violations --- ST LL vs.\ TI driverlib.}}{55}{table.caption.56}%
-\contentsline {table}{\numberline {5.7}{\ignorespaces Exclusive peripheral drivers --- features in one SDK only.}}{57}{table.caption.57}%
-\contentsline {table}{\numberline {5.8}{\ignorespaces Exclusive middleware --- present in one SDK only.}}{58}{table.caption.58}%
-\contentsline {table}{\numberline {5.9}{\ignorespaces Cryptographic algorithm coverage comparison.}}{59}{table.caption.59}%
-\contentsline {table}{\numberline {5.10}{\ignorespaces Communication protocol support comparison.}}{60}{table.caption.60}%
-\contentsline {table}{\numberline {5.11}{\ignorespaces Static-analysis scoreboard --- STM32CubeC5 LL vs.\ TI MSPM33 driverlib.}}{61}{table.caption.61}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Cyclomatic complexity comparison --- ST LL vs.\ TI driverlib.}}{54}{table.caption.55}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces API surface comparison --- ST LL vs.\ TI driverlib.}}{55}{table.caption.56}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces MISRA~C:2012 violations --- ST LL vs.\ TI driverlib.}}{56}{table.caption.57}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Exclusive peripheral drivers --- features in one SDK only.}}{58}{table.caption.58}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Exclusive middleware --- present in one SDK only.}}{59}{table.caption.59}%
+\contentsline {table}{\numberline {5.10}{\ignorespaces Cryptographic algorithm coverage comparison.}}{60}{table.caption.60}%
+\contentsline {table}{\numberline {5.11}{\ignorespaces Communication protocol support comparison.}}{61}{table.caption.61}%
+\contentsline {table}{\numberline {5.12}{\ignorespaces Static-analysis scoreboard --- STM32CubeC5 LL vs.\ TI MSPM33 driverlib.}}{62}{table.caption.62}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

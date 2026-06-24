@@ -1,0 +1,1094 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-03-20>
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
+Document Class: book 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/base\bk12.clo))
+(Packages.tex
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def
+)
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/babel\nil.ldf))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/svg\svg.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrbase.
+sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile
+.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile
+-hook.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlogo.
+sty)))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty)
+)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexc
+mds.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarer
+r.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.st
+y))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/trimspaces\trimspace
+s.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.st
+y
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.st
+y (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphic
+s.cfg)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.
+def)))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/tools\shellesc.sty))
+ (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.c
+fg)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.l
+tx))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/transparent\transpar
+ent.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/transparent\transpar
+ent-nometadata.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/auxhook\auxhook.sty)
+))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer\pgfs
+ys.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfrcs
+.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfu
+til-common.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfu
+til-latex.def)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfr
+cs.code.tex
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revision.t
+ex)))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pg
+fsys.code.tex
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfk
+eys.code.tex
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfk
+eyslibraryfiltered.code.tex))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pg
+f.cfg)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pg
+fsys-pdftex.def
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pg
+fsys-common-pdf.def)))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pg
+fsyssoftpath.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pg
+fsysprotocol.code.tex))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+For additional information on amsmath, use the `?' option.
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty))
+ (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty)
+ (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty)
+) (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.sty)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.st
+y))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\ti
+kz.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.s
+ty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgfco
+re.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+core.code.tex
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.c
+ode.tex
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathut
+il.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathpa
+rser.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfu
+nctions.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfu
+nctions.basic.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfu
+nctions.trigonometric.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfu
+nctions.random.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfu
+nctions.comparison.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfu
+nctions.base.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfu
+nctions.round.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfu
+nctions.misc.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfu
+nctions.integerarithmetics.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathca
+lc.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfl
+oat.code.tex))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.co
+de.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+corepoints.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+corepathconstruct.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+corepathusage.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+corescopes.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+coregraphicstate.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+coretransformations.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+corequick.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+coreobjects.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+corepathprocessing.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+corearrows.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+coreshade.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+coreimage.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+coreexternal.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+corelayers.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+coretransparency.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+corepatterns.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgf
+corerdf.code.tex)))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmod
+uleshapes.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmod
+uleplot.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pg
+fcomp-version-0-65.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pg
+fcomp-version-1-18.sty))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffor
+.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfkey
+s.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfk
+eys.code.tex))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmath.sty
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.c
+ode.tex))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgff
+or.code.tex))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/
+tikz\tikz.code.tex
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgfl
+ibraryplothandlers.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmod
+ulematrix.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/
+tikz/libraries\tikzlibrarytopaths.code.tex)))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcolorbox.
+sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/tools\verbatim.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/environ\environ.sty)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.st
+y))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/
+tikz/libraries\tikzlibrarycalc.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/
+tikz/libraries\tikzlibrarypositioning.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgfl
+ibraryarrows.meta.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/
+tikz/libraries\tikzlibraryfit.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/
+tikz/libraries\tikzlibrarybackgrounds.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/
+tikz/libraries\tikzlibraryshapes.geometric.code.tex
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shap
+es\pgflibraryshapes.geometric.code.tex))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/
+tikz/libraries\tikzlibraryshapes.misc.code.tex
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shap
+es\pgflibraryshapes.misc.code.tex))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/
+tikz/libraries\tikzlibrarychains.code.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/algorithm2e\algorith
+m2e.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/ifoddpage\ifoddpage.
+sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/tools\xspace.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/relsize\relsize.sty)
+)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics\rotating.st
+y) (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/bbding\bbding.sty
+) (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/cite\cite.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics\lscape.sty)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopd
+f-base.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sy
+s.cfg))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/sectsty\sectsty.sty
+
+LaTeX Warning: Command \underbar  has changed.
+               Check if current package is valid.
+
+
+LaTeX Warning: Command \underline  has changed.
+               Check if current package is valid.
+
+)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/doublestroke\dsfont.
+sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifpdf.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.
+sty
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.
+cfg))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics\epsfig.sty)
+ (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/titlesec\titlesec.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/multibib\multibib.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.st
+y) (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/lipsum\lipsum.sty
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/l3keys2e\
+l3keys2e.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-
+pdftex.def)))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/lipsum\lipsum.ltd.te
+x)) (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/soul\soul.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/soul\soul-ori.sty)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/etexcmds\etexcmds.
+sty))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.st
+y (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cf
+g))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.st
+y
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.
+sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdef
+inekeys.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescap
+e.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\get
+titlestring.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.
+sty)))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringen
+c.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintc
+alc.sty)))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerun
+filecheck.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniq
+uecounter.sty)))
+
+Package fancyhdr Warning: \fancyhead's `E' option without twoside option is use
+less.
+(fancyhdr)                Please consider using the `twoside' option on input l
+ine 70.
+
+
+Package fancyhdr Warning: \fancyhead's `E' option without twoside option is use
+less.
+(fancyhdr)                Please consider using the `twoside' option on input l
+ine 72.
+
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.st
+y
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstpatch.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cf
+g))
+==> First Aid for listings.sty no longer applied!
+    Expected:
+        2024/09/23 1.10c (Carsten Heinz)
+    but found:
+        2025/11/14 1.11b (Carsten Heinz)
+    so I'm assuming it got fixed.
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/caption\ltcaption.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/tools\afterpage.sty)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/base\glos
+saries.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.te
+x
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.t
+ex)))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/mfirstuc\mfirstuc.st
+y) (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/xfor\xfor.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/tracklang\tracklang.
+sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/tracklang\tracklan
+g.tex))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/translator\translato
+r.sty)
+
+Package glossaries Warning: No language module detected for `nil'.
+(glossaries)                Language modules need to be installed separately.
+(glossaries)                Please check on CTAN for a bundle called
+(glossaries)                `glossaries-undetermined' or similar.
+
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/datatool\datatool-ba
+se.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/datatool\datatool-l3
+fp.def)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/datatool\datatool-ut
+f8.ldf)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/datatool\datatool-un
+determined.ldf))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\gl
+ossary-hypernav.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\gl
+ossary-list.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\gl
+ossary-long.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\gl
+ossary-super.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/supertabular\superta
+bular.sty))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\gl
+ossary-tree.sty))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/lm\lmodern.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\arabtex.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\aconfig.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\arabaux.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\acmd.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\afonts.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\afonts2.sty)
+) (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\ascan.sty
+(ArabTeX) scanner for code `arabtex' installed.
+(ArabTeX) input encoding set to ArabTeX standard conventions.)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\aparse.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\awrite.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\xarbsymb.sty
+)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\arabskel.sty
+)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\xarbskel.sty
+) (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\aboxes.sty
+)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\arabtoks.sty
+)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\arabchrs.sty
+)) (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\aligs.sty
+)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\aoutput.sty)
+ (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\abidir.sty)
+ (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\atrans.sty
+(ArabTeX) ZDMG transliteration.)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\alatex.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\afoot.sty))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\abjad.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\apatch.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\alists.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\asect.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\atabg.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\alocal.sty
+(ArabTeX) 3.11 local stub, 26.02.2006))
+Arabic processor `ArabTeX' [20060702 patch level 3.11s (02.07.2006)]
+(ArabTeX) ... now be patient ... )
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\utf8.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\utfcode.sty)
+(ArabTeX) scanner for code UTF-8 installed.)
+(ArabTeX) input encoding set to UTF-8 conventions)
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 37.
+
+(main.aux (Frontmatter/Page_de_Garde_EN.aux))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf
+.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(main.out) (main.out)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\apatch.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\alocal.sty
+(ArabTeX) 3.11 local stub, 26.02.2006)
+(ArabTeX) version 3.11s (02.07.2006): second phase of patching)
+(Frontmatter/Page_de_Garde_EN.tex
+
+LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
+(Font)              using `T1/lmr/bx/n' instead on input line 9.
+
+
+LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
+(Font)              using `T1/lmr/m/scsl' instead on input line 11.
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd))
+[1{C:/Users/dkhilifa/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users
+/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc} <./Logos/
+UTM.png (PNG copy)> <./Logos/fst.png (PNG copy)> <./Logos/STMicroelectronics.pn
+g>]
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.77 \frontmatter
+                  [1] (Frontmatter/Dedication.tex
+
+LaTeX Font Warning: Font shape `T1/LobsterTwo-LF/bx/it' undefined
+(Font)              using `T1/cmr/m/n' instead on input line 18.
+
+[1]) (Frontmatter/Acknowledgements.tex) (Frontmatter/R├⌐sum├⌐.tex [2]
+Overfull \hbox (21.54468pt too wide) in paragraph at lines 5--6
+\T1/lmr/m/n/12 Ce rapport prΘsente les travaux rΘalisΘs dans le cadre d'un proj
+et de fin d'Θtudes au sein de STMicroelectronics
+)
+Underfull \hbox (badness 10000) in paragraph at lines 13--87
+
+(Frontmatter/Abstract.tex [3])
+Underfull \hbox (badness 10000) in paragraph at lines 13--92
+
+(Frontmatter/Molakhas.tex [4]
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\uxnsh.fd)
+Overfull \hbox (2.59033pt too wide) in paragraph at lines 20--20
+[]\T1/lmr/m/n/12 GD32  
+)
+Underfull \hbox (badness 10000) in paragraph at lines 25--97
+
+[5] (main.lof
+Overfull \hbox (24.62096pt too wide) in paragraph at lines 4--4
+ [][] [][][]\T1/lmr/m/n/12 Organisational structure of the Microcontroller Divi
+sion (MCD) at ST Tunis. The Maintenance 
+[6]
+Overfull \hbox (4.73997pt too wide) in paragraph at lines 14--14
+ [][] [][][]\T1/lmr/m/n/12 MCU Workflow Studio desktop interface showing a USB 
+HID footprint comparison between 
+
+Overfull \hbox (2.82826pt too wide) in paragraph at lines 24--24
+ [][] [][][]\T1/lmr/m/n/12 UART terminal output of the FreeRTOS cooperative ben
+chmark: thread iteration counters 
+) [7] (main.lot [8]) [9] (main.lol
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd))
+[10] (main.toc [11] [12] [13]) [14] (Chapters/Chapter1.tex
+Chapter 1.
+
+Overfull \hbox (1.11241pt too wide) in paragraph at lines 14--17
+\T1/lmr/m/n/12 This section provides an overview of STMicroelectronics, its his
+tory, the ST Tunis site, and the technically
+
+Overfull \hbox (37.3158pt too wide) in paragraph at lines 25--29
+\T1/lmr/m/n/12 merger of SGS Microelettronica (Italy) and Thomson Semiconductor
+s (France). The name ``STMicroelectronics''
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.36 
+      [1]
+Overfull \hbox (28.79535pt too wide) in paragraph at lines 59--65
+\T1/lmr/m/n/12 software --- specifically the validation and development of libr
+aries and firmware that drive ST microcontrollers.
+
+
+pdfTeX warning: pdflatex.exe (file ./Figures/chapter1/st-site-organization.pdf)
+: PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+[2] (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd)
+Overfull \hbox (8.37436pt too wide) in paragraph at lines 81--85
+[]\T1/lmr/bx/n/12 The Maintenance and Validation team\T1/lmr/m/n/12 : ensures c
+ustomer satisfaction through bug maintenance
+
+Overfull \hbox (2.61942pt too wide) in paragraph at lines 81--85
+\T1/lmr/m/n/12 This team represents the junction linking software and hardware 
+design processes to implementation
+[3{C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.en
+c} <./Figures/chapter1/st-site-organization.pdf>]
+Overfull \hbox (5.19548pt too wide) in paragraph at lines 116--122
+\T1/lmr/m/n/12 Producing actionable competitive intelligence for the marketing 
+team requires answering precise questions:
+[4] [5]
+Overfull \hbox (16.0986pt too wide) in paragraph at lines 190--192
+[]\T1/lmr/m/n/12 Develop supportive tools (footprint analyser, benchmark agent)
+ to make the methodology reproducible
+[6]
+Overfull \hbox (13.98967pt too wide) in paragraph at lines 257--262
+\T1/lmr/m/n/12 its code differently. The same peripheral initialisation appears
+ as \T1/lmtt/m/n/12 HAL_GPIO_Init \T1/lmr/m/n/12 on STM32, \T1/lmtt/m/n/12 GPIO
+_PinInit
+[7] [8]) (Chapters/Chapter2.tex [9]
+Chapter 2.
+[10]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/footprint-tool/architecture.pdf): 
+PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+[11] [12 <./Figures/footprint-tool/architecture.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/footprint-tool/pipeline.pdf): PDF 
+inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+[13{C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-maths
+y.enc}{C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm
+.enc}] [14 <./Figures/footprint-tool/pipeline.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/footprint-tool/layer-classificatio
+n.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allow
+ed
+[15]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/footprint-tool/weights.pdf): PDF i
+nclusion: found PDF version <1.7>, but at most version <1.5> allowed
+[16 <./Figures/footprint-tool/layer-classification.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/footprint-tool/scoring-signals.pdf
+): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+[17 <./Figures/footprint-tool/weights.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/footprint-tool/candidate-ranking.p
+df): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+[18{C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathi
+t.enc} <./Figures/footprint-tool/scoring-signals.pdf>]
+Overfull \hbox (4.09067pt too wide) in paragraph at lines 266--273
+\T1/lmr/m/n/12 automatically in a fixed order or pinned explicitly. They range 
+from a hosted GitHub Copilot endpoint [[][]16[][]]
+
+
+pdfTeX warning: pdflatex.exe (file ./Figures/footprint-tool/ai-integration.pdf)
+: PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+[19 <./Figures/footprint-tool/candidate-ranking.pdf>] [20 <./Figures/footprint-
+tool/ai-integration.pdf>]
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.st
+y) [21] [22]) [23] (Chapters/Chapter3.tex [24]
+Chapter 3.
+
+Overfull \hbox (9.14905pt too wide) in paragraph at lines 6--14
+\T1/lmr/m/n/12 manually, this process is slow, error-prone, and difficult to ke
+ep consistent across many vendor comparisons. 
+
+Overfull \hbox (0.40959pt too wide) in paragraph at lines 15--23
+[]\T1/lmr/m/n/12 To address this, we designed and built a custom GitHub Copilot
+ agent system --- the \T1/lmr/m/it/12 MCU Benchmark
+[25] [26]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/benchmark-agent/architecture.pdf):
+ PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+Underfull \hbox (badness 1983) in paragraph at lines 102--102
+[]|\T1/lmr/m/n/12 Creates new benchmark projects and ports
+
+Underfull \hbox (badness 1184) in paragraph at lines 102--102
+\T1/lmr/m/n/12 STM32 references to target MCU platforms
+
+Underfull \hbox (badness 3354) in paragraph at lines 102--102
+[]|\T1/lmr/m/n/12 Configures IAR EWARM projects: source
+[27 <./Figures/benchmark-agent/architecture.pdf>]
+Underfull \hbox (badness 4048) in paragraph at lines 133--133
+[]|\T1/lmr/m/n/12 File classification, semantics extraction, and
+
+Underfull \hbox (badness 10000) in paragraph at lines 133--133
+[]|\T1/lmr/m/n/12 Gap-driven recommendations for improving
+[28] [29]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/benchmark-agent/workflow.pdf): PDF
+ inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+[30] [31 <./Figures/benchmark-agent/workflow.pdf>] [32]
+Overfull \hbox (6.21068pt too wide) in paragraph at lines 254--260
+\T1/lmr/m/n/12 checklist, the fairness checklist, and the evidence-driven valid
+ation policy directly into the tool's behaviour,
+
+Overfull \hbox (7.71402pt too wide) in paragraph at lines 261--267
+\T1/lmr/m/n/12 several hours of manual porting and debugging to a guided sessio
+n of tens of minutes, with the methodology
+
+Overfull \hbox (4.68785pt too wide) in paragraph at lines 268--277
+\T1/lmr/m/n/12 model; while the always-on rules constrain its behaviour, they c
+annot prevent all model errors, particularly
+
+Overfull \hbox (14.23863pt too wide) in paragraph at lines 280--288
+\T1/lmr/m/n/12 specialist agents cover the full creation-to-debugging lifecycle
+, its five reusable skills encode our methodology
+[33]
+
+Package hyperref Warning: Difference (3) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 289.
+
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 291.
+
+[34]) [35] (Chapters/Chapter4.tex
+Chapter 4.
+
+Overfull \hbox (36.65126pt too wide) in paragraph at lines 30--37
+\T1/lmr/m/n/12 Every scenario in this chapter runs on two boards hosting compar
+able Cortex-M33 parts: the STMicroelectronics
+
+Overfull \hbox (46.68164pt too wide) in paragraph at lines 30--37
+\T1/lmr/bx/n/12 NUCLEO-U575ZI-Q \T1/lmr/m/n/12 (STM32U575ZIT6Q) and GigaDevice'
+s \T1/lmr/bx/n/12 GD32E507 \T1/lmr/m/n/12 evaluation board (GD32E507ZET6).
+[36] [37]
+Underfull \hbox (badness 2351) in paragraph at lines 129--129
+[]|\T1/lmr/m/n/12 Interrupt transfers, enumeration,
+[38] [39]
+Overfull \hbox (2.6492pt too wide) in paragraph at lines 234--237
+\T1/lmr/m/n/12 The CDC scenario adds transmit and receive buffer management, wh
+ich increases both vendors' footprints
+[40]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 293.
+
+
+Overfull \hbox (0.87495pt too wide) in paragraph at lines 294--300
+\T1/lmr/m/n/12 Two modules drive this cost: the \T1/lmr/bx/n/12 HAL RCC \T1/lmr
+/m/n/12 clock-configuration driver ($\OMS/lmsy/m/n/12 ^^Y$\T1/lmr/m/n/12 4560 b
+ytes) and the \T1/lmr/bx/n/12 HAL/LL
+[41] [42] [43] [44]
+Overfull \hbox (9.57213pt too wide) in paragraph at lines 472--475
+\T1/lmr/m/n/12 STM32 completes 1.6% more thread iterations over 30 seconds, ind
+icating a marginally faster \T1/lmtt/m/n/12 taskYIELD()
+[45]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 564.
+
+[46]
+Overfull \hbox (13.7411pt too wide) in paragraph at lines 579--581
+[] []|\T1/lmr/bx/n/12 4.3.3.0.3 RAM footprint.[] \T1/lmr/m/n/12 RAM differences
+ are negligible (2.1--2.3%), indicating that both FreeRTOS
+
+Overfull \hbox (17.66373pt too wide) in paragraph at lines 605--610
+\T1/lmr/m/n/12 cost. GigaDevice's more monolithic approach yields smaller ROM b
+y bundling driver and configuration
+[47]) [48] (Chapters/Chapter5.tex
+Chapter 5.
+
+Overfull \hbox (18.23167pt too wide) in paragraph at lines 43--60
+ [][] 
+[49] [50]
+Overfull \hbox (15.34895pt too wide) in paragraph at lines 102--106
+[]\T1/lmr/m/n/12 A custom Python script (\T1/lmtt/m/n/12 analyze_firmware.py\T1
+/lmr/m/n/12 ) --- extracts API surface metrics (public/static/inline
+[51] [52] [53] [54] [55] [56]
+Underfull \hbox (badness 10000) in paragraph at lines 432--432
+[]|\T1/lmr/m/n/12 LPUART, USART,
+
+Underfull \hbox (badness 10000) in paragraph at lines 436--436
+[]|\T1/lmr/m/n/12 General Serial Controller
+
+Underfull \hbox (badness 10000) in paragraph at lines 439--439
+[]|\T1/lmr/m/n/12 Low-Frequency Subsystem
+
+Underfull \hbox (badness 10000) in paragraph at lines 442--442
+[]|\T1/lmr/m/n/12 UART extend (IrDA,
+[57]
+Underfull \hbox (badness 4144) in paragraph at lines 467--468
+[]|\T1/lmr/m/n/12 FAT-compatible embedded file
+
+Underfull \hbox (badness 10000) in paragraph at lines 468--469
+[]|\T1/lmr/m/n/12 Flash wear-leveling
+[58] [59]
+Overfull \hbox (29.62962pt too wide) in paragraph at lines 528--533
+\T1/lmr/m/n/12 ChaCha20-Poly1305). TI, while narrower, holds a forward-looking 
+advantage with post-quantum cryptography
+[60] [61] [62]) (Chapters/Conclusion.tex [63]) (Endmatter/Glossary.tex [64]
+Appendix A.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--7
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+
+Overfull \hbox (15.22037pt too wide) in paragraph at lines 10--11
+\T1/lmr/m/n/12 vendor platforms under identical conditions (clock, optimisation
+ level, scenario logic), producing comparable
+
+Underfull \hbox (badness 10000) in paragraph at lines 10--11
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--13
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--15
+
+[65]
+Underfull \hbox (badness 10000) in paragraph at lines 16--17
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--19
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--21
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--23
+
+) [66] (Endmatter/Acronyms.tex
+Appendix B.
+[67]
+Overfull \vbox (350.47542pt too high) has occurred while \output is active
+[68]) (Endmatter/ComplementaryCodes.tex
+Overfull \vbox (67.38771pt too high) has occurred while \output is active
+[69]
+Appendix C.
+
+Overfull \hbox (7.38536pt too wide) in paragraph at lines 4--7
+\T1/lmr/m/n/12 This appendix provides representative code excerpts that complem
+ent the tool and benchmark descriptions
+[70] [71] [72] [73]
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+) [74] [75] [76]
+Overfull \hbox (18.36818pt too wide) in paragraph at lines 210--214
+\T1/lmr/m/n/12 Listing [][]C.5[][] shows an abbreviated version of the Python s
+cript used to extract API surface and documentation
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.st
+y) [77]) [78]
+Underfull \hbox (badness 4391) in paragraph at lines 169--170
+[]\T1/lmr/m/n/12 STMicroelectronics, \T1/lmr/m/it/12 STM32Cube Ecosystem\T1/lmr
+/m/n/12 . [Online]. Available: [][]$https : / / www . st . com / en /
+[79]
+Underfull \hbox (badness 2961) in paragraph at lines 213--214
+[]\T1/lmr/m/n/12 GitHub, \T1/lmr/m/it/12 GitHub Models Documentation\T1/lmr/m/n
+/12 . [Online]. Available: [][]$https : / / docs . github . com / en /
+[80]
+Underfull \hbox (badness 2197) in paragraph at lines 246--247
+[]\T1/lmr/m/n/12 Texas Instruments, \T1/lmr/m/it/12 About TI\T1/lmr/m/n/12 . [O
+nline]. Available: [][]$https : / / www . ti . com / about-[]ti / company /
+
+Underfull \hbox (badness 4096) in paragraph at lines 252--253
+[]\T1/lmr/m/n/12 Texas Instruments, \T1/lmr/m/it/12 MSPM33C321A Datasheet\T1/lm
+r/m/n/12 . [Online]. Available: [][]$https : / / www . ti . com /
+[81]
+Underfull \hbox (badness 1648) in paragraph at lines 303--304
+[]\T1/lmr/m/n/12 Texas Instruments, \T1/lmr/m/it/12 EnergyTrace Technology\T1/l
+mr/m/n/12 . [Online]. Available: [][]$https : / / www . ti . com / tool /
+[82] [83] (main.aux (Frontmatter/Page_de_Garde_EN.aux))
+
+ *File List*
+    book.cls    2025/01/22 v1.4n Standard LaTeX document class
+    bk12.clo    2025/01/22 v1.4n Standard LaTeX file (size option)
+Packages.tex
+ fontenc.sty    2025/07/18 v2.1d Standard LaTeX package
+inputenc.sty    2024/02/08 v1.3d Input encoding file
+   babel.sty    2026/04/15 v26.6 The multilingual framework for LuaLaTeX, pdfLa
+TeX and XeLaTeX
+ bblopts.cfg    2005/09/08 v0.1 add Arabic and Farsi to "declared" options of b
+abel
+     nil.ldf    2026/04/15 v26.6 Nil language
+     svg.sty    2020/11/26 v2.02k (include SVG pictures)
+   iftex.sty    2024/12/12 v1.0g TeX engine tests
+ scrbase.sty    2026/02/02 v3.49.2 KOMA-Script package (KOMA-Script-independent
+ basics and keyval usage)
+scrlfile.sty    2026/02/02 v3.49.2 KOMA-Script package (file load hooks)
+scrlfile-hook.sty    2026/02/02 v3.49.2 KOMA-Script package (using LaTeX hooks)
+
+ scrlogo.sty    2026/02/02 v3.49.2 KOMA-Script package (logo)
+  keyval.sty    2022/05/29 v1.15 key=value parser (DPC)
+pdftexcmds.sty    2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+infwarerr.sty    2019/12/03 v1.5 Providing info/warning/error messages (HO)
+ ltxcmds.sty    2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+trimspaces.sty    2009/09/17 v1.1 Trim spaces around a token list
+graphicx.sty    2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+graphics.sty    2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+    trig.sty    2023/12/02 v1.11 sin cos tan (DPC)
+graphics.cfg    2016/06/04 v1.11 sample graphics configuration
+  pdftex.def    2025/09/29 v1.2d Graphics/color driver for pdftex
+shellesc.sty    2023/07/08 v1.0d unified shell escape interface for LaTeX
+  xcolor.sty    2024/09/29 v3.02 LaTeX color extensions (UK)
+   color.cfg    2016/01/02 v1.6 sample color configuration
+mathcolor.ltx
+transparent.sty    2025-06-23 v1.6 Transparency with color stacks
+transparent-nometadata.sty    2025-06-23 v1.6 Transparency via pdfTeX's color s
+tack (HO)
+ auxhook.sty    2019-12-17 v1.6 Hooks for auxiliary files (HO)
+  pgfsys.sty    2025-08-29 v3.1.11a (3.1.11a)
+  pgfrcs.sty    2025-08-29 v3.1.11a (3.1.11a)
+pgfrcs.code.tex
+pgfsys.code.tex
+pgfsyssoftpath.code.tex    2025-08-29 v3.1.11a (3.1.11a)
+pgfsysprotocol.code.tex    2025-08-29 v3.1.11a (3.1.11a)
+ amsmath.sty    2025/07/09 v2.17z AMS math features
+ amstext.sty    2024/11/17 v2.01 AMS text
+  amsgen.sty    1999/11/30 v2.0 generic functions
+  amsbsy.sty    1999/11/29 v1.2d Bold Symbols
+  amsopn.sty    2022/04/08 v2.04 operator names
+  amsthm.sty    2020/05/29 v2.20.6
+ amssymb.sty    2013/01/14 v3.01 AMS font symbols
+amsfonts.sty    2013/01/14 v3.01 Basic AMSFonts support
+    tikz.sty    2025-08-29 v3.1.11a (3.1.11a)
+     pgf.sty    2025-08-29 v3.1.11a (3.1.11a)
+ pgfcore.sty    2025-08-29 v3.1.11a (3.1.11a)
+pgfcore.code.tex
+pgfcomp-version-0-65.sty    2025-08-29 v3.1.11a (3.1.11a)
+pgfcomp-version-1-18.sty    2025-08-29 v3.1.11a (3.1.11a)
+  pgffor.sty    2025-08-29 v3.1.11a (3.1.11a)
+ pgfkeys.sty    
+pgfkeys.code.tex
+ pgfmath.sty    
+pgfmath.code.tex
+pgffor.code.tex
+tikz.code.tex
+tcolorbox.sty    2025/11/28 version 6.9.0 text color boxes
+verbatim.sty    2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
+ environ.sty    2014/05/04 v0.3 A new way to define environments
+etoolbox.sty    2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+tabularx.sty    2023/12/11 v2.12a `tabularx' package (DPC)
+   array.sty    2025/09/25 v2.6n Tabular extension package (FMi)
+algorithm2e.sty    2017/07/18 v5.2 algorithms environments
+  ifthen.sty    2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+ifoddpage.sty    2022/10/18 v1.2 Conditionals for odd/even page detection
+  xspace.sty    2014/10/28 v1.13 Space after command names (DPC,MH)
+ relsize.sty    2013/03/29 ver 4.1
+rotating.sty    2025/01/14 v2.16e rotated objects in LaTeX
+  bbding.sty    1999/04/15 v1.01 Dingbats symbols
+    cite.sty    2015/02/27  v 5.5
+  lscape.sty    2020/05/28 v3.02 Landscape Pages (DPC)
+epstopdf-base.sty    2020-01-24 v2.11 Base part for package epstopdf
+epstopdf-sys.cfg    2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+setspace.sty    2022/12/04 v6.7b set line spacing
+ sectsty.sty    2002/02/25 v2.0.2 Commands to change all sectional heading styl
+es
+  dsfont.sty    1995/08/01 v0.1 Double stroke roman fonts
+   ifpdf.sty    2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
+subfigure.sty    2002/07/30 v2.1.4 subfigure package
+subfigure.cfg
+  epsfig.sty    2024/01/14 v1.7b (e)psfig emulation (SPQR)
+   float.sty    2001/11/08 v1.3d Float enhancements (AL)
+titlesec.sty    2025/01/04 v2.17 Sectioning titles
+multibib.sty    2008/12/10 v1.4 Multiple bibliographies for one document.
+fancyhdr.sty    2025/02/07 v5.2 Extensive control of page headers and footers
+  lipsum.sty    2021-09-20 v2.7 150 paragraphs of Lorem Ipsum dummy text
+l3keys2e.sty    2025-10-09 LaTeX2e option processing using LaTeX3 keys
+   expl3.sty    2026-03-20 L3 programming layer (loader) 
+l3backend-pdftex.def    2026-02-18 L3 backend support: PDF output (pdfTeX)
+  lipsum.ltd
+    soul.sty    2026-03-06 v3.2 Permit use of UTF-8 characters in soul (HO)
+soul-ori.sty    2026-03-06 v3.2 letterspacing/underlining (mf)
+etexcmds.sty    2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+geometry.sty    2026/03/07 v6.0 Page Geometry
+  ifvtex.sty    2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+geometry.cfg
+hyperref.sty    2026-04-24 v7.01q Hypertext links for LaTeX
+kvsetkeys.sty    2022-10-05 v1.19 Key value parser (HO)
+kvdefinekeys.sty    2019-12-19 v1.6 Define keys (HO)
+pdfescape.sty    2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+ hycolor.sty    2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+ nameref.sty    2026-01-29 v2.58 Cross-referencing by name of section
+refcount.sty    2019/12/15 v3.6 Data extraction from label references (HO)
+gettitlestring.sty    2019/12/15 v1.6 Cleanup title references (HO)
+kvoptions.sty    2022-06-15 v3.15 Key value format for package options (HO)
+stringenc.sty    2019/11/29 v1.12 Convert strings between diff. encodings (HO)
+  pd1enc.def    2026-04-24 v7.01q Hyperref: PDFDocEncoding definition (HO)
+ intcalc.sty    2019/12/15 v1.3 Expandable calculations with integers (HO)
+   puenc.def    2026-04-24 v7.01q Hyperref: PDF Unicode definition (HO)
+     url.sty    2013/09/16  ver 3.4  Verb mode for urls, etc.
+  bitset.sty    2019/12/09 v1.3 Handle bit-vector datatype (HO)
+bigintcalc.sty    2019/12/15 v1.5 Expandable calculations on big integers (HO)
+ hpdftex.def    2026-04-24 v7.01q Hyperref driver for pdfTeX
+rerunfilecheck.sty    2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
+uniquecounter.sty    2019/12/15 v1.4 Provide unlimited unique counter (HO)
+listings.sty    2025/11/14 1.11b (Carsten Heinz)
+lstpatch.sty    2025/11/14 1.11b (Carsten Heinz)
+ lstmisc.sty    2025/11/14 1.11b (Carsten Heinz)
+listings.cfg    2025/11/14 1.11b listings configuration
+ caption.sty    2023/08/05 v3.6o Customizing captions (AR)
+caption3.sty    2023/07/31 v2.4d caption3 kernel (AR)
+longtable.sty    2025-10-13 v4.24 Multi-page Table package (DPC)
+ltcaption.sty    2021/01/08 v1.4c longtable captions (AR)
+multirow.sty    2024/11/12 v2.9 Span multiple rows of a table
+booktabs.sty    2020/01/12 v1.61803398 Publication quality tables
+afterpage.sty    2023/07/04 v1.08 After-Page Package (DPC)
+glossaries.sty    2026/04/21 v5.1 (NLCT)
+ xkeyval.sty    2022/06/16 v2.9 package option processing (HA)
+ xkeyval.tex    2014/12/03 v2.7a key=value parser (HA)
+mfirstuc.sty    2025/04/03 v2.09 (NLCT)
+    xfor.sty    2009/02/05 v1.05 (NLCT)
+tracklang.sty    2025/03/11 v1.6.6 (NLCT) Track Languages
+tracklang.tex    2025/03/11 v1.6.6 (NLCT) Track Languages Generic Code
+translator.sty    2021-05-31 v1.12d Easy translation of strings in LaTeX
+datatool-base.sty    2025/12/04 v3.4.3 (NLCT)
+datatool-l3fp.def    2025/12/04 v3.4.3 (NLCT)
+datatool-utf8.ldf    2025/12/04 v3.4.3 (NLCT)
+datatool-undetermined.ldf    2025/12/04 v3.4.3
+glossary-hypernav.sty    2026/04/21 v5.1 (NLCT)
+glossary-list.sty    2026/04/21 v5.1 (NLCT)
+glossary-long.sty    2026/04/21 v5.1 (NLCT)
+glossary-super.sty    2026/04/21 v5.1 (NLCT)
+supertabular.sty    2025/06/26 v4.2d the supertabular environment
+glossary-tree.sty    2026/04/21 v5.1 (NLCT)
+ lmodern.sty    2015/05/01 v1.6.1 Latin Modern Fonts
+ arabtex.sty    2003/08/22  3.11 ArabTeX main module
+ arabaux.sty    2003/05/21  3.11 auxiliary macros for ArabTeX
+   t1lmr.fd    2015/05/01 v1.6.1 Font defs for Latin Modern
+    acmd.sty    2003/08/20  3.11 Arabic command processing 
+  afonts.sty    1995/11/16  3.04 define Naskh font 
+ afonts2.sty    1998/10/19  3.10 define Naskh fonts for LaTeX2e
+   ascan.sty    2003/08/22  3.11 standard ZDMG input encoding 
+  aparse.sty    2003/05/26  3.11 get syllables 
+  awrite.sty    2003/06/05  3.11 build output word 
+xarbsymb.sty    1998/07/15  3.07 symbolic output encoding 
+arabskel.sty    2000/06/04  3.10 character skeleton definitions 
+xarbskel.sty    1999/07/17  3.09 character skeleton definitions 
+  aboxes.sty    2003/05/28  3.11 build output boxes
+arabtoks.sty    1999/07/17  3.09 ArabTeX CS token definitions 
+arabchrs.sty    1998/07/11  3.07 letter token definitions 
+   aligs.sty    2003/05/26  3.11 compute ligatures
+ aoutput.sty    2000/06/04  3.10 build output lines
+  abidir.sty    2003/08/22  3.11 bidirectional linebreaking
+  atrans.sty    2003/06/14  3.11 generate the transliteration 
+  alatex.sty    2003/05/04  3.11 ArabTeX extensions for LaTeX 
+   afoot.sty    2003/05/12  3.11 ArabTeX footnotes
+   abjad.sty    2003/04/26  3.11 abjad numerals 
+  apatch.sty    2006/07/02  3.11s last minute patches 
+  alists.sty    2003/04/26  3.11 inverted list macros
+   asect.sty    2003/04/26  3.11 section macros for Arabic
+   atabg.sty    1997/01/21  3.05 LaTeX tabbing macros for Arabic
+    utf8.sty    2000/06/13  3.10 UTF-8 input encoding 
+ utfcode.sty    2002/03/07  3.10a Arabic+Hebrew segment of UTF-8
+supp-pdf.mkii
+    main.out
+    main.out
+  apatch.sty    2006/07/02  3.11s last minute patches 
+Frontmatter/Page_de_Garde_EN.tex
+Logos/UTM.png
+Logos/fst.png
+Logos/STMicroelectronics.png
+  ot1lmr.fd    2015/05/01 v1.6.1 Font defs for Latin Modern
+  omllmm.fd    2015/05/01 v1.6.1 Font defs for Latin Modern
+ omslmsy.fd    2015/05/01 v1.6.1 Font defs for Latin Modern
+ omxlmex.fd    2015/05/01 v1.6.1 Font defs for Latin Modern
+    umsa.fd    2013/01/14 v3.01 AMS symbols A
+    umsb.fd    2013/01/14 v3.01 AMS symbols B
+Frontmatter/Dedication.tex
+Frontmatter/Acknowledgements.tex
+Frontmatter/R├⌐sum├⌐.tex
+Frontmatter/Abstract.tex
+Frontmatter/Molakhas.tex
+   uxnsh.fd     1999/10/19 v3.10 ArabTeX Naskh extd. font definitions
+  t1lmtt.fd    2015/05/01 v1.6.1 Font defs for Latin Modern
+Chapters/Chapter1.tex
+Logos/STMicroelectronics.png
+Figures/chapter1/st-site-organization.pdf
+  ts1lmr.fd    2015/05/01 v1.6.1 Font defs for Latin Modern
+Chapters/Chapter2.tex
+Figures/footprint-tool/architecture.pdf
+Figures/footprint-tool/pipeline.pdf
+Figures/footprint-tool/layer-classification.pdf
+Figures/footprint-tool/weights.pdf
+Figures/footprint-tool/scoring-signals.pdf
+Figures/footprint-tool/candidate-ranking.pdf
+Figures/footprint-tool/ai-integration.pdf
+lstlang1.sty    2025/11/14 1.11b listings language file
+lstlang1.sty    2025/11/14 1.11b listings language file
+Chapters/Chapter3.tex
+Figures/benchmark-agent/architecture.pdf
+Figures/benchmark-agent/workflow.pdf
+Chapters/Chapter4.tex
+Chapters/Chapter5.tex
+Chapters/Conclusion.tex
+Endmatter/Glossary.tex
+Endmatter/Acronyms.tex
+Endmatter/ComplementaryCodes.tex
+lstlang1.sty    2025/11/14 1.11b listings language file
+ lstmisc.sty    2025/11/14 1.11b (Carsten Heinz)
+lstlang1.sty    2025/11/14 1.11b listings language file
+ ***********
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ )
+(\end occurred inside a group at level 1)
+
+### semi simple group (level 1) entered at line 41 (\begingroup)
+### bottom level
+(see the transcript file for additional information) <C:\Users\dkhilifa\AppData
+\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk><C:/Users/dkhilifa
+/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/dkhil
+ifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/d
+khilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsco10.pfb><C:/Us
+ers/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:
+/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><
+C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
+><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pf
+b><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.p
+fb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.
+pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri
+12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/l
+msy10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/public/l
+m/lmtt10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/publi
+c/lm/lmtt12.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/lm/lmtti10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/symbols/msam10.pfb><C:/Users/dkhilifa/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/arabtex/xnsh14.pfb><C:/Users/dkhilifa/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/arabtex/xnsh14bf.pfb>
+Output written on main.pdf (99 pages, 3024434 bytes).
+Transcript written on main.log.

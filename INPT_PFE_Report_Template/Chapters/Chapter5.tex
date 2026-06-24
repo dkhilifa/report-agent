@@ -13,7 +13,9 @@ SysConfig-centric, unified serial peripheral model and a single-layer driver lib
 (driverlib) rather than the dual HAL/LL approach used by STMicroelectronics.
 
 This chapter presents the first phase of our ST-versus-TI comparison: a comprehensive
-\textbf{static analysis} of the low-level driver layers of both SDKs. We compare the
+\textbf{static analysis} of the low-level driver layers of both SDKs. Unlike the
+runtime-focused benchmarks in Chapter~\ref{chap:vs-gd32}, this analysis examines source-code
+quality and SDK breadth without executing firmware on hardware. We compare the
 STM32CubeC5 Low-Layer (LL) drivers~\cite{stm32cubec5-sw} against the TI MSPM33 SDK
 driverlib~\cite{ti-mspm33-sdk} across seven quality dimensions --- lines of code,
 documentation coverage, code duplication, cyclomatic complexity, API surface design,
@@ -31,8 +33,8 @@ All measurements were produced by automated scripts using
 \section{Hardware platforms}
 \label{sec:ti-boards}
 
-Every scenario in this chapter targets two boards hosting comparable Cortex-M33 parts.
-Table~\ref{tab:ti-board-comparison} summarises their key characteristics.
+The analysis in this chapter targets driver code for two boards hosting comparable
+Cortex-M33 parts. Table~\ref{tab:ti-board-comparison} summarises their key characteristics.
 
 \begin{table}[H]
 \centering
@@ -60,7 +62,7 @@ Debug probe & ST-LINK & XDS110 (EnergyTrace) \\
 Both parts share the same core architecture and identical flash/RAM capacities, which makes
 the comparison fair at the silicon level. The STM32C5A3 offers broader connectivity (USB,
 Ethernet, I3C), while the MSPM33C321A favours higher analog bandwidth (9.4\,MSPS ADC) and
-provides TrustZone support~\cite{ti-mspm33-ds, stm32c5a3-product}.
+provides TrustZone support~\cite{ti-mspm33-ds,stm32c5a3-product}.
 
 % ====================================================================
 \section{Static analysis of the driver layer}
@@ -220,6 +222,51 @@ maintenance perspective, ST's lower duplication means fewer locations to update 
 a bug or adapting to silicon errata.
 
 % --------------------------------------------------------------------
+\subsection{Cyclomatic complexity}
+\label{subsec:ti-complexity}
+
+Cyclomatic complexity (CC) measures the number of linearly independent paths through a
+function; higher values indicate more decision branches and, consequently, harder-to-test
+code~\cite{lizard-tool}. We ran Lizard on every function in both driver sets and
+summarise the results in Table~\ref{tab:ti-complexity}.
+
+\begin{table}[H]
+\centering
+\caption{Cyclomatic complexity comparison --- ST LL vs.\ TI driverlib.}
+\label{tab:ti-complexity}
+\begin{tabular}{l r r}
+\toprule
+\textbf{Metric} & \textbf{ST (LL)} & \textbf{TI (driverlib)} \\
+\midrule
+Analysed functions       &    3\,542 &    2\,539 \\
+Mean CC                  &      4.44 &      7.35 \\
+Median CC                &         4 &         5 \\
+Maximum CC               &        49 &       141 \\
+\midrule
+Functions with CC $>$ 10 &    44 \scriptsize(1.2\,\%) &   335 \scriptsize(13.2\,\%) \\
+Functions with CC $>$ 20 &    12 \scriptsize(0.3\,\%) &    97 \scriptsize(3.8\,\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+ST's driver code is markedly flatter: the average function has fewer than five decision
+points, and only 1.2\,\% of functions exceed the widely accepted threshold of
+CC\,=\,10~\cite{misra-c2012}. The maximum (CC\,=\,49) occurs in a temperature-calculation
+helper (\texttt{LL\_ADC\_CALC\_TEMPERATURE}) that contains a long chain of calibration
+look-ups.
+
+TI's SDK shows a heavier tail: 13.2\,\% of its functions exceed CC\,=\,10, with a peak of
+141 in a single function. Many of these high-complexity functions reside in the UniComm
+serial-controller layer, where a large \texttt{switch} dispatches configuration variants
+for UART, SPI, and I\textsuperscript{2}C through a shared code path. While this design
+consolidates peripheral logic, it concentrates branching in ways that complicate unit testing
+and formal verification.
+
+From a maintainability standpoint, ST's approach of decomposing peripheral logic into many
+small, low-complexity inline functions aligns better with safety-coding guidelines that
+recommend CC\,$\leq$\,10 per function.
+
+% --------------------------------------------------------------------
 \subsection{API surface}
 \label{subsec:ti-api}
 
@@ -312,7 +359,7 @@ Other & Various minor rules                &    6 &   33 \\
 \end{tabular}
 \end{table}
 
-\paragraph{Interpretation.}
+\subsubsection*{Interpretation}
 At first glance, ST's LL layer appears to have far more MISRA violations (3\,703 vs.\ 551).
 However, this requires careful interpretation:
 
@@ -341,7 +388,7 @@ However, this requires careful interpretation:
 If we exclude the tooling-artifact Rule~17.3 from both vendors, the adjusted counts are
 ST~=~162 and TI~=~270, putting ST ahead on genuine MISRA conformance per line of code.
 
-\paragraph{Security analysis (CWE).}
+\subsubsection*{Security analysis (CWE)}
 Both driver layers returned \textbf{zero CWE findings} from \texttt{cppcheck}'s CERT/CWE
 checker. Neither SDK contains patterns flagged as common weakness enumerations, which is
 expected for thin, register-level driver code that performs no dynamic allocation, string
@@ -360,7 +407,9 @@ SDKs file by file and identified exclusive features on each side.
 \subsection{Peripheral driver coverage}
 \label{subsec:ti-periph-gaps}
 
-Table~\ref{tab:ti-periph-exclusive} lists the peripheral drivers present in only one SDK.
+Table~\ref{tab:ti-periph-exclusive} lists the peripheral drivers present in only one
+SDK.\footnote{For brevity, only a representative subset of ST's 25 exclusive drivers is
+shown; the full list is available in the analysis output.}
 
 \begin{table}[H]
 \centering
@@ -531,6 +580,7 @@ results.
 Code lines            & 22\,292          & 27\,972          & ST (leaner) \\
 Documentation coverage & 97.3\,\%        & 82.6\,\%         & ST \\
 Code duplication       & 2.19\,\%        & 7.25\,\%         & ST \\
+Cyclomatic complexity  & 4.44 avg        & 7.35 avg         & ST (flatter) \\
 API functions          & 3\,543          & 2\,500           & ST (wider) \\
 Type safety (enums)    & 1               & 361              & TI \\
 MISRA violations       & 162\textsuperscript{*} & 270       & ST \\
@@ -540,8 +590,9 @@ Exclusive middleware   & 8               & 7                & Balanced \\
 Crypto algorithms      & 10+ exclusive   & 2 exclusive      & ST (breadth), TI (PQC) \\
 Comm.\ protocols       & 7 exclusive     & 3 exclusive      & ST \\
 \bottomrule
-\multicolumn{4}{l}{\footnotesize \textsuperscript{*}After excluding tooling-artifact Rule~17.3 from both vendors.} \\
 \end{tabular}
+\par\smallskip
+{\footnotesize \textsuperscript{*}After excluding tooling-artifact Rule~17.3 from both vendors.}
 \end{table}
 
 The static analysis reveals that ST's LL driver layer is leaner, better documented, less
