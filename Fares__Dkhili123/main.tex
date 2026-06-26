@@ -1,0 +1,329 @@
+\documentclass[a4paper,10pt]{article}
+
+% Package imports
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{cfr-lm}
+\usepackage[T1]{fontenc}
+\usepackage{fontawesome5}
+
+% Color definitions
+\definecolor{darkblue}{RGB}{0,0,139}
+
+% Page layout
+\setlength{\multicolsep}{0pt}
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\geometry{left=0.8cm, top=0.5cm, right=0.8cm, bottom=0.8cm}
+\setlength{\footskip}{5pt} % Addressing fancyhdr warning
+
+% Hyperlink setup
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    filecolor=darkblue,
+    urlcolor=darkblue,
+}
+
+% Custom box settings
+\usepackage[most]{tcolorbox}
+\tcbset{
+    frame code={},
+    center title,
+    left=0pt,
+    right=0pt,
+    top=0pt,
+    bottom=0pt,
+    colback=gray!20,
+    colframe=white,
+    width=\dimexpr\textwidth\relax,
+    enlarge left by=-2mm,
+    boxsep=4pt,
+    arc=0pt,outer arc=0pt,
+}
+
+% URL style
+\urlstyle{same}
+
+% Text alignment
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item{
+    \textbf{#1}{\hspace{0.5mm}#2 \vspace{-0.5mm}}
+  }
+}
+
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}}
+    \end{tabular*}
+    \vspace{-2mm}
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeProject}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#3}} \\
+        \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand{\labelitemii}{$\vcenter{\hbox{\tiny$\circ$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm]}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm,itemsep=0.5mm]}
+
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\cvsection}[1]{%
+\vspace{2mm}
+\begin{tcolorbox}
+    \textbf{\large #1}
+\end{tcolorbox}
+    \vspace{-4mm}
+}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+
+% Commands for icon sizing
+\newcommand{\socialicon}[1]{\raisebox{-0.05em}{\resizebox{!}{1em}{#1}}}
+\newcommand{\ieeeicon}[1]{\raisebox{-0.3em}{\resizebox{!}{1.3em}{#1}}}
+
+% Font options
+\newcommand{\headerfontiii}{\fontfamily{ppl}\selectfont} % Palatino
+
+\begin{document}
+\headerfontiii
+
+% Header
+\begin{center}
+    {\Huge\textbf{DKHILI FARES}}\\[2mm]
+    {\large\textit{Embedded Systems Engineer | STM32 \& IoT}}
+\end{center}
+\vspace{-4mm}
+
+\begin{center}
+    \small{
+    +216 27 491 238\,|\ ElManar-Tunis, Tunisia
+    }
+\end{center}
+\vspace{-6mm}
+\vspace{2.2mm}
+\begin{center}
+    \small{
+    \href{mailto:Dkhili.fares2002@gmail.com}{Dkhili.fares2002@gmail.com} \,|\,
+    \socialicon{\faLinkedin}
+    \href{https://www.linkedin.com/in/fares-dkhili-018b17303/}{Fares Dkhili} \,|\,
+    \socialicon{\faGithub}
+    \href{https://github.com/DkhiliFares}{Fares Dkhili}
+    }
+\end{center}
+\vspace{-2mm}
+\begin{center}
+\small{\textit{Embedded systems engineer with hands-on STM32 and multi-vendor MCU experience. Benchmarked STM32Cube middleware stacks against 5 competing ecosystems at STMicroelectronics. Autonomously designed AI-powered automation tools to accelerate firmware analysis workflows.}}
+\end{center}
+
+
+\section{\textbf{Education}}
+\noindent
+\textbf{Graduate Degree in Computer Engineering,} Faculty of Sciences of Tunis \hfill 2023 -- Present\\
+\textit{\footnotesize{Relevant coursework: Real-Time Systems, Computer Architecture, Embedded Systems, Digital Design, Networks}}\\
+\textbf{Integrated Preparatory Cycle in Mathematics and Computer Science,} Faculty of Sciences of Tunis \hfill 2021 -- 2023
+\section{\textbf{Professional Experience}}
+\resumeSubHeadingListStart
+\resumeSubheading
+  {STMicroelectronics}{Tunis, Tunisia}
+  {End-of-Study Internship (PFE) — STM32Cube Ecosystem Benchmark}{Feb 2026 -- Present}
+  \resumeItemListStart
+    \item Benchmarked STM32Cube middleware stacks (\textbf{USB, FreeRTOS, FatFS}) against \textbf{5 competing ecosystems} (TI, NXP, Renesas, GigaDevice) measuring performance and memory footprint
+    \item Autonomously architected an \textbf{AI-powered footprint analyzer} with chatbot interface — automates root-cause gap analysis, scoring, and optimization recommendations across MCU firmware builds
+    \item Engineered a \textbf{custom VS Code Copilot agent} that automates project creation, cross-vendor porting, build configuration, and debug setup, accelerating the benchmark workflow
+    \item Presented competitive analysis findings to the \textbf{STMicroelectronics marketing team}, identifying per-vendor strengths and actionable improvement areas
+    \item Both tools built on \textbf{own initiative} without supervisor request, demonstrating engineering autonomy
+  \resumeItemListEnd
+
+\resumeSubheading
+  {STMicroelectronics}{Tunis, Tunisia}
+  {Summer Internship — Porting EEMBC CoreMark-PRO to STM32}{July -- August 2025}
+  \resumeItemListStart
+    \item Solved a \textbf{POSIX-dependency barrier} by porting the CoreMark-PRO benchmark from Linux to bare-metal STM32, adapting the MITH abstraction layers for ARM Cortex-M
+    \item Executed and compared performance across \textbf{Cortex-M4 and Cortex-M7} on 3 STM32 boards (H747I-EVAL, Nucleo-144, Discovery U5)
+    \item Optimized memory-constrained workloads by leveraging \textbf{external SDRAM} and tuning IAR/STM32CubeMX build configurations
+  \resumeItemListEnd
+
+\resumeSubheading
+  {Vicom Consulting}{Tunis, Tunisia}
+  {Summer Internship — Embedded Linux Development}{August 2024}
+  \resumeItemListStart
+    \item Cross-compiled a \textbf{Qt GUI application} for Raspberry Pi using a custom ARM toolchain and deployed it on embedded Linux
+    \item Configured the build system for \textbf{cross-platform compatibility} and validated on-target execution over SSH
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+
+\section{\textbf{Projects}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumeProject
+  {AI-Powered Firmware Footprint Analyzer}
+  {Tools: Python, LLM/AI Integration, Chatbot UI, Automated Report Generation}
+  {2026}
+  {}
+\resumeItemListStart
+  \item Architected a tool that \textbf{automates MCU firmware footprint analysis} — classifies binary sections, identifies root causes of size gaps across vendors, and generates optimization recommendations
+  \item Integrated an \textbf{AI chatbot interface} for interactive querying of footprint data and cross-vendor comparison results
+\resumeItemListEnd
+
+\resumeProject
+  {Benchmark Copilot Agent for STM32}
+  {Tools: VS Code Agent API, TypeScript, STM32CubeMX, Multi-vendor Toolchains}
+  {2026}
+  {}
+\resumeItemListStart
+  \item Built a \textbf{custom VS Code Copilot agent} that automates end-to-end benchmark project scaffolding: creation, cross-vendor porting, build configuration, and debug setup
+\resumeItemListEnd
+
+\resumeProject
+  {SecureAccess — Multi-Factor Authentication System}
+  {Tools: Python, Raspberry Pi, OpenCV, Flask, FaceRecognition, RFID}
+  {May 2025}
+  {{}\href{https://github.com/DkhiliFares/SecureAccess}{\textcolor{darkblue}{\faGithub}}}
+\resumeItemListStart
+  \item Engineered a physical security system combining \textbf{3 authentication factors} (RFID, facial recognition, PIN) with a Flask web dashboard for access monitoring
+\resumeItemListEnd
+
+\resumeProject
+{Embedded Linux Cross-Compilation}
+{Tools: Buildroot, GCC, U-Boot, Raspberry Pi, BeagleBone Black}
+{November 2025}
+{{}\href{https://github.com/DkhiliFares/Embedded-linux-cross-compilation}{\textcolor{darkblue}{\faGithub}}}
+\resumeItemListStart
+\item Configured a \textbf{cross-compilation toolchain} and customized a minimal embedded Linux image with Buildroot targeting ARM platforms
+\resumeItemListEnd
+
+\resumeProject
+  {GPRS Communication Library for IoT}
+  {Tools: STM32, C, SIM808, UART}
+  {December 2024}
+  {{}\href{https://github.com/DkhiliFares/GPRS-DRIVER}{\textcolor{darkblue}{\faGithub}}}
+\resumeItemListStart
+  \item Implemented a reusable \textbf{STM32 HAL library} for the SIM808 module, abstracting AT commands into clean HTTP GET/POST APIs over GPRS
+\resumeItemListEnd
+
+\resumeProject
+  {Network Administration Infrastructure}
+  {Tools: EVE-NG, Cisco IOL, Zabbix, Akvorado, Wireshark}
+  {March 2025}
+  {{}\href{https://github.com/DkhiliFares/Network_Administration_Project}{\textcolor{darkblue}{\faGithub}}}
+\resumeItemListStart
+  \item Deployed a \textbf{multi-VLAN enterprise topology} on EVE-NG with centralized monitoring (Zabbix) and traffic analytics (Akvorado)
+\resumeItemListEnd
+
+\resumeProject
+  {IoT Gas and Fire Detection System}
+  {Tools: ESP8266, C++, DHT11, MQ2, MQTT}
+  {May 2024}
+  {{}\href{https://github.com/DkhiliFares/FireDetection__esp32}{\textcolor{darkblue}{\faGithub}}}
+\resumeItemListStart
+  \item Built an \textbf{IoT sensor node} for real-time gas/smoke detection with immediate alert notifications via cloud dashboard
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+\section{\textbf{Skills}}
+\textbf{Programming:} C, C++ (OOP), Embedded C, Python, VHDL, Bash, Java, TypeScript \\
+\textbf{Embedded \& RTOS:} STM32 (CubeMX, CubeIDE, Keil, IAR), ESP32/8266, Raspberry Pi, FreeRTOS, Bare-metal, ARM Cortex-M, Peripheral Drivers (GPIO, UART, SPI, I2C, CAN) \\
+\textbf{Linux \& Build Systems:} Buildroot, Yocto, Cross-compilation, Makefile/CMake, Shell scripting, U-Boot \\
+\textbf{IoT \& Connectivity:} MQTT, LoRa/WAN, GPRS, Node-RED, Cloud dashboards, Power BI \\
+\textbf{AI \& Automation:} LLM integration, AI-powered tooling, OpenCV, VS Code Agent development \\
+\textbf{FPGA \& Digital Design:} VHDL, Quartus Prime, ModelSim, FSM design, HW/SW Co-design \\
+\textbf{DevOps \& Tools:} Git/GitHub, Docker, Jenkins, SonarQube, CI/CD pipelines \\
+\textbf{Networks \& Security:} VLAN, Routing, ACL, Cisco CLI (CCNA), Wireshark, Zabbix, TLS/SSL, VPN \\
+\textbf{Spoken Languages:} French (B2), English (B1), Arabic (Native)
+
+\section{\textbf{Certifications}}
+\vspace{-0.2mm}
+\resumeSubHeadingListStart
+\resumePOR{}{\href{https://www.linkedin.com/in/fares-dkhili-018b17303/recent-activity/all/}{
+\textbf{CCNA: Introduction to Networks (Cisco)}
+}}{October 2024}
+\resumePOR{}{\href{https://learn.nvidia.com/certificates?id=Z4jS_G2wT_uK63hkrrwHAw}{
+\textbf{Fundamentals of Deep Learning (NVIDIA)}
+}}{April 2025}
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+
+
+\section{\textbf{Awards and Distinctions}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+\resumeProject
+  {Competition Performance}
+  {CTF 101, Securinet FST}
+  {April 2025}
+  {{}\href{https://www.linkedin.com/posts/fares-dkhili-018b17303_cybersecurity-ctf-activity-7322699787982528512-YMcf?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE2V9FQBl97M7EPoPtI-0a16X0hT_ahlsmk}{\textcolor{darkblue}{\faIcon{globe}}}}
+\resumeItemListStart
+  \item \textbf{3rd place} at CTF 101 (Securinet FST) — solved cryptography and forensics challenges under time constraints
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\vspace{-6mm}
+\section{\textbf{Professional Affiliations}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+\resumePOR{Securinets FST Tunis}
+    {}
+    {November 2024 - May 2025}
+\resumePOR{ATIA FST: AI Club}
+    {}
+    {2025 - Present}
+\resumePOR{GDG on Campus: FST}
+    {}
+    {September 2023 - Present}
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+\end{document}

@@ -1,0 +1,332 @@
+\documentclass[a4paper,10pt]{article}
+
+% Package imports
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{cfr-lm}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{fontawesome5}
+
+% Color definitions
+\definecolor{darkblue}{RGB}{0,0,139}
+
+% Page layout
+\setlength{\multicolsep}{0pt}
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\geometry{left=0.8cm, top=0.5cm, right=0.8cm, bottom=0.8cm}
+\setlength{\footskip}{5pt}
+
+% Hyperlink setup
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    filecolor=darkblue,
+    urlcolor=darkblue,
+}
+
+% Custom box settings
+\usepackage[most]{tcolorbox}
+\tcbset{
+    frame code={},
+    center title,
+    left=0pt,
+    right=0pt,
+    top=0pt,
+    bottom=0pt,
+    colback=gray!20,
+    colframe=white,
+    width=\dimexpr\textwidth\relax,
+    enlarge left by=-2mm,
+    boxsep=4pt,
+    arc=0pt,outer arc=0pt,
+}
+
+% URL style
+\urlstyle{same}
+
+% Text alignment
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item{
+    \textbf{#1}{\hspace{0.5mm}#2 \vspace{-0.5mm}}
+  }
+}
+
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}}
+    \end{tabular*}
+    \vspace{-2mm}
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeProject}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#3}} \\
+        \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand{\labelitemii}{$\vcenter{\hbox{\tiny$\circ$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm]}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm,itemsep=0.5mm]}
+
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\cvsection}[1]{%
+\vspace{2mm}
+\begin{tcolorbox}
+    \textbf{\large #1}
+\end{tcolorbox}
+    \vspace{-4mm}
+}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+
+% Commands for icon sizing
+\newcommand{\socialicon}[1]{\raisebox{-0.05em}{\resizebox{!}{1em}{#1}}}
+\newcommand{\ieeeicon}[1]{\raisebox{-0.3em}{\resizebox{!}{1.3em}{#1}}}
+
+% Font options
+\newcommand{\headerfontiii}{\fontfamily{ppl}\selectfont} % Palatino
+
+\begin{document}
+\headerfontiii
+
+% Header
+\begin{center}
+    {\Huge\textbf{DKHILI FARES}}\\[2mm]
+    {\large\textit{Ing\'enieur Syst\`emes Embarqu\'es | STM32 \& IoT}}
+\end{center}
+\vspace{-4mm}
+
+\begin{center}
+    \small{
+    +216 27 491 238\,|\ ElManar-Tunis, Tunisie
+    }
+\end{center}
+\vspace{-6mm}
+\vspace{2.2mm}
+\begin{center}
+    \small{
+    \href{mailto:Dkhili.fares2002@gmail.com}{Dkhili.fares2002@gmail.com} \,|\,
+    \socialicon{\faLinkedin}
+    \href{https://www.linkedin.com/in/fares-dkhili-018b17303/}{Fares Dkhili} \,|\,
+    \socialicon{\faGithub}
+    \href{https://github.com/DkhiliFares}{Fares Dkhili}
+    }
+\end{center}
+\vspace{-2mm}
+\begin{center}
+\small{\textit{Ing\'enieur en syst\`emes embarqu\'es avec une exp\'erience pratique sur STM32 et MCU multi-vendeurs. Benchmarking des stacks middleware STM32Cube face \`a 5 \'ecosyst\`emes concurrents chez STMicroelectronics. Conception autonome d'outils d'automatisation pilot\'es par l'IA pour acc\'el\'erer l'analyse firmware.}}
+\end{center}
+
+
+\section{\textbf{Formation}}
+\noindent
+\textbf{Cycle Ing\'enieur en Informatique,} Facult\'e des Sciences de Tunis \hfill 2023 -- Pr\'esent\\
+\textit{\footnotesize{Cours cl\'es : Syst\`emes Temps R\'eel, Architecture des Ordinateurs, Syst\`emes Embarqu\'es, Conception Num\'erique, R\'eseaux}}\\
+\textbf{Cycle Pr\'eparatoire Int\'egr\'e en Math\'ematiques et Informatique,} Facult\'e des Sciences de Tunis \hfill 2021 -- 2023
+
+\section{\textbf{Exp\'erience Professionnelle}}
+\resumeSubHeadingListStart
+\resumeSubheading
+  {STMicroelectronics}{Tunis, Tunisie}
+  {Stage de Fin d'\'Etudes (PFE) --- Benchmark \'Ecosyst\`eme STM32Cube}{F\'ev 2026 -- Pr\'esent}
+  \resumeItemListStart
+    \item Benchmark des stacks middleware STM32Cube (\textbf{USB, FreeRTOS, FatFS}) face \`a \textbf{5 \'ecosyst\`emes concurrents} (TI, NXP, Renesas, GigaDevice) en mesurant performance et empreinte m\'emoire
+    \item Conception autonome d'un \textbf{analyseur d'empreinte pilot\'e par l'IA} avec interface chatbot --- automatise l'analyse des \'ecarts, le scoring et les recommandations d'optimisation sur les builds firmware MCU
+    \item D\'eveloppement d'un \textbf{agent Copilot VS Code personnalis\'e} automatisant la cr\'eation de projets, le portage multi-vendeurs, la configuration de build et le d\'ebogage
+    \item Pr\'esentation des r\'esultats d'analyse concurrentielle \`a l'\textbf{\'equipe marketing de STMicroelectronics}, identifiant les forces et axes d'am\'elioration par vendeur
+    \item Outils d\'evelopp\'es en \textbf{totale autonomie} sans demande du superviseur, d\'emontrant initiative et maturit\'e technique
+  \resumeItemListEnd
+
+\resumeSubheading
+  {STMicroelectronics}{Tunis, Tunisie}
+  {Stage d'\'Et\'e --- Portage EEMBC CoreMark-PRO sur STM32}{Juillet -- Ao\^ut 2025}
+  \resumeItemListStart
+    \item R\'esolution d'une \textbf{d\'ependance POSIX bloquante} en portant le benchmark CoreMark-PRO de Linux vers STM32 bare-metal, adaptation des couches d'abstraction MITH pour ARM Cortex-M
+    \item Ex\'ecution et comparaison des performances sur \textbf{Cortex-M4 et Cortex-M7} sur 3 cartes STM32 (H747I-EVAL, Nucleo-144, Discovery U5)
+    \item Optimisation des charges m\'emoire limit\'ees via \textbf{SDRAM externe} et ajustement des configurations de build IAR/STM32CubeMX
+  \resumeItemListEnd
+
+\resumeSubheading
+  {Vicom Consulting}{Tunis, Tunisie}
+  {Stage d'\'Et\'e --- D\'eveloppement Linux Embarqu\'e}{Ao\^ut 2024}
+  \resumeItemListStart
+    \item Cross-compilation d'une \textbf{application Qt avec interface graphique} pour Raspberry Pi via une cha\^ine de compilation ARM et d\'eploiement sous Linux embarqu\'e
+    \item Configuration du syst\`eme de build pour la \textbf{compatibilit\'e multiplateforme} et validation de l'ex\'ecution sur cible via SSH
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+
+\section{\textbf{Projets}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumeProject
+  {Analyseur d'Empreinte Firmware pilot\'e par l'IA}
+  {Outils : Python, Int\'egration LLM/IA, Interface Chatbot, G\'en\'eration de Rapports}
+  {2026}
+  {}
+\resumeItemListStart
+  \item Conception d'un outil \textbf{automatisant l'analyse d'empreinte firmware MCU} --- classifie les sections binaires, identifie les causes d'\'ecarts de taille entre vendeurs et g\'en\`ere des recommandations d'optimisation
+  \item Int\'egration d'une \textbf{interface chatbot IA} pour l'interrogation interactive des donn\'ees d'empreinte et des r\'esultats de comparaison multi-vendeurs
+\resumeItemListEnd
+
+\resumeProject
+  {Agent Copilot Benchmark pour STM32}
+  {Outils : VS Code Agent API, TypeScript, STM32CubeMX, Cha\^ines multi-vendeurs}
+  {2026}
+  {}
+\resumeItemListStart
+  \item Construction d'un \textbf{agent Copilot VS Code personnalis\'e} automatisant l'ensemble du workflow benchmark : cr\'eation, portage multi-vendeurs, configuration de build et setup de d\'ebogage
+\resumeItemListEnd
+
+\resumeProject
+  {SecureAccess --- Syst\`eme d'Authentification Multi-Facteurs}
+  {Outils : Python, Raspberry Pi, OpenCV, Flask, FaceRecognition, RFID}
+  {Mai 2025}
+  {{}\href{https://github.com/DkhiliFares/SecureAccess}{\textcolor{darkblue}{\faGithub}}}
+\resumeItemListStart
+  \item Conception d'un syst\`eme de s\'ecurit\'e physique combinant \textbf{3 facteurs d'authentification} (RFID, reconnaissance faciale, code PIN) avec tableau de bord Flask
+\resumeItemListEnd
+
+\resumeProject
+{Cross-Compilation Linux Embarqu\'e}
+{Outils : Buildroot, GCC, U-Boot, Raspberry Pi, BeagleBone Black}
+{Novembre 2025}
+{{}\href{https://github.com/DkhiliFares/Embedded-linux-cross-compilation}{\textcolor{darkblue}{\faGithub}}}
+\resumeItemListStart
+\item Configuration d'une \textbf{cha\^ine de cross-compilation} et personnalisation d'une image Linux embarqu\'e minimale avec Buildroot pour plateformes ARM
+\resumeItemListEnd
+
+\resumeProject
+  {Biblioth\`eque de Communication GPRS pour IoT}
+  {Outils : STM32, C, SIM808, UART}
+  {D\'ecembre 2024}
+  {{}\href{https://github.com/DkhiliFares/GPRS-DRIVER}{\textcolor{darkblue}{\faGithub}}}
+\resumeItemListStart
+  \item Impl\'ementation d'une \textbf{biblioth\`eque HAL STM32 r\'eutilisable} pour le module SIM808, abstrayant les commandes AT en APIs HTTP GET/POST propres via GPRS
+\resumeItemListEnd
+
+\resumeProject
+  {Infrastructure d'Administration R\'eseau}
+  {Outils : EVE-NG, Cisco IOL, Zabbix, Akvorado, Wireshark}
+  {Mars 2025}
+  {{}\href{https://github.com/DkhiliFares/Network_Administration_Project}{\textcolor{darkblue}{\faGithub}}}
+\resumeItemListStart
+  \item D\'eploiement d'une \textbf{topologie multi-VLAN entreprise} sur EVE-NG avec supervision centralis\'ee (Zabbix) et analyse de trafic (Akvorado)
+\resumeItemListEnd
+
+\resumeProject
+  {Syst\`eme IoT de D\'etection de Gaz et Incendie}
+  {Outils : ESP8266, C++, DHT11, MQ2, MQTT}
+  {Mai 2024}
+  {{}\href{https://github.com/DkhiliFares/FireDetection__esp32}{\textcolor{darkblue}{\faGithub}}}
+\resumeItemListStart
+  \item R\'ealisation d'un \textbf{n\oe ud capteur IoT} pour la d\'etection en temps r\'eel de gaz/fum\'ee avec alertes imm\'ediates via tableau de bord cloud
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\section{\textbf{Comp\'etences}}
+\textbf{Programmation :} C, C++ (POO), Embedded C, Python, VHDL, Bash, Java, TypeScript \\
+\textbf{Embarqu\'e \& RTOS :} STM32 (CubeMX, CubeIDE, Keil, IAR), ESP32/8266, Raspberry Pi, FreeRTOS, Bare-metal, ARM Cortex-M, Pilotes p\'eriph\'eriques (GPIO, UART, SPI, I2C, CAN) \\
+\textbf{Linux \& Syst\`emes de Build :} Buildroot, Yocto, Cross-compilation, Makefile/CMake, Scripts Shell, U-Boot \\
+\textbf{IoT \& Connectivit\'e :} MQTT, LoRa/WAN, GPRS, Node-RED, Tableaux de bord Cloud, Power BI \\
+\textbf{IA \& Automatisation :} Int\'egration LLM, Outillage pilot\'e par l'IA, OpenCV, D\'eveloppement d'agents VS Code \\
+\textbf{FPGA \& Conception Num\'erique :} VHDL, Quartus Prime, ModelSim, Conception FSM, Co-design HW/SW \\
+\textbf{DevOps \& Outils :} Git/GitHub, Docker, Jenkins, SonarQube, Pipelines CI/CD \\
+\textbf{R\'eseaux \& S\'ecurit\'e :} VLAN, Routage, ACL, Cisco CLI (CCNA), Wireshark, Zabbix, TLS/SSL, VPN \\
+\textbf{Langues :} Fran\c{c}ais (B2), Anglais (B1), Arabe (Natif)
+
+\section{\textbf{Certifications}}
+\vspace{-0.2mm}
+\resumeSubHeadingListStart
+\resumePOR{}{\href{https://www.linkedin.com/in/fares-dkhili-018b17303/recent-activity/all/}{
+\textbf{CCNA : Introduction aux R\'eseaux (Cisco)}
+}}{Octobre 2024}
+\resumePOR{}{\href{https://learn.nvidia.com/certificates?id=Z4jS_G2wT_uK63hkrrwHAw}{
+\textbf{Fundamentals of Deep Learning (NVIDIA)}
+}}{Avril 2025}
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+
+\section{\textbf{Distinctions}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+\resumeProject
+  {Performance en Comp\'etition}
+  {CTF 101, Securinet FST}
+  {Avril 2025}
+  {{}\href{https://www.linkedin.com/posts/fares-dkhili-018b17303_cybersecurity-ctf-activity-7322699787982528512-YMcf?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE2V9FQBl97M7EPoPtI-0a16X0hT_ahlsmk}{\textcolor{darkblue}{\faIcon{globe}}}}
+\resumeItemListStart
+  \item \textbf{3\`eme place} au CTF 101 (Securinet FST) --- r\'esolution de challenges de cryptographie et forensique sous contrainte de temps
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\vspace{-6mm}
+\section{\textbf{Engagements Associatifs}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+\resumePOR{Securinets FST Tunis}
+    {}
+    {Novembre 2024 -- Mai 2025}
+\resumePOR{ATIA FST : Club IA}
+    {}
+    {2025 -- Pr\'esent}
+\resumePOR{GDG on Campus : FST}
+    {}
+    {Septembre 2023 -- Pr\'esent}
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+\end{document}

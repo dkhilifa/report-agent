@@ -1,0 +1,471 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(01_ingenieur_logiciel_embarque.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-03-20>
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/base\letter.cls
+Document Class: letter 2024/08/12 v1.3c Standard LaTeX document class
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/base\size11.clo))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def
+)
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/fr\ba
+bel-french.tex)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/babel-french\frenc
+h.ldf
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/babel-french\frenc
+h3.ldf)))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/carlisle\scalefnt.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.st
+y
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty)
+ (C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cf
+g))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.st
+y
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.
+sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdef
+inekeys.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescap
+e.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexc
+mds.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarer
+r.sty)))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\get
+titlestring.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.
+sty)))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringen
+c.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.st
+y)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintc
+alc.sty)))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerun
+filecheck.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniq
+uecounter.sty)))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/parskip\parskip.sty)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-
+pdftex.def)
+No file 01_ingenieur_logiciel_embarque.aux.
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics\color.sty
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.c
+fg)
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.
+def
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf
+.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+))
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.l
+tx))
+! Missing number, treated as zero.
+<to be read again> 
+                   N
+l.17 \opening{Madame, Monsieur,}
+                                
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   N
+l.17 \opening{Madame, Monsieur,}
+                                
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.17 \opening{Madame, Monsieur,}
+                                
+! Missing number, treated as zero.
+<to be read again> 
+                   A
+l.17 \opening{Madame, Monsieur,}
+                                
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   A
+l.17 \opening{Madame, Monsieur,}
+                                
+
+Overfull \hbox (7.14012pt too wide) in paragraph at lines 25--26
+[]\T1/cmr/m/n/10.95 PrΘalablement, j'ai portΘ le bench-mark \T1/cmr/bx/n/10.95 
+EEMBC CoreMark-PRO \T1/cmr/m/n/10.95 (dΘ-pen-dant de PO-SIX/Linux)
+[1{C:/Users/dkhilifa/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+(01_ingenieur_logiciel_embarque.aux)Trying to make PK font ecbx1095 at 600 DPI...
+The METAFONT mode is: ljfour
+Creating ecbx1095.pk...
+Running miktex-mf.exe...
+This is METAFONT, Version 2.71828182 (MiKTeX 26.2)
+
+
+
+
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\ecbx1
+
+095.mf
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exbas
+
+e.mf)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\ecbx.
+
+mf
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrom
+
+an.mf
+
+ Ok
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exacc
+
+ess.mf
+
+ Ok)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\expse
+
+udo.mf
+
+ Ok)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exruw
+
+est.mf
+
+ Ok [192] [193] [194] [195] [196] [197] [198] [199] [200] [201] [202] [203]
+
+[204] [205] [206] [207] [208] [209] [210] [211] [212] [213] [214] [215]
+
+[216] [217] [218] [219] [220] [221] [222] [223])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrlw
+
+est.mf
+
+ Ok [224] [225] [226] [227] [228] [229] [230] [231] [232] [233] [234] [235]
+
+[236] [237] [238] [239] [240] [241] [242] [243] [244] [245] [246] [247]
+
+[248] [249] [250] [251] [252] [253] [254] [255])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrue
+
+ast.mf
+
+ Ok [128] [129] [130] [131] [132] [133] [134] [135] [136] [137] [138] [139]
+
+[140] [141] [142] [143] [144] [145] [146] [147] [148] [149] [150] [151]
+
+[152] [153] [154] [155] [156] [157])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrle
+
+ast.mf
+
+ Ok [158] [160] [161] [162] [163] [164] [165] [166] [167] [168] [169] [170]
+
+[171] [172] [173] [174] [175] [176] [177] [178] [179] [180] [181] [182]
+
+[183] [184] [185] [186] [187] [188])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exbra
+
+ces.mf
+
+ Ok [94] [126] [23] [40] [41] [60] [124] [62] [91] [93] [92] [123] [125]
+
+[95] [127] [32])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\expun
+
+ct.mf
+
+ Ok [14] [15] [19] [20] [13] [18] [33] [39] [42] [43] [44] [46] [47] [58]
+
+[59] [61] [96] [189] [17] [45] [16] [21] [22])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exacc
+
+ent.mf
+
+ Ok [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exsig
+
+n.mf
+
+ Ok [24] [34] [35] [36] [37] [64] [191] [159])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrli
+
+g.mf
+
+ Ok [25] [26] [28] [27] [29] [30] [31])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrom
+
+p.mf
+
+ Ok [38] [63] [190])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrul
+
+ett.mf
+
+ Ok [65] [66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78]
+
+[79] [80] [81] [82] [83] [84] [85] [86] [87] [88] [89] [90])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrll
+
+ett.mf
+
+ Ok [97] [98] [99] [100] [101] [102] [103] [104] [105] [106] [107] [108]
+
+[109] [110] [111] [112] [113] [114] [115] [116] [117] [118] [119] [120]
+
+[121] [122])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrdi
+
+git.mf
+
+ Ok [48] [49] [50] [51] [52] [53] [54] [55] [56] [57])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrli
+
+gtb.mf
+
+ Ok) ) ) )
+
+Font metrics written on ecbx1095.tfm.
+
+Output written on ecbx1095.600gf (256 characters, 54848 bytes).
+
+Transcript written on ecbx1095.log.
+
+This is GFtoPK, Version 2.4 (MiKTeX 26.2)
+Running miktex-gftopk.exe...
+
+'METAFONT output 2026.06.26:1152'
+
+54848 bytes packed to 28976 bytes.
+
+Installing C:\Users\dkhilifa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk...
+
+
+Package rerunfilecheck Warning: File `01_ingenieur_logiciel_embarque.out' has c
+hanged.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information) <C:\Users\dkhilifa\AppData
+\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk>Trying to make PK font ecrm1095 at 600 DPI...
+This is METAFONT, Version 2.71828182 (MiKTeX 26.2)
+The METAFONT mode is: ljfour
+Creating ecrm1095.pk...
+
+Running miktex-mf.exe...
+
+
+
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\ecrm1
+
+095.mf
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exbas
+
+e.mf)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\ecrm.
+
+mf
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrom
+
+an.mf
+
+ Ok
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exacc
+
+ess.mf
+
+ Ok)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\expse
+
+udo.mf
+
+ Ok)
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exruw
+
+est.mf
+
+ Ok [192] [193] [194] [195] [196] [197] [198] [199] [200] [201] [202] [203]
+
+[204] [205] [206] [207] [208] [209] [210] [211] [212] [213] [214] [215]
+
+[216] [217] [218] [219] [220] [221] [222] [223])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrlw
+
+est.mf
+
+ Ok [224] [225] [226] [227] [228] [229] [230] [231] [232] [233] [234] [235]
+
+[236] [237] [238] [239] [240] [241] [242] [243] [244] [245] [246] [247]
+
+[248] [249] [250] [251] [252] [253] [254] [255])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrue
+
+ast.mf
+
+ Ok [128] [129] [130] [131] [132] [133] [134] [135] [136] [137] [138] [139]
+
+[140] [141] [142] [143] [144] [145] [146] [147] [148] [149] [150] [151]
+
+[152] [153] [154] [155] [156] [157])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrle
+
+ast.mf
+
+ Ok [158] [160] [161] [162] [163] [164] [165] [166] [167] [168] [169] [170]
+
+[171] [172] [173] [174] [175] [176] [177] [178] [179] [180] [181] [182]
+
+[183] [184] [185] [186] [187] [188])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exbra
+
+ces.mf
+
+ Ok [94] [126] [23] [40] [41] [60] [124] [62] [91] [93] [92] [123] [125]
+
+[95] [127] [32])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\expun
+
+ct.mf
+
+ Ok [14] [15] [19] [20] [13] [18] [33] [39] [42] [43] [44] [46] [47] [58]
+
+[59] [61] [96] [189] [17] [45] [16] [21] [22])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exacc
+
+ent.mf
+
+ Ok [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exsig
+
+n.mf
+
+ Ok [24] [34] [35] [36] [37] [64] [191] [159])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrli
+
+g.mf
+
+ Ok [25] [26] [28] [27] [29] [30] [31])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrom
+
+p.mf
+
+ Ok [38] [63] [190])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrul
+
+ett.mf
+
+ Ok [65] [66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78]
+
+[79] [80] [81] [82] [83] [84] [85] [86] [87] [88] [89] [90])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrll
+
+ett.mf
+
+ Ok [97] [98] [99] [100] [101] [102] [103] [104] [105] [106] [107] [108]
+
+[109] [110] [111] [112] [113] [114] [115] [116] [117] [118] [119] [120]
+
+[121] [122])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrdi
+
+git.mf
+
+ Ok [48] [49] [50] [51] [52] [53] [54] [55] [56] [57])
+
+(C:\Users\dkhilifa\AppData\Local\Programs\MiKTeX\fonts/source/jknappen/ec\exrli
+
+gtb.mf
+
+ Ok) ) ) )
+
+(some charht values had to be adjusted by as much as 0.07599pt)
+
+Font metrics written on ecrm1095.tfm.
+
+Output written on ecrm1095.600gf (256 characters, 55424 bytes).
+
+Transcript written on ecrm1095.log.
+
+Running miktex-gftopk.exe...
+This is GFtoPK, Version 2.4 (MiKTeX 26.2)
+
+'METAFONT output 2026.06.26:1153'
+
+55424 bytes packed to 26228 bytes.
+
+Installing C:\Users\dkhilifa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk...
+ <C:\Users\dkhilif
+a\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk>
+Output written on 01_ingenieur_logiciel_embarque.pdf (1 page, 42476 bytes).
+Transcript written on 01_ingenieur_logiciel_embarque.log.
