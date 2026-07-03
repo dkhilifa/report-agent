@@ -1,0 +1,210 @@
+<mxfile host="app.diagrams.net" modified="2026-07-03" agent="PFE-Report" version="24.0.0" type="device">
+  <diagram id="sequence-diagram" name="Sequence Diagram">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Title -->
+        <mxCell id="title" value="Deterministic Benchmark Campaign — Sequence Diagram" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="10" width="380" height="30" as="geometry" />
+        </mxCell>
+        <!-- Participants -->
+        <mxCell id="p-user" value="User" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=40;participant=umlActor;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="50" width="40" height="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="p-coord" value="MCU-Benchmark-Agent&#xa;(Coordinator)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=40;fontSize=10;fontStyle=1;fillColor=#DAE8FC;strokeColor=#4472C4;" vertex="1" parent="1">
+          <mxGeometry x="200" y="50" width="160" height="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="p-analysis" value="benchmark-&#xa;analysis" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=40;fontSize=9;fillColor=#D5E8D4;strokeColor=#82B366;" vertex="1" parent="1">
+          <mxGeometry x="420" y="50" width="100" height="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="p-creation" value="Creation-&#xa;Porting" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=40;fontSize=9;fillColor=#D5E8D4;strokeColor=#82B366;" vertex="1" parent="1">
+          <mxGeometry x="580" y="50" width="100" height="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="p-build" value="Build-&#xa;Project" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=40;fontSize=9;fillColor=#D5E8D4;strokeColor=#82B366;" vertex="1" parent="1">
+          <mxGeometry x="740" y="50" width="100" height="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="p-debug" value="Debugger" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=40;fontSize=9;fillColor=#D5E8D4;strokeColor=#82B366;" vertex="1" parent="1">
+          <mxGeometry x="900" y="50" width="90" height="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="p-board" value="Board / IAR" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=40;fontSize=9;fillColor=#FFF2CC;strokeColor=#D29922;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="50" width="90" height="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="p-vendor" value="Vendor&#xa;Source" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=40;fontSize=9;fillColor=#D5E8D4;strokeColor=#3FB950;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="50" width="90" height="1050" as="geometry" />
+        </mxCell>
+        <!-- Step 1: User submits request -->
+        <mxCell id="m1" value="1. Scenario / firmware / board request" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=9;exitX=1;exitY=0;exitDx=0;exitDy=0;strokeColor=#4472C4;" edge="1" parent="1">
+          <mxGeometry x="0.02" relative="1" as="geometry">
+            <mxPoint x="80" y="130" as="sourcePoint" />
+            <mxPoint x="280" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Step 2: Resolve scenario -->
+        <mxCell id="m2" value="2. Resolve scenario (internal)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=9;strokeColor=#4472C4;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="285" y="165" as="sourcePoint" />
+            <mxPoint x="285" y="190" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="320" y="165" />
+              <mxPoint x="320" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <!-- Step 3: Acquire from vendor -->
+        <mxCell id="m3" value="3. Fetch missing SDK / firmware / startup / linker" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=9;strokeColor=#3FB950;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="285" y="215" as="sourcePoint" />
+            <mxPoint x="1245" y="215" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m3r" value="provenance recorded → source_provenance.yaml" style="html=1;verticalAlign=bottom;endArrow=open;curved=0;rounded=0;fontSize=8;strokeColor=#3FB950;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1245" y="240" as="sourcePoint" />
+            <mxPoint x="285" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Step 4: Analyze semantics -->
+        <mxCell id="m4" value="4. Analyze benchmark semantics" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=9;strokeColor=#4472C4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="285" y="275" as="sourcePoint" />
+            <mxPoint x="470" y="275" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m4r" value="semantic_summary + portability_split" style="html=1;verticalAlign=bottom;endArrow=open;curved=0;rounded=0;fontSize=8;strokeColor=#4472C4;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="470" y="310" as="sourcePoint" />
+            <mxPoint x="285" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Step 5: Create / port project -->
+        <mxCell id="m5" value="5. Create / port project (app-layer only)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=9;strokeColor=#4472C4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="285" y="345" as="sourcePoint" />
+            <mxPoint x="630" y="345" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m5r" value="ported project tree" style="html=1;verticalAlign=bottom;endArrow=open;curved=0;rounded=0;fontSize=8;strokeColor=#4472C4;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="630" y="380" as="sourcePoint" />
+            <mxPoint x="285" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Step 6: Configure build -->
+        <mxCell id="m6" value="6. Configure build (.ewp, startup, linker selection)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=9;strokeColor=#4472C4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="285" y="415" as="sourcePoint" />
+            <mxPoint x="790" y="415" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Step 7: Run IAR build -->
+        <mxCell id="m7" value="7. IarBuild.exe -make" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=9;strokeColor=#8B949E;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="790" y="455" as="sourcePoint" />
+            <mxPoint x="1095" y="455" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m7r" value="build diagnostics" style="html=1;verticalAlign=bottom;endArrow=open;curved=0;rounded=0;fontSize=8;strokeColor=#8B949E;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1095" y="480" as="sourcePoint" />
+            <mxPoint x="790" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Step 8: Debug loop -->
+        <mxCell id="m8" value="8. Diagnose failure (if build failed)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=9;strokeColor=#4472C4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="285" y="520" as="sourcePoint" />
+            <mxPoint x="945" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m8r" value="app-layer fixes applied → rebuild pass" style="html=1;verticalAlign=bottom;endArrow=open;curved=0;rounded=0;fontSize=8;strokeColor=#4472C4;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="945" y="555" as="sourcePoint" />
+            <mxPoint x="285" y="555" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Hardware Approval Gate (highlighted) -->
+        <mxCell id="gate-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D29922;opacity=30;" vertex="1" parent="1">
+          <mxGeometry x="30" y="585" width="1280" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="gate-label" value="⚠ HARDWARE APPROVAL GATE — only step requiring user confirmation" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontStyle=1;fontColor=#D29922;" vertex="1" parent="1">
+          <mxGeometry x="420" y="588" width="420" height="20" as="geometry" />
+        </mxCell>
+        <!-- Step 9: Request approval -->
+        <mxCell id="m9" value="9. Request flash / attach approval" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=9;strokeColor=#D29922;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="275" y="620" as="sourcePoint" />
+            <mxPoint x="85" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Step 10: User approves -->
+        <mxCell id="m10" value="10. Approved ✓" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=9;strokeColor=#D29922;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="85" y="650" as="sourcePoint" />
+            <mxPoint x="275" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Step 11: Flash and capture -->
+        <mxCell id="m11" value="11. Flash → run → capture measurements (DWT, UART, .map)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=9;strokeColor=#D29922;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="285" y="705" as="sourcePoint" />
+            <mxPoint x="1095" y="705" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m11r" value="measurement_metadata.yaml + raw captures" style="html=1;verticalAlign=bottom;endArrow=open;curved=0;rounded=0;fontSize=8;strokeColor=#3FB950;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1095" y="730" as="sourcePoint" />
+            <mxPoint x="285" y="730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Step 12: Semantic equivalence + fairness -->
+        <mxCell id="m12" value="12. Semantic equivalence + fairness review" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=9;strokeColor=#4472C4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="285" y="770" as="sourcePoint" />
+            <mxPoint x="470" y="770" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m12r" value="equivalence + fairness_review.yaml" style="html=1;verticalAlign=bottom;endArrow=open;curved=0;rounded=0;fontSize=8;strokeColor=#4472C4;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="470" y="800" as="sourcePoint" />
+            <mxPoint x="285" y="800" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Step 13: Generate report -->
+        <mxCell id="m13" value="13. Generate structured report" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=9;strokeColor=#4472C4;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="285" y="835" as="sourcePoint" />
+            <mxPoint x="285" y="860" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="320" y="835" />
+              <mxPoint x="320" y="860" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <!-- Step 14: Deliver to user -->
+        <mxCell id="m14" value="14. Campaign report + STM32 recommendations" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=9;strokeColor=#4472C4;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="275" y="900" as="sourcePoint" />
+            <mxPoint x="85" y="900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Legend -->
+        <mxCell id="legend-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry x="30" y="950" width="600" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-auto" value="■ Autonomous" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontColor=#4472C4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="960" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-gate" value="■ Approval gate" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontColor=#D29922;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="960" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-ext" value="■ External acquisition" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontColor=#3FB950;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="960" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-hw" value="■ Hardware / toolchain" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontColor=#8B949E;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="960" width="140" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,117 @@
+<mxfile host="app.diagrams.net" modified="2026-07-03" agent="PFE-Report" version="24.0.0" type="device">
+  <diagram id="use-case-diagram" name="Use Case Diagram">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- System boundary -->
+        <mxCell id="sys-boundary" value="MCU Benchmark Agent System" style="shape=umlFrame;whiteSpace=wrap;html=1;width=180;height=20;boundedLbl=1;verticalAlign=top;align=left;spacingTop=5;dashed=1;dashPattern=5 5;strokeColor=#4472C4;fillColor=none;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="200" y="20" width="720" height="780" as="geometry" />
+        </mxCell>
+        <!-- Actor: User -->
+        <mxCell id="actor-user" value="User&#xa;(Engineer)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="320" width="40" height="60" as="geometry" />
+        </mxCell>
+        <!-- Actor: Physical Board -->
+        <mxCell id="actor-board" value="Physical Board&#xa;(ST-Link / J-Link)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=10;fontColor=#D29922;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="120" width="40" height="60" as="geometry" />
+        </mxCell>
+        <!-- Actor: Vendor Source -->
+        <mxCell id="actor-vendor" value="Vendor Source&#xa;(GitHub / SDK)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=10;fontColor=#3FB950;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="280" width="40" height="60" as="geometry" />
+        </mxCell>
+        <!-- Actor: IAR EWARM -->
+        <mxCell id="actor-iar" value="IAR EWARM&#xa;(IarBuild / cspybat)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=10;fontColor=#8B949E;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="440" width="40" height="60" as="geometry" />
+        </mxCell>
+        <!-- Actor: Report Engine -->
+        <mxCell id="actor-report" value="Report Engine&#xa;(Python scripts)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=10;fontColor=#58A6FF;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="600" width="40" height="60" as="geometry" />
+        </mxCell>
+        <!-- Use Cases: Autonomous (blue) -->
+        <mxCell id="uc1" value="Resolve scenario&#xa;from name/description" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="280" y="50" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc2" value="Acquire vendor&#xa;firmware / SDK" style="ellipse;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#3FB950;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="530" y="50" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc3" value="Analyze benchmark&#xa;semantics" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="280" y="120" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc4" value="Create project&#xa;from scratch" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="280" y="190" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc5" value="Port STM32 →&#xa;competitor" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="530" y="130" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc6" value="Port competitor →&#xa;STM32" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="530" y="200" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc7" value="Port vendor →&#xa;vendor" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="530" y="270" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc8" value="Configure IAR&#xa;build project" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="280" y="270" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc9" value="Run IAR build&#xa;autonomously" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="280" y="340" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc10" value="Diagnose build /&#xa;debug failures" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="530" y="345" width="170" height="50" as="geometry" />
+        </mxCell>
+        <!-- Use Cases: Approval-required (yellow) -->
+        <mxCell id="uc11" value="Request hardware&#xa;approval" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D29922;fontSize=9;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="420" width="180" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="uc12" value="Flash / attach&#xa;(after approval)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D29922;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="580" y="420" width="170" height="50" as="geometry" />
+        </mxCell>
+        <!-- Use Cases: Post-approval autonomous -->
+        <mxCell id="uc13" value="Extract runtime&#xa;measurements" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="280" y="500" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc14" value="Semantic equivalence&#xa;review" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="530" y="500" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc15" value="Run fairness&#xa;review" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="280" y="570" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc16" value="Generate footprint&#xa;comparison" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="530" y="575" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc17" value="Generate timing&#xa;comparison" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="280" y="640" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc18" value="Generate campaign&#xa;report" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="530" y="650" width="170" height="50" as="geometry" />
+        </mxCell>
+        <!-- STM32-specific -->
+        <mxCell id="uc19" value="Recommend STM32&#xa;enhancements" style="ellipse;whiteSpace=wrap;html=1;fillColor=#CFE2F3;strokeColor=#0078D4;fontSize=9;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="720" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="uc20" value="Validate repo /&#xa;workflow artifacts" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#4472C4;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="530" y="725" width="170" height="50" as="geometry" />
+        </mxCell>
+        <!-- Connections: User → use cases -->
+        <mxCell id="e1" style="edgeStyle=none;strokeColor=#666666;" edge="1" source="actor-user" target="uc1" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" style="edgeStyle=none;strokeColor=#666666;" edge="1" source="actor-user" target="uc3" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" style="edgeStyle=none;strokeColor=#666666;" edge="1" source="actor-user" target="uc4" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e4" style="edgeStyle=none;strokeColor=#D29922;dashed=1;" edge="1" source="actor-user" target="uc11" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <!-- Connections: Board → approval use cases -->
+        <mxCell id="e5" style="edgeStyle=none;strokeColor=#D29922;" edge="1" source="actor-board" target="uc12" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e6" style="edgeStyle=none;strokeColor=#666666;" edge="1" source="actor-board" target="uc13" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <!-- Connections: Vendor → acquire -->
+        <mxCell id="e7" style="edgeStyle=none;strokeColor=#3FB950;" edge="1" source="actor-vendor" target="uc2" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <!-- Connections: IAR → build -->
+        <mxCell id="e8" style="edgeStyle=none;strokeColor=#8B949E;" edge="1" source="actor-iar" target="uc9" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e9" style="edgeStyle=none;strokeColor=#8B949E;" edge="1" source="actor-iar" target="uc10" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <!-- Connections: Report → generate -->
+        <mxCell id="e10" style="edgeStyle=none;strokeColor=#58A6FF;" edge="1" source="actor-report" target="uc18" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e11" style="edgeStyle=none;strokeColor=#58A6FF;" edge="1" source="actor-report" target="uc16" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <!-- Include/extend relationships -->
+        <mxCell id="e12" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=none;strokeColor=#999999;dashed=1;fontSize=8;" edge="1" source="uc11" target="uc12" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e13" value="&lt;&lt;extend&gt;&gt;" style="edgeStyle=none;strokeColor=#999999;dashed=1;fontSize=8;" edge="1" source="uc10" target="uc9" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

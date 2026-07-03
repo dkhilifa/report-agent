@@ -62,46 +62,58 @@ footprint are derived.
 
 Listing~\ref{lst:agent-config} shows the configuration of the Creation-Porting specialist
 agent from the MCU Benchmark Copilot Agent system
-(Chapter~\ref{chap:benchmark-agent}). The YAML frontmatter declares metadata and tool
-permissions; the Markdown body contains the behavioural instructions the agent follows.
+(Chapter~\ref{chap:benchmark-agent}). The YAML frontmatter declares metadata, description,
+argument hints, and tool permissions; the Markdown body contains the behavioural
+instructions, autonomy contract, and supported workflow directions.
 
 \begin{lstlisting}[language={}, caption={Creation-Porting agent configuration (abbreviated).}, label={lst:agent-config}]
 ---
-name: creation-porting
-description: >
-  Creates new benchmark projects and ports STM32 references to
-  target MCU platforms while preserving exact runtime semantics.
-tools:
-  - read
-  - edit
-  - search
-  - execute
+name: Creation-Porting
+description: "Create benchmark projects from scratch or port existing
+  benchmarks in any direction (STM32->competitor, competitor->STM32,
+  vendor->vendor, board->board). Use when: generating target project
+  files, creating from a scenario description, separating
+  portable/RTOS/board logic, or acquiring missing reference firmware."
+argument-hint: A benchmark requirement, scenario description, scenario
+  name, firmware name, or a reference project plus target platform.
+tools: ['read', 'search', 'edit', 'vscode', 'todo', 'web', 'execute']
 ---
 
 # Creation-Porting Agent
 
-You create benchmark projects for target MCU platforms by porting
-the STM32 reference. You MUST preserve semantic equivalence.
+## Supported Directions
+- From scratch (scenario description only)
+- STM32 -> competitor
+- Competitor -> STM32
+- Vendor A -> Vendor B
+- Board A -> Board B
+- Name only (resolve, acquire, create)
 
-## Porting workflow
+## Autonomy Contract
+- Operates autonomously for file generation, project creation, and
+  material acquisition (web fetches from official sources).
+- Asks only before flashing/programming/resetting hardware.
+- Acquires missing firmware, CMSIS, BSP, startup, linker from
+  official vendor GitHub repos and SDKs without confirmation.
 
-1. Read and understand the STM32 reference project completely.
-2. Identify all HAL calls, peripherals, and timing dependencies.
-3. Map each STM32 HAL call to the target vendor's equivalent API.
-4. Generate the target project preserving:
-   - Task count and creation order
-   - Priorities and scheduling policy
-   - Delay values and periodicity
-   - Synchronisation primitives
-   - Measurement scope and reporting format
-5. Mark any uncertain hardware detail as TODO.
-6. Invoke the semantic-equivalence skill to verify the port.
+## IAR Template Resolution
+Before creating any project:
+1. Look up target board in config/iar_templates.yaml
+2. Follow resolution: exact board -> family fallback -> type fallback
+3. Acquire template if status == "needs_download"
+4. Use materialised template as read-only project baseline
+5. Place benchmark code through app_integration_points only
 
-## Non-negotiable rules
+## Multi-Layer Separation
+1. Portable application layer (writable) - benchmark logic
+2. RTOS / middleware layer (protected) - select, don't modify
+3. Board-specific layer (protected) - select existing vendor files
+4. Build surface (configure only) - .ewp references, defines, paths
 
-- NEVER modify the STM32 reference project.
-- NEVER invent vendor APIs --- use only documented functions.
-- NEVER claim success without compiler evidence.
+## Semantic Preservation Rule
+Preserve semantics and observable behaviors, not vendor API names.
+Map CMSIS-RTOS2 <-> native FreeRTOS <-> ThreadX as needed via
+app-level adapter files. Never modify vendor HAL source.
 \end{lstlisting}
 
 \pagebreak

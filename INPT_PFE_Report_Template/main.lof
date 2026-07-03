@@ -15,13 +15,15 @@
 \contentsline {figure}{\numberline {2.9}{\ignorespaces Sample output: the results workbook showing per-layer and global footprint comparison.}}{22}{figure.caption.24}%
 \contentsline {figure}{\numberline {2.10}{\ignorespaces First page of the optional PDF report: executive summary with source-vs-target charts.}}{23}{figure.caption.25}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Architecture of the MCU Benchmark Copilot Agent system. The router classifies requests and delegates to specialist agents or invokes skill workflows; all operate under the shared always-on benchmark rules within the VS Code environment.}}{27}{figure.caption.26}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces End-to-end benchmark lifecycle. The MCU Benchmark Copilot Agent handles steps~1 through~5 (understand, create, build, debug, validate); once semantic equivalence is confirmed, the validated linker map is handed to MCU Workflow Studio for footprint analysis.}}{31}{figure.caption.29}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces A live porting session in VS~Code: the MCU Benchmark Copilot Agent applies the semantic-equivalence checklist to a GD32 FreeRTOS port.}}{32}{figure.caption.30}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Architecture of the MCU Benchmark Copilot Agent system. The coordinator resolves scenarios and delegates to specialist agents; automation tools handle deterministic build/measurement operations; all layers operate under the shared always-on benchmark rules and consult the configuration registry.}}{27}{figure.caption.26}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces UML use case diagram of the MCU Benchmark Copilot Agent system. Blue ellipses represent autonomous use cases; yellow ellipses require user approval; green indicates external acquisition. External actors include the user, physical board, vendor source repositories, IAR EWARM toolchain, and the report engine scripts.}}{29}{figure.caption.28}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces End-to-end benchmark lifecycle. The MCU Benchmark Copilot Agent handles steps~1 through~11 autonomously (with a hardware gate at step~9); once semantic equivalence is confirmed, the validated linker map is handed to MCU Workflow Studio for footprint analysis.}}{38}{figure.caption.34}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces UML sequence diagram of a deterministic benchmark campaign. The coordinator delegates to specialist agents (benchmark-analysis, Creation-Porting, Build-Project, Debugger) and interacts with external actors (Vendor Source, Board/IAR). The hardware approval gate (steps~9--10, highlighted) is the only point requiring user confirmation; all other steps execute autonomously.}}{39}{figure.caption.35}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces An autonomous benchmark campaign in VS~Code: the MCU Benchmark Copilot Agent resolves the scenario, acquires firmware, builds, and reports semantic equivalence and fairness status.}}{42}{figure.caption.37}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces The two evaluation boards used for ST-vs-GD32 benchmarking: NUCLEO-U575ZI-Q (left) and GD32E507 (right).}}{37}{figure.caption.32}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces IAR EWARM project structure for the USB HID benchmark: STM32 reference (left) and GD32 target (right).}}{38}{figure.caption.34}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces UART terminal output of the FreeRTOS cooperative benchmark: thread iteration counters reported every 30 seconds on STM32 (left) and GD32 (right).}}{44}{figure.caption.43}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces The two evaluation boards used for ST-vs-GD32 benchmarking: NUCLEO-U575ZI-Q (left) and GD32E507 (right).}}{47}{figure.caption.39}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces IAR EWARM project structure for the USB HID benchmark: STM32 reference (left) and GD32 target (right).}}{48}{figure.caption.41}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces UART terminal output of the FreeRTOS cooperative benchmark: thread iteration counters reported every 30 seconds on STM32 (left) and GD32 (right).}}{54}{figure.caption.50}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

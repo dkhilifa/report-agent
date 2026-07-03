@@ -2,12 +2,12 @@
 \contentsline {chapter}{Dedication}{i}{chapter*.1}%
 \contentsline {chapter}{Acknowledgments}{ii}{chapter*.2}%
 \contentsline {chapter}{Résumé}{iii}{chapter*.3}%
-\contentsline {chapter}{Summary}{iv}{chapter*.4}%
-\contentsline {chapter}{Arabic Abstract}{v}{chapter*.5}%
-\contentsline {chapter}{List of Figures}{vii}{chapter*.6}%
-\contentsline {chapter}{List of Tables}{ix}{chapter*.7}%
-\contentsline {chapter}{List of Listings}{x}{chapter*.8}%
-\contentsline {chapter}{Table of Contents}{xiv}{chapter*.9}%
+\contentsline {chapter}{Summary}{v}{chapter*.4}%
+\contentsline {chapter}{Arabic Abstract}{vi}{chapter*.5}%
+\contentsline {chapter}{List of Figures}{x}{chapter*.6}%
+\contentsline {chapter}{List of Tables}{xii}{chapter*.7}%
+\contentsline {chapter}{List of Listings}{xiii}{chapter*.8}%
+\contentsline {chapter}{Table of Contents}{xvii}{chapter*.9}%
 \contentsline {chapter}{\numberline {1}General Description of the Project}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Host company}{1}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}Presentation}{1}{subsection.1.1.1}%
@@ -39,66 +39,74 @@
 \contentsline {section}{\numberline {2.5}Integration into the benchmark workflow}{21}{section.2.5}%
 \contentsline {section}{\numberline {2.6}Usage and outputs}{21}{section.2.6}%
 \contentsline {section}{\numberline {2.7}Engineering value and limitations}{23}{section.2.7}%
-\contentsline {chapter}{\numberline {3}An AI-Assisted Agent for Benchmark Creation, Porting, and Debugging}{25}{chapter.3}%
+\contentsline {chapter}{\numberline {3}An Autonomous AI Agent for Benchmark Campaigns}{25}{chapter.3}%
 \contentsline {section}{\numberline {3.1}The benchmark engineering problem}{26}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Architecture}{26}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}The four specialist agents}{27}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}The five reusable skills}{28}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Always-on benchmark rules}{29}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Semantic preservation in detail}{30}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Integration with the benchmarking workflow}{30}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Implementation}{32}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Engineering value and limitations}{33}{section.3.7}%
-\contentsline {paragraph}{\numberline {3.7.0.0.1}Paragraph a}{34}{paragraph.3.7.0.0.1}%
-\contentsline {paragraph}{\numberline {3.7.0.0.2}Paragraph b}{34}{paragraph.3.7.0.0.2}%
-\contentsline {chapter}{\numberline {4}Benchmarking ST against GD32}{36}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Hardware platforms}{36}{section.4.1}%
-\contentsline {section}{\numberline {4.2}USB device stack}{38}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Scenario design}{38}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Results}{39}{subsection.4.2.2}%
-\contentsline {subsubsection}{\numberline {4.2.2.1}HID scenario}{39}{subsubsection.4.2.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2.2}CDC scenario}{40}{subsubsection.4.2.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Interpretation}{41}{subsection.4.2.3}%
-\contentsline {paragraph}{\numberline {4.2.3.0.1}ROM footprint.}{41}{paragraph.4.2.3.0.1}%
-\contentsline {paragraph}{\numberline {4.2.3.0.2}RAM footprint.}{42}{paragraph.4.2.3.0.2}%
-\contentsline {paragraph}{\numberline {4.2.3.0.3}Execution time.}{42}{paragraph.4.2.3.0.3}%
-\contentsline {paragraph}{\numberline {4.2.3.0.4}Design philosophy.}{42}{paragraph.4.2.3.0.4}%
-\contentsline {paragraph}{\numberline {4.2.3.0.5}Enhancement proposals.}{42}{paragraph.4.2.3.0.5}%
-\contentsline {section}{\numberline {4.3}FreeRTOS integration}{42}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Scenario design}{43}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Results}{44}{subsection.4.3.2}%
-\contentsline {subsubsection}{\numberline {4.3.2.1}Basic processing}{44}{subsubsection.4.3.2.1}%
-\contentsline {subsubsection}{\numberline {4.3.2.2}Cooperative processing}{45}{subsubsection.4.3.2.2}%
-\contentsline {subsubsection}{\numberline {4.3.2.3}Preemptive processing}{45}{subsubsection.4.3.2.3}%
-\contentsline {subsubsection}{\numberline {4.3.2.4}Per-layer ROM breakdown}{46}{subsubsection.4.3.2.4}%
-\contentsline {subsection}{\numberline {4.3.3}Interpretation}{46}{subsection.4.3.3}%
-\contentsline {paragraph}{\numberline {4.3.3.0.1}Performance.}{46}{paragraph.4.3.3.0.1}%
-\contentsline {paragraph}{\numberline {4.3.3.0.2}ROM footprint.}{47}{paragraph.4.3.3.0.2}%
-\contentsline {paragraph}{\numberline {4.3.3.0.3}RAM footprint.}{47}{paragraph.4.3.3.0.3}%
-\contentsline {paragraph}{\numberline {4.3.3.0.4}Enhancement proposals.}{47}{paragraph.4.3.3.0.4}%
-\contentsline {chapter}{\numberline {5}Benchmarking ST against Texas Instruments}{49}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Hardware platforms}{50}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Static analysis of the driver layer}{50}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Scope and methodology}{50}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Lines of code}{51}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Documentation coverage}{52}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Code duplication}{52}{subsection.5.2.4}%
-\contentsline {subsection}{\numberline {5.2.5}Cyclomatic complexity}{53}{subsection.5.2.5}%
-\contentsline {subsection}{\numberline {5.2.6}API surface}{54}{subsection.5.2.6}%
-\contentsline {subsection}{\numberline {5.2.7}MISRA~C:2012 compliance}{56}{subsection.5.2.7}%
-\contentsline {section}{\numberline {5.3}SDK coverage comparison}{57}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Peripheral driver coverage}{57}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Middleware coverage}{59}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Cryptographic algorithm coverage}{59}{subsection.5.3.3}%
-\contentsline {subsection}{\numberline {5.3.4}Communication protocol coverage}{60}{subsection.5.3.4}%
-\contentsline {section}{\numberline {5.4}Summary of findings}{61}{section.5.4}%
-\contentsline {chapter}{General Conclusion and Perspectives}{64}{chapter*.63}%
-\contentsline {chapter}{\numberline {A}Glossary}{65}{chapter.A}%
-\contentsline {chapter}{\numberline {B}Acronyms}{67}{chapter.B}%
-\contentsline {chapter}{\numberline {C}Complementary Code Listings}{70}{chapter.C}%
-\contentsline {section}{\numberline {C.1}IAR EWARM linker map excerpt}{70}{section.C.1}%
-\contentsline {section}{\numberline {C.2}Agent configuration file}{72}{section.C.2}%
-\contentsline {section}{\numberline {C.3}FreeRTOS cooperative benchmark scenario}{74}{section.C.3}%
-\contentsline {section}{\numberline {C.4}Footprint tool CLI output}{76}{section.C.4}%
-\contentsline {section}{\numberline {C.5}Static-analysis automation script (ST vs.\ TI)}{77}{section.C.5}%
-\contentsline {chapter}{Bibliography}{79}{appendix*.64}%
+\contentsline {subsection}{\numberline {3.2.1}The four specialist agents}{28}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}The six reusable skills}{29}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Automation tools}{30}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Configuration registry}{32}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}Supported workflow directions}{32}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Autonomy model and approval gates}{33}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Board firmware baseline immutability}{34}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Always-on benchmark rules}{35}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Semantic preservation in detail}{36}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Deterministic campaign workflow}{37}{section.3.8}%
+\contentsline {section}{\numberline {3.9}IAR template resolution}{39}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Source acquisition policy}{40}{section.3.10}%
+\contentsline {section}{\numberline {3.11}Campaign artifact model}{41}{section.3.11}%
+\contentsline {section}{\numberline {3.12}Prompt-driven usage}{41}{section.3.12}%
+\contentsline {section}{\numberline {3.13}Implementation}{43}{section.3.13}%
+\contentsline {section}{\numberline {3.14}Integration with the benchmarking workflow}{43}{section.3.14}%
+\contentsline {section}{\numberline {3.15}Engineering value and limitations}{44}{section.3.15}%
+\contentsline {chapter}{\numberline {4}Benchmarking ST against GD32}{46}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Hardware platforms}{46}{section.4.1}%
+\contentsline {section}{\numberline {4.2}USB device stack}{48}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Scenario design}{48}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Results}{49}{subsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.2.1}HID scenario}{49}{subsubsection.4.2.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2.2}CDC scenario}{50}{subsubsection.4.2.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Interpretation}{51}{subsection.4.2.3}%
+\contentsline {paragraph}{\numberline {4.2.3.0.1}ROM footprint.}{51}{paragraph.4.2.3.0.1}%
+\contentsline {paragraph}{\numberline {4.2.3.0.2}RAM footprint.}{52}{paragraph.4.2.3.0.2}%
+\contentsline {paragraph}{\numberline {4.2.3.0.3}Execution time.}{52}{paragraph.4.2.3.0.3}%
+\contentsline {paragraph}{\numberline {4.2.3.0.4}Design philosophy.}{52}{paragraph.4.2.3.0.4}%
+\contentsline {paragraph}{\numberline {4.2.3.0.5}Enhancement proposals.}{52}{paragraph.4.2.3.0.5}%
+\contentsline {section}{\numberline {4.3}FreeRTOS integration}{52}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Scenario design}{53}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Results}{54}{subsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.2.1}Basic processing}{54}{subsubsection.4.3.2.1}%
+\contentsline {subsubsection}{\numberline {4.3.2.2}Cooperative processing}{55}{subsubsection.4.3.2.2}%
+\contentsline {subsubsection}{\numberline {4.3.2.3}Preemptive processing}{55}{subsubsection.4.3.2.3}%
+\contentsline {subsubsection}{\numberline {4.3.2.4}Per-layer ROM breakdown}{56}{subsubsection.4.3.2.4}%
+\contentsline {subsection}{\numberline {4.3.3}Interpretation}{56}{subsection.4.3.3}%
+\contentsline {paragraph}{\numberline {4.3.3.0.1}Performance.}{56}{paragraph.4.3.3.0.1}%
+\contentsline {paragraph}{\numberline {4.3.3.0.2}ROM footprint.}{57}{paragraph.4.3.3.0.2}%
+\contentsline {paragraph}{\numberline {4.3.3.0.3}RAM footprint.}{57}{paragraph.4.3.3.0.3}%
+\contentsline {paragraph}{\numberline {4.3.3.0.4}Enhancement proposals.}{57}{paragraph.4.3.3.0.4}%
+\contentsline {chapter}{\numberline {5}Benchmarking ST against Texas Instruments}{59}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Hardware platforms}{60}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Static analysis of the driver layer}{60}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Scope and methodology}{60}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Lines of code}{61}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Documentation coverage}{62}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Code duplication}{62}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5}Cyclomatic complexity}{63}{subsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.2.6}API surface}{64}{subsection.5.2.6}%
+\contentsline {subsection}{\numberline {5.2.7}MISRA~C:2012 compliance}{66}{subsection.5.2.7}%
+\contentsline {section}{\numberline {5.3}SDK coverage comparison}{67}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Peripheral driver coverage}{67}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Middleware coverage}{69}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Cryptographic algorithm coverage}{69}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Communication protocol coverage}{70}{subsection.5.3.4}%
+\contentsline {section}{\numberline {5.4}Summary of findings}{71}{section.5.4}%
+\contentsline {chapter}{General Conclusion and Perspectives}{74}{chapter*.70}%
+\contentsline {chapter}{\numberline {A}Glossary}{75}{chapter.A}%
+\contentsline {chapter}{\numberline {B}Acronyms}{77}{chapter.B}%
+\contentsline {chapter}{\numberline {C}Complementary Code Listings}{80}{chapter.C}%
+\contentsline {section}{\numberline {C.1}IAR EWARM linker map excerpt}{80}{section.C.1}%
+\contentsline {section}{\numberline {C.2}Agent configuration file}{82}{section.C.2}%
+\contentsline {section}{\numberline {C.3}FreeRTOS cooperative benchmark scenario}{84}{section.C.3}%
+\contentsline {section}{\numberline {C.4}Footprint tool CLI output}{86}{section.C.4}%
+\contentsline {section}{\numberline {C.5}Static-analysis automation script (ST vs.\ TI)}{87}{section.C.5}%
+\contentsline {chapter}{Bibliography}{89}{appendix*.71}%
