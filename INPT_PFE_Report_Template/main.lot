@@ -1,48 +1,48 @@
 \babel@toc {nil}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Principal inputs and outputs of the tool.}}{13}{table.caption.14}%
-\contentsline {table}{\numberline {2.2}{\ignorespaces Implementation stack and the role of each external dependency.}}{15}{table.caption.16}%
-\contentsline {table}{\numberline {2.3}{\ignorespaces Optional language-model back-ends. All are disabled by default; the tool runs fully without them.}}{20}{table.caption.22}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces Principal inputs and outputs of the tool.}}{15}{table.caption.16}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Implementation stack and the role of each external dependency.}}{17}{table.caption.18}%
+\contentsline {table}{\numberline {2.3}{\ignorespaces Optional language-model back-ends. All are disabled by default; the tool runs fully without them.}}{22}{table.caption.24}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Specialist agents and their responsibilities.}}{28}{table.caption.27}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Reusable skills and their purposes.}}{30}{table.caption.29}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Automation tools in the agent system.}}{31}{table.caption.30}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Configuration registry files.}}{32}{table.caption.31}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces Autonomy model: autonomous actions versus approval-required actions.}}{34}{table.caption.32}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces Surface classification under the baseline immutability rule.}}{35}{table.caption.33}%
-\contentsline {table}{\numberline {3.7}{\ignorespaces Pre-built prompt templates for common benchmark tasks.}}{42}{table.caption.36}%
-\contentsline {table}{\numberline {3.8}{\ignorespaces File structure of the agent system.}}{43}{table.caption.38}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Specialist agents and their responsibilities.}}{31}{table.caption.29}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Reusable skills and their purposes.}}{33}{table.caption.31}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Automation tools in the agent system.}}{34}{table.caption.32}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Configuration registry files.}}{35}{table.caption.33}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Autonomy model: autonomous actions versus approval-required actions.}}{37}{table.caption.34}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Surface classification under the baseline immutability rule.}}{38}{table.caption.35}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces Pre-built prompt templates for common benchmark tasks.}}{45}{table.caption.38}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces File structure of the agent system.}}{46}{table.caption.40}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Board characteristics: ST reference vs GigaDevice GD32.}}{47}{table.caption.40}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces USB device stack benchmark scenarios.}}{49}{table.caption.42}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces USB HID device footprint (bytes).}}{49}{table.caption.43}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces USB HID ROM breakdown by layer (bytes).}}{49}{table.caption.44}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces USB HID execution time (ms).}}{50}{table.caption.45}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces USB CDC device footprint (bytes).}}{50}{table.caption.46}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces USB CDC ROM breakdown by layer (bytes).}}{51}{table.caption.47}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces USB CDC execution time (ms).}}{51}{table.caption.48}%
-\contentsline {table}{\numberline {4.9}{\ignorespaces FreeRTOS benchmark scenarios.}}{53}{table.caption.49}%
-\contentsline {table}{\numberline {4.10}{\ignorespaces FreeRTOS basic processing --- performance.}}{54}{table.caption.51}%
-\contentsline {table}{\numberline {4.11}{\ignorespaces FreeRTOS basic processing --- footprint (bytes).}}{54}{table.caption.52}%
-\contentsline {table}{\numberline {4.12}{\ignorespaces FreeRTOS cooperative processing --- performance.}}{55}{table.caption.53}%
-\contentsline {table}{\numberline {4.13}{\ignorespaces FreeRTOS cooperative processing --- footprint (bytes).}}{55}{table.caption.54}%
-\contentsline {table}{\numberline {4.14}{\ignorespaces FreeRTOS preemptive processing --- performance.}}{55}{table.caption.55}%
-\contentsline {table}{\numberline {4.15}{\ignorespaces FreeRTOS preemptive processing --- footprint (bytes).}}{55}{table.caption.56}%
-\contentsline {table}{\numberline {4.16}{\ignorespaces FreeRTOS ROM breakdown by layer (bytes).}}{56}{table.caption.57}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Board characteristics: ST reference vs GigaDevice GD32.}}{50}{table.caption.42}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces USB device stack benchmark scenarios.}}{52}{table.caption.44}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces USB HID device footprint (bytes).}}{52}{table.caption.45}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces USB HID ROM breakdown by layer (bytes).}}{52}{table.caption.46}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces USB HID execution time (ms).}}{53}{table.caption.47}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces USB CDC device footprint (bytes).}}{53}{table.caption.48}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces USB CDC ROM breakdown by layer (bytes).}}{54}{table.caption.49}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces USB CDC execution time (ms).}}{54}{table.caption.50}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces FreeRTOS benchmark scenarios.}}{56}{table.caption.51}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces FreeRTOS basic processing --- performance.}}{57}{table.caption.53}%
+\contentsline {table}{\numberline {4.11}{\ignorespaces FreeRTOS basic processing --- footprint (bytes).}}{57}{table.caption.54}%
+\contentsline {table}{\numberline {4.12}{\ignorespaces FreeRTOS cooperative processing --- performance.}}{58}{table.caption.55}%
+\contentsline {table}{\numberline {4.13}{\ignorespaces FreeRTOS cooperative processing --- footprint (bytes).}}{58}{table.caption.56}%
+\contentsline {table}{\numberline {4.14}{\ignorespaces FreeRTOS preemptive processing --- performance.}}{58}{table.caption.57}%
+\contentsline {table}{\numberline {4.15}{\ignorespaces FreeRTOS preemptive processing --- footprint (bytes).}}{58}{table.caption.58}%
+\contentsline {table}{\numberline {4.16}{\ignorespaces FreeRTOS ROM breakdown by layer (bytes).}}{59}{table.caption.59}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Board and MCU comparison --- STM32C5A3 vs.\ MSPM33C321A.}}{60}{table.caption.58}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Lines-of-code comparison --- ST LL vs.\ TI driverlib.}}{61}{table.caption.59}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Documentation coverage --- ST LL vs.\ TI driverlib.}}{62}{table.caption.60}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Code duplication --- ST LL vs.\ TI driverlib.}}{63}{table.caption.61}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces Cyclomatic complexity comparison --- ST LL vs.\ TI driverlib.}}{64}{table.caption.62}%
-\contentsline {table}{\numberline {5.6}{\ignorespaces API surface comparison --- ST LL vs.\ TI driverlib.}}{65}{table.caption.63}%
-\contentsline {table}{\numberline {5.7}{\ignorespaces MISRA~C:2012 violations --- ST LL vs.\ TI driverlib.}}{66}{table.caption.64}%
-\contentsline {table}{\numberline {5.8}{\ignorespaces Exclusive peripheral drivers --- features in one SDK only.}}{68}{table.caption.65}%
-\contentsline {table}{\numberline {5.9}{\ignorespaces Exclusive middleware --- present in one SDK only.}}{69}{table.caption.66}%
-\contentsline {table}{\numberline {5.10}{\ignorespaces Cryptographic algorithm coverage comparison.}}{70}{table.caption.67}%
-\contentsline {table}{\numberline {5.11}{\ignorespaces Communication protocol support comparison.}}{71}{table.caption.68}%
-\contentsline {table}{\numberline {5.12}{\ignorespaces Static-analysis scoreboard --- STM32CubeC5 LL vs.\ TI MSPM33 driverlib.}}{72}{table.caption.69}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Board and MCU comparison --- STM32C5A3 vs.\ MSPM33C321A.}}{63}{table.caption.60}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Lines-of-code comparison --- ST LL vs.\ TI driverlib.}}{64}{table.caption.61}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Documentation coverage --- ST LL vs.\ TI driverlib.}}{65}{table.caption.62}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Code duplication --- ST LL vs.\ TI driverlib.}}{66}{table.caption.63}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Cyclomatic complexity comparison --- ST LL vs.\ TI driverlib.}}{67}{table.caption.64}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces API surface comparison --- ST LL vs.\ TI driverlib.}}{68}{table.caption.65}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces MISRA~C:2012 violations --- ST LL vs.\ TI driverlib.}}{69}{table.caption.66}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Exclusive peripheral drivers --- features in one SDK only.}}{71}{table.caption.67}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Exclusive middleware --- present in one SDK only.}}{72}{table.caption.68}%
+\contentsline {table}{\numberline {5.10}{\ignorespaces Cryptographic algorithm coverage comparison.}}{73}{table.caption.69}%
+\contentsline {table}{\numberline {5.11}{\ignorespaces Communication protocol support comparison.}}{74}{table.caption.70}%
+\contentsline {table}{\numberline {5.12}{\ignorespaces Static-analysis scoreboard --- STM32CubeC5 LL vs.\ TI MSPM33 driverlib.}}{75}{table.caption.71}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

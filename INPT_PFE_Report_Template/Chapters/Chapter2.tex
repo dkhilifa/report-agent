@@ -70,9 +70,33 @@ AI-assistance column refines the mapping without ever sitting on the critical pa
 \label{fig:tool-architecture}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/footprint-tool/use-case.pdf}
+\caption{UML use-case diagram of MCU Workflow Studio~v0.2.0. Five actors interact with
+twenty use cases grouped by concern: the benchmark engineer drives the core analysis, the
+technical reviewer validates low-confidence mappings, the CI/CD pipeline runs scripted
+headless benchmarks, the LLM service (optional, dashed) enriches the mapping, and the
+equivalence miner maintains the cross-vendor knowledge base.}
+\label{fig:tool-use-case}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/footprint-tool/sequence.pdf}
+\caption{UML sequence diagram of a complete footprint benchmark run. The workflow service
+orchestrates twelve steps: parsing both linker maps, classifying symbols into layers,
+querying the equivalence database, scoring candidates with twelve weighted signals,
+computing per-layer deltas, evaluating firmware quality metrics, and emitting the run
+manifest alongside all export artefacts.}
+\label{fig:tool-sequence}
+\end{figure}
+
 Two interfaces sit on top of the same engine: a desktop graphical user interface (GUI) built with PySide6
-(the Qt binding for Python)~\cite{pyside6}, which adds interactive charts and a project-scoped
-chat assistant, and a command-line interface for scripted and reproducible runs. Both call
+(the Qt binding for Python)~\cite{pyside6}, which provides over fourteen analysis tabs ---
+including interactive charts, a mapping mind-map visualisation panel, a review queue, and a
+project-scoped chat assistant --- and a command-line interface for scripted and reproducible
+runs. Both call
 into a single \emph{workflow service} that owns the data models and drives every stage.
 Persistence is handled by SQLite~\cite{sqlite}: a vendor registry of aliases and naming
 prefixes, a knowledge store of confirmed correspondences, an optional feedback store, and a
@@ -100,7 +124,8 @@ Scoped CSV/JSON/XLSX & Filtered exports for downstream processing. \\
 Review queue (JSON/CSV) & Low-confidence mappings prioritised for manual confirmation. \\
 Mapping diagnostics (JSON) & Per-pair signal breakdown and acceptance decisions. \\
 GUI payload (JSON) & Pre-rendered data for the desktop interface. \\
-PDF report (optional) & Eight-page narrative summary with charts. \\
+PDF report (optional) & Eight-page narrative summary with charts, quality grade, and enhancement roadmap. \\
+Run manifest (JSON) & Tool version, input checksums, equivalence DB hash, and deterministic mode for reproducibility. \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -157,12 +182,12 @@ stand-alone Windows executable with PyInstaller~\cite{pyinstaller}.
 \toprule
 \textbf{Concern} & \textbf{Technology} & \textbf{Role in the tool} \\
 \midrule
-Language & Python $\geq$ 3.11 \cite{python} & Entire code base. \\
-Desktop GUI & PySide6 / Qt \cite{pyside6} & Windows, charts, chat assistant. \\
+Language & Python $\geq$ 3.11 \cite{python} & Entire code base (version 0.2.0). \\
+Desktop GUI & PySide6 / Qt \cite{pyside6} & 14+ tab windows, mind-map panel, chat assistant. \\
 Tabular export & pandas \cite{pandas} & Scoped CSV/JSON/Excel export. \\
 Excel I/O & openpyxl \cite{openpyxl} & Reads prior workbooks, writes results. \\
-Charts \& PDF & matplotlib \cite{matplotlib} & Figures embedded in the PDF report. \\
-Persistence & SQLite \cite{sqlite} & Knowledge base, run history, caches. \\
+Charts \& PDF & matplotlib \cite{matplotlib} & Figures in the 8-page PDF report. \\
+Persistence & SQLite \cite{sqlite} & Knowledge base, equivalence store, run history. \\
 Packaging & PyInstaller \cite{pyinstaller} & Stand-alone Windows executable. \\
 \bottomrule
 \end{tabularx}
@@ -202,11 +227,13 @@ determines the layer with an associated confidence.}
 Matching ST symbols to their competitor counterparts is the part that, done manually, costs the
 most time and is the least repeatable, so it received the most care. Rather than rely on name
 similarity alone --- which fails precisely when two vendors name the same function differently
---- the engine scores each candidate pair by combining a dozen weighted signals into a single
-confidence value. Name and role similarity carry the most weight, followed by footprint
-proximity, shared external references, and call-signature, object-type, and operation cues;
-aliases from the vendor registry, surrounding context, and historical priors contribute the
-rest. Figure~\ref{fig:tool-weights} shows the relative weights, and
+--- the engine scores each candidate pair by combining twelve weighted signals into a single,
+explainable confidence value. Role similarity and alias similarity carry the most weight
+(0.18 each), followed by name similarity and operation similarity (0.12 each), external
+references and signature cues (0.10 each), footprint proximity (0.08), object similarity
+(0.06), context cues (0.04), and three knowledge-base priors (history, board-pair,
+scenario --- contributing the remaining 0.02). The weights sum to exactly~1.0.
+Figure~\ref{fig:tool-weights} shows the relative weights, and
 Figure~\ref{fig:tool-scoring-signals} expands the computation and penalty mechanics of each
 signal.
 
@@ -306,6 +333,64 @@ made during review can be replayed on later runs, so the tool improves as it is 
 vendor pair. We treat this learning, together with the web-ingestion and run-history features,
 as useful but experimental, and none of it is on the critical path of a comparison.
 
+\subsection{Cross-vendor equivalence database}
+\label{sec:tool-equivalence}
+
+A critical addition to the scoring engine is the \emph{cross-vendor equivalence database},
+which encodes deterministic knowledge about which modules and functions serve the same
+peripheral function across vendor SDKs. When two symbols are confirmed equivalents by this
+database, their confidence is boosted to the high-confidence threshold regardless of naming
+differences.
+
+The database covers twenty-five peripheral groups (GPIO, UART, SPI, I\textsuperscript{2}C,
+Timer, Clock, Power, DMA, USB Device, USB Host, Flash, ADC, DAC, CAN, Ethernet, RTC,
+Watchdog, CRC, RNG, I\textsuperscript{2}S, Pin Mux, Interrupt, Cortex core, BSP/Board,
+System Init, Startup, and PWM) with token-pattern entries for six vendors: STM32, NXP,
+Renesas, TI, GigaDevice, and Infineon. It also encodes sixteen action-verb equivalence
+classes (init/deinit, start/stop, transmit/receive, set/get, reset, callback, register/
+unregister, lock/unlock, suspend/resume), so that \texttt{HAL\_GPIO\_Init} and
+\texttt{GPIO\_Setup} are recognised as serving the same role.
+
+The database is designed as an offline, provenance-tracked artefact: an equivalence miner
+extracts entries from pinned vendor SDK repositories (resolved to a specific commit SHA for
+reproducibility), records provenance for every entry, and produces a content-hashed mining
+manifest. This ensures that the equivalence knowledge used in any given run is auditable
+and frozen --- it cannot drift silently between executions.
+
+\subsection{Source-code signal provider}
+\label{sec:tool-source-code}
+
+When both source and target IAR EWARM project directories are available, an optional
+source-code signal provider enriches the mapping with three additional signals derived from
+the actual C source files: function signature similarity (parameter count and return-type
+patterns), call-graph structural similarity (shared callee patterns), and include-graph
+co-location (functions in files with similar \texttt{\#include} dependencies). This
+provider operates as an external-signal plug-in to the scoring engine and is disabled by
+default; when enabled, it provides a richer correspondence basis for firmware that is
+available locally, without requiring any network access or language model.
+
+\subsection{Firmware quality metrics and grading}
+\label{sec:tool-quality}
+
+Beyond comparing two builds, the tool computes firmware quality metrics for the source
+(STM32) firmware independently: total flash and RAM, module and function counts, average
+and maximum module size, layer-balance score, modularity score, code density, HAL
+abstraction ratio, middleware ratio, application ratio, large-module count, dead-weight
+estimate, optimisation potential, and an overall quality grade (A through~F). These metrics
+appear in the PDF report and help the technical marketing team assess not just how STM32
+compares to a competitor, but how well the STM32 firmware itself is structured.
+
+\subsection{Run manifest and reproducibility}
+\label{sec:tool-manifest}
+
+Every benchmark run emits a \emph{run manifest} that captures the tool version, the
+deterministic mode (strict or assisted), the schema version, input file checksums, and a
+hash of the equivalence database state at the time of execution. This manifest allows any
+run to be proven reproducible: given the same inputs, configuration, and frozen knowledge
+state, the tool must produce byte-for-byte identical logical output. The deterministic
+hardening specification formalises this guarantee by requiring stable sort tie-breaks,
+rounded floating-point scores, and canonical export ordering across all stages.
+
 \section{Integration into the benchmark workflow}
 \label{sec:tool-integration}
 
@@ -374,14 +459,21 @@ The value of the tool is that it turns a slow, subjective, once-off comparison i
 explainable, and repeatable one. A footprint benchmark that previously took an afternoon of
 careful map-reading now runs in seconds and produces the same answer every time, with a
 documented reason behind every symbol correspondence and a clear attribution of where each
-kilobyte of difference originates. That reproducibility is what lets the benchmarking chapters
-of this report rest their footprint claims on evidence rather than on judgement.
+kilobyte of difference originates. The run manifest, the frozen equivalence database, and the
+deterministic hardening guarantee that the same inputs always yield the same verdict ---
+satisfying the reproducibility requirement of academic evaluation.
+
+The twelve-signal scoring engine, backed by the cross-vendor equivalence database covering
+twenty-five peripheral groups and sixteen action-verb classes, achieves high-confidence
+mappings across six vendors without relying on language models. The firmware quality metrics
+and grading system provide an independent structural assessment of the STM32 firmware, and
+the multi-run history tracks how footprint evolves across SDK versions.
 
 We are equally clear about what the tool does not do. It reads IAR EWARM linker maps; builds
 produced by other toolchains are out of scope for now, and broadening the parser is the most
 obvious avenue for future work. Its footprint figures are static, derived from the linked image
-rather than from execution. The migration-effort estimates and letter grades that the optional
-PDF report can produce are heuristic indications, not measured quantities, and we label them
+rather than from execution. The quality grades and optimisation-potential estimates that the
+report produces are heuristic indications, not measured quantities, and we label them
 accordingly wherever they appear. Finally, the language-model features, while useful, are
 optional and still maturing; the trustworthy core of the tool is, and is meant to remain, fully
 deterministic.
@@ -390,9 +482,11 @@ deterministic.
 
 We designed and built MCU Workflow Studio to remove the manual bottleneck in cross-vendor
 footprint benchmarking and to make its results reproducible and explainable. Its deterministic
-core parses two IAR linker maps, classifies every symbol into an architectural layer, maps STM32
-symbols to their competitor counterparts with an auditable confidence, and reports per-layer and
-global flash and RAM differences with a clear root cause --- with optional, strictly bounded
-language-model assistance available on top. The chapters that follow rely on this tool for the
-footprint figures they report, which is why we have presented it first, as a contribution in its
-own right.
+core parses two IAR linker maps, classifies every symbol into an architectural layer, maps
+STM32 symbols to their competitor counterparts using a twelve-signal scoring engine backed by a
+cross-vendor equivalence database, and reports per-layer and global flash and RAM differences
+with a clear root cause. The run manifest guarantees reproducibility; the firmware quality
+metrics provide an independent structural assessment; and the optional, strictly bounded
+language-model assistance enriches the mapping without ever sitting on the critical path. The
+chapters that follow rely on this tool for the footprint figures they report, which is why we
+have presented it first, as a contribution in its own right.
