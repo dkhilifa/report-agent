@@ -1,0 +1,132 @@
+<mxfile host="app.diagrams.net" modified="2026-07-10T00:00:00.000Z" agent="draw.io" version="21.0.0">
+  <diagram id="gantt-pfe" name="Gantt Chart">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="&lt;b&gt;STM32Cube Ecosystem Benchmark — Project Gantt Chart&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="600" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Month Headers -->
+        <mxCell id="hdr_feb" value="&lt;b&gt;Month 1&lt;/b&gt;&lt;br&gt;Feb" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="280" y="70" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="hdr_mar" value="&lt;b&gt;Month 2&lt;/b&gt;&lt;br&gt;Mar" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="440" y="70" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="hdr_apr" value="&lt;b&gt;Month 3&lt;/b&gt;&lt;br&gt;Apr" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="600" y="70" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="hdr_may" value="&lt;b&gt;Month 4&lt;/b&gt;&lt;br&gt;May" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="760" y="70" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="hdr_jun" value="&lt;b&gt;Month 5&lt;/b&gt;&lt;br&gt;Jun" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="920" y="70" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="hdr_jul" value="&lt;b&gt;Month 6&lt;/b&gt;&lt;br&gt;Jul" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="70" width="160" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Task Labels -->
+        <mxCell id="lbl1" value="Competitors search &amp;&amp; equivalence definition" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="10" y="130" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl2" value="Recreate USB legacy" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="10" y="180" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl3" value="Present results to marketing &amp;&amp; set next plan" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="10" y="230" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl4" value="GD32 Benchmark" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="10" y="280" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl5" value="Footprint Analyzer Tool" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="10" y="330" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl6" value="Custom Copilot Agent" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="10" y="380" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl7" value="Static &amp;&amp; Functional Benchmark: TI vs ST (Cube2 C5)" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="10" y="430" width="260" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Bars -->
+        <!-- Row 1: Competitors search — Month 1 (Feb) full -->
+        <mxCell id="bar1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4fc3f7;strokeColor=#0288d1;arcSize=30;" vertex="1" parent="1">
+          <mxGeometry x="280" y="135" width="160" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Row 2: USB legacy — Month 2-3 (Mar-Apr) -->
+        <mxCell id="bar2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#66bb6a;strokeColor=#2e7d32;arcSize=30;" vertex="1" parent="1">
+          <mxGeometry x="440" y="185" width="320" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Row 3: Marketing milestone — early Month 4 (May) diamond -->
+        <mxCell id="bar3" value="" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fdd835;strokeColor=#f9a825;" vertex="1" parent="1">
+          <mxGeometry x="820" y="225" width="24" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- Row 4: GD32 Benchmark — Month 4 to mid Month 5 (May – mid Jun) -->
+        <mxCell id="bar4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffa726;strokeColor=#e65100;arcSize=30;" vertex="1" parent="1">
+          <mxGeometry x="760" y="285" width="240" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Row 5: Footprint Analyzer — Month 4 to mid Month 5 (May – mid Jun) -->
+        <mxCell id="bar5" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ab47bc;strokeColor=#6a1b9a;arcSize=30;" vertex="1" parent="1">
+          <mxGeometry x="760" y="335" width="240" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Row 6: Custom Copilot Agent — Month 4 to mid Month 5 (May – mid Jun) -->
+        <mxCell id="bar6" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ec407a;strokeColor=#ad1457;arcSize=30;" vertex="1" parent="1">
+          <mxGeometry x="760" y="385" width="240" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Row 7: TI vs ST — mid Month 5 to end Month 6 (mid Jun – Jul) -->
+        <mxCell id="bar7" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#26c6da;strokeColor=#00838f;arcSize=30;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="435" width="240" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Parallel bracket annotation -->
+        <mxCell id="parallel_note" value="&lt;i&gt;Parallel&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="700" y="330" width="50" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Grid lines (vertical separators) -->
+        <mxCell id="grid1" value="" style="endArrow=none;dashed=1;strokeColor=#cccccc;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="440" y="110" as="sourcePoint" />
+            <mxPoint x="440" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="grid2" value="" style="endArrow=none;dashed=1;strokeColor=#cccccc;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="110" as="sourcePoint" />
+            <mxPoint x="600" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="grid3" value="" style="endArrow=none;dashed=1;strokeColor=#cccccc;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="760" y="110" as="sourcePoint" />
+            <mxPoint x="760" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="grid4" value="" style="endArrow=none;dashed=1;strokeColor=#cccccc;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="920" y="110" as="sourcePoint" />
+            <mxPoint x="920" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="grid5" value="" style="endArrow=none;dashed=1;strokeColor=#cccccc;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1080" y="110" as="sourcePoint" />
+            <mxPoint x="1080" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

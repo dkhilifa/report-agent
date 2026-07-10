@@ -1,0 +1,3303 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-accent="cyan">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engineer OS Ultimate</title>
+  <meta name="description" content="Engineer OS Ultimate — local-first personal operating system for engineers." />
+  <style>
+    :root{
+      --bg:#07111f;
+      --bg2:#091728;
+      --panel:rgba(10,19,33,.72);
+      --panel2:rgba(14,24,42,.7);
+      --card:rgba(17,29,48,.72);
+      --text:#ecf7ff;
+      --muted:#9db5c9;
+      --subtle:#6c88a3;
+      --line:rgba(173,215,255,.12);
+      --glass-border:rgba(255,255,255,.1);
+      --shadow:0 18px 55px rgba(0,0,0,.35);
+      --soft:0 10px 30px rgba(0,0,0,.2);
+      --success:#2ee6a6;
+      --warning:#ffcc66;
+      --danger:#ff6f91;
+      --accent:#51d3ff;
+      --accent2:#2f7cff;
+      --accent3:#80f0ff;
+      --gradient:linear-gradient(135deg,var(--accent2),var(--accent));
+      --gradient-soft:linear-gradient(135deg,rgba(47,124,255,.25),rgba(81,211,255,.12));
+      --radius:24px;
+      --radius-sm:16px;
+      --sidebar-width:300px;
+      --input:rgba(255,255,255,.05);
+      --input-focus:rgba(255,255,255,.08);
+    }
+
+    html[data-theme="light"]{
+      --bg:#eaf4ff;
+      --bg2:#daeaff;
+      --panel:rgba(255,255,255,.78);
+      --panel2:rgba(255,255,255,.68);
+      --card:rgba(255,255,255,.78);
+      --text:#0f1722;
+      --muted:#41617d;
+      --subtle:#6886a1;
+      --line:rgba(11,25,39,.1);
+      --glass-border:rgba(255,255,255,.55);
+      --shadow:0 18px 55px rgba(32,76,122,.12);
+      --soft:0 10px 30px rgba(32,76,122,.1);
+      --input:rgba(7,19,31,.05);
+      --input-focus:rgba(7,19,31,.08);
+    }
+
+    html[data-accent="cyan"]{
+      --accent:#51d3ff;
+      --accent2:#2f7cff;
+      --accent3:#80f0ff;
+    }
+    html[data-accent="blue"]{
+      --accent:#72a8ff;
+      --accent2:#275efe;
+      --accent3:#9bc3ff;
+    }
+    html[data-accent="mint"]{
+      --accent:#52f1c5;
+      --accent2:#03b89a;
+      --accent3:#9cffea;
+    }
+    html[data-accent="purple"]{
+      --accent:#b08bff;
+      --accent2:#7357ff;
+      --accent3:#d5c3ff;
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      min-height:100%;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(52,123,255,.18), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(81,211,255,.12), transparent 30%),
+        linear-gradient(180deg,var(--bg),var(--bg2));
+      color:var(--text);
+      overflow-x:hidden;
+    }
+    body.sidebar-open{overflow:hidden}
+    h1,h2,h3,h4,p{margin:0}
+    button,input,textarea,select{font:inherit}
+    button{color:inherit}
+    a{color:var(--accent);text-decoration:none}
+    ::selection{background:rgba(81,211,255,.25)}
+
+    .glass{
+      background:var(--panel);
+      border:1px solid var(--glass-border);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      box-shadow:var(--shadow);
+    }
+    .glass-soft{
+      background:var(--panel2);
+      border:1px solid rgba(255,255,255,.08);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+
+    .loader{
+      position:fixed; inset:0; z-index:5000;
+      display:grid; place-items:center; text-align:center;
+      background:
+        radial-gradient(circle at center, rgba(81,211,255,.12), transparent 40%),
+        linear-gradient(180deg,#07111f,#091728);
+      transition:opacity .5s ease, visibility .5s ease;
+    }
+    .loader.hidden{opacity:0;visibility:hidden}
+    .loader-mark{position:relative;width:110px;height:110px;margin:0 auto 18px}
+    .loader-ring{
+      position:absolute;inset:0;border-radius:50%;
+      border:3px solid rgba(255,255,255,.1);
+      border-top-color:var(--accent);
+      animation:spin 1s linear infinite;
+    }
+    .loader-core{
+      position:absolute; inset:20px;
+      display:grid; place-items:center;
+      border-radius:22px; background:var(--gradient);
+      box-shadow:0 0 40px rgba(81,211,255,.4);
+    }
+    .loader-core svg{width:34px;height:34px;color:#fff}
+    .loader p{color:var(--muted);margin-top:8px}
+
+    .bg-orb{
+      position:fixed; border-radius:50%; filter:blur(80px); opacity:.22; z-index:0; pointer-events:none;
+    }
+    .orb-1{width:320px;height:320px;top:-80px;left:-80px;background:var(--accent2);animation:driftA 14s ease-in-out infinite}
+    .orb-2{width:280px;height:280px;bottom:-100px;right:-60px;background:var(--accent);animation:driftB 16s ease-in-out infinite}
+    .orb-3{width:220px;height:220px;top:38%;right:18%;background:rgba(146,105,255,.75);animation:driftC 18s ease-in-out infinite}
+
+    .particle-field{position:fixed;inset:0;pointer-events:none;z-index:0}
+    .particle{
+      position:absolute;width:6px;height:6px;border-radius:50%;
+      background:rgba(255,255,255,.35);
+      box-shadow:0 0 18px rgba(81,211,255,.55);
+      animation:floatParticle 12s linear infinite;
+    }
+    .particle:nth-child(1){top:15%;left:10%;animation-delay:0s}
+    .particle:nth-child(2){top:30%;left:20%;animation-delay:3s}
+    .particle:nth-child(3){top:65%;left:12%;animation-delay:2s}
+    .particle:nth-child(4){top:78%;left:28%;animation-delay:7s}
+    .particle:nth-child(5){top:12%;right:22%;animation-delay:5s}
+    .particle:nth-child(6){top:42%;right:10%;animation-delay:1s}
+    .particle:nth-child(7){top:72%;right:18%;animation-delay:4s}
+    .particle:nth-child(8){top:85%;right:35%;animation-delay:6s}
+
+    .auth-screen{
+      position:fixed; inset:0; z-index:4000;
+      display:grid; place-items:center; padding:20px;
+      background:
+        radial-gradient(circle at top left, rgba(52,123,255,.18), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(81,211,255,.12), transparent 30%),
+        linear-gradient(180deg,var(--bg),var(--bg2));
+    }
+    .auth-screen.hidden{display:none}
+    .auth-card{
+      width:min(100%,440px);
+      border-radius:28px;
+      padding:24px;
+      display:grid;
+      gap:18px;
+    }
+    .auth-brand{display:flex;align-items:center;gap:14px}
+    .auth-tabs{display:flex;gap:10px}
+    .auth-tabs button{flex:1}
+    .auth-form{display:grid;gap:14px}
+
+    .app-shell{position:relative;z-index:1}
+    .sidebar{
+      position:fixed; left:12px; top:12px; bottom:12px;
+      width:min(calc(100vw - 24px), var(--sidebar-width));
+      padding:18px 14px 14px;
+      border-radius:28px;
+      display:flex; flex-direction:column; gap:18px;
+      transform:translateX(-110%);
+      transition:transform .35s ease;
+      z-index:30;
+      overflow:hidden;
+    }
+    .sidebar.open{transform:translateX(0)}
+    .brand{display:flex;align-items:center;gap:14px;padding:10px 12px 6px}
+    .brand-icon{
+      width:52px;height:52px;border-radius:18px;
+      display:grid;place-items:center;
+      background:var(--gradient);box-shadow:0 15px 35px rgba(47,124,255,.35)
+    }
+    .brand-icon svg{width:24px;height:24px;color:#fff}
+    .brand p{color:var(--muted);font-size:.9rem}
+    .nav-group{display:flex;flex-direction:column;gap:6px;overflow:auto;padding-right:4px}
+    .nav-link{
+      border:0; background:transparent; cursor:pointer; text-align:left;
+      color:var(--muted); border-radius:16px; padding:12px 14px;
+      display:flex; align-items:center; gap:12px; transition:.25s ease;
+    }
+    .nav-link svg{width:19px;height:19px;flex:0 0 19px}
+    .nav-link:hover,.nav-link.active{
+      color:var(--text);
+      background:linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 10px 30px rgba(0,0,0,.18);
+      transform:translateX(4px);
+    }
+    .sidebar-footer{margin-top:auto}
+    .mini-profile{
+      padding:14px; border-radius:18px; display:grid; gap:4px;
+    }
+    .mini-profile span,.mini-profile small{color:var(--muted)}
+
+    .main-content{padding:14px;width:100%}
+    .topbar{
+      position:sticky; top:14px; z-index:20;
+      min-height:80px;
+      border-radius:24px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:14px 16px; margin-bottom:14px;
+    }
+    .topbar-left,.topbar-right{display:flex;align-items:center;gap:12px}
+    .eyebrow{
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:.72rem;
+      color:var(--subtle);
+      margin-bottom:4px;
+    }
+    .clock-pill{
+      display:flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:999px; color:var(--muted);
+    }
+    .clock-dot{
+      width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 14px var(--success)
+    }
+
+    .icon-btn{
+      width:46px;height:46px;border-radius:16px;
+      border:1px solid var(--line); background:var(--card); cursor:pointer;
+      display:grid; place-items:center;
+      transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .icon-btn:hover{transform:translateY(-2px);box-shadow:var(--soft);background:rgba(255,255,255,.1)}
+    .icon-btn svg{width:20px;height:20px}
+
+    .page{display:none;animation:pageEnter .45s ease}
+    .page.active{display:block}
+    .page-inner,.stack-block{display:grid;gap:14px}
+    .hero{
+      padding:22px;border-radius:28px;position:relative;overflow:hidden;
+    }
+    .hero::after{
+      content:"";position:absolute;right:-80px;bottom:-80px;width:220px;height:220px;border-radius:50%;
+      background:radial-gradient(circle, rgba(81,211,255,.28), transparent 65%);filter:blur(20px);
+    }
+    .hero h2{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:8px}
+    .hero p{color:var(--muted);line-height:1.6}
+    .hero-grid,.metric-grid,.stats-grid,.card-grid,.book-grid,.project-grid,.badge-grid,.rules-grid,.goal-grid,.form-grid{display:grid;gap:14px}
+
+    .card,.metric-card,.timeline-card,.list-card,.chart-card,.form-card,.rule-card,.badge-card,.book-card,.project-card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--soft);
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .card:hover,.metric-card:hover,.timeline-card:hover,.list-card:hover,.chart-card:hover,.form-card:hover,.rule-card:hover,.badge-card:hover,.book-card:hover,.project-card:hover{
+      transform:translateY(-3px);
+      box-shadow:var(--shadow);
+      border-color:rgba(81,211,255,.22);
+    }
+
+    .metric-card{position:relative;overflow:hidden}
+    .metric-card::before{
+      content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;
+      background:linear-gradient(135deg, rgba(81,211,255,.24), transparent, rgba(47,124,255,.18));
+      -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+    }
+
+    .card-head,.metric-head,.section-head,.row-between{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+    }
+    .card-title{font-size:1.02rem;margin-bottom:6px}
+    .muted{color:var(--muted)}
+    .subtle{color:var(--subtle)}
+    .big-number{font-size:clamp(1.8rem,5vw,2.7rem);font-weight:800;line-height:1;margin:6px 0}
+    .pill,.tag,.badge,.status-pill{
+      display:inline-flex;align-items:center;gap:8px;
+      min-height:34px;padding:8px 12px;border-radius:999px;
+      border:1px solid var(--line); background:rgba(255,255,255,.05); color:var(--text);
+    }
+    .tag{font-size:.9rem;color:var(--muted)}
+    .badge{background:rgba(81,211,255,.12)}
+    .status-pill.success{color:#062817;background:var(--success)}
+    .status-pill.warning{color:#2e1b00;background:var(--warning)}
+    .status-pill.danger{color:#fff;background:var(--danger)}
+    .progress{
+      width:100%;height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden
+    }
+    .progress span{
+      display:block;height:100%;border-radius:inherit;background:var(--gradient);box-shadow:0 0 24px rgba(81,211,255,.45)
+    }
+
+    .form-row{display:grid;gap:12px;grid-template-columns:1fr}
+    .form-group{display:grid;gap:8px}
+    label{color:var(--muted);font-size:.92rem}
+    input,textarea,select{
+      width:100%;
+      border:1px solid transparent;
+      border-radius:16px;
+      background:var(--input);
+      color:var(--text);
+      padding:13px 14px;
+      outline:none;
+      transition:border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    input:focus,textarea:focus,select:focus{
+      border-color:rgba(81,211,255,.28);
+      background:var(--input-focus);
+      box-shadow:0 0 0 4px rgba(81,211,255,.08);
+    }
+    textarea{min-height:110px;resize:vertical}
+
+    .btn,.btn-secondary,.btn-ghost,.btn-danger{
+      border:0;border-radius:16px;padding:12px 16px;cursor:pointer;font-weight:650;
+      transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+    .btn{color:#fff;background:var(--gradient);box-shadow:0 15px 35px rgba(47,124,255,.25)}
+    .btn-secondary{color:var(--text);background:rgba(255,255,255,.08);border:1px solid var(--line)}
+    .btn-secondary.active{background:var(--gradient-soft);border-color:rgba(81,211,255,.24)}
+    .btn-ghost{color:var(--muted);background:transparent;border:1px dashed var(--line)}
+    .btn-danger{color:#fff;background:linear-gradient(135deg,#ff5a7d,#ff7d5a)}
+    .btn:hover,.btn-secondary:hover,.btn-ghost:hover,.btn-danger:hover{transform:translateY(-2px)}
+    .inline-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+    .timeline-list,.check-list,.simple-list,.table-like{display:grid;gap:10px}
+    .timeline-item,.check-item,.simple-item,.table-row{
+      display:grid;align-items:center;gap:12px;
+      padding:14px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.05)
+    }
+    .timeline-item,.check-item,.simple-item{grid-template-columns:auto 1fr auto}
+    .timeline-item.done,.check-item.done{opacity:.72}
+    .timeline-time{
+      width:74px;text-align:center;padding:10px 12px;border-radius:14px;
+      background:rgba(81,211,255,.1);color:var(--accent3);font-weight:700
+    }
+    .check-input{width:20px;height:20px;accent-color:var(--accent)}
+    .note-block{
+      padding:15px;border-radius:18px;border:1px solid var(--line);
+      background:rgba(255,255,255,.04);color:var(--muted);line-height:1.7
+    }
+    .quote-card{
+      padding:20px;border-radius:24px;
+      background:linear-gradient(135deg, rgba(47,124,255,.18), rgba(81,211,255,.08));
+      border:1px solid rgba(81,211,255,.16)
+    }
+    .quote-card blockquote{margin:0 0 10px 0;font-size:1.02rem;line-height:1.7}
+    .quote-card cite{color:var(--muted);font-style:normal}
+
+    .book-cover{
+      height:160px;border-radius:22px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), transparent),
+        linear-gradient(135deg, hsl(var(--cover-hue),90%,55%), hsl(calc(var(--cover-hue) + 45),90%,60%));
+      display:flex;align-items:flex-end;padding:16px;color:#fff;font-weight:800;font-size:1.05rem;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.3)
+    }
+
+    .ring-wrap{width:156px;height:156px;position:relative;margin:0 auto}
+    .ring-wrap svg{width:100%;height:100%;transform:rotate(-90deg)}
+    .ring-center{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+    .ring-value{font-size:1.8rem;font-weight:800}
+    .ring-label{font-size:.9rem;color:var(--muted)}
+
+    .chart-wrap{display:grid;gap:12px}
+    .chart-svg{width:100%;height:auto;display:block}
+    .chart-labels{display:flex;justify-content:space-between;gap:8px;color:var(--subtle);font-size:.8rem}
+    .bar-chart{display:grid;gap:10px}
+    .bar-row{display:grid;grid-template-columns:minmax(56px,68px) 1fr auto;gap:10px;align-items:center}
+    .bar-track{height:10px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden}
+    .bar-track span{display:block;height:100%;border-radius:999px;background:var(--gradient)}
+
+    .phase-box details{
+      border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.04);overflow:hidden
+    }
+    .phase-box summary{
+      list-style:none;cursor:pointer;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:12px
+    }
+    .phase-box summary::-webkit-details-marker{display:none}
+    .topic-card{
+      margin:0 14px 14px;padding:16px;border-radius:18px;
+      background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);display:grid;gap:12px
+    }
+    .topic-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .topic-mini{display:flex;gap:8px;flex-wrap:wrap}
+
+    .switch-row{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0
+    }
+    .switch-row + .switch-row{border-top:1px solid rgba(255,255,255,.06)}
+    .achievement-icon{
+      width:58px;height:58px;border-radius:18px;display:grid;place-items:center;
+      background:var(--gradient-soft);color:var(--accent3);box-shadow:0 10px 25px rgba(47,124,255,.18)
+    }
+    .achievement-icon svg{width:26px;height:26px}
+    .badge-card.locked{opacity:.58;filter:grayscale(.3)}
+    .rule-card{position:relative;overflow:hidden}
+    .rule-card::before{
+      content:"";position:absolute;top:-20%;right:-10%;width:160px;height:160px;border-radius:50%;
+      background:radial-gradient(circle, rgba(81,211,255,.18), transparent 70%)
+    }
+    .color-picker-row{display:flex;gap:10px;flex-wrap:wrap}
+    .color-chip{
+      width:44px;height:44px;border:2px solid transparent;border-radius:14px;cursor:pointer;transition:.2s ease
+    }
+    .color-chip.active{border-color:#fff;box-shadow:0 0 0 4px rgba(81,211,255,.12)}
+    .toast-wrap{
+      position:fixed;right:16px;bottom:16px;z-index:60;display:grid;gap:10px
+    }
+    .toast{
+      min-width:250px;max-width:360px;padding:14px 16px;border-radius:18px;
+      background:var(--panel);border:1px solid var(--glass-border);color:var(--text);box-shadow:var(--shadow);
+      animation:slideUpFade .35s ease;
+    }
+    .empty-state{
+      padding:18px;border-radius:18px;border:1px dashed var(--line);
+      color:var(--muted);text-align:center
+    }
+    .tiny{font-size:.8rem}
+    .small{font-size:.9rem}
+    .kbd{
+      padding:4px 8px;border-radius:10px;border:1px solid var(--line);
+      background:rgba(255,255,255,.06);color:var(--muted)
+    }
+
+    .table-head,.table-row{
+      display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:10px;align-items:center
+    }
+    .table-head{padding:0 6px;color:var(--subtle);font-size:.82rem}
+
+    iframe,embed{max-width:100%}
+
+    @media (min-width:700px){
+      .hero-grid,.metric-grid,.stats-grid,.card-grid,.book-grid,.project-grid,.badge-grid,.rules-grid,.goal-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+      .form-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+
+    @media (min-width:960px){
+      .sidebar{transform:none;left:14px}
+      .main-content{margin-left:calc(var(--sidebar-width) + 28px);padding:14px 18px 18px 0}
+      .hero-grid{grid-template-columns:1.4fr .9fr}
+      .metric-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+      .stats-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .card-grid,.book-grid,.project-grid,.badge-grid,.rules-grid,.goal-grid{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+      }
+    }
+
+    @media (min-width:1280px){
+      .card-grid,.book-grid,.project-grid,.badge-grid,.rules-grid{
+        grid-template-columns:repeat(4,minmax(0,1fr));
+      }
+      .goal-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+
+    @media (max-width:959px){
+      .clock-pill{display:none}
+      .table-head,.table-row{grid-template-columns:1fr}
+      .topbar{padding:12px}
+    }
+
+    @media (max-width:640px){
+      .card,.metric-card,.timeline-card,.list-card,.chart-card,.form-card,.rule-card,.badge-card,.book-card,.project-card{
+        padding:14px;border-radius:18px
+      }
+      .brand h1{font-size:1rem}
+      .big-number{font-size:1.6rem}
+      .hero h2{font-size:1.7rem}
+    }
+
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes pageEnter{from{opacity:0;transform:translateY(10px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+    @keyframes slideUpFade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes floatParticle{0%{transform:translateY(0) scale(.8);opacity:0}10%{opacity:1}50%{transform:translateY(-30px) scale(1)}100%{transform:translateY(-70px) scale(.8);opacity:0}}
+    @keyframes driftA{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(30px,35px,0)}}
+    @keyframes driftB{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-25px,-30px,0)}}
+    @keyframes driftC{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(18px,-25px,0)}}
+    @keyframes pulseGlow{0%,100%{box-shadow:0 0 0 rgba(81,211,255,0)}50%{box-shadow:0 0 28px rgba(81,211,255,.25)}}
+    @keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+    .hero,.quote-card,.metric-card:nth-child(2n),.book-card:nth-child(3n),.project-card:nth-child(2n){animation:floatCard 7s ease-in-out infinite}
+    .btn,.icon-btn,.nav-link.active,.brand-icon{animation:pulseGlow 4s ease-in-out infinite}
+  </style>
+</head>
+<body>
+  <div class="loader" id="appLoader">
+    <div>
+      <div class="loader-mark">
+        <div class="loader-ring"></div>
+        <div class="loader-core">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2l7 4v8c0 4.2-2.8 7.2-7 8-4.2-.8-7-3.8-7-8V6l7-4z" fill="currentColor"></path>
+          </svg>
+        </div>
+      </div>
+      <h1>Engineer OS Ultimate</h1>
+      <p>Booting your personal operating system…</p>
+    </div>
+  </div>
+
+  <div id="authScreen" class="auth-screen">
+    <div class="auth-card glass">
+      <div class="auth-brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2l7 4v8c0 4.2-2.8 7.2-7 8-4.2-.8-7-3.8-7-8V6l7-4z" fill="currentColor"></path>
+          </svg>
+        </div>
+        <div>
+          <h1>Engineer OS</h1>
+          <p>Local-first multi-user edition</p>
+        </div>
+      </div>
+
+      <div class="auth-tabs">
+        <button id="showLoginTab" class="btn-secondary active" type="button">Login</button>
+        <button id="showRegisterTab" class="btn-secondary" type="button">Register</button>
+      </div>
+
+      <form id="loginForm" class="auth-form">
+        <div class="form-group">
+          <label>Username</label>
+          <input id="loginUsername" type="text" autocomplete="username" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input id="loginPassword" type="password" autocomplete="current-password" required />
+        </div>
+        <button class="btn" type="submit">Login</button>
+      </form>
+
+      <form id="registerForm" class="auth-form" style="display:none;">
+        <div class="form-group">
+          <label>Username</label>
+          <input id="registerUsername" type="text" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input id="registerPassword" type="password" required />
+        </div>
+        <div class="form-group">
+          <label>Display Name</label>
+          <input id="registerDisplayName" type="text" required />
+        </div>
+        <button class="btn" type="submit">Create Account</button>
+      </form>
+
+      <div class="note-block">
+        This is a local login system. Accounts exist only in this browser on this device.
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <div class="particle-field" aria-hidden="true">
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+  </div>
+
+  <div class="app-shell" id="appShell" style="display:none;">
+    <aside class="sidebar glass" id="sidebar">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2l7 4v8c0 4.2-2.8 7.2-7 8-4.2-.8-7-3.8-7-8V6l7-4z" fill="currentColor"></path>
+          </svg>
+        </div>
+        <div>
+          <h1>Engineer OS</h1>
+          <p>My Personal Operating System</p>
+        </div>
+      </div>
+
+      <nav class="nav-group">
+        <button class="nav-link active" data-section="dashboard">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm10 8h8V11h-8v10zM3 21h8v-6H3v6zm10-10h8V3h-8v8z" fill="currentColor"/></svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-link" data-section="planner">
+          <svg viewBox="0 0 24 24"><path d="M7 2h2v3H7V2zm8 0h2v3h-2V2zM4 5h16a1 1 0 011 1v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a1 1 0 011-1zm0 5v10h16V10H4z" fill="currentColor"/></svg>
+          <span>Daily Planner</span>
+        </button>
+        <button class="nav-link" data-section="prayer">
+          <svg viewBox="0 0 24 24"><path d="M12 2a8 8 0 108 8 7 7 0 11-8-8z" fill="currentColor"/></svg>
+          <span>Prayer</span>
+        </button>
+        <button class="nav-link" data-section="quran">
+          <svg viewBox="0 0 24 24"><path d="M6 4h8a4 4 0 014 4v12H10a4 4 0 00-4 4V4zm12 16V8a4 4 0 00-4-4H6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          <span>Quran</span>
+        </button>
+        <button class="nav-link" data-section="quranNotifier">
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9 5.5-.8L12 2z" fill="currentColor"/></svg>
+          <span>Quran Notifier</span>
+        </button>
+        <button class="nav-link" data-section="roadmap">
+          <svg viewBox="0 0 24 24"><path d="M4 17h5v3H4v-3zm0-6h10v3H4v-3zm0-6h16v3H4V5zm12 12h4v3h-4v-3z" fill="currentColor"/></svg>
+          <span>Embedded Roadmap</span>
+        </button>
+        <button class="nav-link" data-section="books">
+          <svg viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 00-3 3V4z" fill="currentColor"/></svg>
+          <span>Books</span>
+        </button>
+        <button class="nav-link" data-section="pdfLibrary">
+          <svg viewBox="0 0 24 24"><path d="M6 2h8l4 4v16H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1.5V7h3.5" fill="currentColor"/></svg>
+          <span>PDF Library</span>
+        </button>
+        <button class="nav-link" data-section="projects">
+          <svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4zm0 5l9 4 9-4m-18 5l9 4 9-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          <span>Projects</span>
+        </button>
+        <button class="nav-link" data-section="pfe">
+          <svg viewBox="0 0 24 24"><path d="M4 4h12l4 4v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm12 0v4h4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          <span>PFE</span>
+        </button>
+        <button class="nav-link" data-section="career">
+          <svg viewBox="0 0 24 24"><path d="M9 6V4a3 3 0 016 0v2h5a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h5zm2 0h2V4a1 1 0 10-2 0v2z" fill="currentColor"/></svg>
+          <span>Career</span>
+        </button>
+        <button class="nav-link" data-section="health">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-10a4 4 0 017-2.7A4 4 0 0119 11c0 5.6-7 10-7 10z" fill="currentColor"/></svg>
+          <span>Health</span>
+        </button>
+        <button class="nav-link" data-section="journal">
+          <svg viewBox="0 0 24 24"><path d="M6 3h11a2 2 0 012 2v16l-4-2-4 2-4-2-4 2V5a2 2 0 012-2h1z" fill="currentColor"/></svg>
+          <span>Journal</span>
+        </button>
+        <button class="nav-link" data-section="goals">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.7 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z" fill="currentColor"/></svg>
+          <span>Goals</span>
+        </button>
+        <button class="nav-link" data-section="statistics">
+          <svg viewBox="0 0 24 24"><path d="M5 9h3v10H5V9zm5-4h3v14h-3V5zm5 7h3v7h-3v-7z" fill="currentColor"/></svg>
+          <span>Statistics</span>
+        </button>
+        <button class="nav-link" data-section="rules">
+          <svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.4 8.8-8 10-4.6-1.2-8-5-8-10V6l8-4z" fill="currentColor"/></svg>
+          <span>Rules</span>
+        </button>
+        <button class="nav-link" data-section="achievements">
+          <svg viewBox="0 0 24 24"><path d="M7 3h10v3h3v4a4 4 0 01-4 4h-1.1A5 5 0 0113 16.9V19h4v2H7v-2h4v-2.1A5 5 0 019.1 14H8a4 4 0 01-4-4V6h3V3z" fill="currentColor"/></svg>
+          <span>Achievements</span>
+        </button>
+        <button class="nav-link" data-section="settings">
+          <svg viewBox="0 0 24 24"><path d="M19.4 13a7.9 7.9 0 000-2l2.1-1.6-2-3.4-2.5 1a8 8 0 00-1.7-1L15 2h-4l-.3 4a8 8 0 00-1.7 1l-2.5-1-2 3.4L6.6 11a7.9 7.9 0 000 2l-2.1 1.6 2 3.4 2.5-1a8 8 0 001.7 1l.3 4h4l.3-4a8 8 0 001.7-1l2.5 1 2-3.4L19.4 13zM12 15.5A3.5 3.5 0 1112 8a3.5 3.5 0 010 7.5z" fill="currentColor"/></svg>
+          <span>Settings</span>
+        </button>
+        <button class="nav-link" data-section="about">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="currentColor"/></svg>
+          <span>About</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="mini-profile glass-soft" id="sidebarProfile">
+          <strong>Engineer</strong>
+          <span>Computer Engineer</span>
+          <small>Embedded Systems • Embedded Linux • AI</small>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar glass">
+        <div class="topbar-left">
+          <button class="icon-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+            <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </button>
+          <div>
+            <p class="eyebrow">Engineer OS</p>
+            <h2 id="pageTitle">Dashboard</h2>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="clock-pill glass-soft">
+            <span id="liveDate"></span>
+            <span class="clock-dot"></span>
+            <span id="liveClock"></span>
+          </div>
+          <button class="icon-btn" id="quickThemeToggle" aria-label="Toggle theme">
+            <svg viewBox="0 0 24 24"><path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.4 6.4l-1.4-1.4M7 7L5.6 5.6m12.8 0L17 7M7 17l-1.4 1.4M12 16a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <section id="dashboard" class="page active"></section>
+      <section id="planner" class="page"></section>
+      <section id="prayer" class="page"></section>
+      <section id="quran" class="page"></section>
+      <section id="quranNotifier" class="page"></section>
+      <section id="roadmap" class="page"></section>
+      <section id="books" class="page"></section>
+      <section id="pdfLibrary" class="page"></section>
+      <section id="projects" class="page"></section>
+      <section id="pfe" class="page"></section>
+      <section id="career" class="page"></section>
+      <section id="health" class="page"></section>
+      <section id="journal" class="page"></section>
+      <section id="goals" class="page"></section>
+      <section id="statistics" class="page"></section>
+      <section id="rules" class="page"></section>
+      <section id="achievements" class="page"></section>
+      <section id="settings" class="page"></section>
+      <section id="about" class="page"></section>
+    </main>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+
+  <script>
+    function esc(value){
+      return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#39;");
+    }
+
+    function clone(value){
+      return JSON.parse(JSON.stringify(value));
+    }
+
+    function isObject(value){
+      return value && typeof value === "object" && !Array.isArray(value);
+    }
+
+    function mergeDeep(base, incoming){
+      if(Array.isArray(base)) return Array.isArray(incoming) ? incoming : clone(base);
+      if(isObject(base)){
+        const out = {};
+        const keys = new Set([...(Object.keys(base || {})), ...(Object.keys(incoming || {}))]);
+        keys.forEach((key) => {
+          out[key] = mergeDeep(base ? base[key] : undefined, incoming ? incoming[key] : undefined);
+        });
+        return out;
+      }
+      return incoming !== undefined ? incoming : base;
+    }
+
+    const EngineerStorage = (() => {
+      const PRAYER_NAMES = ["fajr","dhuhr","asr","maghrib","isha"];
+
+      function uid(prefix="id"){
+        return prefix + "_" + Math.random().toString(36).slice(2,10);
+      }
+
+      function todayKey(date = new Date()){
+        const adjusted = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+        return adjusted.toISOString().split("T")[0];
+      }
+
+      function dayKeyOffset(offset = 0){
+        const d = new Date();
+        d.setDate(d.getDate() + offset);
+        return todayKey(d);
+      }
+
+      const ROADMAP_BLUEPRINT = [
+        { name:"Phase 1", focus:"Linux Fundamentals", topics:["Shell","C Revision","Memory","Processes","Threads","Filesystems","Networking Basics"] },
+        { name:"Phase 2", focus:"Embedded Linux", topics:["Cross Compilation","Buildroot","Yocto","Bootloader","Device Tree","BusyBox","Kernel"] },
+        { name:"Phase 3", focus:"Linux Drivers", topics:["GPIO","SPI","I2C","UART","CAN","Interrupts","DMA","Character Drivers","Platform Drivers"] },
+        { name:"Phase 4", focus:"Modern C++", topics:["C++17","Templates","RAII","Smart Pointers","Move Semantics","Design Patterns","CMake","Testing"] },
+        { name:"Phase 5", focus:"Advanced Embedded", topics:["RTOS","ARM Cortex","Performance","Optimization","Debugging","Networking","Security","AI for Embedded","Open Source","Interview Preparation"] }
+      ];
+
+      const PHASE_RESOURCES = {
+        "Phase 1": {
+          books:["The Linux Command Line","Advanced Programming in the UNIX Environment"],
+          courses:["Linux Journey","Beej's Guide to Network Concepts"],
+          projects:["Build a shell command cheat sheet","Automate a Linux study workflow"],
+          baseHours:8
+        },
+        "Phase 2": {
+          books:["Mastering Embedded Linux Programming","Embedded Linux Primer"],
+          courses:["Buildroot Fundamentals","Yocto Essentials"],
+          projects:["Cross-compile a test app","Create a custom Buildroot image"],
+          baseHours:10
+        },
+        "Phase 3": {
+          books:["Linux Device Drivers","Essential Linux Device Drivers"],
+          courses:["Linux Driver Development Labs","Kernel Development Basics"],
+          projects:["Driver mini-lab on Raspberry Pi","Character driver playground"],
+          baseHours:12
+        },
+        "Phase 4": {
+          books:["Effective Modern C++","Clean Code"],
+          courses:["CMake Masterclass","Modern C++ Fundamentals"],
+          projects:["Refactor legacy C with modern C++ patterns","Build a reusable embedded utility library"],
+          baseHours:8
+        },
+        "Phase 5": {
+          books:["Making Embedded Systems","Real-Time Concepts for Embedded Systems"],
+          courses:["RTOS Practical Labs","Embedded Security Fundamentals"],
+          projects:["RTOS sensor node","Benchmark and optimize an ARM project"],
+          baseHours:10
+        }
+      };
+
+      function plannerTemplate(){
+        return [
+          { id:uid("task"), time:"05:00", title:"Wake up", done:false },
+          { id:uid("task"), time:"05:15", title:"Fajr", done:false },
+          { id:uid("task"), time:"05:30", title:"Morning Adhkar", done:false },
+          { id:uid("task"), time:"05:45", title:"Quran", done:false },
+          { id:uid("task"), time:"07:00", title:"Breakfast", done:false },
+          { id:uid("task"), time:"08:00", title:"PFE", done:false },
+          { id:uid("task"), time:"10:00", title:"Embedded Linux Study", done:false },
+          { id:uid("task"), time:"12:00", title:"Coding", done:false },
+          { id:uid("task"), time:"13:30", title:"Lunch", done:false },
+          { id:uid("task"), time:"14:00", title:"Dhuhr", done:false },
+          { id:uid("task"), time:"15:30", title:"Walk", done:false },
+          { id:uid("task"), time:"16:00", title:"Projects", done:false },
+          { id:uid("task"), time:"18:00", title:"Workout", done:false },
+          { id:uid("task"), time:"19:15", title:"Maghrib", done:false },
+          { id:uid("task"), time:"20:00", title:"Reading", done:false },
+          { id:uid("task"), time:"21:00", title:"Isha", done:false },
+          { id:uid("task"), time:"22:30", title:"Sleep", done:false }
+        ];
+      }
+
+      function createTopic(phaseName, focus, topic, index){
+        const pack = PHASE_RESOURCES[phaseName];
+        return {
+          id:uid("topic"),
+          title:topic,
+          description:`Master ${topic} as part of ${focus} through practical embedded-oriented exercises, notes, labs, and review sessions.`,
+          books:clone(pack.books),
+          courses:clone(pack.courses),
+          projects:[`Mini project for ${topic}`].concat(pack.projects.slice(0,1)),
+          exercises:[
+            `Write focused notes for ${topic}`,
+            `Solve one practice exercise related to ${topic}`,
+            `Build one tiny hands-on experiment for ${topic}`
+          ],
+          estimatedHours:pack.baseHours + index * 2,
+          progress:0,
+          notes:"",
+          completed:false
+        };
+      }
+
+      function createRoadmap(){
+        return ROADMAP_BLUEPRINT.map((phase) => ({
+          id:uid("phase"),
+          name:phase.name,
+          focus:phase.focus,
+          topics:phase.topics.map((topic,index) => createTopic(phase.name, phase.focus, topic, index))
+        }));
+      }
+
+      function defaultBooks(){
+        return [
+          { id:uid("book"), title:"Mastering Embedded Linux Programming", author:"Chris Simmonds", coverHue:195, progress:18, currentChapter:"Toolchains and Boot Process", notes:"", bookmarks:"Kernel configuration, toolchain notes", completed:false },
+          { id:uid("book"), title:"Linux Device Drivers", author:"Jonathan Corbet, Alessandro Rubini, Greg Kroah-Hartman", coverHue:225, progress:10, currentChapter:"Char Drivers", notes:"", bookmarks:"Major/minor numbers, file operations", completed:false },
+          { id:uid("book"), title:"Effective Modern C++", author:"Scott Meyers", coverHue:275, progress:8, currentChapter:"Type Deduction", notes:"", bookmarks:"auto, decltype, move", completed:false },
+          { id:uid("book"), title:"Clean Code", author:"Robert C. Martin", coverHue:150, progress:22, currentChapter:"Functions", notes:"", bookmarks:"Meaningful names, code smells", completed:false },
+          { id:uid("book"), title:"Computer Systems: A Programmer's Perspective", author:"Bryant & O'Hallaron", coverHue:18, progress:5, currentChapter:"Data Representation", notes:"", bookmarks:"Memory hierarchy, binaries", completed:false }
+        ];
+      }
+
+      function defaultProjects(){
+        return [
+          { id:uid("project"), name:"PFE", category:"Academic", progress:42, github:"", lessons:"Clarify scope early, track milestones weekly." },
+          { id:uid("project"), name:"SecureAccess", category:"Security / Embedded", progress:30, github:"", lessons:"System integration requires more documentation than expected." },
+          { id:uid("project"), name:"CoreMark PRO", category:"Benchmarking", progress:18, github:"", lessons:"Always define reproducible benchmark conditions." },
+          { id:uid("project"), name:"Embedded Linux Board Bring-up", category:"Embedded Linux", progress:16, github:"", lessons:"Device Tree and boot logs reveal the real story." },
+          { id:uid("project"), name:"Driver Projects", category:"Linux Drivers", progress:12, github:"", lessons:"Read kernel logs first, assumptions second." }
+        ];
+      }
+
+      function defaultPfe(){
+        return {
+          milestones:[
+            { id:uid("mile"), title:"Problem definition", due:dayKeyOffset(7), done:true },
+            { id:uid("mile"), title:"System architecture", due:dayKeyOffset(20), done:false },
+            { id:uid("mile"), title:"Implementation sprint", due:dayKeyOffset(35), done:false },
+            { id:uid("mile"), title:"Testing and validation", due:dayKeyOffset(50), done:false },
+            { id:uid("mile"), title:"Final report and presentation", due:dayKeyOffset(60), done:false }
+          ],
+          meetings:[{ id:uid("meet"), date:dayKeyOffset(-3), note:"Reviewed objectives and current blockers." }],
+          supervisorNotes:"",
+          tasks:[
+            { id:uid("pfe"), title:"Prepare next demo", due:dayKeyOffset(4), done:false },
+            { id:uid("pfe"), title:"Write architecture summary", due:dayKeyOffset(2), done:false }
+          ],
+          files:["specification.pdf","architecture_notes.md"],
+          completion:38
+        };
+      }
+
+      function defaultCareer(){
+        return {
+          cv:"",
+          linkedin:"",
+          github:"",
+          portfolio:"",
+          githubCommits:0,
+          interviewChecklist:[
+            { id:uid("chk"), title:"Review C pointers and memory", done:false },
+            { id:uid("chk"), title:"Practice Linux process/thread questions", done:false },
+            { id:uid("chk"), title:"Explain one embedded project clearly", done:false },
+            { id:uid("chk"), title:"Prepare STAR stories", done:false }
+          ],
+          companiesApplied:["STMicroelectronics"],
+          applications:[{ id:uid("app"), company:"Dream Embedded Company", status:"Wishlist", interview:false }],
+          wishlist:["Embedded Linux Engineer","Device Driver Engineer","AI on Edge Developer"],
+          salaryGoals:"Build strong skills first, then negotiate from value.",
+          notes:""
+        };
+      }
+
+      function defaultGoals(){
+        return {
+          month1:["Solidify Linux fundamentals daily","Finish momentum on current PFE milestone","Pray on time consistently"],
+          month3:["Complete Phase 1 and start Phase 2","Finish one technical book","Launch two mini embedded projects"],
+          month6:["Build Linux driver foundations","Strengthen C++ and CMake","Prepare for technical interviews"],
+          year1:["Become job-ready as an Embedded Linux Engineer","Build a strong portfolio","Contribute to open source"],
+          year5:["Work as a high-impact embedded software engineer","Understand systems deeply from boot to application","Mentor others"],
+          lifeMission:"Build useful technology, seek excellence, stay disciplined, and remain grounded in faith."
+        };
+      }
+
+      const DEFAULTS = {
+        profile:{
+          displayName:"Fares Dkhili",
+          subtitle:"My Personal Operating System",
+          role:"Computer Engineer",
+          tags:["Embedded Systems","Embedded Linux","AI","STM32","Raspberry Pi"]
+        },
+        settings:{ theme:"dark", accent:"cyan" },
+        ui:{ lastSection:"dashboard" },
+        metrics:{ daily:{} },
+        planner:{ template:plannerTemplate(), tasksByDate:{} },
+        islam:{
+          prayersByDate:{},
+          quranByDate:{},
+          adhkarByDate:{},
+          ramadanMode:false,
+          fridayReminders:true,
+          goals:[
+            { id:uid("igoal"), title:"Pray all five prayers on time", done:false },
+            { id:uid("igoal"), title:"Read Quran every day", done:false },
+            { id:uid("igoal"), title:"Morning and evening adhkar", done:false }
+          ]
+        },
+        health:{
+          goals:{ waterMl:3000, calories:2200, steps:8000, sleepHours:7.5 },
+          weightEntries:[
+            { date:dayKeyOffset(-6), value:74.8 },
+            { date:dayKeyOffset(-3), value:74.4 },
+            { date:todayKey(), value:74.1 }
+          ]
+        },
+        roadmap:{ phases:createRoadmap() },
+        books:defaultBooks(),
+        pdfLibrary:{ files:[], activePdfId:null },
+        projects:defaultProjects(),
+        pfe:defaultPfe(),
+        career:defaultCareer(),
+        journal:{ entriesByDate:{} },
+        goals:defaultGoals(),
+        quranNotifier:{
+          currentPage:1,
+          lastSentDate:"",
+          notifyAt:"08:00",
+          enabled:true,
+          lastPageData:null
+        },
+        contentCache:{
+          quote:null,
+          hadith:null
+        },
+        rules:[
+          "Finish before starting.",
+          "One roadmap.",
+          "One mission.",
+          "Build more than consume.",
+          "Books over posts.",
+          "No random courses.",
+          "No comparison.",
+          "Protect your focus.",
+          "Deep work.",
+          "Discipline over motivation.",
+          "Pray on time.",
+          "Be grateful."
+        ]
+      };
+
+      function ensureDailyState(state, date = todayKey()){
+        state.metrics ||= { daily:{} };
+        state.metrics.daily ||= {};
+        state.metrics.daily[date] ||= {
+          studyHours:0,
+          readingMinutes:0,
+          codingHours:0,
+          pfeHours:0,
+          waterMl:0,
+          calories:0,
+          steps:0,
+          sleepHours:0,
+          weight:"",
+          workoutDone:false,
+          workoutType:"",
+          stretch:false,
+          eyeCare:false,
+          quranPages:0,
+          dhikrCount:0
+        };
+
+        state.planner ||= {};
+        state.planner.template ||= plannerTemplate();
+        state.planner.tasksByDate ||= {};
+        state.planner.tasksByDate[date] ||= clone(state.planner.template);
+
+        state.islam ||= {};
+        state.islam.prayersByDate ||= {};
+        state.islam.quranByDate ||= {};
+        state.islam.adhkarByDate ||= {};
+        state.islam.prayersByDate[date] ||= PRAYER_NAMES.reduce((acc,name)=>{acc[name]=false;return acc;}, {});
+        state.islam.quranByDate[date] ||= { pages:0, notes:"" };
+        state.islam.adhkarByDate[date] ||= { morning:false, evening:false, dhikrCount:0 };
+
+        state.journal ||= { entriesByDate:{} };
+        state.journal.entriesByDate ||= {};
+        state.journal.entriesByDate[date] ||= {
+          learned:"",
+          problems:"",
+          ideas:"",
+          tomorrow:"",
+          gratitude:""
+        };
+
+        return state;
+      }
+
+      return {
+        PRAYER_NAMES,
+        ROADMAP_BLUEPRINT,
+        DEFAULTS,
+        uid,
+        clone,
+        todayKey,
+        dayKeyOffset,
+        ensureDailyState
+      };
+    })();
+
+    const Auth = {
+      AUTH_KEY:"engineer_os_auth",
+      SESSION_KEY:"engineer_os_session",
+
+      loadUsers(){
+        try{return JSON.parse(localStorage.getItem(this.AUTH_KEY)) || { users:[] };}
+        catch{return { users:[] };}
+      },
+
+      saveUsers(data){
+        localStorage.setItem(this.AUTH_KEY, JSON.stringify(data));
+      },
+
+      async hashPassword(password){
+        if(window.crypto && crypto.subtle && window.TextEncoder){
+          try{
+            const enc = new TextEncoder().encode(password);
+            const hashBuffer = await crypto.subtle.digest("SHA-256", enc);
+            return Array.from(new Uint8Array(hashBuffer)).map((b)=>b.toString(16).padStart(2,"0")).join("");
+          }catch{}
+        }
+        let hash = 5381;
+        for(let i=0;i<password.length;i++) hash = ((hash << 5) + hash) + password.charCodeAt(i);
+        return String(hash >>> 0);
+      },
+
+      async register(username, password, displayName){
+        const cleanUser = username.trim().toLowerCase();
+        const db = this.loadUsers();
+        if(!cleanUser) throw new Error("Username is required.");
+        if(db.users.some((u)=>u.username === cleanUser)) throw new Error("User already exists.");
+
+        const passwordHash = await this.hashPassword(password);
+        db.users.push({
+          username:cleanUser,
+          displayName,
+          passwordHash,
+          createdAt:new Date().toISOString()
+        });
+        this.saveUsers(db);
+        localStorage.setItem(this.SESSION_KEY, cleanUser);
+        return cleanUser;
+      },
+
+      async login(username, password){
+        const cleanUser = username.trim().toLowerCase();
+        const db = this.loadUsers();
+        const user = db.users.find((u)=>u.username === cleanUser);
+        if(!user) throw new Error("User not found.");
+        const incoming = await this.hashPassword(password);
+        if(incoming !== user.passwordHash) throw new Error("Invalid password.");
+        localStorage.setItem(this.SESSION_KEY, cleanUser);
+        return cleanUser;
+      },
+
+      logout(){
+        localStorage.removeItem(this.SESSION_KEY);
+        location.reload();
+      },
+
+      currentUser(){
+        return localStorage.getItem(this.SESSION_KEY);
+      },
+
+      userStorageKey(username){
+        return "engineer_os_user_" + username;
+      },
+
+      loadUserState(username){
+        try{
+          const raw = localStorage.getItem(this.userStorageKey(username));
+          const parsed = raw ? JSON.parse(raw) : {};
+          const merged = mergeDeep(EngineerStorage.DEFAULTS, parsed);
+          return EngineerStorage.ensureDailyState(merged);
+        }catch{
+          return EngineerStorage.ensureDailyState(clone(EngineerStorage.DEFAULTS));
+        }
+      },
+
+      saveUserState(username, state){
+        localStorage.setItem(this.userStorageKey(username), JSON.stringify(state));
+      },
+
+      userRecord(username){
+        const db = this.loadUsers();
+        return db.users.find((u)=>u.username === username) || null;
+      }
+    };
+
+    const PdfDB = {
+      db:null,
+      async init(){
+        if(this.db) return this.db;
+        this.db = await new Promise((resolve, reject) => {
+          const req = indexedDB.open("engineer_os_pdf_db", 1);
+          req.onupgradeneeded = () => {
+            const db = req.result;
+            if(!db.objectStoreNames.contains("pdfs")) db.createObjectStore("pdfs");
+          };
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        });
+        return this.db;
+      },
+      async put(id, blob){
+        const db = await this.init();
+        await new Promise((resolve,reject)=>{
+          const tx = db.transaction("pdfs","readwrite");
+          tx.objectStore("pdfs").put(blob,id);
+          tx.oncomplete = resolve;
+          tx.onerror = () => reject(tx.error);
+        });
+      },
+      async get(id){
+        const db = await this.init();
+        return await new Promise((resolve,reject)=>{
+          const tx = db.transaction("pdfs","readonly");
+          const req = tx.objectStore("pdfs").get(id);
+          req.onsuccess = () => resolve(req.result || null);
+          req.onerror = () => reject(req.error);
+        });
+      },
+      async delete(id){
+        const db = await this.init();
+        await new Promise((resolve,reject)=>{
+          const tx = db.transaction("pdfs","readwrite");
+          tx.objectStore("pdfs").delete(id);
+          tx.oncomplete = resolve;
+          tx.onerror = () => reject(tx.error);
+        });
+      }
+    };
+
+    const ChartKit = {
+      clamp(value,min,max){return Math.max(min, Math.min(max, value));},
+      ring(percent,label="Progress"){
+        const safe = this.clamp(percent || 0, 0, 100);
+        const radius = 52;
+        const circumference = 2 * Math.PI * radius;
+        const dash = (safe / 100) * circumference;
+        return `
+          <div class="ring-wrap">
+            <svg viewBox="0 0 140 140" class="chart-svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="var(--accent2)"></stop>
+                  <stop offset="100%" stop-color="var(--accent)"></stop>
+                </linearGradient>
+              </defs>
+              <circle cx="70" cy="70" r="${radius}" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="10"></circle>
+              <circle cx="70" cy="70" r="${radius}" fill="none" stroke="url(#ringGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${dash} ${circumference}"></circle>
+            </svg>
+            <div class="ring-center">
+              <div class="ring-value">${Math.round(safe)}%</div>
+              <div class="ring-label">${label}</div>
+            </div>
+          </div>
+        `;
+      },
+      line(data=[], labels=[]){
+        const width = 360, height = 140, pad = 12;
+        const safeData = data.length ? data : [0,0,0,0,0,0,0];
+        const max = Math.max(...safeData, 1);
+        const stepX = (width - pad * 2) / Math.max(safeData.length - 1, 1);
+        const points = safeData.map((value,index)=>{
+          const x = pad + index * stepX;
+          const y = height - pad - (value / max) * (height - pad * 2);
+          return `${x},${y}`;
+        }).join(" ");
+        const circles = safeData.map((value,index)=>{
+          const x = pad + index * stepX;
+          const y = height - pad - (value / max) * (height - pad * 2);
+          return `<circle cx="${x}" cy="${y}" r="3.5" fill="var(--accent)"></circle>`;
+        }).join("");
+        return `
+          <div class="chart-wrap">
+            <svg viewBox="0 0 ${width} ${height}" class="chart-svg" role="img" aria-label="Line chart">
+              <defs>
+                <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="var(--accent2)"></stop>
+                  <stop offset="100%" stop-color="var(--accent)"></stop>
+                </linearGradient>
+              </defs>
+              <polyline points="${points}" fill="none" stroke="url(#lineGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline>
+              ${circles}
+            </svg>
+            <div class="chart-labels">${labels.map((l)=>`<span>${l}</span>`).join("")}</div>
+          </div>
+        `;
+      },
+      bars(items=[]){
+        return `
+          <div class="bar-chart">
+            ${items.map((item)=>`
+              <div class="bar-row">
+                <span class="tiny muted">${item.label}</span>
+                <div class="bar-track"><span style="width:${Math.max(0, Math.min(100, item.value || 0))}%"></span></div>
+                <strong class="tiny">${item.display ?? `${Math.round(item.value || 0)}%`}</strong>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      }
+    };
+
+    const OnlineAPI = {
+      async fetchJson(url){
+        const res = await fetch(url);
+        if(!res.ok) throw new Error("HTTP " + res.status);
+        return await res.json();
+      },
+
+      async getQuranPage(page){
+        const json = await this.fetchJson(`https://api.alquran.cloud/v1/page/${page}/quran-uthmani`);
+        return json.data;
+      },
+
+      async getQuote(){
+        const json = await this.fetchJson("https://dummyjson.com/quotes/random");
+        return { text: json.quote, author: json.author || "Unknown" };
+      },
+
+      async getHadith(){
+        const json = await this.fetchJson("https://api.hadith.gading.dev/books/muslim?range=1-300");
+        const items = json?.data?.hadiths || [];
+        if(!items.length) throw new Error("No hadith available");
+        const random = items[Math.floor(Math.random() * items.length)];
+        return {
+          text: random.arab || random.id || random.en || "Hadith unavailable",
+          ref: `Muslim ${random.number || ""}`.trim()
+        };
+      }
+    };
+
+    const QuranNotifier = {
+      async sendNextPage(state){
+        const q = state.quranNotifier;
+        const page = q.currentPage;
+        try{
+          const data = await OnlineAPI.getQuranPage(page);
+          q.lastPageData = {
+            page,
+            ayahs:(data.ayahs || []).map((a)=>({ numberInSurah:a.numberInSurah, surah:a.surah?.englishName || "", text:a.text }))
+          };
+          q.lastSentDate = EngineerStorage.todayKey();
+          this.showNotification(page, q.lastPageData);
+          q.currentPage = page >= 604 ? 1 : page + 1;
+          App.saveOnly();
+          App.update(["quranNotifier","dashboard"]);
+          App.toast("Quran page delivered.");
+        }catch(error){
+          App.toast("Could not fetch Quran page from API.");
+        }
+      },
+
+      reset(state){
+        state.quranNotifier.currentPage = 1;
+        state.quranNotifier.lastSentDate = "";
+        state.quranNotifier.lastPageData = null;
+        App.saveOnly();
+        App.update(["quranNotifier","dashboard"]);
+        App.toast("Quran order reset to page 1.");
+      },
+
+      async maybeNotify(state){
+        if(!state || !state.quranNotifier) return;
+        const q = state.quranNotifier;
+        if(!q.enabled) return;
+        const currentTime = new Date().toTimeString().slice(0,5);
+        const today = EngineerStorage.todayKey();
+        if(currentTime >= q.notifyAt && q.lastSentDate !== today){
+          await this.sendNextPage(state);
+        }
+      },
+
+      showNotification(page,data){
+        const body = (data?.ayahs || []).slice(0,2).map((a)=>a.text).join(" ").slice(0,180) || `Your Quran page ${page} is ready.`;
+        try{
+          if("Notification" in window && Notification.permission === "granted"){
+            new Notification(`Quran Page ${page}`, { body });
+          }else{
+            App.toast(`Quran Page ${page} is ready.`);
+          }
+        }catch{
+          App.toast(`Quran Page ${page} is ready.`);
+        }
+      }
+    };
+
+    const App = {
+      state:null,
+      renderers:{},
+      runtime:{
+        activePdfObjectUrl:null
+      },
+      content:{
+        missions:[
+          "Focus deeply on one important engineering mission today.",
+          "Move one roadmap topic forward with intention.",
+          "Build something small but real.",
+          "Turn confusion into notes, then action.",
+          "Study with discipline, not mood.",
+          "Finish what matters before opening anything new.",
+          "Protect your attention like a system resource."
+        ],
+        quotes:[
+          { text:"The best engineers are not the busiest. They are the clearest thinkers.", by:"Engineer OS" },
+          { text:"Simplicity is prerequisite for reliability.", by:"Edsger W. Dijkstra" },
+          { text:"Talk is cheap. Show me the code.", by:"Linus Torvalds" },
+          { text:"Programs must be written for people to read.", by:"Harold Abelson" }
+        ],
+        hadith:[
+          { text:"The most beloved deeds to Allah are those that are consistent, even if small.", ref:"Bukhari / Muslim" },
+          { text:"Whoever follows a path in pursuit of knowledge, Allah will make easy for him a path to Paradise.", ref:"Muslim" },
+          { text:"Part of the perfection of one's Islam is leaving what does not concern him.", ref:"Tirmidhi" }
+        ],
+        verses:[
+          { text:"وَقُل رَّبِّ زِدْنِي عِلْمًا", ref:"طه 20:114" },
+          { text:"إِنَّ مَعَ الْعُسْرِ يُسْرًا", ref:"الشرح 94:6" },
+          { text:"فَاصْبِرْ إِنَّ وَعْدَ اللَّهِ حَقٌّ", ref:"الروم 30:60" }
+        ],
+        inspiration:[
+          "Build more than you consume.",
+          "One roadmap. One mission. Full concentration.",
+          "Mastery is repetition with reflection.",
+          "Quiet consistency beats noisy ambition.",
+          "Discipline is the real productivity system."
+        ]
+      },
+
+      toast(message){
+        const wrap = document.getElementById("toastWrap");
+        const el = document.createElement("div");
+        el.className = "toast";
+        el.textContent = message;
+        wrap.appendChild(el);
+        setTimeout(()=>el.remove(), 2600);
+      },
+
+      saveOnly(){
+        const username = Auth.currentUser();
+        if(!username || !this.state) return;
+        Auth.saveUserState(username, this.state);
+      },
+
+      update(sections=[]){
+        EngineerStorage.ensureDailyState(this.state);
+        this.saveOnly();
+        this.refreshShellMeta();
+        sections.forEach((section)=>{
+          if(this.renderers[section]) this.renderers[section]();
+        });
+      },
+
+      applyAppearance(){
+        document.documentElement.dataset.theme = this.state?.settings?.theme || "dark";
+        document.documentElement.dataset.accent = this.state?.settings?.accent || "cyan";
+        this.saveOnly();
+      },
+
+      refreshShellMeta(){
+        const p = this.state.profile;
+        const sidebar = document.getElementById("sidebarProfile");
+        if(sidebar){
+          sidebar.innerHTML = `
+            <strong>${esc(p.displayName)}</strong>
+            <span>${esc(p.role)}</span>
+            <small>${esc((p.tags || []).join(" • "))}</small>
+          `;
+        }
+      },
+
+      showSection(sectionId){
+        document.querySelectorAll(".page").forEach((page)=>page.classList.toggle("active", page.id === sectionId));
+        document.querySelectorAll(".nav-link").forEach((link)=>link.classList.toggle("active", link.dataset.section === sectionId));
+        const title = document.querySelector(`.nav-link[data-section="${sectionId}"] span`)?.textContent || "Dashboard";
+        document.getElementById("pageTitle").textContent = title;
+        this.state.ui.lastSection = sectionId;
+        this.saveOnly();
+        document.getElementById("sidebar").classList.remove("open");
+        document.body.classList.remove("sidebar-open");
+      },
+
+      refreshClock(){
+        const now = new Date();
+        document.getElementById("liveDate").textContent = now.toLocaleDateString("en-US", {
+          weekday:"short", month:"short", day:"numeric"
+        });
+        document.getElementById("liveClock").textContent = now.toLocaleTimeString("en-US", {
+          hour:"2-digit", minute:"2-digit", second:"2-digit"
+        });
+        const heroDate = document.getElementById("heroCurrentDate");
+        const heroTime = document.getElementById("heroCurrentTime");
+        if(heroDate) heroDate.textContent = now.toLocaleDateString("en-US", { weekday:"long", month:"long", day:"numeric", year:"numeric" });
+        if(heroTime) heroTime.textContent = now.toLocaleTimeString("en-US", { hour:"2-digit", minute:"2-digit" });
+      },
+
+      utils:{
+        prettyDate(dateKey){
+          return new Date(dateKey + "T00:00:00").toLocaleDateString("en-US", {
+            weekday:"long", year:"numeric", month:"long", day:"numeric"
+          });
+        },
+        pickDaily(list, salt=0){
+          const seed = Number(EngineerStorage.todayKey().replaceAll("-", "")) + salt;
+          return list[seed % list.length];
+        },
+        lastNDates(n){
+          return [...Array(n)].map((_,i)=>{
+            const offset = i - (n - 1);
+            return EngineerStorage.dayKeyOffset(offset);
+          });
+        },
+        totalStudyHours(){
+          return Object.values(App.state.metrics.daily).reduce((sum, day)=>sum + Number(day.studyHours || 0), 0);
+        },
+        studyDaysCount(){
+          return Object.values(App.state.metrics.daily).filter((day)=>Number(day.studyHours || 0) > 0).length;
+        },
+        calculateStudyStreak(){
+          let streak = 0;
+          for(let i=0;i<365;i++){
+            const date = EngineerStorage.dayKeyOffset(-i);
+            const hours = Number(App.state.metrics.daily[date]?.studyHours || 0);
+            if(hours > 0) streak++;
+            else break;
+          }
+          return streak;
+        },
+        calculateQuranStreak(){
+          let streak = 0;
+          for(let i=0;i<365;i++){
+            const date = EngineerStorage.dayKeyOffset(-i);
+            const pages = Number(App.state.islam.quranByDate[date]?.pages || 0);
+            if(pages > 0) streak++;
+            else break;
+          }
+          return streak;
+        },
+        getPrayerProgress(date = EngineerStorage.todayKey()){
+          const prayers = App.state.islam.prayersByDate[date] || {};
+          const done = Object.values(prayers).filter(Boolean).length;
+          return (done / EngineerStorage.PRAYER_NAMES.length) * 100;
+        },
+        getTaskProgress(date = EngineerStorage.todayKey()){
+          const tasks = App.state.planner.tasksByDate[date] || [];
+          const done = tasks.filter((t)=>t.done).length;
+          return tasks.length ? (done / tasks.length) * 100 : 0;
+        },
+        currentBook(){
+          return App.state.books.find((b)=>Number(b.progress) < 100) || App.state.books[0];
+        },
+        currentPhase(){
+          return App.state.roadmap.phases.find((phase)=>phase.topics.some((t)=>!t.completed)) || App.state.roadmap.phases.at(-1);
+        },
+        roadmapPercent(){
+          const topics = App.state.roadmap.phases.flatMap((phase)=>phase.topics);
+          return topics.length ? topics.reduce((sum,t)=>sum+Number(t.progress || 0), 0) / topics.length : 0;
+        },
+        achievements(){
+          const totalHours = this.totalStudyHours();
+          const studyDays = this.studyDaysCount();
+          const firstBookDone = App.state.books.some((b)=>Number(b.progress || 0) >= 100);
+          const firstKernelDriver = App.state.roadmap.phases.flatMap((p)=>p.topics).some((t)=>["Character Drivers","Platform Drivers"].includes(t.title) && t.completed);
+          const firstInterview = App.state.career.applications.some((app)=>app.interview || app.status === "Interview");
+          const firstJob = App.state.career.applications.some((app)=>["Offer","Hired"].includes(app.status));
+          const pdfTracked = App.state.pdfLibrary.files.some((f)=>Number(f.progress || 0) > 0);
+          return [
+            { title:"30 Study Days", unlocked:studyDays >= 30, hint:`${studyDays}/30 days` },
+            { title:"100 Study Hours", unlocked:totalHours >= 100, hint:`${Math.round(totalHours)}/100 hours` },
+            { title:"First Kernel Driver", unlocked:firstKernelDriver, hint:"Complete Character Drivers or Platform Drivers" },
+            { title:"Finish First Book", unlocked:firstBookDone, hint:"Reach 100% in any book" },
+            { title:"100 GitHub Commits", unlocked:Number(App.state.career.githubCommits || 0) >= 100, hint:`${App.state.career.githubCommits || 0}/100 commits` },
+            { title:"First Interview", unlocked:firstInterview, hint:"Mark one interview" },
+            { title:"PDF Deep Reader", unlocked:pdfTracked, hint:"Track progress in one PDF" },
+            { title:"First Job", unlocked:firstJob, hint:"Receive an offer" }
+          ];
+        }
+      },
+
+      async loadDynamicContent(){
+        try{
+          const quote = await OnlineAPI.getQuote();
+          this.state.contentCache.quote = quote;
+        }catch{}
+        try{
+          const hadith = await OnlineAPI.getHadith();
+          this.state.contentCache.hadith = hadith;
+        }catch{}
+        this.saveOnly();
+        this.update(["dashboard","prayer","quran"]);
+      },
+
+      async openPdf(id){
+        try{
+          const blob = await PdfDB.get(id);
+          if(!blob){
+            this.toast("PDF file not found in local storage.");
+            return;
+          }
+          const meta = this.state.pdfLibrary.files.find((f)=>f.id === id);
+          if(!meta) return;
+          if(this.runtime.activePdfObjectUrl) URL.revokeObjectURL(this.runtime.activePdfObjectUrl);
+          this.runtime.activePdfObjectUrl = URL.createObjectURL(blob);
+          this.state.pdfLibrary.activePdfId = id;
+          meta.lastOpened = new Date().toISOString();
+          this.saveOnly();
+          this.renderers.pdfLibrary();
+        }catch{
+          this.toast("Failed to open PDF.");
+        }
+      },
+
+      async removePdf(id){
+        await PdfDB.delete(id);
+        this.state.pdfLibrary.files = this.state.pdfLibrary.files.filter((f)=>f.id !== id);
+        if(this.state.pdfLibrary.activePdfId === id){
+          this.state.pdfLibrary.activePdfId = null;
+          if(this.runtime.activePdfObjectUrl){
+            URL.revokeObjectURL(this.runtime.activePdfObjectUrl);
+            this.runtime.activePdfObjectUrl = null;
+          }
+        }
+        this.update(["pdfLibrary","statistics","achievements"]);
+      },
+
+      fullRender(){
+        this.refreshShellMeta();
+        Object.values(this.renderers).forEach((fn)=>fn());
+        this.showSection(this.state.ui.lastSection || "dashboard");
+        this.refreshClock();
+      }
+    };
+
+    function renderDashboard(){
+      const container = document.getElementById("dashboard");
+      const today = EngineerStorage.todayKey();
+      const day = App.state.metrics.daily[today];
+      const studyStreak = App.utils.calculateStudyStreak();
+      const prayerProgress = App.utils.getPrayerProgress(today);
+      const taskProgress = App.utils.getTaskProgress(today);
+      const currentBook = App.utils.currentBook();
+      const currentPhase = App.utils.currentPhase();
+      const roadmapPercent = App.utils.roadmapPercent();
+      const verse = App.utils.pickDaily(App.content.verses, 2);
+      const quote = App.state.contentCache.quote || App.utils.pickDaily(App.content.quotes, 5);
+      const hadith = App.state.contentCache.hadith || App.utils.pickDaily(App.content.hadith, 7);
+      const inspiration = App.utils.pickDaily(App.content.inspiration, 8);
+      const mission = App.utils.pickDaily(App.content.missions, 11);
+      const tasks = (App.state.planner.tasksByDate[today] || []).slice(0, 8);
+      const currentPdf = App.state.pdfLibrary.files.find((f)=>f.id === App.state.pdfLibrary.activePdfId) || App.state.pdfLibrary.files[0];
+      const overall = Math.round((prayerProgress + taskProgress + Math.min((Number(day.waterMl || 0)/Math.max(App.state.health.goals.waterMl,1))*100,100) + Math.min(roadmapPercent,100))/4);
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass hero-grid">
+            <div>
+              <p class="eyebrow">السلام عليكم ${esc(App.state.profile.displayName.split(" ")[0] || "Engineer")}</p>
+              <h2>Welcome back, ${esc(App.state.profile.displayName)}.</h2>
+              <p>${esc(App.state.profile.subtitle || "My Personal Operating System")}</p>
+              <div class="inline-actions" style="margin-top:14px;">
+                <span class="pill"><strong id="heroCurrentDate">${App.utils.prettyDate(today)}</strong></span>
+                <span class="pill"><strong id="heroCurrentTime">--:--</strong></span>
+                <span class="pill"><strong>${overall}%</strong> overview</span>
+              </div>
+            </div>
+            <div class="card">
+              ${ChartKit.ring(overall, "Today's Progress")}
+            </div>
+          </div>
+
+          <div class="card-grid">
+            <div class="metric-card"><div class="metric-head"><div><h3 class="card-title">Mission of the Day</h3><p class="muted">${esc(mission)}</p></div><span class="badge">Focus</span></div></div>
+            <div class="metric-card"><div class="metric-head"><div><h3 class="card-title">Current Streak</h3><div class="big-number">${studyStreak}</div><p class="muted">study days</p></div><span class="badge">Discipline</span></div></div>
+            <div class="metric-card"><div class="metric-head"><div><h3 class="card-title">Study Hours</h3><div class="big-number">${day.studyHours || 0}</div><p class="muted">today</p></div><span class="badge">${Math.round(App.utils.totalStudyHours())} total</span></div></div>
+            <div class="metric-card"><div class="metric-head"><div><h3 class="card-title">Prayer Progress</h3><div class="big-number">${Math.round(prayerProgress)}%</div><p class="muted">today</p></div><span class="badge">5 daily</span></div></div>
+            <div class="metric-card"><div class="metric-head"><div><h3 class="card-title">Current Book</h3><div class="big-number" style="font-size:1.15rem;line-height:1.3;">${esc(currentBook.title)}</div><p class="muted">${currentBook.progress}% • ${esc(currentBook.currentChapter)}</p></div><span class="badge">Reading</span></div></div>
+            <div class="metric-card"><div class="metric-head"><div><h3 class="card-title">Roadmap Stage</h3><div class="big-number" style="font-size:1.1rem;line-height:1.3;">${esc(currentPhase.name)}</div><p class="muted">${esc(currentPhase.focus)}</p></div><span class="badge">${Math.round(roadmapPercent)}%</span></div></div>
+            <div class="metric-card"><div class="metric-head"><div><h3 class="card-title">Quran Notifier</h3><div class="big-number">${App.state.quranNotifier.currentPage}</div><p class="muted">next page at ${esc(App.state.quranNotifier.notifyAt)}</p></div><span class="badge">${App.state.quranNotifier.enabled ? "Enabled" : "Off"}</span></div></div>
+            <div class="metric-card"><div class="metric-head"><div><h3 class="card-title">Active PDF</h3><div class="big-number" style="font-size:1.05rem;line-height:1.3;">${currentPdf ? esc(currentPdf.name) : "No PDF selected"}</div><p class="muted">${currentPdf ? `${currentPdf.progress || 0}% • page ${currentPdf.currentPage || 1}` : "Open one from PDF Library"}</p></div><span class="badge">Library</span></div></div>
+          </div>
+
+          <div class="card-grid">
+            <div class="form-card">
+              <div class="section-head">
+                <div>
+                  <h3 class="card-title">Quick Input</h3>
+                  <p class="muted">Update today's energy and study directly from the dashboard.</p>
+                </div>
+                <button class="btn-secondary" id="refreshCloudContentBtn" type="button">Refresh APIs</button>
+              </div>
+              <div class="form-row" style="margin-top:12px;">
+                <div class="form-group"><label>Study hours</label><input id="dashStudyHours" type="number" step="0.5" min="0" value="${day.studyHours || 0}"></div>
+                <div class="form-group"><label>Reading minutes</label><input id="dashReadingMinutes" type="number" min="0" value="${day.readingMinutes || 0}"></div>
+                <div class="form-group"><label>Coding hours</label><input id="dashCodingHours" type="number" step="0.5" min="0" value="${day.codingHours || 0}"></div>
+                <div class="form-group"><label>PFE hours</label><input id="dashPfeHours" type="number" step="0.5" min="0" value="${day.pfeHours || 0}"></div>
+              </div>
+            </div>
+
+            <div class="quote-card">
+              <blockquote>${esc(quote.text || quote.quote || "Quote unavailable")}</blockquote>
+              <cite>${esc(quote.author || quote.by || "Quote")}</cite>
+            </div>
+
+            <div class="quote-card" dir="rtl">
+              <blockquote>${verse.text}</blockquote>
+              <cite>${verse.ref}</cite>
+            </div>
+
+            <div class="quote-card">
+              <blockquote>${esc(hadith.text || "Hadith unavailable")}</blockquote>
+              <cite>${esc(hadith.ref || "Hadith")}</cite>
+            </div>
+          </div>
+
+          <div class="card-grid">
+            <div class="list-card">
+              <div class="section-head"><div><h3 class="card-title">Daily Checklist</h3><p class="muted">Quick wins from today's planner.</p></div></div>
+              <div class="check-list" style="margin-top:14px;">
+                ${tasks.map((task)=>`
+                  <label class="check-item ${task.done ? "done" : ""}">
+                    <input type="checkbox" class="check-input dash-task-toggle" data-id="${task.id}" ${task.done ? "checked" : ""}>
+                    <span>${esc(task.title)}</span>
+                    <span class="tag">${esc(task.time)}</span>
+                  </label>
+                `).join("")}
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="section-head"><div><h3 class="card-title">Progress Overview</h3><p class="muted">Priority areas for the day.</p></div></div>
+              <div style="margin-top:14px;">
+                ${ChartKit.bars([
+                  { label:"Planner", value:taskProgress },
+                  { label:"Prayer", value:prayerProgress },
+                  { label:"Roadmap", value:roadmapPercent },
+                  { label:"Water", value:Math.min((Number(day.waterMl || 0) / Math.max(App.state.health.goals.waterMl,1)) * 100,100) }
+                ])}
+              </div>
+            </div>
+          </div>
+
+          <div class="quote-card">
+            <blockquote>${esc(inspiration)}</blockquote>
+            <cite>Random inspiration</cite>
+          </div>
+        </div>
+      `;
+
+      [["dashStudyHours","studyHours"],["dashReadingMinutes","readingMinutes"],["dashCodingHours","codingHours"],["dashPfeHours","pfeHours"]].forEach(([id,key])=>{
+        container.querySelector("#" + id).addEventListener("input",(e)=>{
+          App.state.metrics.daily[today][key] = Number(e.target.value || 0);
+          App.update(["dashboard","statistics","achievements"]);
+        });
+      });
+
+      container.querySelectorAll(".dash-task-toggle").forEach((checkbox)=>{
+        checkbox.addEventListener("change",()=>{
+          const task = App.state.planner.tasksByDate[today].find((item)=>item.id === checkbox.dataset.id);
+          if(!task) return;
+          task.done = checkbox.checked;
+          App.update(["dashboard","planner","statistics","achievements"]);
+        });
+      });
+
+      container.querySelector("#refreshCloudContentBtn").addEventListener("click",()=>{
+        App.loadDynamicContent();
+        App.toast("Refreshing quote and hadith from APIs…");
+      });
+    }
+
+    function renderPlanner(){
+      const container = document.getElementById("planner");
+      const today = EngineerStorage.todayKey();
+      const tasks = App.state.planner.tasksByDate[today].slice().sort((a,b)=>a.time.localeCompare(b.time));
+      const completed = tasks.filter((t)=>t.done).length;
+      const progress = tasks.length ? (completed / tasks.length) * 100 : 0;
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass hero-grid">
+            <div>
+              <p class="eyebrow">Daily Planner</p>
+              <h2>Structured focus from Fajr to Sleep</h2>
+              <p>Your planner follows a disciplined rhythm. Check tasks as you progress, add custom blocks, and everything is saved automatically.</p>
+              <div class="inline-actions">
+                <span class="pill"><strong>${completed}/${tasks.length}</strong> completed</span>
+                <span class="pill"><strong>${Math.round(progress)}%</strong> today</span>
+              </div>
+            </div>
+            <div class="card">${ChartKit.ring(progress, "Planner")}</div>
+          </div>
+
+          <div class="form-card">
+            <div class="section-head"><div><h3 class="card-title">Add custom task</h3><p class="muted">Any mission, meeting, or study block.</p></div></div>
+            <div class="form-row" style="margin-top:12px;">
+              <div class="form-group"><label>Time</label><input id="newPlannerTime" type="time" value="09:00"></div>
+              <div class="form-group"><label>Task</label><input id="newPlannerTitle" type="text" placeholder="Add a new task"></div>
+            </div>
+            <div class="inline-actions" style="margin-top:12px;">
+              <button class="btn" id="plannerAddTask">Add Task</button>
+              <button class="btn-secondary" id="plannerResetDay">Reset Today</button>
+            </div>
+          </div>
+
+          <div class="timeline-card">
+            <div class="section-head"><div><h3 class="card-title">Timeline</h3><p class="muted">Autosaved and editable.</p></div></div>
+            <div class="timeline-list" style="margin-top:14px;">
+              ${tasks.map((task)=>`
+                <div class="timeline-item ${task.done ? "done" : ""}" data-id="${task.id}">
+                  <div class="timeline-time"><input type="time" class="planner-time" value="${esc(task.time)}"></div>
+                  <div class="form-grid"><input type="text" class="planner-title" value="${esc(task.title)}"></div>
+                  <div class="inline-actions">
+                    <input class="check-input planner-done" type="checkbox" ${task.done ? "checked" : ""}>
+                    <button class="icon-btn planner-remove" type="button">
+                      <svg viewBox="0 0 24 24"><path d="M6 7h12M9 7V4h6v3m-8 0l1 12h8l1-12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    </button>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.querySelector("#plannerAddTask").addEventListener("click",()=>{
+        const time = container.querySelector("#newPlannerTime").value || "09:00";
+        const title = container.querySelector("#newPlannerTitle").value.trim();
+        if(!title) return App.toast("Please enter a task title.");
+        App.state.planner.tasksByDate[today].push({ id:EngineerStorage.uid("task"), time, title, done:false });
+        App.update(["planner","dashboard","statistics","achievements"]);
+      });
+
+      container.querySelector("#plannerResetDay").addEventListener("click",()=>{
+        App.state.planner.tasksByDate[today] = clone(App.state.planner.template).map((t)=>({ ...t, id:EngineerStorage.uid("task") }));
+        App.update(["planner","dashboard","statistics","achievements"]);
+      });
+
+      container.querySelectorAll(".timeline-item").forEach((row)=>{
+        const id = row.dataset.id;
+        const task = App.state.planner.tasksByDate[today].find((t)=>t.id === id);
+        if(!task) return;
+        row.querySelector(".planner-time").addEventListener("input",(e)=>{ task.time = e.target.value; App.saveOnly(); });
+        row.querySelector(".planner-title").addEventListener("input",(e)=>{ task.title = e.target.value; App.saveOnly(); });
+        row.querySelector(".planner-done").addEventListener("change",(e)=>{ task.done = e.target.checked; App.update(["planner","dashboard","statistics","achievements"]); });
+        row.querySelector(".planner-remove").addEventListener("click",()=>{
+          App.state.planner.tasksByDate[today] = App.state.planner.tasksByDate[today].filter((t)=>t.id !== id);
+          App.update(["planner","dashboard","statistics","achievements"]);
+        });
+      });
+    }
+
+    function renderPrayer(){
+      const container = document.getElementById("prayer");
+      const today = EngineerStorage.todayKey();
+      const prayers = App.state.islam.prayersByDate[today];
+      const adhkar = App.state.islam.adhkarByDate[today];
+      const daily = App.state.metrics.daily[today];
+      const doneCount = Object.values(prayers).filter(Boolean).length;
+      const progress = (doneCount / EngineerStorage.PRAYER_NAMES.length) * 100;
+      const hadith = App.state.contentCache.hadith || App.utils.pickDaily(App.content.hadith, 3);
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass hero-grid">
+            <div>
+              <p class="eyebrow">Prayer & Dhikr</p>
+              <h2>Consistency, calmness, alignment</h2>
+              <p>A focused space to track prayers, adhkar, and Islamic goals.</p>
+              <div class="inline-actions">
+                <span class="pill"><strong>${doneCount}/5</strong> prayers</span>
+                <span class="pill"><strong>${daily.dhikrCount || adhkar.dhikrCount || 0}</strong> dhikr</span>
+                <span class="pill"><strong>${adhkar.morning && adhkar.evening ? "Complete" : "In progress"}</strong> adhkar</span>
+              </div>
+            </div>
+            <div class="card">${ChartKit.ring(progress, "Prayer")}</div>
+          </div>
+
+          <div class="card-grid">
+            ${EngineerStorage.PRAYER_NAMES.map((name)=>`
+              <div class="metric-card">
+                <div class="row-between">
+                  <div>
+                    <h3 class="card-title">${name.charAt(0).toUpperCase() + name.slice(1)}</h3>
+                    <p class="muted">Track with one tap</p>
+                  </div>
+                  <input type="checkbox" class="check-input prayer-toggle" data-prayer="${name}" ${prayers[name] ? "checked" : ""}>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+
+          <div class="form-card">
+            <div class="section-head"><div><h3 class="card-title">Daily Dhikr & Adhkar</h3><p class="muted">Morning, evening, and remembrance count.</p></div></div>
+            <div class="form-row" style="margin-top:12px;">
+              <div class="form-group"><label>Dhikr Count</label><input type="number" min="0" id="dhikrCountInput" value="${Number(daily.dhikrCount || adhkar.dhikrCount || 0)}"></div>
+              <div class="form-group"><label>Islamic Goals</label><input type="text" id="newIslamGoal" placeholder="Add a personal Islamic goal"></div>
+            </div>
+            <div class="switch-row">
+              <div><strong>Morning Adhkar</strong><p class="muted small">Start the day with remembrance.</p></div>
+              <input type="checkbox" class="check-input" id="morningAdhkar" ${adhkar.morning ? "checked" : ""}>
+            </div>
+            <div class="switch-row">
+              <div><strong>Evening Adhkar</strong><p class="muted small">Close the day with gratitude and protection.</p></div>
+              <input type="checkbox" class="check-input" id="eveningAdhkar" ${adhkar.evening ? "checked" : ""}>
+            </div>
+            <div class="inline-actions" style="margin-top:14px;">
+              <button class="btn" id="addIslamGoalBtn">Add Goal</button>
+            </div>
+          </div>
+
+          <div class="quote-card">
+            <blockquote>${esc(hadith.text || "Hadith unavailable")}</blockquote>
+            <cite>${esc(hadith.ref || "Hadith")}</cite>
+          </div>
+
+          <div class="list-card">
+            <div class="section-head"><div><h3 class="card-title">Islamic Goals</h3><p class="muted">Simple, consistent, sincere.</p></div></div>
+            <div class="check-list" style="margin-top:14px;">
+              ${App.state.islam.goals.map((goal,index)=>`
+                <label class="check-item ${goal.done ? "done" : ""}">
+                  <input type="checkbox" class="check-input islam-goal-toggle" data-index="${index}" ${goal.done ? "checked" : ""}>
+                  <span>${esc(goal.title)}</span>
+                  <button class="icon-btn islam-goal-remove" data-index="${index}" type="button">
+                    <svg viewBox="0 0 24 24"><path d="M6 7h12M9 7V4h6v3m-8 0l1 12h8l1-12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                  </button>
+                </label>
+              `).join("")}
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.querySelectorAll(".prayer-toggle").forEach((input)=>{
+        input.addEventListener("change",()=>{
+          prayers[input.dataset.prayer] = input.checked;
+          App.update(["prayer","dashboard","statistics","achievements"]);
+        });
+      });
+
+      container.querySelector("#dhikrCountInput").addEventListener("input",(e)=>{
+        const v = Number(e.target.value || 0);
+        adhkar.dhikrCount = v;
+        daily.dhikrCount = v;
+        App.saveOnly();
+      });
+
+      container.querySelector("#morningAdhkar").addEventListener("change",(e)=>{
+        adhkar.morning = e.target.checked;
+        App.update(["prayer","dashboard","statistics"]);
+      });
+
+      container.querySelector("#eveningAdhkar").addEventListener("change",(e)=>{
+        adhkar.evening = e.target.checked;
+        App.update(["prayer","dashboard","statistics"]);
+      });
+
+      container.querySelector("#addIslamGoalBtn").addEventListener("click",()=>{
+        const value = container.querySelector("#newIslamGoal").value.trim();
+        if(!value) return App.toast("Please enter a goal.");
+        App.state.islam.goals.push({ id:EngineerStorage.uid("igoal"), title:value, done:false });
+        App.update(["prayer"]);
+      });
+
+      container.querySelectorAll(".islam-goal-toggle").forEach((input)=>{
+        input.addEventListener("change",()=>{
+          const idx = Number(input.dataset.index);
+          App.state.islam.goals[idx].done = input.checked;
+          App.update(["prayer","dashboard","statistics"]);
+        });
+      });
+
+      container.querySelectorAll(".islam-goal-remove").forEach((btn)=>{
+        btn.addEventListener("click",()=>{
+          const idx = Number(btn.dataset.index);
+          App.state.islam.goals.splice(idx,1);
+          App.update(["prayer"]);
+        });
+      });
+    }
+
+    function renderQuran(){
+      const container = document.getElementById("quran");
+      const today = EngineerStorage.todayKey();
+      const quran = App.state.islam.quranByDate[today];
+      const daily = App.state.metrics.daily[today];
+      const totalPages = Object.values(App.state.islam.quranByDate).reduce((sum,day)=>sum + Number(day.pages || 0), 0);
+      const streak = App.utils.calculateQuranStreak();
+      const verse = App.utils.pickDaily(App.content.verses, 5);
+      const dates = App.utils.lastNDates(7);
+      const pagesSeries = dates.map((date)=>Number(App.state.islam.quranByDate[date]?.pages || 0));
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass hero-grid">
+            <div>
+              <p class="eyebrow">Quran</p>
+              <h2>Daily reading with clarity and reflection</h2>
+              <p>Track pages, keep notes, maintain your streak.</p>
+              <div class="inline-actions">
+                <span class="pill"><strong>${Number(quran.pages || 0)}</strong> pages today</span>
+                <span class="pill"><strong>${totalPages}</strong> total pages</span>
+                <span class="pill"><strong>${streak}</strong> day streak</span>
+              </div>
+            </div>
+            <div class="card">${ChartKit.ring(Math.min((Number(quran.pages || 0) / 10) * 100, 100), "Daily Quran")}</div>
+          </div>
+
+          <div class="card-grid">
+            <div class="form-card">
+              <h3 class="card-title">Reading Tracker</h3>
+              <div class="form-grid" style="margin-top:12px;">
+                <div class="form-group"><label>Pages read today</label><input type="number" min="0" id="quranPagesInput" value="${Number(quran.pages || daily.quranPages || 0)}"></div>
+                <div class="form-group"><label>Notes / Reflection</label><textarea id="quranNotesInput">${esc(quran.notes || "")}</textarea></div>
+              </div>
+            </div>
+
+            <div class="form-card">
+              <h3 class="card-title">Friday & Ramadan</h3>
+              <div class="switch-row">
+                <div><strong>Friday reminders</strong><p class="muted small">Useful weekly reminder space.</p></div>
+                <input type="checkbox" class="check-input" id="fridayReminderToggle" ${App.state.islam.fridayReminders ? "checked" : ""}>
+              </div>
+              <div class="switch-row">
+                <div><strong>Ramadan mode</strong><p class="muted small">Special discipline mode for Ramadan planning.</p></div>
+                <input type="checkbox" class="check-input" id="ramadanModeToggle" ${App.state.islam.ramadanMode ? "checked" : ""}>
+              </div>
+              <div class="note-block" style="margin-top:12px;">${App.state.islam.ramadanMode ? "Ramadan mode is enabled. Prioritize Quran, dhikr, prayer consistency, and energy management." : "Ramadan mode is disabled. Enable it when needed."}</div>
+            </div>
+
+            <div class="quote-card" dir="rtl">
+              <blockquote>${verse.text}</blockquote>
+              <cite>${verse.ref}</cite>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="section-head"><div><h3 class="card-title">Last 7 Days</h3><p class="muted">Simple reading trend.</p></div></div>
+            ${ChartKit.line(pagesSeries, dates.map((d)=>d.slice(5)))}
+          </div>
+        </div>
+      `;
+
+      container.querySelector("#quranPagesInput").addEventListener("input",(e)=>{
+        const value = Number(e.target.value || 0);
+        quran.pages = value;
+        daily.quranPages = value;
+        App.update(["quran","dashboard","statistics","achievements"]);
+      });
+      container.querySelector("#quranNotesInput").addEventListener("input",(e)=>{
+        quran.notes = e.target.value;
+        App.saveOnly();
+      });
+      container.querySelector("#fridayReminderToggle").addEventListener("change",(e)=>{
+        App.state.islam.fridayReminders = e.target.checked;
+        App.saveOnly();
+      });
+      container.querySelector("#ramadanModeToggle").addEventListener("change",(e)=>{
+        App.state.islam.ramadanMode = e.target.checked;
+        App.update(["quran","dashboard"]);
+      });
+    }
+
+    function renderQuranNotifier(){
+      const container = document.getElementById("quranNotifier");
+      const q = App.state.quranNotifier;
+      const currentPageData = q.lastPageData;
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass hero-grid">
+            <div>
+              <p class="eyebrow">Quran Notifier</p>
+              <h2>Ordered daily Quran pages</h2>
+              <p>Receive one Quran page in sequence every day. Reset anytime and continue with discipline.</p>
+              <div class="inline-actions">
+                <span class="pill"><strong>Next page:</strong> ${q.currentPage}</span>
+                <span class="pill"><strong>Time:</strong> ${esc(q.notifyAt)}</span>
+                <span class="pill"><strong>${q.enabled ? "Enabled" : "Disabled"}</strong></span>
+              </div>
+            </div>
+            <div class="card">${ChartKit.ring((q.currentPage / 604) * 100, "Quran Order")}</div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Notification time</label>
+                <input id="quranNotifyTime" type="time" value="${esc(q.notifyAt)}">
+              </div>
+              <div class="form-group">
+                <label>Notifications permission</label>
+                <button class="btn-secondary" id="requestNotificationPermission" type="button">Enable Browser Notifications</button>
+              </div>
+            </div>
+
+            <div class="switch-row">
+              <div><strong>Enable notifier</strong><p class="muted small">Send one ordered page every day while the app is open.</p></div>
+              <input type="checkbox" class="check-input" id="quranNotifierEnabled" ${q.enabled ? "checked" : ""}>
+            </div>
+
+            <div class="inline-actions" style="margin-top:12px;">
+              <button class="btn" id="sendNextQuranPageNow" type="button">Send Now</button>
+              <button class="btn-secondary" id="resetQuranOrder" type="button">Reset Order</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-head">
+              <div><h3 class="card-title">Last delivered page</h3><p class="muted">Cached locally for offline reading</p></div>
+            </div>
+            <div class="note-block" dir="rtl" style="margin-top:14px;max-height:420px;overflow:auto;">
+              ${
+                currentPageData?.ayahs?.length
+                  ? currentPageData.ayahs.map((a)=>`<p style="margin-bottom:12px;">${esc(a.text)}</p>`).join("")
+                  : "No page loaded yet."
+              }
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.querySelector("#quranNotifyTime").addEventListener("input",(e)=>{
+        q.notifyAt = e.target.value;
+        App.saveOnly();
+      });
+
+      container.querySelector("#quranNotifierEnabled").addEventListener("change",(e)=>{
+        q.enabled = e.target.checked;
+        App.saveOnly();
+      });
+
+      container.querySelector("#sendNextQuranPageNow").addEventListener("click",async ()=>{
+        await QuranNotifier.sendNextPage(App.state);
+      });
+
+      container.querySelector("#resetQuranOrder").addEventListener("click",()=>{
+        QuranNotifier.reset(App.state);
+      });
+
+      container.querySelector("#requestNotificationPermission").addEventListener("click",async ()=>{
+        if(!("Notification" in window)) return App.toast("This browser does not support notifications.");
+        try{
+          const permission = await Notification.requestPermission();
+          App.toast("Notification permission: " + permission);
+        }catch{
+          App.toast("Notification permission could not be requested.");
+        }
+      });
+    }
+
+    function renderRoadmap(){
+      const container = document.getElementById("roadmap");
+      const phases = App.state.roadmap.phases;
+      const topics = phases.flatMap((p)=>p.topics);
+      const overall = topics.length ? topics.reduce((sum,t)=>sum + Number(t.progress || 0),0)/topics.length : 0;
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass hero-grid">
+            <div>
+              <p class="eyebrow">Technical Roadmap</p>
+              <h2>One roadmap. Deep mastery. Real systems.</h2>
+              <p>The roadmap follows your path from Linux fundamentals to advanced embedded engineering and interview preparation.</p>
+              <div class="inline-actions">
+                <span class="pill"><strong>${phases.length}</strong> phases</span>
+                <span class="pill"><strong>${topics.length}</strong> topics</span>
+                <span class="pill"><strong>${Math.round(overall)}%</strong> overall progress</span>
+              </div>
+            </div>
+            <div class="card">${ChartKit.ring(overall, "Roadmap")}</div>
+          </div>
+
+          <div class="phase-box stack-block">
+            ${phases.map((phase,idx)=>{
+              const phaseProgress = phase.topics.length ? phase.topics.reduce((sum,t)=>sum+Number(t.progress||0),0)/phase.topics.length : 0;
+              return `
+                <details ${idx===0 ? "open" : ""}>
+                  <summary>
+                    <div>
+                      <h3>${esc(phase.name)} — ${esc(phase.focus)}</h3>
+                      <p class="muted">${phase.topics.length} topics • ${Math.round(phaseProgress)}%</p>
+                    </div>
+                    <div class="pill"><strong>${Math.round(phaseProgress)}%</strong></div>
+                  </summary>
+                  <div class="stack-block" style="padding:0 0 6px;">
+                    ${phase.topics.map((topic)=>`
+                      <div class="topic-card" data-topic-id="${topic.id}">
+                        <div class="topic-top">
+                          <div>
+                            <h4>${esc(topic.title)}</h4>
+                            <p class="muted">${esc(topic.description)}</p>
+                          </div>
+                          <div class="topic-mini">
+                            <span class="tag">${topic.estimatedHours}h</span>
+                            <span class="tag">${topic.completed ? "Completed" : "In Progress"}</span>
+                          </div>
+                        </div>
+                        <div class="progress"><span style="width:${Number(topic.progress || 0)}%"></span></div>
+                        <div class="form-row">
+                          <div class="form-group"><label>Progress</label><input class="roadmap-progress" type="range" min="0" max="100" value="${Number(topic.progress || 0)}"></div>
+                          <div class="form-group"><label>Estimated hours</label><input class="roadmap-hours" type="number" min="1" value="${Number(topic.estimatedHours || 0)}"></div>
+                        </div>
+                        <div class="form-group"><label>Notes</label><textarea class="roadmap-notes">${esc(topic.notes || "")}</textarea></div>
+                        <div class="switch-row">
+                          <div><strong>Completed</strong><p class="muted small">Mark the topic complete when mastered.</p></div>
+                          <input type="checkbox" class="check-input roadmap-completed" ${topic.completed ? "checked" : ""}>
+                        </div>
+                      </div>
+                    `).join("")}
+                  </div>
+                </details>
+              `;
+            }).join("")}
+          </div>
+        </div>
+      `;
+
+      container.querySelectorAll(".topic-card").forEach((card)=>{
+        const topicId = card.dataset.topicId;
+        const topic = App.state.roadmap.phases.flatMap((p)=>p.topics).find((t)=>t.id === topicId);
+        if(!topic) return;
+        card.querySelector(".roadmap-progress").addEventListener("input",(e)=>{
+          topic.progress = Number(e.target.value || 0);
+          if(topic.progress === 100) topic.completed = true;
+          App.update(["roadmap","dashboard","statistics","achievements"]);
+        });
+        card.querySelector(".roadmap-hours").addEventListener("input",(e)=>{
+          topic.estimatedHours = Number(e.target.value || 0);
+          App.saveOnly();
+        });
+        card.querySelector(".roadmap-notes").addEventListener("input",(e)=>{
+          topic.notes = e.target.value;
+          App.saveOnly();
+        });
+        card.querySelector(".roadmap-completed").addEventListener("change",(e)=>{
+          topic.completed = e.target.checked;
+          if(e.target.checked && topic.progress < 100) topic.progress = 100;
+          App.update(["roadmap","dashboard","statistics","achievements"]);
+        });
+      });
+    }
+
+    function renderBooks(){
+      const container = document.getElementById("books");
+      const libraryProgress = App.state.books.length ? App.state.books.reduce((sum,b)=>sum+Number(b.progress || 0),0)/App.state.books.length : 0;
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass hero-grid">
+            <div>
+              <p class="eyebrow">Books</p>
+              <h2>Technical library, chapter progress, notes, bookmarks</h2>
+              <p>Read deeply, take notes, and finish books deliberately.</p>
+            </div>
+            <div class="card">${ChartKit.ring(libraryProgress, "Library")}</div>
+          </div>
+
+          <div class="form-card">
+            <div class="section-head"><div><h3 class="card-title">Add Book</h3><p class="muted">Expand your personal library.</p></div></div>
+            <div class="form-row" style="margin-top:12px;">
+              <div class="form-group"><label>Title</label><input id="newBookTitle" type="text" placeholder="Book title"></div>
+              <div class="form-group"><label>Author</label><input id="newBookAuthor" type="text" placeholder="Author"></div>
+            </div>
+            <div class="inline-actions" style="margin-top:12px;"><button class="btn" id="addBookBtn">Add Book</button></div>
+          </div>
+
+          <div class="book-grid">
+            ${App.state.books.map((book)=>`
+              <div class="book-card" data-id="${book.id}">
+                <div class="book-cover" style="--cover-hue:${book.coverHue || 200}">
+                  <div><div>${esc(book.title)}</div><div class="small">${esc(book.author)}</div></div>
+                </div>
+                <div class="form-grid">
+                  <div class="form-group"><label>Progress</label><input class="book-progress" type="range" min="0" max="100" value="${Number(book.progress || 0)}"></div>
+                  <div class="progress"><span style="width:${Number(book.progress || 0)}%"></span></div>
+                  <div class="form-group"><label>Current chapter</label><input class="book-chapter" type="text" value="${esc(book.currentChapter || "")}"></div>
+                  <div class="form-group"><label>Bookmarks</label><input class="book-bookmarks" type="text" value="${esc(book.bookmarks || "")}"></div>
+                  <div class="form-group"><label>Notes</label><textarea class="book-notes">${esc(book.notes || "")}</textarea></div>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      `;
+
+      container.querySelector("#addBookBtn").addEventListener("click",()=>{
+        const title = container.querySelector("#newBookTitle").value.trim();
+        const author = container.querySelector("#newBookAuthor").value.trim();
+        if(!title) return App.toast("Please enter a book title.");
+        App.state.books.push({
+          id:EngineerStorage.uid("book"),
+          title, author, coverHue:Math.floor(Math.random()*300),
+          progress:0, currentChapter:"", notes:"", bookmarks:"", completed:false
+        });
+        App.update(["books"]);
+      });
+
+      container.querySelectorAll(".book-card").forEach((card)=>{
+        const book = App.state.books.find((b)=>b.id === card.dataset.id);
+        if(!book) return;
+        card.querySelector(".book-progress").addEventListener("input",(e)=>{
+          book.progress = Number(e.target.value || 0);
+          book.completed = book.progress >= 100;
+          App.update(["books","dashboard","statistics","achievements"]);
+        });
+        card.querySelector(".book-chapter").addEventListener("input",(e)=>{ book.currentChapter = e.target.value; App.saveOnly(); });
+        card.querySelector(".book-bookmarks").addEventListener("input",(e)=>{ book.bookmarks = e.target.value; App.saveOnly(); });
+        card.querySelector(".book-notes").addEventListener("input",(e)=>{ book.notes = e.target.value; App.saveOnly(); });
+      });
+    }
+
+    function renderPdfLibrary(){
+      const container = document.getElementById("pdfLibrary");
+      const lib = App.state.pdfLibrary;
+      const active = lib.files.find((f)=>f.id === lib.activePdfId) || null;
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass hero-grid">
+            <div>
+              <p class="eyebrow">PDF Library</p>
+              <h2>Your books from your device</h2>
+              <p>Select PDF books, open them inside the app, and save progress, current page, and notes.</p>
+              <div class="inline-actions">
+                <span class="pill"><strong>${lib.files.length}</strong> PDFs</span>
+                <span class="pill"><strong>${active ? esc(active.name) : "No active file"}</strong></span>
+              </div>
+            </div>
+            <div class="card">${ChartKit.ring(active?.progress || 0, "Reading Progress")}</div>
+          </div>
+
+          <div class="form-card">
+            <div class="section-head"><div><h3 class="card-title">Import PDFs</h3><p class="muted">Files are stored locally in your browser.</p></div></div>
+            <div class="inline-actions" style="margin-top:12px;">
+              <input id="pdfInput" type="file" accept="application/pdf" multiple>
+            </div>
+          </div>
+
+          <div class="card-grid">
+            <div class="list-card">
+              <div class="section-head"><div><h3 class="card-title">My PDFs</h3><p class="muted">Open, track, or remove.</p></div></div>
+              <div class="simple-list" style="margin-top:14px;">
+                ${
+                  lib.files.length
+                    ? lib.files.map((file)=>`
+                      <div class="simple-item">
+                        <div>
+                          <strong>${esc(file.name)}</strong>
+                          <div class="tiny muted">${file.progress || 0}% • page ${file.currentPage || 1}</div>
+                        </div>
+                        <div class="inline-actions">
+                          <button class="btn-secondary pdf-open" data-id="${file.id}" type="button">Open</button>
+                          <button class="icon-btn pdf-remove" data-id="${file.id}" type="button">
+                            <svg viewBox="0 0 24 24"><path d="M6 7h12M9 7V4h6v3m-8 0l1 12h8l1-12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                    `).join("")
+                    : `<div class="empty-state">No PDF added yet.</div>`
+                }
+              </div>
+            </div>
+
+            <div class="form-card">
+              <h3 class="card-title">Reader Progress</h3>
+              ${
+                active
+                  ? `
+                    <div class="form-grid" style="margin-top:12px;">
+                      <div class="form-group"><label>Current page</label><input id="pdfCurrentPage" type="number" min="1" value="${active.currentPage || 1}"></div>
+                      <div class="form-group"><label>Progress %</label><input id="pdfProgress" type="number" min="0" max="100" value="${active.progress || 0}"></div>
+                      <div class="form-group"><label>Notes</label><textarea id="pdfNotes">${esc(active.notes || "")}</textarea></div>
+                    </div>
+                  `
+                  : `<div class="empty-state" style="margin-top:12px;">Choose a PDF first.</div>`
+              }
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Reader</h3>
+            <div style="margin-top:14px;">
+              ${
+                active && App.runtime.activePdfObjectUrl
+                  ? `<iframe src="${App.runtime.activePdfObjectUrl}" style="width:100%;height:78vh;border:0;border-radius:18px;background:#fff;"></iframe>`
+                  : `<div class="empty-state">Select and open a PDF to read it here.</div>`
+              }
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.querySelector("#pdfInput").addEventListener("change", async (e)=>{
+        const files = Array.from(e.target.files || []);
+        if(!files.length) return;
+        for(const file of files){
+          const existing = lib.files.find((f)=>f.name === file.name && f.size === file.size && f.lastModified === file.lastModified);
+          if(existing) continue;
+          const id = EngineerStorage.uid("pdf");
+          await PdfDB.put(id, file);
+          lib.files.push({
+            id,
+            name:file.name,
+            size:file.size,
+            lastModified:file.lastModified,
+            progress:0,
+            currentPage:1,
+            notes:"",
+            lastOpened:null
+          });
+        }
+        App.update(["pdfLibrary","statistics","achievements"]);
+        e.target.value = "";
+      });
+
+      container.querySelectorAll(".pdf-open").forEach((btn)=>{
+        btn.addEventListener("click", async ()=>{
+          await App.openPdf(btn.dataset.id);
+        });
+      });
+
+      container.querySelectorAll(".pdf-remove").forEach((btn)=>{
+        btn.addEventListener("click", async ()=>{
+          await App.removePdf(btn.dataset.id);
+        });
+      });
+
+      if(active){
+        container.querySelector("#pdfCurrentPage")?.addEventListener("input",(e)=>{
+          active.currentPage = Number(e.target.value || 1);
+          App.saveOnly();
+        });
+        container.querySelector("#pdfProgress")?.addEventListener("input",(e)=>{
+          active.progress = Number(e.target.value || 0);
+          App.update(["pdfLibrary","dashboard","statistics","achievements"]);
+        });
+        container.querySelector("#pdfNotes")?.addEventListener("input",(e)=>{
+          active.notes = e.target.value;
+          App.saveOnly();
+        });
+      }
+    }
+
+    function renderProjects(){
+      const container = document.getElementById("projects");
+      const avg = App.state.projects.length ? App.state.projects.reduce((sum,p)=>sum+Number(p.progress || 0),0)/App.state.projects.length : 0;
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass hero-grid">
+            <div>
+              <p class="eyebrow">Projects</p>
+              <h2>Build more than consume</h2>
+              <p>Track progress, GitHub links, and lessons learned across your engineering work.</p>
+            </div>
+            <div class="card">${ChartKit.ring(avg, "Projects")}</div>
+          </div>
+
+          <div class="form-card">
+            <div class="section-head"><div><h3 class="card-title">Add Project</h3><p class="muted">Current or future.</p></div></div>
+            <div class="form-row" style="margin-top:12px;">
+              <div class="form-group"><label>Name</label><input id="newProjectName" type="text" placeholder="Project name"></div>
+              <div class="form-group"><label>Category</label><input id="newProjectCategory" type="text" placeholder="Embedded Linux / Driver / AI"></div>
+            </div>
+            <div class="inline-actions" style="margin-top:12px;"><button class="btn" id="addProjectBtn">Add Project</button></div>
+          </div>
+
+          <div class="project-grid">
+            ${App.state.projects.map((project)=>`
+              <div class="project-card" data-id="${project.id}">
+                <div class="row-between">
+                  <div><h3 class="card-title">${esc(project.name)}</h3><p class="muted">${esc(project.category)}</p></div>
+                  <span class="badge">${Number(project.progress || 0)}%</span>
+                </div>
+                <div class="form-grid">
+                  <div class="form-group"><label>Progress</label><input class="project-progress" type="range" min="0" max="100" value="${Number(project.progress || 0)}"></div>
+                  <div class="progress"><span style="width:${Number(project.progress || 0)}%"></span></div>
+                  <div class="form-group"><label>GitHub Link</label><input class="project-github" type="text" value="${esc(project.github || "")}" placeholder="https://github.com/..."></div>
+                  <div class="form-group"><label>Lessons Learned</label><textarea class="project-lessons">${esc(project.lessons || "")}</textarea></div>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      `;
+
+      container.querySelector("#addProjectBtn").addEventListener("click",()=>{
+        const name = container.querySelector("#newProjectName").value.trim();
+        const category = container.querySelector("#newProjectCategory").value.trim();
+        if(!name) return App.toast("Please enter a project name.");
+        App.state.projects.push({ id:EngineerStorage.uid("project"), name, category, progress:0, github:"", lessons:"" });
+        App.update(["projects"]);
+      });
+
+      container.querySelectorAll(".project-card").forEach((card)=>{
+        const project = App.state.projects.find((p)=>p.id === card.dataset.id);
+        if(!project) return;
+        card.querySelector(".project-progress").addEventListener("input",(e)=>{ project.progress = Number(e.target.value || 0); App.update(["projects","statistics"]); });
+        card.querySelector(".project-github").addEventListener("input",(e)=>{ project.github = e.target.value; App.saveOnly(); });
+        card.querySelector(".project-lessons").addEventListener("input",(e)=>{ project.lessons = e.target.value; App.saveOnly(); });
+      });
+    }
+
+    function renderPfe(){
+      const container = document.getElementById("pfe");
+      const pfe = App.state.pfe;
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass hero-grid">
+            <div>
+              <p class="eyebrow">PFE</p>
+              <h2>Milestones, meetings, notes, tasks, deadlines</h2>
+              <p>A serious command center for your final project.</p>
+            </div>
+            <div class="card">${ChartKit.ring(Number(pfe.completion || 0), "PFE")}</div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-row">
+              <div class="form-group"><label>Completion Percentage</label><input id="pfeCompletion" type="range" min="0" max="100" value="${Number(pfe.completion || 0)}"></div>
+              <div class="form-group"><label>Supervisor Notes</label><textarea id="pfeSupervisorNotes">${esc(pfe.supervisorNotes || "")}</textarea></div>
+            </div>
+          </div>
+
+          <div class="card-grid">
+            <div class="list-card">
+              <div class="section-head"><div><h3 class="card-title">Milestones</h3><p class="muted">Deadline-aware progress.</p></div></div>
+              <div class="form-row" style="margin-top:12px;">
+                <div class="form-group"><input id="newMilestoneTitle" type="text" placeholder="Milestone title"></div>
+                <div class="form-group"><input id="newMilestoneDue" type="date"></div>
+              </div>
+              <div class="inline-actions" style="margin-top:10px;"><button class="btn" id="addMilestoneBtn">Add Milestone</button></div>
+              <div class="check-list" style="margin-top:14px;">
+                ${pfe.milestones.map((item,index)=>`
+                  <label class="check-item ${item.done ? "done" : ""}">
+                    <input type="checkbox" class="check-input pfe-milestone-toggle" data-index="${index}" ${item.done ? "checked" : ""}>
+                    <span>${esc(item.title)} — <span class="muted">${esc(item.due)}</span></span>
+                    <button class="icon-btn pfe-milestone-remove" data-index="${index}" type="button">
+                      <svg viewBox="0 0 24 24"><path d="M6 7h12M9 7V4h6v3m-8 0l1 12h8l1-12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    </button>
+                  </label>
+                `).join("")}
+              </div>
+            </div>
+
+            <div class="list-card">
+              <div class="section-head"><div><h3 class="card-title">Tasks</h3><p class="muted">Small actions move the whole project.</p></div></div>
+              <div class="form-row" style="margin-top:12px;">
+                <div class="form-group"><input id="newPfeTaskTitle" type="text" placeholder="Task title"></div>
+                <div class="form-group"><input id="newPfeTaskDue" type="date"></div>
+              </div>
+              <div class="inline-actions" style="margin-top:10px;"><button class="btn" id="addPfeTaskBtn">Add Task</button></div>
+              <div class="check-list" style="margin-top:14px;">
+                ${pfe.tasks.map((task,index)=>`
+                  <label class="check-item ${task.done ? "done" : ""}">
+                    <input type="checkbox" class="check-input pfe-task-toggle" data-index="${index}" ${task.done ? "checked" : ""}>
+                    <span>${esc(task.title)} — <span class="muted">${esc(task.due)}</span></span>
+                    <button class="icon-btn pfe-task-remove" data-index="${index}" type="button">
+                      <svg viewBox="0 0 24 24"><path d="M6 7h12M9 7V4h6v3m-8 0l1 12h8l1-12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    </button>
+                  </label>
+                `).join("")}
+              </div>
+            </div>
+
+            <div class="list-card">
+              <div class="section-head"><div><h3 class="card-title">Meetings & Files</h3><p class="muted">Context matters.</p></div></div>
+              <div class="form-row" style="margin-top:12px;">
+                <div class="form-group"><input id="newMeetingDate" type="date"></div>
+                <div class="form-group"><input id="newMeetingNote" type="text" placeholder="Meeting note"></div>
+              </div>
+              <div class="inline-actions" style="margin-top:10px;"><button class="btn" id="addMeetingBtn">Add Meeting</button></div>
+
+              <div class="simple-list" style="margin-top:14px;">
+                ${pfe.meetings.map((meeting)=>`
+                  <div class="simple-item"><span><strong>${esc(meeting.date)}</strong> — ${esc(meeting.note)}</span></div>
+                `).join("")}
+              </div>
+
+              <div class="form-group" style="margin-top:14px;">
+                <label>Files (one per line)</label>
+                <textarea id="pfeFiles">${esc((pfe.files || []).join("\n"))}</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.querySelector("#pfeCompletion").addEventListener("input",(e)=>{ pfe.completion = Number(e.target.value || 0); App.update(["pfe","statistics","dashboard"]); });
+      container.querySelector("#pfeSupervisorNotes").addEventListener("input",(e)=>{ pfe.supervisorNotes = e.target.value; App.saveOnly(); });
+      container.querySelector("#pfeFiles").addEventListener("input",(e)=>{ pfe.files = e.target.value.split("\n").map((v)=>v.trim()).filter(Boolean); App.saveOnly(); });
+
+      container.querySelector("#addMilestoneBtn").addEventListener("click",()=>{
+        const title = container.querySelector("#newMilestoneTitle").value.trim();
+        const due = container.querySelector("#newMilestoneDue").value;
+        if(!title) return App.toast("Please enter a milestone title.");
+        pfe.milestones.push({ id:EngineerStorage.uid("mile"), title, due, done:false });
+        App.update(["pfe"]);
+      });
+
+      container.querySelector("#addPfeTaskBtn").addEventListener("click",()=>{
+        const title = container.querySelector("#newPfeTaskTitle").value.trim();
+        const due = container.querySelector("#newPfeTaskDue").value;
+        if(!title) return App.toast("Please enter a task title.");
+        pfe.tasks.push({ id:EngineerStorage.uid("pfe"), title, due, done:false });
+        App.update(["pfe"]);
+      });
+
+      container.querySelector("#addMeetingBtn").addEventListener("click",()=>{
+        const dateValue = container.querySelector("#newMeetingDate").value;
+        const note = container.querySelector("#newMeetingNote").value.trim();
+        if(!dateValue || !note) return App.toast("Please add date and note.");
+        pfe.meetings.unshift({ id:EngineerStorage.uid("meet"), date:dateValue, note });
+        App.update(["pfe"]);
+      });
+
+      container.querySelectorAll(".pfe-milestone-toggle").forEach((input)=>input.addEventListener("change",()=>{ pfe.milestones[Number(input.dataset.index)].done = input.checked; App.update(["pfe","statistics"]); }));
+      container.querySelectorAll(".pfe-task-toggle").forEach((input)=>input.addEventListener("change",()=>{ pfe.tasks[Number(input.dataset.index)].done = input.checked; App.update(["pfe","statistics"]); }));
+      container.querySelectorAll(".pfe-milestone-remove").forEach((btn)=>btn.addEventListener("click",()=>{ pfe.milestones.splice(Number(btn.dataset.index),1); App.update(["pfe"]); }));
+      container.querySelectorAll(".pfe-task-remove").forEach((btn)=>btn.addEventListener("click",()=>{ pfe.tasks.splice(Number(btn.dataset.index),1); App.update(["pfe"]); }));
+    }
+
+    function renderCareer(){
+      const container = document.getElementById("career");
+      const career = App.state.career;
+      const prepPercent = ((career.interviewChecklist.filter((i)=>i.done).length || 0) / Math.max(career.interviewChecklist.length,1)) * 100;
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass hero-grid">
+            <div>
+              <p class="eyebrow">Career</p>
+              <h2>Career assets, applications, and interview preparation</h2>
+              <p>Keep your professional profile organized at all times.</p>
+              <div class="inline-actions">
+                <span class="pill"><strong>${career.companiesApplied.filter(Boolean).length}</strong> companies</span>
+                <span class="pill"><strong>${career.applications.length}</strong> applications</span>
+                <span class="pill"><strong>${career.githubCommits || 0}</strong> commits</span>
+              </div>
+            </div>
+            <div class="card">${ChartKit.ring(prepPercent, "Interview Prep")}</div>
+          </div>
+
+          <div class="form-card">
+            <div class="section-head"><div><h3 class="card-title">Professional Links</h3><p class="muted">Be ready at all times.</p></div></div>
+            <div class="form-row" style="margin-top:12px;">
+              <div class="form-group"><label>CV</label><input id="careerCv" type="text" value="${esc(career.cv)}" placeholder="Path or note"></div>
+              <div class="form-group"><label>LinkedIn</label><input id="careerLinkedin" type="text" value="${esc(career.linkedin)}"></div>
+              <div class="form-group"><label>GitHub</label><input id="careerGithub" type="text" value="${esc(career.github)}"></div>
+              <div class="form-group"><label>Portfolio</label><input id="careerPortfolio" type="text" value="${esc(career.portfolio)}"></div>
+              <div class="form-group"><label>GitHub commits</label><input id="careerCommits" type="number" min="0" value="${Number(career.githubCommits || 0)}"></div>
+              <div class="form-group"><label>Salary goals</label><input id="careerSalary" type="text" value="${esc(career.salaryGoals)}"></div>
+            </div>
+            <div class="form-group" style="margin-top:12px;"><label>Notes</label><textarea id="careerNotes">${esc(career.notes || "")}</textarea></div>
+          </div>
+
+          <div class="card-grid">
+            <div class="list-card">
+              <div class="section-head"><div><h3 class="card-title">Interview Preparation</h3><p class="muted">Check off what is ready.</p></div></div>
+              <div class="check-list" style="margin-top:14px;">
+                ${career.interviewChecklist.map((item)=>`
+                  <label class="check-item ${item.done ? "done" : ""}">
+                    <input class="check-input career-check" data-id="${item.id}" type="checkbox" ${item.done ? "checked" : ""}>
+                    <span>${esc(item.title)}</span>
+                    <span class="tag">${item.done ? "Ready" : "Pending"}</span>
+                  </label>
+                `).join("")}
+              </div>
+            </div>
+
+            <div class="list-card">
+              <div class="section-head"><div><h3 class="card-title">Companies Applied</h3><p class="muted">Track target companies.</p></div></div>
+              <div class="form-group" style="margin-top:14px;"><input type="text" id="newCompanyInput" placeholder="Add company"></div>
+              <div class="inline-actions" style="margin-top:10px;"><button class="btn" id="addCompanyBtn">Add Company</button></div>
+              <div class="simple-list" style="margin-top:14px;">
+                ${career.companiesApplied.filter(Boolean).map((company,index)=>`
+                  <div class="simple-item">
+                    <span>${esc(company)}</span>
+                    <button class="icon-btn remove-company" data-index="${index}" type="button">
+                      <svg viewBox="0 0 24 24"><path d="M6 7h12M9 7V4h6v3m-8 0l1 12h8l1-12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    </button>
+                  </div>
+                `).join("") || `<div class="empty-state">No companies added yet.</div>`}
+              </div>
+            </div>
+
+            <div class="list-card">
+              <div class="section-head"><div><h3 class="card-title">Applications</h3><p class="muted">Status overview.</p></div></div>
+              <div class="form-row" style="margin-top:14px;">
+                <div class="form-group"><input type="text" id="newAppCompany" placeholder="Company"></div>
+                <div class="form-group">
+                  <select id="newAppStatus">
+                    <option>Wishlist</option><option>Applied</option><option>Interview</option><option>Offer</option><option>Rejected</option>
+                  </select>
+                </div>
+              </div>
+              <div class="inline-actions" style="margin-top:10px;"><button class="btn" id="addApplicationBtn">Add Application</button></div>
+              <div class="table-like" style="margin-top:14px;">
+                <div class="table-head"><span>Company</span><span>Status</span><span>Interview</span><span>Remove</span></div>
+                ${career.applications.map((app)=>`
+                  <div class="table-row" data-id="${app.id}">
+                    <span>${esc(app.company)}</span>
+                    <select class="career-app-status">
+                      ${["Wishlist","Applied","Interview","Offer","Rejected"].map((status)=>`<option ${app.status===status ? "selected" : ""}>${status}</option>`).join("")}
+                    </select>
+                    <input type="checkbox" class="check-input career-app-interview" ${app.interview ? "checked" : ""}>
+                    <button class="icon-btn career-app-remove" type="button">
+                      <svg viewBox="0 0 24 24"><path d="M6 7h12M9 7V4h6v3m-8 0l1 12h8l1-12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    </button>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      [["careerCv","cv"],["careerLinkedin","linkedin"],["careerGithub","github"],["careerPortfolio","portfolio"],["careerSalary","salaryGoals"],["careerNotes","notes"]].forEach(([id,key])=>{
+        container.querySelector("#" + id).addEventListener("input",(e)=>{ career[key] = e.target.value; App.saveOnly(); });
+      });
+      container.querySelector("#careerCommits").addEventListener("input",(e)=>{ career.githubCommits = Number(e.target.value || 0); App.update(["career","achievements"]); });
+
+      container.querySelectorAll(".career-check").forEach((input)=>{
+        input.addEventListener("change",()=>{
+          const item = career.interviewChecklist.find((row)=>row.id === input.dataset.id);
+          if(!item) return;
+          item.done = input.checked;
+          App.update(["career","dashboard","statistics","achievements"]);
+        });
+      });
+
+      container.querySelector("#addCompanyBtn").addEventListener("click",()=>{
+        const value = container.querySelector("#newCompanyInput").value.trim();
+        if(!value) return App.toast("Please enter a company name.");
+        career.companiesApplied.push(value);
+        App.update(["career"]);
+      });
+
+      container.querySelectorAll(".remove-company").forEach((btn)=>btn.addEventListener("click",()=>{ career.companiesApplied.splice(Number(btn.dataset.index),1); App.update(["career"]); }));
+
+      container.querySelector("#addApplicationBtn").addEventListener("click",()=>{
+        const company = container.querySelector("#newAppCompany").value.trim();
+        const status = container.querySelector("#newAppStatus").value;
+        if(!company) return App.toast("Please enter a company.");
+        career.applications.push({ id:EngineerStorage.uid("app"), company, status, interview:status==="Interview" });
+        App.update(["career","achievements"]);
+      });
+
+      container.querySelectorAll(".table-row").forEach((row)=>{
+        const item = career.applications.find((app)=>app.id === row.dataset.id);
+        if(!item) return;
+        row.querySelector(".career-app-status").addEventListener("change",(e)=>{ item.status = e.target.value; if(item.status==="Interview") item.interview = true; App.update(["career","achievements"]); });
+        row.querySelector(".career-app-interview").addEventListener("change",(e)=>{ item.interview = e.target.checked; App.update(["career","achievements"]); });
+        row.querySelector(".career-app-remove").addEventListener("click",()=>{ career.applications = career.applications.filter((app)=>app.id !== item.id); App.update(["career","achievements"]); });
+      });
+    }
+
+    function renderHealth(){
+      const container = document.getElementById("health");
+      const today = EngineerStorage.todayKey();
+      const daily = App.state.metrics.daily[today];
+      const goals = App.state.health.goals;
+      const weightToday = daily.weight || App.state.health.weightEntries.find((entry)=>entry.date === today)?.value || "";
+      const waterPercent = goals.waterMl ? Math.min((Number(daily.waterMl || 0)/goals.waterMl)*100,100) : 0;
+      const stepsPercent = goals.steps ? Math.min((Number(daily.steps || 0)/goals.steps)*100,100) : 0;
+      const sleepPercent = goals.sleepHours ? Math.min((Number(daily.sleepHours || 0)/goals.sleepHours)*100,100) : 0;
+      const dates = App.utils.lastNDates(7);
+      const waterSeries = dates.map((d)=>Number(App.state.metrics.daily[d]?.waterMl || 0) / 250);
+      const stepsSeries = dates.map((d)=>Number(App.state.metrics.daily[d]?.steps || 0));
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass hero-grid">
+            <div>
+              <p class="eyebrow">Health</p>
+              <h2>Energy management for high performance</h2>
+              <p>Track weight, water, workout, calories, sleep, walking, stretching, and eye care.</p>
+              <div class="inline-actions">
+                <span class="pill"><strong>${daily.workoutDone ? "Done" : "Pending"}</strong> workout</span>
+                <span class="pill"><strong>${daily.waterMl || 0} ml</strong> water</span>
+                <span class="pill"><strong>${daily.steps || 0}</strong> steps</span>
+              </div>
+            </div>
+            <div class="card">${ChartKit.ring((waterPercent + stepsPercent + sleepPercent)/3, "Health")}</div>
+          </div>
+
+          <div class="metric-grid">
+            <div class="metric-card"><h3 class="card-title">Weight</h3><div class="big-number">${weightToday || "—"}</div><p class="muted">kg</p></div>
+            <div class="metric-card"><h3 class="card-title">Water</h3><div class="big-number">${daily.waterMl || 0}</div><p class="muted">ml / ${goals.waterMl}</p></div>
+            <div class="metric-card"><h3 class="card-title">Sleep</h3><div class="big-number">${daily.sleepHours || 0}</div><p class="muted">hours / ${goals.sleepHours}</p></div>
+            <div class="metric-card"><h3 class="card-title">Walking</h3><div class="big-number">${daily.steps || 0}</div><p class="muted">steps / ${goals.steps}</p></div>
+          </div>
+
+          <div class="form-card">
+            <div class="section-head"><div><h3 class="card-title">Today's Tracking</h3><p class="muted">All values are saved instantly.</p></div></div>
+            <div class="form-row" style="margin-top:12px;">
+              <div class="form-group"><label>Weight (kg)</label><input id="healthWeight" type="number" step="0.1" value="${weightToday}"></div>
+              <div class="form-group"><label>Water (ml)</label><input id="healthWater" type="number" min="0" value="${daily.waterMl || 0}"></div>
+              <div class="form-group"><label>Calories</label><input id="healthCalories" type="number" min="0" value="${daily.calories || 0}"></div>
+              <div class="form-group"><label>Sleep hours</label><input id="healthSleep" type="number" step="0.1" min="0" value="${daily.sleepHours || 0}"></div>
+              <div class="form-group"><label>Walking steps</label><input id="healthSteps" type="number" min="0" value="${daily.steps || 0}"></div>
+              <div class="form-group"><label>Workout type</label><input id="healthWorkoutType" type="text" value="${esc(daily.workoutType || "")}" placeholder="Push / Pull / Run / Mobility"></div>
+            </div>
+            <div class="switch-row"><div><strong>Workout completed</strong><p class="muted small">Mark today's training session.</p></div><input type="checkbox" class="check-input" id="healthWorkoutDone" ${daily.workoutDone ? "checked" : ""}></div>
+            <div class="switch-row"><div><strong>Stretch reminder done</strong><p class="muted small">Protect your posture and mobility.</p></div><input type="checkbox" class="check-input" id="healthStretch" ${daily.stretch ? "checked" : ""}></div>
+            <div class="switch-row"><div><strong>Eye care break done</strong><p class="muted small">Reduce screen fatigue and strain.</p></div><input type="checkbox" class="check-input" id="healthEyeCare" ${daily.eyeCare ? "checked" : ""}></div>
+          </div>
+
+          <div class="card-grid">
+            <div class="chart-card"><h3 class="card-title">Water (last 7 days, cups)</h3>${ChartKit.line(waterSeries, dates.map((d)=>d.slice(5)))}</div>
+            <div class="chart-card"><h3 class="card-title">Steps (last 7 days)</h3>${ChartKit.line(stepsSeries, dates.map((d)=>d.slice(5)))}</div>
+            <div class="chart-card"><h3 class="card-title">Goal Progress</h3>${ChartKit.bars([
+              { label:"Water", value:waterPercent },
+              { label:"Steps", value:stepsPercent },
+              { label:"Sleep", value:sleepPercent },
+              { label:"Calories", value:goals.calories ? Math.min((Number(daily.calories || 0)/goals.calories)*100,100) : 0 }
+            ])}</div>
+          </div>
+        </div>
+      `;
+
+      function syncWeight(value){
+        daily.weight = value;
+        const existing = App.state.health.weightEntries.find((entry)=>entry.date === today);
+        if(value === "" || value === null) return;
+        if(existing) existing.value = Number(value);
+        else App.state.health.weightEntries.push({ date:today, value:Number(value) });
+      }
+
+      container.querySelector("#healthWeight").addEventListener("input",(e)=>{ syncWeight(e.target.value); App.saveOnly(); });
+      container.querySelector("#healthWater").addEventListener("input",(e)=>{ daily.waterMl = Number(e.target.value || 0); App.update(["health","dashboard","statistics","achievements"]); });
+      container.querySelector("#healthCalories").addEventListener("input",(e)=>{ daily.calories = Number(e.target.value || 0); App.saveOnly(); });
+      container.querySelector("#healthSleep").addEventListener("input",(e)=>{ daily.sleepHours = Number(e.target.value || 0); App.update(["health","statistics"]); });
+      container.querySelector("#healthSteps").addEventListener("input",(e)=>{ daily.steps = Number(e.target.value || 0); App.update(["health","dashboard","statistics"]); });
+      container.querySelector("#healthWorkoutType").addEventListener("input",(e)=>{ daily.workoutType = e.target.value; App.saveOnly(); });
+      container.querySelector("#healthWorkoutDone").addEventListener("change",(e)=>{ daily.workoutDone = e.target.checked; App.update(["health","dashboard","statistics","achievements"]); });
+      container.querySelector("#healthStretch").addEventListener("change",(e)=>{ daily.stretch = e.target.checked; App.saveOnly(); });
+      container.querySelector("#healthEyeCare").addEventListener("change",(e)=>{ daily.eyeCare = e.target.checked; App.saveOnly(); });
+    }
+
+    function renderJournal(){
+      const container = document.getElementById("journal");
+      const today = EngineerStorage.todayKey();
+      const entry = App.state.journal.entriesByDate[today];
+      const recent = Object.entries(App.state.journal.entriesByDate).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,5);
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass hero-grid">
+            <div>
+              <p class="eyebrow">Journal</p>
+              <h2>Capture learning, friction, ideas, and gratitude</h2>
+              <p>Write what you learned, what blocked you, what to do tomorrow, and what you're grateful for.</p>
+              <div class="inline-actions"><span class="pill"><strong>${App.utils.prettyDate(today)}</strong></span></div>
+            </div>
+            <div class="quote-card">
+              <blockquote>"Small daily reflections compound into clarity, confidence, and direction."</blockquote>
+              <cite>Engineer OS</cite>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-grid">
+              <div class="form-group"><label>What I learned</label><textarea id="journalLearned">${esc(entry.learned)}</textarea></div>
+              <div class="form-group"><label>Problems</label><textarea id="journalProblems">${esc(entry.problems)}</textarea></div>
+              <div class="form-group"><label>Ideas</label><textarea id="journalIdeas">${esc(entry.ideas)}</textarea></div>
+              <div class="form-group"><label>Tomorrow</label><textarea id="journalTomorrow">${esc(entry.tomorrow)}</textarea></div>
+              <div class="form-group"><label>Gratitude</label><textarea id="journalGratitude">${esc(entry.gratitude)}</textarea></div>
+            </div>
+          </div>
+
+          <div class="list-card">
+            <div class="section-head"><div><h3 class="card-title">Recent Entries</h3><p class="muted">A quick look back for pattern recognition.</p></div></div>
+            <div class="card-grid" style="margin-top:14px;">
+              ${recent.length ? recent.map(([date,data])=>`
+                <div class="card">
+                  <div class="row-between"><strong>${App.utils.prettyDate(date)}</strong><span class="tag">${date}</span></div>
+                  <div class="note-block" style="margin-top:12px;">${esc((data.learned || "No lesson recorded yet.").slice(0,140))}</div>
+                </div>
+              `).join("") : `<div class="empty-state">No journal entries yet.</div>`}
+            </div>
+          </div>
+        </div>
+      `;
+
+      [["journalLearned","learned"],["journalProblems","problems"],["journalIdeas","ideas"],["journalTomorrow","tomorrow"],["journalGratitude","gratitude"]].forEach(([id,key])=>{
+        container.querySelector("#" + id).addEventListener("input",(e)=>{ entry[key] = e.target.value; App.saveOnly(); });
+      });
+    }
+
+    function renderGoals(){
+      const container = document.getElementById("goals");
+      const goals = App.state.goals;
+
+      function field(label,key){
+        const val = Array.isArray(goals[key]) ? goals[key].join("\n") : goals[key];
+        return `
+          <div class="card">
+            <div class="section-head"><div><h3 class="card-title">${label}</h3><p class="muted">One line per goal</p></div></div>
+            <textarea class="goals-textarea" data-goal-key="${key}" style="margin-top:12px;">${esc(val)}</textarea>
+          </div>
+        `;
+      }
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass">
+            <p class="eyebrow">Goals</p>
+            <h2>1 month to life mission</h2>
+            <p>Keep your horizon clear and layered.</p>
+          </div>
+          <div class="goal-grid">
+            ${field("1 Month","month1")}
+            ${field("3 Months","month3")}
+            ${field("6 Months","month6")}
+            ${field("1 Year","year1")}
+            ${field("5 Years","year5")}
+            ${field("Life Mission","lifeMission")}
+          </div>
+        </div>
+      `;
+
+      container.querySelectorAll(".goals-textarea").forEach((textarea)=>{
+        textarea.addEventListener("input",()=>{
+          const key = textarea.dataset.goalKey;
+          if(key === "lifeMission") goals[key] = textarea.value;
+          else goals[key] = textarea.value.split("\n").map((v)=>v.trim()).filter(Boolean);
+          App.saveOnly();
+        });
+      });
+    }
+
+    function renderStatistics(){
+      const container = document.getElementById("statistics");
+      const dates = App.utils.lastNDates(7);
+      const study = dates.map((d)=>Number(App.state.metrics.daily[d]?.studyHours || 0));
+      const coding = dates.map((d)=>Number(App.state.metrics.daily[d]?.codingHours || 0));
+      const prayer = dates.map((d)=>Math.round(App.utils.getPrayerProgress(d)));
+      const pdfs = App.state.pdfLibrary.files.slice(0,5).map((file)=>({ label:file.name.slice(0,10), value:Number(file.progress || 0) }));
+      const yearlyBars = [
+        { label:"Study", value:Math.min((App.utils.totalStudyHours()/300)*100,100), display:`${Math.round(App.utils.totalStudyHours())}h` },
+        { label:"Books", value:App.state.books.length ? (App.state.books.filter((b)=>Number(b.progress||0)>=100).length / App.state.books.length) * 100 : 0, display:`${App.state.books.filter((b)=>Number(b.progress||0)>=100).length}/${App.state.books.length}` },
+        { label:"Projects", value:App.state.projects.length ? App.state.projects.reduce((sum,p)=>sum+Number(p.progress||0),0)/App.state.projects.length : 0 },
+        { label:"Prayer", value:Math.round(App.utils.getPrayerProgress()) },
+        { label:"PDF", value:App.state.pdfLibrary.files.length ? App.state.pdfLibrary.files.reduce((sum,f)=>sum+Number(f.progress||0),0)/App.state.pdfLibrary.files.length : 0 }
+      ];
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass">
+            <p class="eyebrow">Statistics</p>
+            <h2>Weekly, monthly, yearly visibility</h2>
+            <p>See whether your system is actually working.</p>
+          </div>
+
+          <div class="stats-grid">
+            <div class="chart-card"><h3 class="card-title">Weekly Study Hours</h3>${ChartKit.line(study, dates.map((d)=>d.slice(5)))}</div>
+            <div class="chart-card"><h3 class="card-title">Weekly Coding Hours</h3>${ChartKit.line(coding, dates.map((d)=>d.slice(5)))}</div>
+            <div class="chart-card"><h3 class="card-title">Weekly Prayer Progress</h3>${ChartKit.line(prayer, dates.map((d)=>d.slice(5)))}</div>
+          </div>
+
+          <div class="card-grid">
+            <div class="chart-card"><h3 class="card-title">PDF Progress</h3>${ChartKit.bars(pdfs.length ? pdfs : [{label:"No PDF",value:0}])}</div>
+            <div class="chart-card"><h3 class="card-title">Yearly Snapshot</h3>${ChartKit.bars(yearlyBars)}</div>
+            <div class="chart-card">
+              <h3 class="card-title">Key Totals</h3>
+              <div class="simple-list">
+                <div class="simple-item"><span>Study Hours</span><strong>${Math.round(App.utils.totalStudyHours())}</strong></div>
+                <div class="simple-item"><span>Study Days</span><strong>${App.utils.studyDaysCount()}</strong></div>
+                <div class="simple-item"><span>Books Completed</span><strong>${App.state.books.filter((b)=>Number(b.progress||0)>=100).length}</strong></div>
+                <div class="simple-item"><span>Projects Active</span><strong>${App.state.projects.length}</strong></div>
+                <div class="simple-item"><span>PFE Completion</span><strong>${App.state.pfe.completion}%</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderRules(){
+      const container = document.getElementById("rules");
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass">
+            <p class="eyebrow">Rules</p>
+            <h2>Operating principles</h2>
+            <p>These are not reminders. These are system rules.</p>
+          </div>
+          <div class="rules-grid">
+            ${App.state.rules.map((rule)=>`
+              <div class="rule-card">
+                <div class="achievement-icon">
+                  <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-5m-3-7a10 10 0 100 20 10 10 0 000-20z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                </div>
+                <h3 class="card-title" style="margin-top:12px;">${esc(rule)}</h3>
+                <p class="muted">Make it visible. Make it habitual. Make it non-negotiable.</p>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderAchievements(){
+      const container = document.getElementById("achievements");
+      const badges = App.utils.achievements();
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass">
+            <p class="eyebrow">Achievements</p>
+            <h2>Unlocked by consistency</h2>
+            <p>Every badge represents evidence, not intention.</p>
+          </div>
+          <div class="badge-grid">
+            ${badges.map((badge)=>`
+              <div class="badge-card ${badge.unlocked ? "" : "locked"}">
+                <div class="achievement-icon">
+                  <svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 8.9 9 8l3-6z" fill="currentColor"/></svg>
+                </div>
+                <h3 class="card-title" style="margin-top:12px;">${esc(badge.title)}</h3>
+                <p class="muted">${badge.unlocked ? "Unlocked" : esc(badge.hint)}</p>
+                <span class="status-pill ${badge.unlocked ? "success" : "warning"}">${badge.unlocked ? "Unlocked" : "Locked"}</span>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderSettings(){
+      const container = document.getElementById("settings");
+      const p = App.state.profile;
+      const s = App.state.settings;
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass hero-grid">
+            <div>
+              <p class="eyebrow">Settings</p>
+              <h2>Personalize your system</h2>
+              <p>Switch theme, tune accents, customize profile, export data, import data, or sign out.</p>
+            </div>
+            <div class="card"><div class="note-block">State uses LocalStorage. PDF files are stored locally in IndexedDB and are not included in JSON export.</div></div>
+          </div>
+
+          <div class="card-grid">
+            <div class="form-card">
+              <h3 class="card-title">Theme</h3>
+              <div class="inline-actions" style="margin-top:12px;">
+                <button class="btn-secondary theme-btn ${s.theme==="dark" ? "active" : ""}" data-theme="dark">Dark</button>
+                <button class="btn-secondary theme-btn ${s.theme==="light" ? "active" : ""}" data-theme="light">Light</button>
+              </div>
+            </div>
+
+            <div class="form-card">
+              <h3 class="card-title">Accent Color</h3>
+              <div class="color-picker-row" style="margin-top:12px;">
+                <button class="color-chip ${s.accent==="cyan" ? "active" : ""}" data-accent="cyan" style="background:linear-gradient(135deg,#2f7cff,#51d3ff)"></button>
+                <button class="color-chip ${s.accent==="blue" ? "active" : ""}" data-accent="blue" style="background:linear-gradient(135deg,#275efe,#72a8ff)"></button>
+                <button class="color-chip ${s.accent==="mint" ? "active" : ""}" data-accent="mint" style="background:linear-gradient(135deg,#03b89a,#52f1c5)"></button>
+                <button class="color-chip ${s.accent==="purple" ? "active" : ""}" data-accent="purple" style="background:linear-gradient(135deg,#7357ff,#b08bff)"></button>
+              </div>
+            </div>
+
+            <div class="form-card">
+              <h3 class="card-title">Profile Customization</h3>
+              <div class="form-grid" style="margin-top:12px;">
+                <div class="form-group"><label>Display Name</label><input id="profileDisplayName" type="text" value="${esc(p.displayName)}"></div>
+                <div class="form-group"><label>Role</label><input id="profileRole" type="text" value="${esc(p.role)}"></div>
+                <div class="form-group"><label>Subtitle</label><input id="profileSubtitle" type="text" value="${esc(p.subtitle)}"></div>
+                <div class="form-group"><label>Tags (comma separated)</label><input id="profileTags" type="text" value="${esc((p.tags||[]).join(", "))}"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h3 class="card-title">Data Management</h3>
+            <div class="inline-actions" style="margin-top:12px;">
+              <button class="btn" id="exportDataBtn" type="button">Export</button>
+              <button class="btn-secondary" id="importDataBtn" type="button">Import</button>
+              <button class="btn-secondary" id="refreshApiBtn" type="button">Refresh APIs</button>
+              <button class="btn-danger" id="resetDataBtn" type="button">Reset User Data</button>
+              <button class="btn-danger" id="logoutBtn" type="button">Logout</button>
+              <input id="importFileInput" type="file" hidden accept="application/json">
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h3 class="card-title">Quick Guide</h3>
+            <div class="simple-list" style="margin-top:12px;">
+              <div class="simple-item"><span>Export creates a JSON snapshot of your current user state.</span><span class="kbd">State only</span></div>
+              <div class="simple-item"><span>Import replaces current user state from a backup file.</span><span class="kbd">Overwrite</span></div>
+              <div class="simple-item"><span>PDF files remain in IndexedDB and are not included in JSON export.</span><span class="kbd">Local</span></div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.querySelectorAll(".theme-btn").forEach((btn)=>btn.addEventListener("click",()=>{
+        App.state.settings.theme = btn.dataset.theme;
+        App.applyAppearance();
+        App.update(["settings"]);
+      }));
+
+      container.querySelectorAll(".color-chip").forEach((chip)=>chip.addEventListener("click",()=>{
+        App.state.settings.accent = chip.dataset.accent;
+        App.applyAppearance();
+        App.update(["settings"]);
+      }));
+
+      [["profileDisplayName","displayName"],["profileRole","role"],["profileSubtitle","subtitle"]].forEach(([id,key])=>{
+        container.querySelector("#" + id).addEventListener("input",(e)=>{
+          App.state.profile[key] = e.target.value;
+          App.refreshShellMeta();
+          App.saveOnly();
+          App.update(["about","dashboard"]);
+        });
+      });
+
+      container.querySelector("#profileTags").addEventListener("input",(e)=>{
+        App.state.profile.tags = e.target.value.split(",").map((v)=>v.trim()).filter(Boolean);
+        App.refreshShellMeta();
+        App.saveOnly();
+        App.update(["about","dashboard"]);
+      });
+
+      container.querySelector("#exportDataBtn").addEventListener("click",()=>{
+        const username = Auth.currentUser();
+        const blob = new Blob([JSON.stringify(App.state, null, 2)], { type:"application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `engineer-os-${username}-${EngineerStorage.todayKey()}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        App.toast("Export complete.");
+      });
+
+      const importInput = container.querySelector("#importFileInput");
+      container.querySelector("#importDataBtn").addEventListener("click",()=>importInput.click());
+
+      importInput.addEventListener("change", async (e)=>{
+        const file = e.target.files?.[0];
+        if(!file) return;
+        try{
+          const text = await file.text();
+          const parsed = JSON.parse(text);
+          App.state = EngineerStorage.ensureDailyState(mergeDeep(EngineerStorage.DEFAULTS, parsed));
+          App.applyAppearance();
+          App.fullRender();
+          App.toast("Import complete.");
+        }catch{
+          App.toast("Import failed.");
+        }finally{
+          importInput.value = "";
+        }
+      });
+
+      container.querySelector("#refreshApiBtn").addEventListener("click",()=>{
+        App.loadDynamicContent();
+        App.toast("Refreshing quote and hadith APIs…");
+      });
+
+      container.querySelector("#resetDataBtn").addEventListener("click",()=>{
+        const ok = confirm("Reset current user data?");
+        if(!ok) return;
+        const userRecord = Auth.userRecord(Auth.currentUser());
+        const fresh = clone(EngineerStorage.DEFAULTS);
+        if(userRecord?.displayName) fresh.profile.displayName = userRecord.displayName;
+        App.state = EngineerStorage.ensureDailyState(fresh);
+        App.applyAppearance();
+        App.fullRender();
+        App.toast("User data reset.");
+      });
+
+      container.querySelector("#logoutBtn").addEventListener("click",()=>Auth.logout());
+    }
+
+    function renderAbout(){
+      const container = document.getElementById("about");
+      const p = App.state.profile;
+      const user = Auth.currentUser();
+
+      container.innerHTML = `
+        <div class="page-inner">
+          <div class="hero glass hero-grid">
+            <div>
+              <p class="eyebrow">About</p>
+              <h2>${esc(p.displayName)}</h2>
+              <p>${esc(p.role)} — ${esc(p.subtitle)}</p>
+              <div class="inline-actions" style="margin-top:14px;">
+                ${p.tags.map((tag)=>`<span class="tag">${esc(tag)}</span>`).join("")}
+              </div>
+            </div>
+            <div class="quote-card">
+              <blockquote>"My Personal Operating System."</blockquote>
+              <cite>${esc(user)}</cite>
+            </div>
+          </div>
+
+          <div class="card-grid">
+            <div class="card"><h3 class="card-title">What this app is</h3><div class="note-block" style="margin-top:12px;">A local-first personal platform for discipline, study, prayer, health, roadmap execution, reading, project momentum, PDF reading, and career preparation.</div></div>
+            <div class="card"><h3 class="card-title">Online enhancements</h3><div class="note-block" style="margin-top:12px;">When online, the app can fetch Quran pages, quotes, and hadith. When offline, it falls back to cached local content.</div></div>
+            <div class="card"><h3 class="card-title">Persistence</h3><div class="note-block" style="margin-top:12px;">All user state is stored locally per user. PDF files are stored in IndexedDB inside your browser.</div></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function attachGlobalEvents(){
+      document.querySelectorAll(".nav-link").forEach((button)=>{
+        button.addEventListener("click",()=>App.showSection(button.dataset.section));
+      });
+
+      document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
+        document.body.classList.toggle("sidebar-open");
+        document.getElementById("sidebar").classList.toggle("open");
+      });
+
+      document.getElementById("quickThemeToggle").addEventListener("click",()=>{
+        App.state.settings.theme = App.state.settings.theme === "dark" ? "light" : "dark";
+        App.applyAppearance();
+        App.update(["settings"]);
+      });
+    }
+
+    function showLoginTab(){
+      document.getElementById("loginForm").style.display = "";
+      document.getElementById("registerForm").style.display = "none";
+      document.getElementById("showLoginTab").classList.add("active");
+      document.getElementById("showRegisterTab").classList.remove("active");
+    }
+
+    function showRegisterTab(){
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("registerForm").style.display = "";
+      document.getElementById("showRegisterTab").classList.add("active");
+      document.getElementById("showLoginTab").classList.remove("active");
+    }
+
+    async function bootApp(){
+      await PdfDB.init();
+
+      document.getElementById("showLoginTab").addEventListener("click", showLoginTab);
+      document.getElementById("showRegisterTab").addEventListener("click", showRegisterTab);
+
+      document.getElementById("loginForm").addEventListener("submit", async (e)=>{
+        e.preventDefault();
+        try{
+          const username = document.getElementById("loginUsername").value.trim();
+          const password = document.getElementById("loginPassword").value;
+          await Auth.login(username, password);
+          location.reload();
+        }catch(err){
+          alert(err.message);
+        }
+      });
+
+      document.getElementById("registerForm").addEventListener("submit", async (e)=>{
+        e.preventDefault();
+        try{
+          const username = document.getElementById("registerUsername").value.trim();
+          const password = document.getElementById("registerPassword").value;
+          const displayName = document.getElementById("registerDisplayName").value.trim();
+          await Auth.register(username, password, displayName);
+          location.reload();
+        }catch(err){
+          alert(err.message);
+        }
+      });
+
+      const currentUser = Auth.currentUser();
+      if(!currentUser){
+        document.getElementById("authScreen").classList.remove("hidden");
+        document.getElementById("appShell").style.display = "none";
+        return;
+      }
+
+      App.state = Auth.loadUserState(currentUser);
+      const record = Auth.userRecord(currentUser);
+      if(record?.displayName && !App.state.profile.displayName) App.state.profile.displayName = record.displayName;
+
+      EngineerStorage.ensureDailyState(App.state);
+      App.applyAppearance();
+      App.refreshShellMeta();
+
+      App.renderers.dashboard = renderDashboard;
+      App.renderers.planner = renderPlanner;
+      App.renderers.prayer = renderPrayer;
+      App.renderers.quran = renderQuran;
+      App.renderers.quranNotifier = renderQuranNotifier;
+      App.renderers.roadmap = renderRoadmap;
+      App.renderers.books = renderBooks;
+      App.renderers.pdfLibrary = renderPdfLibrary;
+      App.renderers.projects = renderProjects;
+      App.renderers.pfe = renderPfe;
+      App.renderers.career = renderCareer;
+      App.renderers.health = renderHealth;
+      App.renderers.journal = renderJournal;
+      App.renderers.goals = renderGoals;
+      App.renderers.statistics = renderStatistics;
+      App.renderers.rules = renderRules;
+      App.renderers.achievements = renderAchievements;
+      App.renderers.settings = renderSettings;
+      App.renderers.about = renderAbout;
+
+      attachGlobalEvents();
+      App.fullRender();
+      document.getElementById("authScreen").classList.add("hidden");
+      document.getElementById("appShell").style.display = "";
+      App.loadDynamicContent();
+
+      setInterval(()=>App.refreshClock(), 1000);
+      setInterval(()=>QuranNotifier.maybeNotify(App.state), 30000);
+      QuranNotifier.maybeNotify(App.state);
+    }
+
+    document.addEventListener("DOMContentLoaded", async ()=>{
+      await bootApp();
+      window.addEventListener("load",()=>{
+        setTimeout(()=>document.getElementById("appLoader").classList.add("hidden"), 650);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Slide - Benchmark Methodology</title>
+  <style>
+    :root{
+      --navy:#062b5b;
+      --navy2:#0d3e7c;
+      --yellow:#f2c500;
+      --magenta:#e1007a;
+      --bg:#eef2f7;
+      --card:#ffffff;
+      --line:#d7e0ea;
+      --text:#17365d;
+      --muted:#62768f;
+      --green1:#52d817;
+      --green2:#0ecb6d;
+      --teal1:#0c8f97;
+      --teal2:#07516d;
+      --deep:#003a63;
+      --shadow:0 10px 26px rgba(0,0,0,.10);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html, body{
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      background:linear-gradient(135deg,#dde6f0,#f7f9fc);
+      font-family:"Segoe UI", Arial, sans-serif;
+    }
+
+    .stage{
+      position:relative;
+      width:100vw;
+      height:100vh;
+      overflow:hidden;
+    }
+
+    .slide{
+      position:absolute;
+      width:1366px;
+      height:768px;
+      left:50%;
+      top:50%;
+      transform-origin:center center;
+      background:var(--bg);
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:0 24px 60px rgba(0,0,0,.18);
+      border:1px solid #e2e8f0;
+    }
+
+    /* Header */
+    .header{
+      padding:28px 42px 18px 42px;
+      position:relative;
+    }
+
+    .header::after{
+      content:"";
+      position:absolute;
+      right:0;
+      top:0;
+      width:22px;
+      height:120px;
+      background:var(--navy);
+    }
+
+    .row-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:14px;
+    }
+
+    .ribbon{
+      display:inline-block;
+      background:var(--magenta);
+      color:#fff;
+      padding:14px 30px 14px 24px;
+      font-size:18px;
+      font-weight:700;
+      clip-path:polygon(0 0, 85% 0, 100% 100%, 0 100%);
+      min-width:290px;
+      box-shadow:var(--shadow);
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+
+    .chip{
+      background:#aac8e4;
+      color:var(--navy);
+      font-size:14px;
+      font-weight:700;
+      padding:9px 14px;
+      border-radius:8px;
+      box-shadow:var(--shadow);
+    }
+
+    .title{
+      font-size:36px;
+      font-weight:800;
+      color:var(--navy);
+      margin-bottom:6px;
+    }
+
+    .subtitle{
+      font-size:18px;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+
+    .line{
+      height:3px;
+      background:linear-gradient(90deg,var(--navy),transparent);
+    }
+
+    /* Content */
+    .content{
+      height:calc(768px - 145px);
+      padding:10px 30px 28px 30px;
+      display:grid;
+      grid-template-columns:230px 1fr;
+      gap:20px;
+    }
+
+    /* Left visual column */
+    .left-panel{
+      background:linear-gradient(180deg,#f7fbff,#eef4fa);
+      border:1px solid var(--line);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      padding:24px 18px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-around;
+      align-items:center;
+    }
+
+    .left-panel h3{
+      font-size:22px;
+      color:var(--navy);
+      text-align:center;
+      margin-bottom:8px;
+    }
+
+    .icon-stack{
+      display:flex;
+      flex-direction:column;
+      gap:26px;
+      width:100%;
+      align-items:center;
+    }
+
+    .icon-box{
+      width:84px;
+      height:84px;
+      border-radius:20px;
+      background:#fff;
+      border:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--navy);
+      font-size:38px;
+      box-shadow:0 8px 18px rgba(0,0,0,.07);
+    }
+
+    .left-note{
+      text-align:center;
+      font-size:15px;
+      line-height:1.45;
+      color:var(--muted);
+      margin-top:12px;
+    }
+
+    /* Right flow */
+    .right-panel{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      grid-template-rows:1fr 1fr;
+      gap:18px 20px;
+      align-items:center;
+    }
+
+    .step{
+      position:relative;
+      background:#ebebeb;
+      border-radius:20px;
+      min-height:210px;
+      padding:76px 22px 24px 22px;
+      box-shadow:var(--shadow);
+      overflow:visible;
+    }
+
+    .step.wide{
+      grid-row:1 / span 2;
+      grid-column:3;
+      align-self:center;
+      min-height:240px;
+    }
+
+    .banner{
+      position:absolute;
+      top:18px;
+      left:-12px;
+      height:58px;
+      width:230px;
+      color:#fff;
+      font-size:18px;
+      font-weight:800;
+      display:flex;
+      align-items:center;
+      padding-left:34px;
+      clip-path:polygon(0 0, 78% 0, 100% 50%, 78% 100%, 0 100%, 6% 50%);
+      box-shadow:var(--shadow);
+      letter-spacing:.2px;
+    }
+
+    .banner.green{
+      background:linear-gradient(90deg,var(--green1),#38d81e);
+    }
+
+    .banner.green2{
+      background:linear-gradient(90deg,var(--green2),#05c76a);
+    }
+
+    .banner.teal{
+      background:linear-gradient(90deg,var(--teal1),#0a758c);
+    }
+
+    .banner.teal2{
+      background:linear-gradient(90deg,var(--teal2),#084f6f);
+    }
+
+    .banner.deep{
+      background:linear-gradient(90deg,var(--deep),#004f85);
+    }
+
+    .step-number{
+      position:absolute;
+      top:20px;
+      right:18px;
+      font-size:23px;
+      font-weight:900;
+      color:#111;
+    }
+
+    .step h4{
+      font-size:21px;
+      color:var(--navy);
+      margin-bottom:10px;
+    }
+
+    .step p{
+      font-size:17px;
+      line-height:1.5;
+      color:#2d415c;
+    }
+
+    .bottom-note{
+      position:absolute;
+      left:270px;
+      right:34px;
+      bottom:18px;
+      background:#eef6ff;
+      border-left:6px solid #79abd8;
+      padding:12px 15px;
+      border-radius:10px;
+      font-size:15px;
+      line-height:1.45;
+      color:#314864;
+      box-shadow:var(--shadow);
+    }
+
+    .footer{
+      position:absolute;
+      right:22px;
+      bottom:12px;
+      color:#7b8ca0;
+      font-size:12px;
+    }
+
+    .conf{
+      position:absolute;
+      left:28px;
+      bottom:12px;
+      color:#7b8ca0;
+      font-size:12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="slide" id="slide">
+
+      <div class="header">
+        <div class="row-top">
+          <div class="ribbon">III. Benchmark Methodology</div>
+          <div class="chip">3.1 Global Workflow</div>
+        </div>
+        <div class="title">Benchmark Methodology</div>
+        <div class="subtitle">Structured process used to design, execute, analyze, and exploit benchmark campaigns</div>
+        <div class="line"></div>
+      </div>
+
+      <div class="content">
+        <!-- Left panel -->
+        <div class="left-panel">
+          <h3>Methodology Logic</h3>
+          <div class="icon-stack">
+            <div class="icon-box">📝</div>
+            <div class="icon-box">🛠</div>
+            <div class="icon-box">📄</div>
+            <div class="icon-box">🚀</div>
+            <div class="icon-box">🔍</div>
+          </div>
+          <div class="left-note">
+            From scenario definition to result delivery,<br>
+            each phase contributes to a <strong>fair</strong>,<br>
+            <strong>reproducible</strong>, and <strong>interpretable</strong> benchmark.
+          </div>
+        </div>
+
+        <!-- Right panel -->
+        <div class="right-panel">
+          <div class="step">
+            <div class="banner green">Plan</div>
+            <div class="step-number">01</div>
+            <h4>Define the Scope</h4>
+            <p>
+              Select the benchmark targets, identify equivalent boards and software components,
+              and define the goals and expected deliverables.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="banner teal">Extract</div>
+            <div class="step-number">03</div>
+            <h4>Collect Metrics</h4>
+            <p>
+              Extract benchmark KPIs from the built projects, including footprint,
+              execution-time, and other relevant indicators.
+            </p>
+          </div>
+
+          <div class="step wide">
+            <div class="banner deep">Deliver</div>
+            <div class="step-number">05</div>
+            <h4>Exploit and Communicate</h4>
+            <p>
+              Consolidate the final results and provide them to internal stakeholders
+              for technical understanding, feedback, and future decision-making.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="banner green2">Build</div>
+            <div class="step-number">02</div>
+            <h4>Create Scenarios</h4>
+            <p>
+              Recreate or create benchmark scenarios and build them for both vendors
+              under equivalent and controlled conditions.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="banner teal2">Interpret</div>
+            <div class="step-number">04</div>
+            <h4>Analyze Results</h4>
+            <p>
+              Interpret the measurements, explain observed gaps,
+              and formulate enhancement proposals where improvement is possible.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-note">
+        <strong>Key idea:</strong> the benchmark methodology is not limited to measuring results;
+        it ensures that the comparison is <strong>fair, meaningful, and exploitable</strong>.
+      </div>
+
+      <div class="conf">PFE - STM32Cube Competitor Benchmark</div>
+      <div class="footer">Benchmark Methodology</div>
+    </div>
+  </div>
+
+  <script>
+    function scaleSlide() {
+      const slide = document.getElementById('slide');
+      const baseWidth = 1366;
+      const baseHeight = 768;
+      const scaleX = window.innerWidth / baseWidth;
+      const scaleY = window.innerHeight / baseHeight;
+      const scale = Math.min(scaleX, scaleY);
+      slide.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    }
+
+    window.addEventListener('resize', scaleSlide);
+    window.addEventListener('load', scaleSlide);
+  </script>
+</body>
+</html>

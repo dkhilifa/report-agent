@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>USB Benchmark - Enhancement Proposals</title>
+  <style>
+    :root{
+      --navy:#062b5b;
+      --navy2:#0d3e7c;
+      --yellow:#f2c500;
+      --magenta:#e1007a;
+      --bg:#eef2f7;
+      --card:#ffffff;
+      --line:#d7e0ea;
+      --text:#17365d;
+      --muted:#62768f;
+      --shadow:0 10px 24px rgba(0,0,0,.10);
+      --green:#18b75b;
+      --blue:#2f9ddb;
+      --orange:#f39c12;
+      --red:#e74c3c;
+      --soft-blue:#eef6ff;
+      --soft-green:#ebfaef;
+      --soft-yellow:#fff7dc;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html, body{
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      font-family:"Segoe UI", Arial, sans-serif;
+      background:linear-gradient(135deg,#dde6f0,#f7f9fc);
+    }
+
+    .stage{
+      position:relative;
+      width:100vw;
+      height:100vh;
+    }
+
+    .slide{
+      position:absolute;
+      width:1366px;
+      height:768px;
+      left:50%;
+      top:50%;
+      transform-origin:center center;
+      background:var(--bg);
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid #e2e8f0;
+      box-shadow:0 24px 60px rgba(0,0,0,.18);
+    }
+
+    /* top header */
+    .header{
+      padding:28px 42px 18px 42px;
+      position:relative;
+    }
+
+    .header::after{
+      content:"";
+      position:absolute;
+      right:0;
+      top:0;
+      width:22px;
+      height:120px;
+      background:var(--navy);
+    }
+
+    .row-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:14px;
+    }
+
+    .ribbon{
+      display:inline-block;
+      background:var(--magenta);
+      color:#fff;
+      padding:14px 30px 14px 24px;
+      font-size:18px;
+      font-weight:700;
+      clip-path:polygon(0 0, 85% 0, 100% 100%, 0 100%);
+      min-width:300px;
+      box-shadow:var(--shadow);
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+
+    .chip{
+      background:#aac8e4;
+      color:var(--navy);
+      font-size:14px;
+      font-weight:700;
+      padding:9px 14px;
+      border-radius:8px;
+      box-shadow:var(--shadow);
+    }
+
+    .title{
+      font-size:34px;
+      font-weight:800;
+      color:var(--navy);
+      margin-bottom:6px;
+    }
+
+    .subtitle{
+      font-size:18px;
+      color:var(--muted);
+      margin-bottom:8px;
+      line-height:1.35;
+    }
+
+    .line{
+      height:3px;
+      background:linear-gradient(90deg,var(--navy),transparent);
+    }
+
+    /* body */
+    .body{
+      height:calc(768px - 145px);
+      padding:12px 32px 26px 32px;
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+
+    .top-summary{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:14px;
+    }
+
+    .summary-box{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:15px 16px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      min-height:95px;
+    }
+
+    .icon{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-size:20px;
+      font-weight:800;
+      flex-shrink:0;
+    }
+
+    .i-red{background:linear-gradient(180deg,#f57867,#dd4d3a);}
+    .i-green{background:linear-gradient(180deg,#3dd477,#1da85a);}
+    .i-blue{background:linear-gradient(180deg,#45aef0,#1f86cb);}
+
+    .summary-box h4{
+      font-size:14px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.4px;
+      margin-bottom:4px;
+    }
+
+    .summary-box .big{
+      font-size:26px;
+      font-weight:900;
+      color:var(--navy);
+      margin-bottom:4px;
+      line-height:1;
+    }
+
+    .summary-box p{
+      font-size:14px;
+      color:#314864;
+      line-height:1.35;
+    }
+
+    /* center layout */
+    .main-grid{
+      display:grid;
+      grid-template-columns:320px 1fr 320px;
+      gap:16px;
+      flex:1;
+      min-height:0;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:16px 18px;
+    }
+
+    .card h3{
+      font-size:21px;
+      color:var(--navy);
+      margin-bottom:10px;
+    }
+
+    .label{
+      display:inline-block;
+      background:var(--yellow);
+      color:#000;
+      font-size:13px;
+      font-weight:800;
+      padding:7px 11px;
+      border-radius:8px;
+      margin-bottom:10px;
+      box-shadow:var(--shadow);
+    }
+
+    ul.clean{
+      list-style:none;
+      margin-top:4px;
+    }
+
+    ul.clean li{
+      position:relative;
+      padding-left:18px;
+      margin-bottom:9px;
+      font-size:15px;
+      line-height:1.4;
+      color:#314864;
+    }
+
+    ul.clean li::before{
+      content:"•";
+      position:absolute;
+      left:5px;
+      top:0;
+      color:var(--magenta);
+      font-weight:800;
+    }
+
+    .small-note{
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.4;
+    }
+
+    .left-col, .right-col, .center-col{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      min-height:0;
+    }
+
+    .soft-blue{
+      background:var(--soft-blue);
+      border-left:6px solid var(--blue);
+    }
+
+    .soft-green{
+      background:var(--soft-green);
+      border-left:6px solid var(--green);
+    }
+
+    .soft-yellow{
+      background:var(--soft-yellow);
+      border-left:6px solid var(--orange);
+    }
+
+    /* center proposals */
+    .proposal{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:16px 18px;
+    }
+
+    .proposal-head{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:10px;
+    }
+
+    .proposal-icon{
+      width:40px;
+      height:40px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-weight:800;
+      font-size:18px;
+      flex-shrink:0;
+    }
+
+    .p1{background:linear-gradient(180deg,#3fd273,#1da85a);}
+    .p2{background:linear-gradient(180deg,#41b2f1,#2484ca);}
+    .p3{background:linear-gradient(180deg,#f7b24a,#e18d06);}
+
+    .proposal h3{
+      font-size:22px;
+      color:var(--navy);
+      margin:0;
+    }
+
+    .priority{
+      display:inline-block;
+      margin-top:8px;
+      padding:5px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .high{
+      background:#ffe6e3;
+      color:#b42318;
+    }
+
+    .medium{
+      background:#fff2dd;
+      color:#9a6100;
+    }
+
+    /* arrow */
+    .impact-arrow{
+      text-align:center;
+      font-size:30px;
+      color:var(--navy);
+      font-weight:900;
+      margin:2px 0;
+    }
+
+    /* right panel */
+    .impact-box{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:18px;
+      text-align:center;
+    }
+
+    .impact-box h3{
+      font-size:22px;
+      color:var(--navy);
+      margin-bottom:12px;
+    }
+
+    .impact-circle{
+      width:170px;
+      height:170px;
+      border-radius:50%;
+      margin:0 auto 14px auto;
+      background:
+        conic-gradient(
+          #1e7a2b 0 44%,
+          #e57a2e 44% 69%,
+          #1f6e9a 69% 92%,
+          #56bde2 92% 100%
+        );
+      position:relative;
+      box-shadow:var(--shadow);
+      border:4px solid #fff;
+    }
+
+    .impact-circle::after{
+      content:"USB ROM\A Gap";
+      white-space:pre;
+      position:absolute;
+      inset:38px;
+      background:#fff;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-size:24px;
+      font-weight:800;
+      color:var(--navy);
+      border:1px solid var(--line);
+      line-height:1.2;
+    }
+
+    .legend{
+      display:grid;
+      gap:7px;
+      text-align:left;
+      margin-top:10px;
+    }
+
+    .legend-item{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:14px;
+      color:#314864;
+      font-weight:700;
+    }
+
+    .dot{
+      width:13px;
+      height:13px;
+      border-radius:4px;
+      flex-shrink:0;
+    }
+
+    .mini-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:16px 18px;
+    }
+
+    .mini-card h3{
+      font-size:21px;
+      color:var(--navy);
+      margin-bottom:10px;
+    }
+
+    /* bottom row */
+    .bottom-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .note{
+      background:#eef6ff;
+      border-left:6px solid #79abd8;
+      padding:12px 15px;
+      border-radius:10px;
+      font-size:14px;
+      color:#314864;
+      line-height:1.42;
+      box-shadow:var(--shadow);
+    }
+
+    .success{
+      background:#ebfaef;
+      border-left:6px solid var(--green);
+      padding:12px 15px;
+      border-radius:10px;
+      font-size:14px;
+      color:#245234;
+      line-height:1.42;
+      box-shadow:var(--shadow);
+    }
+
+    .footer{
+      position:absolute;
+      right:22px;
+      bottom:12px;
+      color:#7b8ca0;
+      font-size:12px;
+    }
+
+    .conf{
+      position:absolute;
+      left:28px;
+      bottom:12px;
+      color:#7b8ca0;
+      font-size:12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="slide" id="slide">
+
+      <div class="header">
+        <div class="row-top">
+          <div class="ribbon">V. Results and Contributions</div>
+          <div class="chip">USB Benchmark - Enhancement Proposals</div>
+        </div>
+        <div class="title">Enhancement Proposals from the USB Benchmark</div>
+        <div class="subtitle">
+          Proposals derived from the ST vs GD32 USB analysis to reduce ROM overhead while preserving STM32Cube strengths
+        </div>
+        <div class="line"></div>
+      </div>
+
+      <div class="body">
+        <!-- top summary -->
+        <div class="top-summary">
+          <div class="summary-box">
+            <div class="icon i-red">R</div>
+            <div>
+              <h4>Main ROM Gap</h4>
+              <div class="big">+77% to +88%</div>
+              <p>STM32 ROM footprint is significantly higher than GD32 in HID and CDC scenarios.</p>
+            </div>
+          </div>
+
+          <div class="summary-box">
+            <div class="icon i-green">M</div>
+            <div>
+              <h4>Main Strength</h4>
+              <div class="big">-57% to -65%</div>
+              <p>STM32 uses less RAM and achieves much faster USB initialization.</p>
+            </div>
+          </div>
+
+          <div class="summary-box">
+            <div class="icon i-blue">C</div>
+            <div>
+              <h4>Root Cause</h4>
+              <div class="big">HAL Layer</div>
+              <p>HAL RCC and HAL/LL USB driver explain most of the ROM difference.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- center -->
+        <div class="main-grid">
+          <!-- left -->
+          <div class="left-col">
+            <div class="card soft-blue">
+              <div class="label">Diagnosis</div>
+              <h3>Main Contributors</h3>
+              <ul class="clean">
+                <li><strong>HAL RCC</strong> contributes about <strong>4560 bytes</strong></li>
+                <li><strong>HAL/LL USB driver</strong> contributes about <strong>5006 bytes</strong></li>
+                <li>Externalized USB configuration files increase the application footprint</li>
+              </ul>
+            </div>
+
+            <div class="card soft-yellow">
+              <div class="label">Interpretation</div>
+              <h3>Why the Gap Exists</h3>
+              <p class="small-note">
+                STM32Cube uses a more <strong>modular architecture</strong>:
+                HAL, middleware, and user configuration are separated.
+                This improves flexibility and reuse, but it comes with a ROM cost.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="label">Objective</div>
+              <h3>Improvement Direction</h3>
+              <p class="small-note">
+                Reduce ROM overhead <strong>without losing</strong> the STM32 advantages:
+                modularity, lower RAM usage, and faster initialization.
+              </p>
+            </div>
+          </div>
+
+          <!-- center -->
+          <div class="center-col">
+            <div class="proposal soft-green">
+              <div class="proposal-head">
+                <div class="proposal-icon p1">1</div>
+                <h3>Optimize HAL RCC</h3>
+              </div>
+              <ul class="clean">
+                <li>Trim the clock-configuration logic to keep only the paths needed by the USB scenario</li>
+                <li>Improve conditional compilation or dead-code elimination in RCC-related code</li>
+              </ul>
+              <div class="priority high">High Priority</div>
+            </div>
+
+            <div class="impact-arrow">↓</div>
+
+            <div class="proposal soft-blue">
+              <div class="proposal-head">
+                <div class="proposal-icon p2">2</div>
+                <h3>Refine USB Driver Feature Selection</h3>
+              </div>
+              <ul class="clean">
+                <li>Exclude unused USB code paths from Full-Speed-only projects</li>
+                <li>Separate broader USB capabilities from minimal scenario-specific builds</li>
+              </ul>
+              <div class="priority high">High Priority</div>
+            </div>
+
+            <div class="impact-arrow">↓</div>
+
+            <div class="proposal soft-yellow">
+              <div class="proposal-head">
+                <div class="proposal-icon p3">3</div>
+                <h3>Review Configuration File Overhead</h3>
+              </div>
+              <ul class="clean">
+                <li>Limit the footprint introduced by user configuration files</li>
+                <li>Keep flexibility while reducing unnecessary compiled code</li>
+              </ul>
+              <div class="priority medium">Medium Priority</div>
+            </div>
+          </div>
+
+          <!-- right -->
+          <div class="right-col">
+            <div class="impact-box">
+              <h3>Main ROM Distribution</h3>
+              <div class="impact-circle"></div>
+              <div class="legend">
+                <div class="legend-item"><span class="dot" style="background:#1e7a2b;"></span> RCC</div>
+                <div class="legend-item"><span class="dot" style="background:#e57a2e;"></span> PCD</div>
+                <div class="legend-item"><span class="dot" style="background:#1f6e9a;"></span> USB driver</div>
+                <div class="legend-item"><span class="dot" style="background:#56bde2;"></span> Other HAL</div>
+              </div>
+            </div>
+
+            <div class="mini-card">
+              <h3>Expected Impact</h3>
+              <ul class="clean">
+                <li>Lower STM32 USB ROM footprint</li>
+                <li>Preserve lower RAM usage</li>
+                <li>Preserve fast initialization performance</li>
+                <li>Keep STM32Cube modularity benefits</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- bottom -->
+        <div class="bottom-row">
+          <div class="note">
+            <strong>Engineering logic:</strong> the benchmark not only shows that STM32 ROM is higher,
+            it also identifies <strong>where the gap comes from</strong>, which makes the proposals precise and actionable.
+          </div>
+          <div class="success">
+            <strong>Main takeaway:</strong> the most impactful improvements for the USB benchmark are
+            <strong>HAL RCC optimization</strong> and <strong>finer compile-time USB feature selection</strong>.
+          </div>
+        </div>
+      </div>
+
+      <div class="conf">PFE - STM32Cube Competitor Benchmark</div>
+      <div class="footer">USB Enhancement Proposals</div>
+    </div>
+  </div>
+
+  <script>
+    function scaleSlide() {
+      const slide = document.getElementById('slide');
+      const baseWidth = 1366;
+      const baseHeight = 768;
+      const scaleX = window.innerWidth / baseWidth;
+      const scaleY = window.innerHeight / baseHeight;
+      const scale = Math.min(scaleX, scaleY);
+      slide.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    }
+
+    window.addEventListener('resize', scaleSlide);
+    window.addEventListener('load', scaleSlide);
+  </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PFE Project Gantt Chart</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #222; padding: 40px; }
+  h1 { text-align: center; margin-bottom: 30px; font-size: 1.6rem; color: #1a1a2e; }
+  .gantt-container { max-width: 1100px; margin: 0 auto; overflow-x: auto; }
+  .gantt-table { width: 100%; border-collapse: collapse; }
+  .gantt-table th, .gantt-table td { padding: 10px 8px; text-align: center; font-size: 0.82rem; }
+  .gantt-table thead th { background: #e3eaf3; border-bottom: 2px solid #b0c4de; color: #1a1a2e; }
+  .gantt-table thead th.task-col { text-align: left; width: 260px; }
+  .month-header { min-width: 120px; }
+  .task-row td { border-bottom: 1px solid #ddd; height: 48px; position: relative; }
+  .task-row td.task-name { text-align: left; font-weight: 500; white-space: nowrap; padding-left: 14px; }
+  .bar-cell { padding: 0 !important; }
+  .bar { height: 28px; border-radius: 6px; position: absolute; top: 10px; }
+  /* Colors */
+  .bar.blue    { background: linear-gradient(90deg, #4fc3f7, #0288d1); }
+  .bar.green   { background: linear-gradient(90deg, #66bb6a, #2e7d32); }
+  .bar.orange  { background: linear-gradient(90deg, #ffa726, #e65100); }
+  .bar.purple  { background: linear-gradient(90deg, #ab47bc, #6a1b9a); }
+  .bar.pink    { background: linear-gradient(90deg, #ec407a, #ad1457); }
+  .bar.teal    { background: linear-gradient(90deg, #26c6da, #00838f); }
+  .milestone-diamond { width: 18px; height: 18px; background: #fdd835; transform: rotate(45deg); margin: 0 auto; border: 2px solid #f9a825; }
+  .legend { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin-top: 28px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; }
+  .legend-swatch { width: 18px; height: 12px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<h1>STM32Cube Ecosystem Benchmark &mdash; Project Gantt Chart</h1>
+<div class="gantt-container">
+<table class="gantt-table">
+<thead>
+  <tr>
+    <th class="task-col">Task</th>
+    <th class="month-header">Month 1<br><small>Feb</small></th>
+    <th class="month-header">Month 2<br><small>Mar</small></th>
+    <th class="month-header">Month 3<br><small>Apr</small></th>
+    <th class="month-header">Month 4<br><small>May</small></th>
+    <th class="month-header">Month 5<br><small>Jun</small></th>
+    <th class="month-header">Month 6<br><small>Jul</small></th>
+  </tr>
+</thead>
+<tbody>
+  <!-- Row 1: Competitors search -->
+  <tr class="task-row">
+    <td class="task-name">Competitors search &amp; equivalence definition</td>
+    <td class="bar-cell" style="position:relative;"><div class="bar blue" style="left:4%;width:92%;"></div></td>
+    <td></td><td></td><td></td><td></td><td></td>
+  </tr>
+  <!-- Row 2: USB legacy -->
+  <tr class="task-row">
+    <td class="task-name">Recreate USB legacy</td>
+    <td></td>
+    <td class="bar-cell" style="position:relative;"><div class="bar green" style="left:4%;width:96%;"></div></td>
+    <td class="bar-cell" style="position:relative;"><div class="bar green" style="left:0%;width:96%;"></div></td>
+    <td></td><td></td><td></td>
+  </tr>
+  <!-- Row 3: Marketing presentation (milestone) -->
+  <tr class="task-row">
+    <td class="task-name">Present results to marketing &amp; set next plan</td>
+    <td></td><td></td><td></td>
+    <td style="position:relative;"><div class="milestone-diamond" style="margin-top:5px;"></div></td>
+    <td></td><td></td>
+  </tr>
+  <!-- Row 4: GD32 Benchmark -->
+  <tr class="task-row">
+    <td class="task-name">GD32 Benchmark</td>
+    <td></td><td></td><td></td>
+    <td class="bar-cell" style="position:relative;"><div class="bar orange" style="left:4%;width:96%;"></div></td>
+    <td class="bar-cell" style="position:relative;"><div class="bar orange" style="left:0%;width:48%;"></div></td>
+    <td></td>
+  </tr>
+  <!-- Row 5: Footprint Analyzer Tool -->
+  <tr class="task-row">
+    <td class="task-name">Footprint Analyzer Tool</td>
+    <td></td><td></td><td></td>
+    <td class="bar-cell" style="position:relative;"><div class="bar purple" style="left:4%;width:96%;"></div></td>
+    <td class="bar-cell" style="position:relative;"><div class="bar purple" style="left:0%;width:48%;"></div></td>
+    <td></td>
+  </tr>
+  <!-- Row 6: Custom Copilot Agent -->
+  <tr class="task-row">
+    <td class="task-name">Custom Copilot Agent</td>
+    <td></td><td></td><td></td>
+    <td class="bar-cell" style="position:relative;"><div class="bar pink" style="left:4%;width:96%;"></div></td>
+    <td class="bar-cell" style="position:relative;"><div class="bar pink" style="left:0%;width:48%;"></div></td>
+    <td></td>
+  </tr>
+  <!-- Row 7: TI vs ST -->
+  <tr class="task-row">
+    <td class="task-name">Static &amp; Functional Benchmark: TI vs ST (Cube2 C5)</td>
+    <td></td><td></td><td></td><td></td>
+    <td class="bar-cell" style="position:relative;"><div class="bar teal" style="left:50%;width:50%;"></div></td>
+    <td class="bar-cell" style="position:relative;"><div class="bar teal" style="left:0%;width:96%;"></div></td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#4fc3f7;"></div>Competitors search</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#66bb6a;"></div>USB legacy</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#fdd835; border-radius:0; transform:rotate(45deg); width:12px; height:12px;"></div>Marketing milestone</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#ffa726;"></div>GD32 Benchmark</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#ab47bc;"></div>Footprint Analyzer</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#ec407a;"></div>Copilot Agent</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#26c6da;"></div>TI vs ST Benchmark</div>
+</div>
+</body>
+</html>

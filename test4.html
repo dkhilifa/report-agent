@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Slide - Evaluation Criteria and Benchmark Dimensions</title>
+  <style>
+    :root{
+      --navy:#062b5b;
+      --navy2:#0d3e7c;
+      --yellow:#f2c500;
+      --magenta:#e1007a;
+      --bg:#eef2f7;
+      --card:#ffffff;
+      --line:#d7e0ea;
+      --text:#17365d;
+      --muted:#62768f;
+      --shadow:0 10px 26px rgba(0,0,0,.10);
+
+      --c1:#2ec4b6;
+      --c2:#4cc9f0;
+      --c3:#48b04d;
+      --c4:#7b61ff;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html, body{
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      background:linear-gradient(135deg,#dde6f0,#f7f9fc);
+      font-family:"Segoe UI", Arial, sans-serif;
+    }
+
+    .stage{
+      position:relative;
+      width:100vw;
+      height:100vh;
+      overflow:hidden;
+    }
+
+    .slide{
+      position:absolute;
+      width:1366px;
+      height:768px;
+      left:50%;
+      top:50%;
+      transform-origin:center center;
+      background:var(--bg);
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:0 24px 60px rgba(0,0,0,.18);
+      border:1px solid #e2e8f0;
+    }
+
+    /* Header */
+    .header{
+      padding:28px 42px 18px 42px;
+      position:relative;
+    }
+
+    .header::after{
+      content:"";
+      position:absolute;
+      right:0;
+      top:0;
+      width:22px;
+      height:120px;
+      background:var(--navy);
+    }
+
+    .row-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:14px;
+    }
+
+    .ribbon{
+      display:inline-block;
+      background:var(--magenta);
+      color:#fff;
+      padding:14px 30px 14px 24px;
+      font-size:18px;
+      font-weight:700;
+      clip-path:polygon(0 0, 85% 0, 100% 100%, 0 100%);
+      min-width:320px;
+      box-shadow:var(--shadow);
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+
+    .chip{
+      background:#aac8e4;
+      color:var(--navy);
+      font-size:14px;
+      font-weight:700;
+      padding:9px 14px;
+      border-radius:8px;
+      box-shadow:var(--shadow);
+    }
+
+    .title{
+      font-size:36px;
+      font-weight:800;
+      color:var(--navy);
+      margin-bottom:6px;
+    }
+
+    .subtitle{
+      font-size:18px;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+
+    .line{
+      height:3px;
+      background:linear-gradient(90deg,var(--navy),transparent);
+    }
+
+    /* Body */
+    .content{
+      height:calc(768px - 145px);
+      padding:14px 34px 30px 34px;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .top-note{
+      background:#ffffff;
+      border:1px solid var(--line);
+      border-left:6px solid var(--yellow);
+      border-radius:14px;
+      padding:14px 18px;
+      box-shadow:var(--shadow);
+      font-size:17px;
+      line-height:1.45;
+      color:#344b68;
+    }
+
+    .diagram{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      flex:1;
+    }
+
+    .block{
+      position:relative;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:22px 22px 18px 22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      min-height:220px;
+    }
+
+    .block::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      bottom:0;
+      width:12px;
+    }
+
+    .block.teal::before{background:var(--c1);}
+    .block.blue::before{background:var(--c2);}
+    .block.green::before{background:var(--c3);}
+    .block.purple::before{background:var(--c4);}
+
+    .head{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:14px;
+    }
+
+    .icon{
+      width:50px;
+      height:50px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:24px;
+      font-weight:800;
+      color:#fff;
+      flex-shrink:0;
+    }
+
+    .teal .icon{background:var(--c1);}
+    .blue .icon{background:var(--c2);}
+    .green .icon{background:var(--c3);}
+    .purple .icon{background:var(--c4);}
+
+    .block h3{
+      font-size:23px;
+      color:var(--navy);
+      margin:0;
+    }
+
+    .block p.small{
+      font-size:15px;
+      color:var(--muted);
+      margin-top:4px;
+    }
+
+    ul.clean{
+      list-style:none;
+      margin-top:10px;
+    }
+
+    ul.clean li{
+      position:relative;
+      padding-left:18px;
+      margin-bottom:10px;
+      font-size:17px;
+      line-height:1.42;
+      color:#304762;
+    }
+
+    ul.clean li::before{
+      content:"•";
+      position:absolute;
+      left:4px;
+      top:0;
+      color:var(--magenta);
+      font-weight:800;
+    }
+
+    .bottom-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .note{
+      background:#eef6ff;
+      border-left:6px solid #79abd8;
+      padding:13px 16px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      font-size:16px;
+      color:#314864;
+      line-height:1.45;
+    }
+
+    .success{
+      background:#ebfaef;
+      border-left:6px solid #2da562;
+      padding:13px 16px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      font-size:16px;
+      color:#245234;
+      line-height:1.45;
+    }
+
+    .footer{
+      position:absolute;
+      right:22px;
+      bottom:12px;
+      color:#7b8ca0;
+      font-size:12px;
+    }
+
+    .conf{
+      position:absolute;
+      left:28px;
+      bottom:12px;
+      color:#7b8ca0;
+      font-size:12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="slide" id="slide">
+
+      <div class="header">
+        <div class="row-top">
+          <div class="ribbon">III. Benchmark Methodology</div>
+          <div class="chip">3.2 Evaluation Criteria and Dimensions</div>
+        </div>
+        <div class="title">Evaluation Criteria and Benchmark Dimensions</div>
+        <div class="subtitle">The benchmark is multi-dimensional and not limited to a single metric</div>
+        <div class="line"></div>
+      </div>
+
+      <div class="content">
+        <div class="top-note">
+          The benchmark work covers several analysis axes.  
+          <strong>Footprint analysis</strong> and <strong>execution-time analysis</strong> belong to the broader
+          <strong>functional analysis</strong>, while static analysis addresses source-code structure and SDK composition.
+        </div>
+
+        <div class="diagram">
+          <div class="block teal">
+            <div class="head">
+              <div class="icon">F</div>
+              <div>
+                <h3>Functional Analysis</h3>
+                <p class="small">Feature-level comparison and implementation behavior</p>
+              </div>
+            </div>
+            <ul class="clean">
+              <li>Compares how the same functionality is implemented across vendors</li>
+              <li>Focuses on scenario execution under equivalent observable behavior</li>
+              <li>Includes both <strong>footprint</strong> and <strong>execution-time</strong> perspectives</li>
+            </ul>
+          </div>
+
+          <div class="block blue">
+            <div class="head">
+              <div class="icon">M</div>
+              <div>
+                <h3>Footprint Analysis</h3>
+                <p class="small">Part of the functional analysis</p>
+              </div>
+            </div>
+            <ul class="clean">
+              <li>Code size</li>
+              <li>Memory occupation</li>
+              <li>Per-layer and per-module contribution to the global footprint</li>
+            </ul>
+          </div>
+
+          <div class="block green">
+            <div class="head">
+              <div class="icon">T</div>
+              <div>
+                <h3>Execution-Time Analysis</h3>
+                <p class="small">Part of the functional analysis</p>
+              </div>
+            </div>
+            <ul class="clean">
+              <li>Measured efficiency in selected benchmark scenarios</li>
+              <li>Initialization and runtime behavior</li>
+              <li>Performance differences under controlled conditions</li>
+            </ul>
+          </div>
+
+          <div class="block purple">
+            <div class="head">
+              <div class="icon">S</div>
+              <div>
+                <h3>Static Analysis Orientation</h3>
+                <p class="small">Code structure and ecosystem quality view</p>
+              </div>
+            </div>
+            <ul class="clean">
+              <li>Code structure and composition</li>
+              <li>Dependency behavior</li>
+              <li>API surface, documentation, duplication, complexity, compliance, and coverage</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bottom-row">
+          <div class="note">
+            <strong>Important note:</strong> the exact scope depends on the benchmark campaign,
+            and not all dimensions were at the same maturity level during the internship.
+          </div>
+          <div class="success">
+            <strong>Key message:</strong> the benchmark is <strong>multi-dimensional</strong>:
+            it combines feature-level behavior, footprint, execution efficiency, and software-structure analysis.
+          </div>
+        </div>
+      </div>
+
+      <div class="conf">PFE - STM32Cube Competitor Benchmark</div>
+      <div class="footer">Slide 8</div>
+    </div>
+  </div>
+
+  <script>
+    function scaleSlide() {
+      const slide = document.getElementById('slide');
+      const baseWidth = 1366;
+      const baseHeight = 768;
+      const scaleX = window.innerWidth / baseWidth;
+      const scaleY = window.innerHeight / baseHeight;
+      const scale = Math.min(scaleX, scaleY);
+      slide.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    }
+
+    window.addEventListener('resize', scaleSlide);
+    window.addEventListener('load', scaleSlide);
+  </script>
+</body>
+</html>

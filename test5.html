@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Section 4 & 5 - Work Carried Out / Results and Contributions</title>
+  <style>
+    :root{
+      --navy:#062b5b;
+      --navy2:#0d3e7c;
+      --navy3:#11498f;
+      --yellow:#f2c500;
+      --magenta:#e1007a;
+      --bg:#eef2f7;
+      --card:#ffffff;
+      --line:#d7e0ea;
+      --text:#17365d;
+      --muted:#62768f;
+      --shadow:0 12px 30px rgba(0,0,0,.10);
+
+      --green:#20b36a;
+      --green2:#7adf9e;
+      --teal:#119da4;
+      --blue:#57a7ff;
+      --orange:#f39c12;
+      --purple:#7e57c2;
+      --red:#e85d75;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    html, body{
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      background:linear-gradient(135deg,#dde6f0,#f7f9fc);
+      font-family:"Segoe UI", Arial, sans-serif;
+    }
+
+    .stage{
+      position:relative;
+      width:100vw;
+      height:100vh;
+      overflow:hidden;
+    }
+
+    .deck{
+      position:absolute;
+      width:1366px;
+      height:768px;
+      left:50%;
+      top:50%;
+      transform-origin:center center;
+    }
+
+    .slide{
+      position:absolute;
+      inset:0;
+      background:var(--bg);
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid #e2e8f0;
+      box-shadow:0 24px 60px rgba(0,0,0,.18);
+      opacity:0;
+      visibility:hidden;
+      transform:translateX(40px);
+      transition:opacity .45s ease, transform .45s ease, visibility .45s;
+    }
+
+    .slide.active{
+      opacity:1;
+      visibility:visible;
+      transform:translateX(0);
+      z-index:2;
+    }
+
+    .slide.prev{
+      transform:translateX(-40px);
+    }
+
+    .header{
+      padding:28px 42px 18px 42px;
+      position:relative;
+    }
+
+    .header::after{
+      content:"";
+      position:absolute;
+      right:0;top:0;
+      width:22px;height:120px;
+      background:var(--navy);
+    }
+
+    .row-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:14px;
+    }
+
+    .ribbon{
+      display:inline-block;
+      background:var(--magenta);
+      color:#fff;
+      padding:14px 30px 14px 24px;
+      font-size:18px;
+      font-weight:700;
+      clip-path:polygon(0 0, 85% 0, 100% 100%, 0 100%);
+      min-width:320px;
+      box-shadow:var(--shadow);
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+
+    .chip{
+      background:#aac8e4;
+      color:var(--navy);
+      font-size:14px;
+      font-weight:700;
+      padding:9px 14px;
+      border-radius:8px;
+      box-shadow:var(--shadow);
+    }
+
+    .title{
+      font-size:35px;
+      font-weight:800;
+      color:var(--navy);
+      margin-bottom:6px;
+    }
+
+    .subtitle{
+      font-size:18px;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+
+    .line{
+      height:3px;
+      background:linear-gradient(90deg,var(--navy),transparent);
+    }
+
+    .content{
+      height:calc(768px - 145px);
+      padding:12px 34px 30px 34px;
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:18px 20px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card.soft{ background:linear-gradient(180deg,#ffffff,#f7fbff); }
+
+    .card h3{
+      font-size:21px;
+      color:var(--navy);
+      margin-bottom:10px;
+    }
+
+    .card p{
+      font-size:15px;
+      line-height:1.45;
+      color:#324a67;
+    }
+
+    ul.clean{
+      list-style:none;
+      margin-top:6px;
+    }
+
+    ul.clean li{
+      position:relative;
+      padding-left:18px;
+      margin-bottom:9px;
+      font-size:15px;
+      line-height:1.42;
+      color:#314864;
+    }
+
+    ul.clean li::before{
+      content:"•";
+      position:absolute;
+      left:5px;
+      top:0;
+      color:var(--magenta);
+      font-weight:800;
+    }
+
+    .icon{
+      width:42px;height:42px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:20px;
+      font-weight:800;
+      color:#fff;
+      margin-bottom:10px;
+      box-shadow:0 8px 18px rgba(0,0,0,.08);
+    }
+
+    .i-blue{background:linear-gradient(180deg,var(--blue),#2d7bda)}
+    .i-green{background:linear-gradient(180deg,var(--green),#159956)}
+    .i-orange{background:linear-gradient(180deg,#f7b347,#e08e07)}
+    .i-purple{background:linear-gradient(180deg,#9c80e9,#7152bd)}
+    .i-teal{background:linear-gradient(180deg,#19b9c4,#0a7d86)}
+    .i-red{background:linear-gradient(180deg,#f37d92,#d84b67)}
+    .i-navy{background:linear-gradient(180deg,var(--navy3),var(--navy))}
+
+    .highlight{
+      background:#fff7dc;
+      border-left:6px solid var(--yellow);
+      padding:12px 15px;
+      border-radius:10px;
+      font-size:15px;
+      color:#5b4c16;
+      box-shadow:var(--shadow);
+    }
+
+    .note{
+      background:#eef6ff;
+      border-left:6px solid #79abd8;
+      padding:12px 15px;
+      border-radius:10px;
+      font-size:15px;
+      color:#314864;
+      box-shadow:var(--shadow);
+      line-height:1.42;
+    }
+
+    .success{
+      background:#ebfaef;
+      border-left:6px solid var(--green);
+      padding:12px 15px;
+      border-radius:10px;
+      font-size:15px;
+      color:#245234;
+      box-shadow:var(--shadow);
+      line-height:1.42;
+    }
+
+    .process{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+      align-items:start;
+    }
+
+    .step{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      min-height:172px;
+      box-shadow:var(--shadow);
+      position:relative;
+    }
+
+    .step:not(:last-child)::after{
+      content:"→";
+      position:absolute;
+      right:-12px;
+      top:48%;
+      transform:translateY(-50%);
+      font-size:24px;
+      color:var(--navy);
+      font-weight:800;
+      z-index:3;
+    }
+
+    .num{
+      width:32px;height:32px;border-radius:50%;
+      background:var(--navy);color:#fff;
+      display:flex;align-items:center;justify-content:center;
+      font-size:14px;font-weight:700;
+      margin-bottom:10px;
+    }
+
+    .step h4{
+      font-size:18px;
+      color:var(--navy);
+      margin-bottom:8px;
+    }
+
+    .step p{
+      font-size:14px;
+      line-height:1.38;
+      color:#36506c;
+    }
+
+    .mini-flow{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:12px;
+      align-items:center;
+    }
+
+    .mini-box{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:14px 12px;
+      text-align:center;
+      min-height:110px;
+      position:relative;
+    }
+
+    .mini-box:not(:last-child)::after{
+      content:"→";
+      position:absolute;
+      right:-10px;
+      top:45%;
+      font-size:22px;
+      color:var(--navy);
+      font-weight:800;
+      z-index:2;
+    }
+
+    .mini-box .small{
+      font-size:12px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.5px;
+      margin-bottom:8px;
+      font-weight:700;
+    }
+
+    .mini-box .big{
+      font-size:16px;
+      color:var(--navy);
+      font-weight:800;
+      line-height:1.3;
+    }
+
+    .timeline{
+      display:grid;
+      grid-template-columns:1fr 70px 1fr;
+      gap:14px;
+      align-items:center;
+    }
+
+    .arrow-center{
+      text-align:center;
+      font-size:36px;
+      color:var(--navy);
+      font-weight:800;
+    }
+
+    .roadmap-list{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .kpi-row{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+    }
+
+    .kpi{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:16px;
+      text-align:center;
+    }
+
+    .kpi .value{
+      font-size:31px;
+      color:var(--navy);
+      font-weight:800;
+      margin-bottom:6px;
+    }
+
+    .kpi .label{
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.34;
+    }
+
+    .status{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      margin-top:6px;
+    }
+
+    .s-blue{background:#e8f1fb;color:var(--navy)}
+    .s-green{background:#eaf8ef;color:#177343}
+    .s-orange{background:#fff4e1;color:#a86400}
+    .s-purple{background:#f1ebff;color:#6140b7}
+
+    .quadrant{
+      position:relative;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:20px;
+      box-shadow:var(--shadow);
+      min-height:255px;
+    }
+
+    .quadrant .axes{
+      position:absolute;
+      inset:56px 20px 20px 20px;
+    }
+
+    .quadrant .vline, .quadrant .hline{
+      position:absolute;
+      background:#cdd8e6;
+    }
+    .quadrant .vline{width:2px;top:0;bottom:0;left:50%}
+    .quadrant .hline{height:2px;left:0;right:0;top:50%}
+
+    .q-label{
+      position:absolute;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .ql1{top:8px;left:20px}
+    .ql2{top:8px;right:20px}
+    .ql3{bottom:6px;left:20px}
+    .ql4{bottom:6px;right:20px}
+
+    .point{
+      position:absolute;
+      width:14px;height:14px;border-radius:50%;
+      background:var(--blue);
+      box-shadow:0 0 0 6px rgba(87,167,255,.15);
+    }
+
+    .point.p2{background:var(--green); box-shadow:0 0 0 6px rgba(32,179,106,.15);}
+    .point.p3{background:var(--orange); box-shadow:0 0 0 6px rgba(243,156,18,.15);}
+    .point.p4{background:var(--purple); box-shadow:0 0 0 6px rgba(126,87,194,.15);}
+
+    .point-label{
+      position:absolute;
+      font-size:12px;
+      font-weight:700;
+      color:var(--navy);
+      white-space:nowrap;
+    }
+
+    .footer{
+      position:absolute;
+      right:22px;
+      bottom:12px;
+      color:#7b8ca0;
+      font-size:12px;
+    }
+    .conf{
+      position:absolute;
+      left:28px;
+      bottom:12px;
+      color:#7b8ca0;
+      font-size:12px;
+    }
+
+    .controls{
+      position:fixed;
+      right:20px;
+      bottom:18px;
+      display:flex;
+      gap:10px;
+      z-index:20;
+    }
+
+    .controls button{
+      border:none;
+      background:var(--navy);
+      color:#fff;
+      padding:10px 16px;
+      border-radius:10px;
+      cursor:pointer;
+      font-size:14px;
+      box-shadow:var(--shadow);
+    }
+
+    .controls button:hover{background:var(--navy2)}
+    .controls button:disabled{opacity:.35;cursor:not-allowed}
+
+    .progress{
+      position:fixed;
+      top:0;left:0;height:5px;width:0;
+      background:linear-gradient(90deg,var(--magenta),var(--yellow));
+      z-index:25; transition:width .3s ease;
+    }
+
+    .counter{
+      position:fixed;
+      left:22px; bottom:18px;
+      z-index:25;
+      color:#66788f;
+      font-size:14px;
+    }
+
+    .anim-fade-up{
+      opacity:0;
+      transform:translateY(14px);
+      animation:fadeUp .55s ease forwards;
+    }
+
+    .anim-delay-1{animation-delay:.08s}
+    .anim-delay-2{animation-delay:.16s}
+    .anim-delay-3{animation-delay:.24s}
+    .anim-delay-4{animation-delay:.32s}
+    .anim-delay-5{animation-delay:.40s}
+
+    @keyframes fadeUp{
+      to{opacity:1; transform:translateY(0)}
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="counter" id="counter"></div>
+
+  <div class="controls">
+    <button id="prevBtn" onclick="changeSlide(-1)">◀ Prev</button>
+    <button id="nextBtn" onclick="changeSlide(1)">Next ▶</button>
+  </div>
+
+  <div class="stage">
+    <div class="deck" id="deck">
+
+      <!-- ===================================================== -->
+      <!-- SLIDE 9 -->
+      <!-- ===================================================== -->
+      <section class="slide active" id="slide-9">
+        <div class="header">
+          <div class="row-top">
+            <div class="ribbon">IV. Work Carried Out</div>
+            <div class="chip">4.1 Initial Work</div>
+          </div>
+          <div class="title">Competitor Search and Equivalence Definition</div>
+          <div class="subtitle">A solid preparation phase before running benchmark scenarios</div>
+          <div class="line"></div>
+        </div>
+
+        <div class="content">
+          <div class="grid-2">
+            <div class="card soft anim-fade-up anim-delay-1">
+              <div class="icon i-blue">🔎</div>
+              <h3>Preparation Activities</h3>
+              <ul class="clean">
+                <li>Search for available <strong>competitor boards</strong> and ecosystems</li>
+                <li>Identify the closest <strong>ST equivalent targets</strong></li>
+                <li>Study possible <strong>benchmark scenarios</strong></li>
+                <li>Establish the <strong>comparison basis</strong> for future measurements</li>
+              </ul>
+            </div>
+
+            <div class="card anim-fade-up anim-delay-2">
+              <div class="icon i-green">🎯</div>
+              <h3>Goal of This Phase</h3>
+              <p>
+                Ensure that benchmark campaigns start from a technically valid comparison framework:
+                equivalent boards, comparable software scope, and meaningful use cases.
+              </p>
+              <div class="status s-green">Foundation of Fair Benchmarking</div>
+            </div>
+          </div>
+
+          <div class="process">
+            <div class="step anim-fade-up anim-delay-1">
+              <div class="num">1</div>
+              <h4>Explore Competitors</h4>
+              <p>Identify vendor families, boards, MCU classes, and available software ecosystems.</p>
+            </div>
+            <div class="step anim-fade-up anim-delay-2">
+              <div class="num">2</div>
+              <h4>Match ST Targets</h4>
+              <p>Define hardware and software equivalence to ensure comparable benchmark conditions.</p>
+            </div>
+            <div class="step anim-fade-up anim-delay-3">
+              <div class="num">3</div>
+              <h4>Select Scenarios</h4>
+              <p>Evaluate which software stacks and benchmark cases are relevant and feasible.</p>
+            </div>
+            <div class="step anim-fade-up anim-delay-4">
+              <div class="num">4</div>
+              <h4>Build Comparison Basis</h4>
+              <p>Prepare a structured basis for fair execution, interpretation, and future reuse.</p>
+            </div>
+          </div>
+
+          <div class="note">
+            <strong>Main message:</strong> the benchmark work did not start directly with measurements;
+            it started with a rigorous <strong>preparation and equivalence phase</strong>, which is essential for a fair comparison.
+          </div>
+        </div>
+        <div class="conf">PFE - STM32Cube Competitor Benchmark</div>
+        <div class="footer">Slide 9</div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- SLIDE 10 -->
+      <!-- ===================================================== -->
+      <section class="slide" id="slide-10">
+        <div class="header">
+          <div class="row-top">
+            <div class="ribbon">IV. Work Carried Out</div>
+            <div class="chip">4.2 Legacy USB Benchmark Recreation</div>
+          </div>
+          <div class="title">Recreation of Legacy USB Benchmark Scenarios</div>
+          <div class="subtitle">Reviving and modernizing existing benchmark assets</div>
+          <div class="line"></div>
+        </div>
+
+        <div class="content">
+          <div class="grid-2">
+            <div class="card soft anim-fade-up anim-delay-1">
+              <div class="icon i-orange">🔁</div>
+              <h3>Recreated Scenarios</h3>
+              <ul class="clean">
+                <li><strong>Renesas USB</strong> vs <strong>ST USB stack</strong></li>
+                <li><strong>NXP USB</strong> vs <strong>ST USB stack</strong></li>
+              </ul>
+              <div class="status s-orange">Legacy Assets Reused</div>
+            </div>
+
+            <div class="card anim-fade-up anim-delay-2">
+              <div class="icon i-teal">🧩</div>
+              <h3>Modernization Work</h3>
+              <ul class="clean">
+                <li>Rebuild old projects and benchmark scenarios</li>
+                <li>Update build and measurement flow</li>
+                <li>Regenerate footprint outputs</li>
+                <li>Regenerate execution-time outputs</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mini-flow">
+            <div class="mini-box anim-fade-up anim-delay-1">
+              <div class="small">Legacy Input</div>
+              <div class="big">Ancient benchmark material</div>
+            </div>
+            <div class="mini-box anim-fade-up anim-delay-2">
+              <div class="small">Rebuild</div>
+              <div class="big">Projects and scenarios reconstructed</div>
+            </div>
+            <div class="mini-box anim-fade-up anim-delay-3">
+              <div class="small">Update</div>
+              <div class="big">Build and measurement flow improved</div>
+            </div>
+            <div class="mini-box anim-fade-up anim-delay-4">
+              <div class="small">Regenerate</div>
+              <div class="big">New footprint and timing outputs</div>
+            </div>
+            <div class="mini-box anim-fade-up anim-delay-5">
+              <div class="small">Exploit</div>
+              <div class="big">Usable benchmark results restored</div>
+            </div>
+          </div>
+
+          <div class="success">
+            <strong>Added value:</strong> this effort was not only about rerunning old tests;
+            it restored the value of legacy benchmark scenarios and turned them into <strong>updated, exploitable assets</strong>.
+          </div>
+        </div>
+        <div class="conf">PFE - STM32Cube Competitor Benchmark</div>
+        <div class="footer">Slide 10</div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- SLIDE 11 -->
+      <!-- ===================================================== -->
+      <section class="slide" id="slide-11">
+        <div class="header">
+          <div class="row-top">
+            <div class="ribbon">IV. Work Carried Out</div>
+            <div class="chip">4.3 Internal Feedback and Roadmap Evolution</div>
+          </div>
+          <div class="title">Internal Feedback and Benchmark Roadmap Evolution</div>
+          <div class="subtitle">From initial outputs to new benchmark directions</div>
+          <div class="line"></div>
+        </div>
+
+        <div class="content">
+          <div class="timeline">
+            <div class="card soft anim-fade-up anim-delay-1">
+              <div class="icon i-blue">📦</div>
+              <h3>Initial Outputs</h3>
+              <ul class="clean">
+                <li>Legacy USB benchmark results consolidated internally</li>
+                <li>Benchmark material prepared for internal presentation</li>
+                <li>First comparison results reused in a broader effort</li>
+              </ul>
+            </div>
+
+            <div class="arrow-center anim-fade-up anim-delay-2">→</div>
+
+            <div class="card anim-fade-up anim-delay-3">
+              <div class="icon i-purple">🧭</div>
+              <h3>New Benchmark Plan</h3>
+              <ul class="clean">
+                <li><strong>ST vs GD32</strong> middleware benchmark</li>
+                <li><strong>STM32Cube 2 (C5) vs TI MSPM33</strong></li>
+                <li>Static analysis orientation</li>
+                <li>Functional analysis orientation</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="roadmap-list">
+            <div class="card soft anim-fade-up anim-delay-2">
+              <div class="icon i-green">💬</div>
+              <h3>Stakeholder Feedback Loop</h3>
+              <p>
+                Benchmark results were not isolated outputs. They were presented, discussed,
+                and used to refine priorities and future comparison directions.
+              </p>
+            </div>
+
+            <div class="card anim-fade-up anim-delay-4">
+              <div class="icon i-navy">🏭</div>
+              <h3>Industrial Significance</h3>
+              <p>
+                This evolution shows that the internship work was integrated into a
+                <strong>real industrial process</strong>, with decisions influenced by technical and stakeholder feedback.
+              </p>
+            </div>
+          </div>
+
+          <div class="note">
+            <strong>Main message:</strong> the benchmark roadmap evolved through internal exploitation and feedback,
+            which confirms the practical relevance of the work beyond the initial scenarios.
+          </div>
+        </div>
+        <div class="conf">PFE - STM32Cube Competitor Benchmark</div>
+        <div class="footer">Slide 11</div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- SLIDE 12 -->
+      <!-- ===================================================== -->
+      <section class="slide" id="slide-12">
+        <div class="header">
+          <div class="row-top">
+            <div class="ribbon">IV. Work Carried Out</div>
+            <div class="chip">4.4 Focus on GD32 Middleware Benchmark</div>
+          </div>
+          <div class="title">Focus on the GD32 Middleware Benchmark</div>
+          <div class="subtitle">The strongest technical benchmark workstream of the internship</div>
+          <div class="line"></div>
+        </div>
+
+        <div class="content">
+          <div class="grid-2">
+            <div class="card soft anim-fade-up anim-delay-1">
+              <div class="icon i-teal">🎯</div>
+              <h3>Benchmark Objective</h3>
+              <ul class="clean">
+                <li>Compare <strong>ST middleware</strong> against <strong>GD32 middleware</strong></li>
+                <li>Apply the same benchmark methodology used across the project</li>
+                <li>Study comparable components under equivalent benchmark logic</li>
+              </ul>
+            </div>
+
+            <div class="card anim-fade-up anim-delay-2">
+              <div class="icon i-green">👤</div>
+              <h3>My Role</h3>
+              <ul class="clean">
+                <li>Carried out this benchmark workstream <strong>autonomously</strong></li>
+                <li>Prepared the environment and analysis basis</li>
+                <li>Performed comparison and interpretation work</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card soft anim-fade-up anim-delay-3">
+              <h3>Compared Scope / Analysis Logic</h3>
+              <ul class="clean">
+                <li>Compared middleware components and implementation choices</li>
+                <li>Analyzed footprint distribution and architecture impact</li>
+                <li>Observed module contribution and optional feature overhead</li>
+              </ul>
+              <div class="status s-blue">Methodology-Driven Analysis</div>
+            </div>
+
+            <div class="quadrant anim-fade-up anim-delay-4">
+              <h3 style="margin-bottom:10px;">Categories of Findings</h3>
+              <div class="axes">
+                <div class="vline"></div>
+                <div class="hline"></div>
+
+                <div class="q-label ql1">Higher cost / clearer cause</div>
+                <div class="q-label ql2">Higher cost / complex cause</div>
+                <div class="q-label ql3">Lower cost / clearer cause</div>
+                <div class="q-label ql4">Lower cost / complex cause</div>
+
+                <div class="point" style="left:24%; top:68%;"></div>
+                <div class="point-label" style="left:28%; top:65%;">Module granularity</div>
+
+                <div class="point p2" style="left:70%; top:28%;"></div>
+                <div class="point-label" style="left:52%; top:23%;">Architecture impact</div>
+
+                <div class="point p3" style="left:38%; top:57%;"></div>
+                <div class="point-label" style="left:41%; top:53%;">Feature overhead</div>
+
+                <div class="point p4" style="left:62%; top:42%;"></div>
+                <div class="point-label" style="left:65%; top:38%;">Abstraction cost</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="highlight">
+            If detailed values are confidential, the benchmark can still be presented through <strong>categories of findings</strong>,
+            methodology, and interpretation logic rather than raw numbers.
+          </div>
+        </div>
+        <div class="conf">PFE - STM32Cube Competitor Benchmark</div>
+        <div class="footer">Slide 12</div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- SLIDE 13 -->
+      <!-- ===================================================== -->
+      <section class="slide" id="slide-13">
+        <div class="header">
+          <div class="row-top">
+            <div class="ribbon">IV. Work Carried Out</div>
+            <div class="chip">4.5 Personal Contribution to Benchmark Workflow</div>
+          </div>
+          <div class="title">Support Developments for the Benchmark Workflow</div>
+          <div class="subtitle">Engineering contributions created to facilitate benchmark work</div>
+          <div class="line"></div>
+        </div>
+
+        <div class="content">
+          <div class="mini-flow">
+            <div class="mini-box anim-fade-up anim-delay-1">
+              <div class="small">Input</div>
+              <div class="big">Map files and benchmark artifacts</div>
+            </div>
+            <div class="mini-box anim-fade-up anim-delay-2">
+              <div class="small">Analysis</div>
+              <div class="big">Footprint analyzer and equivalence mapping</div>
+            </div>
+            <div class="mini-box anim-fade-up anim-delay-3">
+              <div class="small">Interpretation</div>
+              <div class="big">Gap analysis and AI-assisted understanding</div>
+            </div>
+            <div class="mini-box anim-fade-up anim-delay-4">
+              <div class="small">Setup</div>
+              <div class="big">Custom copilot agent for creation / porting / debug</div>
+            </div>
+            <div class="mini-box anim-fade-up anim-delay-5">
+              <div class="small">Outcome</div>
+              <div class="big">Faster and more exploitable benchmark workflow</div>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="card soft anim-fade-up anim-delay-1">
+              <div class="icon i-blue">📊</div>
+              <h3>Footprint Analyzer</h3>
+              <ul class="clean">
+                <li>Map file exploitation</li>
+                <li>Module / function equivalence mapping</li>
+                <li>Footprint gap computation</li>
+                <li>Structured result interpretation</li>
+              </ul>
+            </div>
+
+            <div class="card anim-fade-up anim-delay-2">
+              <div class="icon i-purple">🧠</div>
+              <h3>AI-Assisted Understanding</h3>
+              <ul class="clean">
+                <li>Help users understand gap origins</li>
+                <li>Generate interpretations</li>
+                <li>Suggest recommendations and enhancements</li>
+              </ul>
+            </div>
+
+            <div class="card soft anim-fade-up anim-delay-3">
+              <div class="icon i-green">🤖</div>
+              <h3>Custom Copilot Agent</h3>
+              <ul class="clean">
+                <li>Project creation support</li>
+                <li>Porting assistance</li>
+                <li>Debug and setup acceleration</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="note">
+            <strong>Important wording:</strong> these are <strong>support developments created to facilitate benchmark work</strong>;
+            they are part of my contribution, but they are not the main subject of the PFE.
+          </div>
+        </div>
+        <div class="conf">PFE - STM32Cube Competitor Benchmark</div>
+        <div class="footer">Slide 13</div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- SLIDE 14 -->
+      <!-- ===================================================== -->
+      <section class="slide" id="slide-14">
+        <div class="header">
+          <div class="row-top">
+            <div class="ribbon">V. Results and Contributions</div>
+            <div class="chip">5.1 Main Outputs and Added Value</div>
+          </div>
+          <div class="title">Main Outputs and Added Value</div>
+          <div class="subtitle">What the internship produced and why it matters</div>
+          <div class="line"></div>
+        </div>
+
+        <div class="content">
+          <div class="kpi-row">
+            <div class="kpi anim-fade-up anim-delay-1">
+              <div class="value">USB</div>
+              <div class="label">Legacy benchmark scenarios recreated and modernized</div>
+            </div>
+            <div class="kpi anim-fade-up anim-delay-2">
+              <div class="value">2+</div>
+              <div class="label">Competitor comparison directions actively addressed</div>
+            </div>
+            <div class="kpi anim-fade-up anim-delay-3">
+              <div class="value">AI</div>
+              <div class="label">Workflow support developments created for setup and analysis</div>
+            </div>
+            <div class="kpi anim-fade-up anim-delay-4">
+              <div class="value">R&D</div>
+              <div class="label">Results contributed to internal benchmark effort and evolution</div>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="card soft anim-fade-up anim-delay-1">
+              <div class="icon i-orange">📦</div>
+              <h3>Benchmark Outputs</h3>
+              <ul class="clean">
+                <li>Updated benchmark scenarios</li>
+                <li>Regenerated footprint and execution-time results</li>
+                <li>Progress on GD32 middleware benchmark</li>
+                <li>Preparation of upcoming benchmark tracks</li>
+              </ul>
+            </div>
+
+            <div class="card anim-fade-up anim-delay-2">
+              <div class="icon i-blue">👤</div>
+              <h3>Personal Contribution</h3>
+              <ul class="clean">
+                <li>Autonomous benchmark execution</li>
+                <li>Reconstruction and optimization of workflow</li>
+                <li>Development of support assets for analysis and setup</li>
+              </ul>
+            </div>
+
+            <div class="card soft anim-fade-up anim-delay-3">
+              <div class="icon i-green">✨</div>
+              <h3>Added Value</h3>
+              <ul class="clean">
+                <li>Better exploitability of benchmark data</li>
+                <li>Improved benchmark workflow efficiency</li>
+                <li>Contribution to internal benchmark effort</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="success">
+            <strong>Valorization message:</strong> this work produced both <strong>benchmark results</strong> and
+            <strong>benchmark-enabling contributions</strong> that improve productivity and reusability.
+          </div>
+        </div>
+        <div class="conf">PFE - STM32Cube Competitor Benchmark</div>
+        <div class="footer">Slide 14</div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- SLIDE 15 -->
+      <!-- ===================================================== -->
+      <section class="slide" id="slide-15">
+        <div class="header">
+          <div class="row-top">
+            <div class="ribbon">V. Results and Contributions</div>
+            <div class="chip">5.2 Key Learnings and Strengths</div>
+          </div>
+          <div class="title">Key Learnings and Strengths of the Work</div>
+          <div class="subtitle">Technical maturity, methodological rigor, and industrial relevance</div>
+          <div class="line"></div>
+        </div>
+
+        <div class="content">
+          <div class="grid-4">
+            <div class="card soft anim-fade-up anim-delay-1">
+              <div class="icon i-blue">⚖</div>
+              <h3>Fairness Matters</h3>
+              <p>Reliable benchmarking depends on rigorous equivalence between compared targets and features.</p>
+            </div>
+
+            <div class="card anim-fade-up anim-delay-2">
+              <div class="icon i-orange">🧱</div>
+              <h3>Legacy Reuse</h3>
+              <p>Existing benchmark assets can regain strong value when they are carefully rebuilt and modernized.</p>
+            </div>
+
+            <div class="card soft anim-fade-up anim-delay-3">
+              <div class="icon i-purple">📈</div>
+              <h3>Interpretation Is Essential</h3>
+              <p>Raw metrics alone are not enough; results must be explained and linked to engineering trade-offs.</p>
+            </div>
+
+            <div class="card anim-fade-up anim-delay-4">
+              <div class="icon i-green">⚙</div>
+              <h3>Workflow Support Helps</h3>
+              <p>Benchmark efficiency and scalability can be significantly improved through support developments.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card soft anim-fade-up anim-delay-2">
+              <div class="icon i-navy">🧪</div>
+              <h3>Strength of the Topic</h3>
+              <ul class="clean">
+                <li>Combines <strong>technical depth</strong> and <strong>industrial impact</strong></li>
+                <li>Bridges benchmark execution, result interpretation, and workflow scalability</li>
+                <li>Answering real internal needs, not only academic objectives</li>
+              </ul>
+            </div>
+
+            <div class="card anim-fade-up anim-delay-3">
+              <div class="icon i-red">🧭</div>
+              <h3>Personal Growth</h3>
+              <ul class="clean">
+                <li>Improved autonomy in technical investigation and benchmark execution</li>
+                <li>Developed stronger methodological thinking</li>
+                <li>Learned to connect measurements to actionable engineering proposals</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight">
+            <strong>Main reflection:</strong> this topic is strong because it combines
+            <strong>fair engineering comparison</strong>, <strong>concrete technical deliverables</strong>,
+            and <strong>real industrial usefulness</strong>.
+          </div>
+        </div>
+        <div class="conf">PFE - STM32Cube Competitor Benchmark</div>
+        <div class="footer">Slide 15</div>
+      </section>
+
+    </div>
+  </div>
+
+  <script>
+    const slideIds = ["slide-9","slide-10","slide-11","slide-12","slide-13","slide-14","slide-15"];
+    let current = 0;
+
+    function showSlide(index){
+      slideIds.forEach((id, i) => {
+        const el = document.getElementById(id);
+        el.classList.remove("active","prev");
+        if(i === index){
+          el.classList.add("active");
+        } else if(i < index){
+          el.classList.add("prev");
+        }
+      });
+
+      document.getElementById("counter").textContent = `${index + 1} / ${slideIds.length}`;
+      document.getElementById("progress").style.width = `${((index + 1) / slideIds.length) * 100}%`;
+      document.getElementById("prevBtn").disabled = index === 0;
+      document.getElementById("nextBtn").disabled = index === slideIds.length - 1;
+    }
+
+    function changeSlide(dir){
+      current = Math.max(0, Math.min(slideIds.length - 1, current + dir));
+      showSlide(current);
+    }
+
+    function scaleDeck(){
+      const deck = document.getElementById("deck");
+      const baseWidth = 1366;
+      const baseHeight = 768;
+      const scaleX = window.innerWidth / baseWidth;
+      const scaleY = window.innerHeight / baseHeight;
+      const scale = Math.min(scaleX, scaleY);
+      deck.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "ArrowRight" || e.key === " "){
+        e.preventDefault();
+        changeSlide(1);
+      }
+      if(e.key === "ArrowLeft"){
+        e.preventDefault();
+        changeSlide(-1);
+      }
+      if(e.key === "Home"){
+        current = 0; showSlide(current);
+      }
+      if(e.key === "End"){
+        current = slideIds.length - 1; showSlide(current);
+      }
+    });
+
+    let touchStartX = 0;
+    document.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    document.addEventListener("touchend", (e) => {
+      const dx = touchStartX - e.changedTouches[0].screenX;
+      if(Math.abs(dx) > 60){
+        changeSlide(dx > 0 ? 1 : -1);
+      }
+    });
+
+    window.addEventListener("resize", scaleDeck);
+    window.addEventListener("load", () => {
+      scaleDeck();
+      showSlide(current);
+    });
+  </script>
+</body>
+</html>

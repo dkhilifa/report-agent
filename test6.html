@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GD32 Benchmark Scope and Measurement Flow</title>
+  <style>
+    :root{
+      --navy:#062b5b;
+      --navy2:#0d3e7c;
+      --bg:#eef2f7;
+      --card:#ffffff;
+      --line:#d7e0ea;
+      --text:#17365d;
+      --muted:#62768f;
+      --magenta:#e1007a;
+      --yellow:#f2c500;
+      --shadow:0 12px 30px rgba(0,0,0,.12);
+
+      --green:#56e10f;
+      --green2:#0cc66b;
+      --teal:#0f8d95;
+      --teal2:#066a88;
+      --deep:#003c67;
+      --deep2:#072a8a;
+      --panel:#071c35;
+      --panel2:#0a2440;
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; }
+
+    html, body{
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      background:linear-gradient(135deg,#dde6f0,#f7f9fc);
+      font-family:"Segoe UI", Arial, sans-serif;
+    }
+
+    .stage{
+      position:relative;
+      width:100vw;
+      height:100vh;
+      overflow:hidden;
+    }
+
+    .slide{
+      position:absolute;
+      width:1366px;
+      height:768px;
+      left:50%;
+      top:50%;
+      transform-origin:center center;
+      background:var(--bg);
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:0 24px 60px rgba(0,0,0,.18);
+      border:1px solid #e2e8f0;
+    }
+
+    /* Header */
+    .header{
+      padding:28px 42px 18px 42px;
+      position:relative;
+    }
+
+    .header::after{
+      content:"";
+      position:absolute;
+      right:0;
+      top:0;
+      width:22px;
+      height:120px;
+      background:var(--navy);
+    }
+
+    .row-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:14px;
+    }
+
+    .ribbon{
+      display:inline-block;
+      background:var(--magenta);
+      color:#fff;
+      padding:14px 30px 14px 24px;
+      font-size:18px;
+      font-weight:700;
+      clip-path:polygon(0 0, 85% 0, 100% 100%, 0 100%);
+      min-width:320px;
+      box-shadow:var(--shadow);
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+
+    .chip{
+      background:#aac8e4;
+      color:var(--navy);
+      font-size:14px;
+      font-weight:700;
+      padding:9px 14px;
+      border-radius:8px;
+      box-shadow:var(--shadow);
+    }
+
+    .title{
+      font-size:35px;
+      font-weight:800;
+      color:var(--navy);
+      margin-bottom:6px;
+    }
+
+    .subtitle{
+      font-size:18px;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+
+    .line{
+      height:3px;
+      background:linear-gradient(90deg,var(--navy),transparent);
+    }
+
+    /* Main content */
+    .content{
+      padding:12px 34px 30px 34px;
+      height:calc(768px - 145px);
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .top-note{
+      background:#eef6ff;
+      border-left:6px solid #79abd8;
+      padding:12px 15px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      font-size:15px;
+      color:#314864;
+      line-height:1.4;
+    }
+
+    .diagram-panel{
+      position:relative;
+      flex:1;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .diagram-panel::before,
+    .diagram-panel::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      filter:blur(8px);
+      opacity:.14;
+    }
+
+    .diagram-panel::before{
+      width:280px;height:280px;
+      left:-90px; top:90px;
+      background:#00b3ff;
+    }
+
+    .diagram-panel::after{
+      width:220px;height:220px;
+      right:-60px; bottom:30px;
+      background:#2eff8b;
+    }
+
+    .section-label{
+      position:absolute;
+      top:16px;
+      height:42px;
+      padding:0 22px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-size:18px;
+      font-weight:800;
+      border-radius:10px;
+      box-shadow:var(--shadow);
+      z-index:3;
+    }
+
+    .sl-scen{ left:290px; width:220px; background:linear-gradient(90deg,#14c96d,#0db95f); }
+    .sl-met{ left:590px; width:300px; background:linear-gradient(90deg,#35969c,#3d98a0); }
+    .sl-tools{ left:1010px; width:315px; background:linear-gradient(90deg,#055a73,#084a6b); }
+
+    .node{
+      position:absolute;
+      z-index:4;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:#fff;
+      font-weight:700;
+      border-radius:12px;
+      box-shadow:0 10px 22px rgba(0,0,0,.20);
+      animation:fadeUp .55s ease forwards;
+      opacity:0;
+      transform:translateY(12px);
+    }
+
+    .delay-1{ animation-delay:.05s; }
+    .delay-2{ animation-delay:.12s; }
+    .delay-3{ animation-delay:.19s; }
+    .delay-4{ animation-delay:.26s; }
+    .delay-5{ animation-delay:.33s; }
+    .delay-6{ animation-delay:.40s; }
+    .delay-7{ animation-delay:.47s; }
+    .delay-8{ animation-delay:.54s; }
+    .delay-9{ animation-delay:.61s; }
+
+    @keyframes fadeUp{
+      to{ opacity:1; transform:translateY(0); }
+    }
+
+    .node.source{
+      left:18px; top:108px;
+      width:62px; height:336px;
+      background:linear-gradient(180deg,#59e115,#49d60f);
+      border-radius:0;
+      font-size:18px;
+      letter-spacing:.4px;
+      writing-mode:vertical-rl;
+      transform:rotate(180deg) translateY(12px);
+    }
+
+    .node.stack{
+      width:150px; height:46px;
+      background:linear-gradient(90deg,#0cc66b,#10c36b);
+      font-size:18px;
+    }
+    .usb{ left:120px; top:125px; }
+    .rtos{ left:120px; top:372px; }
+
+    .node.scenario{
+      width:235px; height:44px;
+      background:linear-gradient(90deg,#0b858e,#0b8f98);
+      font-size:17px;
+    }
+    .hid{ left:300px; top:105px; }
+    .cdc{ left:300px; top:160px; }
+    .basic{ left:300px; top:285px; }
+    .coop{ left:300px; top:355px; }
+    .preempt{ left:300px; top:425px; }
+
+    .node.metric{
+      width:290px; height:42px;
+      background:linear-gradient(90deg,#044c62,#055f79);
+      font-size:16px;
+      padding:0 10px;
+    }
+    .m-foot-usb{ left:620px; top:78px; }
+    .m-init{ left:620px; top:132px; }
+    .m-enum{ left:620px; top:186px; }
+    .m-thr{ left:620px; top:240px; }
+    .m-foot-rtos{ left:620px; top:322px; }
+    .m-perf{ left:620px; top:412px; }
+
+    .node.tool{
+      width:385px; height:44px;
+      background:linear-gradient(90deg,#082d83,#062b73);
+      font-size:15px;
+      padding:0 14px;
+    }
+    .t-map-usb{ left:965px; top:78px; }
+    .t-dwt{ left:965px; top:132px; }
+    .t-usba{ left:965px; top:220px; }
+    .t-map-rtos{ left:965px; top:322px; }
+    .t-timers{ left:965px; top:412px; }
+
+    /* Brackets */
+    .bracket{
+      position:absolute;
+      border-right:5px solid #0c4f9b;
+      border-top:5px solid #0c4f9b;
+      border-bottom:5px solid #0c4f9b;
+      border-left:none;
+      border-radius:0 12px 12px 0;
+      z-index:2;
+      opacity:.95;
+    }
+    .br-usb{ left:535px; top:93px; width:26px; height:103px; }
+    .br-rtos{ left:535px; top:300px; width:26px; height:152px; }
+    .br-usba{ left:873px; top:185px; width:22px; height:81px; }
+
+    /* Footer */
+    .foot-note{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:14px;
+    }
+
+    .note{
+      background:#eef6ff;
+      border-left:6px solid #79abd8;
+      padding:12px 15px;
+      border-radius:10px;
+      font-size:14px;
+      color:#314864;
+      line-height:1.4;
+      box-shadow:var(--shadow);
+    }
+
+    .success{
+      background:#ebfaef;
+      border-left:6px solid #2da562;
+      padding:12px 15px;
+      border-radius:10px;
+      font-size:14px;
+      color:#245234;
+      line-height:1.4;
+      box-shadow:var(--shadow);
+    }
+
+    .footer{
+      position:absolute;
+      right:22px;
+      bottom:12px;
+      color:#7b8ca0;
+      font-size:12px;
+    }
+
+    .conf{
+      position:absolute;
+      left:28px;
+      bottom:12px;
+      color:#7b8ca0;
+      font-size:12px;
+    }
+
+    /* SVG lines */
+    svg.wires{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:1;
+      pointer-events:none;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="slide" id="slide">
+      <div class="header">
+        <div class="row-top">
+          <div class="ribbon">IV. Work Carried Out</div>
+          <div class="chip">4.4 Focus on GD32 Middleware Benchmark</div>
+        </div>
+        <div class="title">GD32 Benchmark Scope and Measurement Flow</div>
+        <div class="subtitle">Completed benchmark scenarios, measured metrics, and supporting tools used in the campaign</div>
+        <div class="line"></div>
+      </div>
+
+      <div class="content">
+        <div class="top-note">
+          This benchmark covers two middleware families: <strong>USB Stack</strong> and <strong>FreeRTOS</strong>.
+          It combines <strong>functional measurements</strong> and <strong>footprint analysis</strong> using a structured toolchain.
+        </div>
+
+        <div class="diagram-panel">
+          <!-- Overlay wires -->
+          <svg class="wires" viewBox="0 0 1280 500" preserveAspectRatio="none">
+            <defs>
+              <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L8,3 L0,6 Z" fill="#0e5b94"></path>
+              </marker>
+            </defs>
+
+            <!-- Middleware to stack -->
+            <path d="M80 276 L120 148" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+            <path d="M80 276 L120 395" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+
+            <!-- USB stack to scenarios -->
+            <path d="M270 148 L300 127" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+            <path d="M270 148 L300 182" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+
+            <!-- FreeRTOS stack to scenarios -->
+            <path d="M270 395 L300 307" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+            <path d="M270 395 L300 377" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+            <path d="M270 395 L300 447" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+
+            <!-- USB group to metrics -->
+            <path d="M560 145 L620 100" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+            <path d="M560 145 L620 154" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+            <path d="M560 145 L620 208" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+            <path d="M560 145 L620 262" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+
+            <!-- RTOS group to metrics -->
+            <path d="M560 376 L620 344" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+            <path d="M560 376 L620 434" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+
+            <!-- USB metrics to tools -->
+            <path d="M910 100 L965 100" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+            <path d="M910 154 L965 154" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+            <path d="M895 228 L965 242" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+            <path d="M910 262 L965 242" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+
+            <!-- RTOS metrics to tools -->
+            <path d="M910 344 L965 344" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+            <path d="M910 434 L965 434" stroke="#0d5d98" stroke-width="4" fill="none" marker-end="url(#arrowBlue)"/>
+          </svg>
+
+          <!-- Section headers -->
+          <div class="section-label sl-scen">Scenarios</div>
+          <div class="section-label sl-met">Metrics</div>
+          <div class="section-label sl-tools">Tools</div>
+
+          <!-- Source -->
+          <div class="node source delay-1">Middlewares</div>
+
+          <!-- Stack -->
+          <div class="node stack usb delay-2">USB Stack</div>
+          <div class="node stack rtos delay-3">FreeRTOS</div>
+
+          <!-- Scenarios -->
+          <div class="node scenario hid delay-2">HID</div>
+          <div class="node scenario cdc delay-3">CDC</div>
+
+          <div class="node scenario basic delay-4">Basic processing test</div>
+          <div class="node scenario coop delay-5">Cooperative test</div>
+          <div class="node scenario preempt delay-6">Preemptive test</div>
+
+          <!-- Brackets -->
+          <div class="bracket br-usb"></div>
+          <div class="bracket br-rtos"></div>
+          <div class="bracket br-usba"></div>
+
+          <!-- Metrics -->
+          <div class="node metric m-foot-usb delay-3">Footprint</div>
+          <div class="node metric m-init delay-4">Init execution time</div>
+          <div class="node metric m-enum delay-5">Enumeration</div>
+          <div class="node metric m-thr delay-6">Data transmission throughput</div>
+
+          <div class="node metric m-foot-rtos delay-5">Footprint</div>
+          <div class="node metric m-perf delay-6">Performance (threads/second)</div>
+
+          <!-- Tools -->
+          <div class="node tool t-map-usb delay-4">IAR map files + AI-based footprint analyzer tool</div>
+          <div class="node tool t-dwt delay-5">DWT function</div>
+          <div class="node tool t-usba delay-6">USB analyzer</div>
+
+          <div class="node tool t-map-rtos delay-7">IAR map files + AI-based footprint analyzer tool</div>
+          <div class="node tool t-timers delay-8">Timers</div>
+        </div>
+
+        <div class="foot-note">
+          <div class="note">
+            <strong>Benchmark logic:</strong> the same middleware families are exercised through representative scenarios,
+            then evaluated through functional and memory-oriented metrics using dedicated tooling.
+          </div>
+          <div class="success">
+            <strong>Slide objective:</strong> clearly show the completed <strong>GD32 benchmark scope</strong>,
+            not only the results, but also the measurement logic behind them.
+          </div>
+        </div>
+      </div>
+
+      <div class="conf">PFE - STM32Cube Competitor Benchmark</div>
+      <div class="footer">GD32 Middleware Benchmark</div>
+    </div>
+  </div>
+
+  <script>
+    function scaleSlide() {
+      const slide = document.getElementById('slide');
+      const baseWidth = 1366;
+      const baseHeight = 768;
+      const scaleX = window.innerWidth / baseWidth;
+      const scaleY = window.innerHeight / baseHeight;
+      const scale = Math.min(scaleX, scaleY);
+      slide.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    }
+
+    window.addEventListener('resize', scaleSlide);
+    window.addEventListener('load', scaleSlide);
+  </script>
+</body>
+</html>
